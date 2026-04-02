@@ -457,8 +457,9 @@
       </div>
 
       <!-- Syndicate animated graph -->
-      <div class="mb-16 fade-up">
-        <canvas id="syndicate-graph" class="w-full rounded-2xl"></canvas>
+      <div class="mb-16 fade-up" style="position:relative; width:100%; aspect-ratio:16/7; background:rgba(6,14,30,0.8); border-radius:20px; overflow:hidden; border:1px solid rgba(45,111,255,0.15);">
+        <canvas id="syndicate-graph" style="position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;"></canvas>
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.2);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;pointer-events:none;white-space:nowrap;font-family:Inter,sans-serif;">перетаскивайте узлы</div>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
@@ -920,96 +921,182 @@
     })();
 
 
-    // ===== SYNDICATE GRAPH ANIMATION =====
-    (function() {
-      const canvas = document.getElementById('syndicate-graph');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let nodes = [];
-      let animFrame;
-      const NODE_COUNT = 30;
-      const CONNECTION_DIST = 140;
+    // ===== SYNDICATE GRAPH — force-directed engine =====
+    (function(){
+const canvas = document.getElementById('syndicate-graph');
+if(!canvas) return;
+const ctx = canvas.getContext('2d');
 
-      function resize() {
-        const rect = canvas.parentElement.getBoundingClientRect();
-        canvas.width = rect.width;
-        canvas.height = 400;
-        if (nodes.length === 0) initNodes();
-      }
+function resize(){
+  const r=canvas.getBoundingClientRect();
+  canvas.width=r.width*devicePixelRatio; canvas.height=r.height*devicePixelRatio;
+  ctx.scale(devicePixelRatio,devicePixelRatio);
+  W=r.width; H=r.height;
+}
+let W,H; resize();
+window.addEventListener('resize',()=>{
+  const oldW=W,oldH=H; resize();
+  if(nodes&&oldW>0&&oldH>0){
+    const sx=W/oldW,sy=H/oldH;
+    for(const n of nodes){n.x*=sx;n.y*=sy;n.vx=0;n.vy=0;}
+    settled=true;
+  }
+});
 
-      function initNodes() {
-        nodes = [];
-        for (let i = 0; i < NODE_COUNT; i++) {
-          nodes.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: (Math.random() - 0.5) * 0.4,
-            r: 3 + Math.random() * 4,
-          });
-        }
-      }
+// ── УЧАСТНИКИ СИНДИКАТА ──────────────────────────────────────────────────────
+const RAW_NODES=[
+  {id:0,  label:'СИНДИКАТ',   role:'Центр',          r:18},
+  {id:1,  label:'Андрей',     role:'Предприниматель', r:11},
+  {id:2,  label:'Мария',      role:'Маркетолог',      r:10},
+  {id:3,  label:'Дмитрий',    role:'Разработчик',     r:10},
+  {id:4,  label:'Елена',      role:'HR-директор',     r:9},
+  {id:5,  label:'Роман',      role:'Инвестор',        r:11},
+  {id:6,  label:'Наталья',    role:'Дизайнер',        r:9},
+  {id:7,  label:'Алексей',    role:'CEO',             r:11},
+  {id:8,  label:'Ольга',      role:'Копирайтер',      r:8},
+  {id:9,  label:'Сергей',     role:'Продажи',         r:10},
+  {id:10, label:'Ирина',      role:'Финансист',       r:9},
+  {id:11, label:'Максим',     role:'AI-интегратор',   r:10},
+  {id:12, label:'Татьяна',    role:'Консультант',     r:8},
+  {id:13, label:'Виктор',     role:'Стратег',         r:10},
+  {id:14, label:'Кирилл',     role:'Аналитик',        r:9},
+  {id:15, label:'Анна',       role:'Основатель',      r:10},
+];
+const RAW_EDGES=[
+  [0,1],[0,3],[0,5],[0,7],[0,11],[0,13],
+  [1,2],[1,5],[1,9],[1,13],
+  [2,6],[2,8],[2,12],
+  [3,11],[3,14],
+  [4,7],[4,10],[4,15],
+  [5,7],[5,13],[5,15],
+  [6,8],[6,12],
+  [7,9],[7,13],
+  [8,12],
+  [9,10],[9,14],
+  [10,15],
+  [11,14],[11,13],
+  [12,15],
+];
 
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+// ── ФИЗИКА ───────────────────────────────────────────────────────────────────
+const REP=2800,SPK=0.03,REST=85,DAMP=0.84,CK=0.007;
 
-        // Connections
-        for (let i = 0; i < nodes.length; i++) {
-          for (let j = i + 1; j < nodes.length; j++) {
-            const dx = nodes[i].x - nodes[j].x;
-            const dy = nodes[i].y - nodes[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < CONNECTION_DIST) {
-              const opacity = (1 - dist / CONNECTION_DIST) * 0.3;
-              ctx.strokeStyle = `rgba(45, 111, 255, ${opacity})`;
-              ctx.lineWidth = 1;
-              ctx.beginPath();
-              ctx.moveTo(nodes[i].x, nodes[i].y);
-              ctx.lineTo(nodes[j].x, nodes[j].y);
-              ctx.stroke();
-            }
-          }
-        }
+let nodes,edges;
+function init(){
+  const cx=W/2,cy=H/2,sp=Math.min(W,H)*0.33;
+  nodes=RAW_NODES.map((n,i)=>{
+    const a=(i/RAW_NODES.length)*Math.PI*2,d=i===0?0:sp*(0.3+Math.random()*0.7);
+    return{...n,x:cx+Math.cos(a)*d*(0.6+Math.random()*0.8),y:cy+Math.sin(a)*d*(0.6+Math.random()*0.8),vx:(Math.random()-.5)*1.5,vy:(Math.random()-.5)*1.5,phase:Math.random()*Math.PI*2};
+  });
+  edges=RAW_EDGES.map(([a,b])=>({a,b}));
+}
+init();
 
-        // Nodes
-        for (let node of nodes) {
-          node.x += node.vx;
-          node.y += node.vy;
-          if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
-          if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+function tick(){
+  const cx=W/2,cy=H/2;
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i],b=nodes[j],dx=b.x-a.x,dy=b.y-a.y,d2=dx*dx+dy*dy+.01,d=Math.sqrt(d2),f=REP/d2,fx=(dx/d)*f,fy=(dy/d)*f;
+      if(!a.pinned){a.vx-=fx;a.vy-=fy;} if(!b.pinned){b.vx+=fx;b.vy+=fy;}
+    }
+  }
+  for(const e of edges){
+    const a=nodes[e.a],b=nodes[e.b],dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)+.01,f=SPK*(d-REST),fx=(dx/d)*f,fy=(dy/d)*f;
+    if(!a.pinned){a.vx+=fx;a.vy+=fy;} if(!b.pinned){b.vx-=fx;b.vy-=fy;}
+  }
+  for(const n of nodes){
+    if(n.pinned)continue;
+    n.vx+=(cx-n.x)*CK;n.vy+=(cy-n.y)*CK;n.vx*=DAMP;n.vy*=DAMP;n.x+=n.vx;n.y+=n.vy;
+  }
+}
 
-          ctx.fillStyle = 'rgba(45, 111, 255, 0.6)';
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
-          ctx.fill();
+// ── ВЗАИМОДЕЙСТВИЕ ────────────────────────────────────────────────────────────
+let dragged=null,hovered=null;
+function csCoords(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+function hit(mx,my){for(let i=nodes.length-1;i>=0;i--){const n=nodes[i],dx=mx-n.x,dy=my-n.y;if(dx*dx+dy*dy<=(n.r+7)*(n.r+7))return n;}return null;}
+function hitT(mx,my){for(let i=nodes.length-1;i>=0;i--){const n=nodes[i],dx=mx-n.x,dy=my-n.y;if(dx*dx+dy*dy<=(n.r+22)*(n.r+22))return n;}return null;}
+canvas.addEventListener('mousemove',e=>{const{x,y}=csCoords(e);if(dragged){dragged.x=x;dragged.y=y;dragged.vx=0;dragged.vy=0;}else{hovered=hit(x,y);canvas.style.cursor=hovered?'pointer':'grab';}});
+canvas.addEventListener('mousedown',e=>{const{x,y}=csCoords(e),n=hit(x,y);if(n){dragged=n;n.pinned=true;settled=false;canvas.style.cursor='grabbing';}});
+canvas.addEventListener('mouseup',()=>{if(dragged)dragged.pinned=false;dragged=null;canvas.style.cursor='grab';});
+canvas.addEventListener('mouseleave',()=>{if(dragged)dragged.pinned=false;dragged=null;hovered=null;});
+canvas.addEventListener('touchstart',e=>{e.preventDefault();const t=e.touches[0],r=canvas.getBoundingClientRect(),x=t.clientX-r.left,y=t.clientY-r.top,n=hitT(x,y);if(n){dragged=n;n.pinned=true;settled=false;hovered=n;}},{passive:false});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();const t=e.touches[0],r=canvas.getBoundingClientRect();if(dragged){dragged.x=t.clientX-r.left;dragged.y=t.clientY-r.top;dragged.vx=0;dragged.vy=0;}},{passive:false});
+canvas.addEventListener('touchend',()=>{if(dragged)dragged.pinned=false;dragged=null;hovered=null;});
 
-          // Glow
-          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.r * 3);
-          gradient.addColorStop(0, 'rgba(45, 111, 255, 0.15)');
-          gradient.addColorStop(1, 'rgba(45, 111, 255, 0)');
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, node.r * 3, 0, Math.PI * 2);
-          ctx.fill();
-        }
+function getConn(node){const s=new Set();for(const e of edges){if(e.a===node.id)s.add(e.b);if(e.b===node.id)s.add(e.a);}return s;}
 
-        animFrame = requestAnimationFrame(draw);
-      }
+// ── РЕНДЕР (цвет: синий 45,111,255) ─────────────────────────────────────────
+let t=0;
+function draw(){
+  t++;
+  ctx.clearRect(0,0,W,H);
+  const conn=hovered?getConn(hovered):null;
+  for(const e of edges){
+    const a=nodes[e.a],b=nodes[e.b];
+    const act=hovered&&(e.a===hovered.id||e.b===hovered.id);
+    const sec=hovered&&!act&&conn&&(conn.has(e.a)||conn.has(e.b));
+    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+    ctx.strokeStyle=act?'rgba(45,111,255,0.7)':sec?'rgba(45,111,255,0.22)':hovered?'rgba(45,111,255,0.04)':'rgba(45,111,255,0.14)';
+    ctx.lineWidth=act?1.5:0.7;ctx.stroke();
+    if(act){
+      const p=((t*0.7+e.a*11)%100)/100;
+      ctx.beginPath();ctx.arc(a.x+(b.x-a.x)*p,a.y+(b.y-a.y)*p,2,0,Math.PI*2);
+      ctx.fillStyle='rgba(100,160,255,0.95)';ctx.fill();
+    }
+  }
+  for(const n of nodes){
+    const isHub=n.id===0,isHov=n===hovered,isNbr=hovered&&conn&&conn.has(n.id),isDim=hovered&&!isHov&&!isNbr;
+    const br=Math.sin(t*0.02+n.phase)*(isHub?.05:.08)+1,r=n.r*br;
+    const gR=isHov?r*3.5:isHub?r*3:r*2,gA=isDim?.03:isHov?.4:isHub?.22:.10;
+    const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,gR);
+    g.addColorStop(0,`rgba(45,111,255,${gA})`);g.addColorStop(.5,`rgba(45,111,255,${gA*.3})`);g.addColorStop(1,'rgba(45,111,255,0)');
+    ctx.beginPath();ctx.arc(n.x,n.y,gR,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    const na=isDim?.1:isHov?1:isNbr?.9:isHub?.88:.55;
+    ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);
+    if(isHov||isHub||isNbr){
+      const f=ctx.createRadialGradient(n.x-r*.3,n.y-r*.3,0,n.x,n.y,r);
+      f.addColorStop(0,`rgba(100,160,255,${na})`);f.addColorStop(1,`rgba(26,79,214,${na})`);
+      ctx.fillStyle=f;
+    } else {ctx.fillStyle=`rgba(45,111,255,${na*.28})`;}
+    ctx.fill();
+    ctx.strokeStyle=`rgba(45,111,255,${na})`;ctx.lineWidth=isHov?2:isHub?1.8:.9;ctx.stroke();
+    if(isHub||isHov){
+      const pulse=Math.sin(t*.04+n.phase)*.5+.5;
+      ctx.beginPath();ctx.arc(n.x,n.y,r+4+pulse*3,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(45,111,255,${.18*pulse})`;ctx.lineWidth=1;ctx.stroke();
+    }
+    if(!isDim){
+      const la=isHov?1:isNbr?.9:isHub?.75:.38,yy=n.y+r+11;
+      ctx.font=`${isHub?700:500} ${isHub?10:8.5}px Inter,sans-serif`;ctx.textAlign='center';
+      ctx.fillStyle=`rgba(223,226,235,${la})`;ctx.fillText(n.label,n.x,yy);
+      ctx.font=`400 7.5px Inter,sans-serif`;
+      ctx.fillStyle=`rgba(100,160,255,${la*.65})`;ctx.fillText(n.role,n.x,yy+10);
+    }
+  }
+}
 
-      // Only animate when visible
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            resize();
-            draw();
-          } else {
-            cancelAnimationFrame(animFrame);
-          }
-        });
-      }, { threshold: 0.1 });
+// ── ПРЕСЕТЛ ───────────────────────────────────────────────────────────────────
+for(let i=0;i<4000;i++){
+  tick();
+  if(i>200){let e=0;for(const n of nodes)e+=n.vx*n.vx+n.vy*n.vy;if(e<0.01)break;}
+}
+for(const n of nodes){n.vx=0;n.vy=0;}
 
-      observer.observe(canvas);
-      window.addEventListener('resize', resize);
+// ── LOOP ─────────────────────────────────────────────────────────────────────
+let settled=true;
+function loop(){
+  if(!settled){
+    for(let i=0;i<3;i++)tick();
+    if(!dragged){let e=0;for(const n of nodes)e+=n.vx*n.vx+n.vy*n.vy;if(e<0.15){settled=true;for(const n of nodes){n.vx=0;n.vy=0;}}}
+  }
+  draw();requestAnimationFrame(loop);
+}
+
+// Запускаем только когда граф в viewport
+const _obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){_obs.disconnect();loop();}});
+},{threshold:0.1});
+_obs.observe(canvas);
     })();
 
 
