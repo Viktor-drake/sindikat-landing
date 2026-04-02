@@ -1001,10 +1001,10 @@
       <div class="stitch-layout items-center fade-up">
 
         <!-- Фото основателя -->
-        <div style="position:relative;">
-          <div id="founder-photo-container" style="border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:#161619;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
+        <div style="position:relative;display:flex;justify-content:center;">
+          <div id="founder-photo-container" style="border-radius:16px;overflow:hidden;aspect-ratio:3/4;width:320px;background:#161619;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
             <img id="founder-photo" src="founder.jpg" alt="Виктор — основатель NextGen Club"
-              style="width:100%;height:100%;object-fit:cover;display:block;"
+              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"
               onerror="this.style.display='none';document.getElementById('founder-placeholder').style.display='flex';">
             <!-- Плейсхолдер если фото не загрузилось -->
             <div id="founder-placeholder" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;">
