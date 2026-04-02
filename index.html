@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextGen Club — Сообщество технологического доминирования</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#060E1E',
+            'navy-card': '#0C1628',
+            'blue-accent': '#1A4FD6',
+            'blue-bright': '#2D6FFF',
+            'yellow-cta': '#F5C518',
+            'silver': '#8A9BBF',
+          },
+          fontFamily: {
+            bebas: ['Bebas Neue', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #060E1E; }
+    ::-webkit-scrollbar-thumb { background: #1A4FD6; border-radius: 3px; }
+
+    /* Glass card */
+    .glass {
+      background: rgba(12, 22, 40, 0.7);
+      border: 1px solid rgba(45, 111, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+    }
+    .glass:hover {
+      border-color: rgba(45, 111, 255, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px rgba(26, 79, 214, 0.15);
+    }
+    .glass { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    /* Glow */
+    .glow-blue {
+      background: radial-gradient(ellipse 600px 300px at center bottom, rgba(26,79,214,0.2), transparent);
+    }
+    .glow-blue-top {
+      background: radial-gradient(ellipse 600px 200px at center top, rgba(26,79,214,0.12), transparent);
+    }
+
+    /* Section number */
+    .section-num {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      color: #1A4FD6;
+      letter-spacing: 0.15em;
+    }
+
+    /* CTA button pulse */
+    .cta-pulse {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.5), 0 0 80px rgba(245, 197, 24, 0.2); }
+    }
+
+    /* Fade in on scroll */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pill badge */
+    .pill {
+      background: rgba(26, 79, 214, 0.12);
+      border: 1px solid rgba(26, 79, 214, 0.25);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Comparison table */
+    .price-table td, .price-table th {
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .price-table tr:last-child td { border-bottom: none; }
+
+    /* Collapsible */
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .collapsible-open .collapsible-content {
+      max-height: 500px;
+    }
+
+    /* Canvas behind hero */
+    #dot-grid {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Syndicate graph */
+    #syndicate-graph {
+      width: 100%;
+      height: 400px;
+    }
+
+    /* Strikethrough price */
+    .price-old {
+      text-decoration: line-through;
+      color: #8A9BBF;
+    }
+  </style>
+</head>
+<body class="bg-navy text-white antialiased overflow-x-hidden">
+
+  <!-- DOT GRID CANVAS -->
+  <canvas id="dot-grid"></canvas>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-navy/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+      <span class="font-bebas text-xl tracking-wider text-white">NEXTGEN CLUB</span>
+      <div class="hidden md:flex items-center gap-8 text-sm text-silver">
+        <a href="#about" class="hover:text-white transition-colors">О КЛУБЕ</a>
+        <a href="#tools" class="hover:text-white transition-colors">ИНСТРУМЕНТЫ</a>
+        <a href="#syndicate" class="hover:text-white transition-colors">СИНДИКАТ</a>
+        <a href="#price" class="hover:text-white transition-colors">ЦЕНА</a>
+      </div>
+      <a href="#price" class="px-5 py-2.5 bg-yellow-cta text-navy font-bold text-sm rounded-lg hover:brightness-110 transition-all">
+        Вступить в клуб
+      </a>
+    </div>
+  </nav>
+
+  <!-- =========================================== -->
+  <!-- SCREEN 01 — HERO                            -->
+  <!-- =========================================== -->
+  <section class="relative min-h-screen flex items-center justify-center px-6 pt-16">
+    <!-- Blue glow underneath -->
+    <div class="absolute inset-0 glow-blue pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto text-center space-y-8 fade-up">
+      <!-- Pill badge -->
+      <div class="inline-flex items-center gap-2 pill text-blue-bright">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        ПРИЁМ ОТКРЫТ
+      </div>
+
+      <!-- Caps label -->
+      <p class="text-silver text-xs sm:text-sm tracking-[0.2em] uppercase">
+        Закрытый клуб · Сообщество технологического доминирования
+      </p>
+
+      <!-- Giant headline -->
+      <h1 class="font-bebas text-[80px] sm:text-[120px] lg:text-[160px] leading-[0.85] tracking-wide text-white">
+        NEXTGEN<br>CLUB
+      </h1>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+        <a href="#price" class="px-10 py-4 bg-yellow-cta text-navy font-bold rounded-xl text-lg cta-pulse hover:brightness-110 transition-all">
+          Вступить в клуб
+        </a>
+        <a href="#edge" class="px-10 py-4 border border-white/15 text-white rounded-xl text-lg hover:border-blue-bright/40 transition-colors">
+          Смотреть дальше ↓
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 02 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
+  <!-- =========================================== -->
+  <section id="edge" class="relative py-32 px-6 lg:px-8">
+    <div class="absolute inset-0 glow-blue-top pointer-events-none"></div>
+    <div class="max-w-[1200px] mx-auto relative z-10">
+      <div class="text-center mb-16 fade-up">
+        <span class="section-num">02 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ВЫ ВСЕГДА НА ОСТРИЕ</h2>
+        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
+          Рынок AI меняется каждую неделю. Следить за ним — отдельная работа. Мы делаем её за вас.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass p-8 space-y-4 fade-up">
+          <div class="w-12 h-12 rounded-xl bg-blue-accent/15 flex items-center justify-center text-2xl">🔍</div>
+          <h3 class="text-xl font-bold">Мониторим рынок</h3>
+          <p class="text-silver leading-relaxed">Собираем всё, что выходит: инструменты, модели, кейсы, тренды. Фильтруем от хайпа — оставляем только то, что имеет реальный потенциал.</p>
+        </div>
+        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.15s">
+          <div class="w-12 h-12 rounded-xl bg-blue-accent/15 flex items-center justify-center text-2xl">⚡</div>
+          <h3 class="text-xl font-bold">Быстро внедряем</h3>
+          <p class="text-silver leading-relaxed">Новый инструмент проходит проверку внутри клуба — и сразу попадает в базу с инструкцией, как применить в вашем деле.</p>
+        </div>
+        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.3s">
+          <div class="w-12 h-12 rounded-xl bg-blue-accent/15 flex items-center justify-center text-2xl">🎯</div>
+          <h3 class="text-xl font-bold">Привлекаем топовых экспертов</h3>
+          <p class="text-silver leading-relaxed">Лучшие практики приносят люди, которые уже делают это на высшем уровне. Эксперты — часть клуба.</p>
+        </div>
+      </div>
+
+      <div class="mt-16 text-center fade-up">
+        <p class="text-xl sm:text-2xl font-semibold text-white max-w-3xl mx-auto leading-relaxed">
+          Вы всегда с самыми передовыми технологиями.<br>
+          <span class="text-silver">Мы нашли, отфильтровали, внедрили — вам остаётся применять.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 03 — ЧТО ТАКОЕ NEXTGENCLUB           -->
+  <!-- =========================================== -->
+  <section id="about" class="py-32 px-6 lg:px-8">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <span class="section-num">03 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ЧТО ТАКОЕ NEXTGENCLUB</h2>
+        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
+          Всё, что нужно для работы с AI на профессиональном уровне — в одном месте.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass p-8 space-y-4 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')">
+          <div class="text-4xl">◎</div>
+          <h3 class="text-xl font-bold flex items-center gap-2">
+            Сообщество
+            <span class="text-silver text-sm group-hover:text-blue-bright transition-colors">▾</span>
+          </h3>
+          <div class="collapsible-content">
+            <p class="text-silver leading-relaxed pt-2">Живые люди, практики, разборы кейсов. Еженедельные эфиры и обсуждения. Среда, где каждый помогает каждому расти.</p>
+          </div>
+        </div>
+        <div class="glass p-8 space-y-4 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')" style="transition-delay: 0.15s">
+          <div class="text-4xl">⚡</div>
+          <h3 class="text-xl font-bold flex items-center gap-2">
+            Инструменты
+            <span class="text-silver text-sm group-hover:text-blue-bright transition-colors">▾</span>
+          </h3>
+          <div class="collapsible-content">
+            <p class="text-silver leading-relaxed pt-2">Библиотека AI-плагинов, скиллов и MCP. 20+ инструментов сейчас, новые каждый месяц. Claude как основной движок.</p>
+          </div>
+        </div>
+        <div class="glass p-8 space-y-4 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')" style="transition-delay: 0.3s">
+          <div class="text-4xl">🤖</div>
+          <h3 class="text-xl font-bold flex items-center gap-2">
+            Синдикат
+            <span class="text-silver text-sm group-hover:text-blue-bright transition-colors">▾</span>
+          </h3>
+          <div class="collapsible-content">
+            <p class="text-silver leading-relaxed pt-2">Умный нетворкинг с AI-матчингом. Оцифровка ваших связей, ресурсов и компетенций. Подбор нужных людей под конкретный запрос.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 04 — ДЛЯ КОГО                        -->
+  <!-- =========================================== -->
+  <section class="py-32 px-6 lg:px-8">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <p class="text-xs tracking-[0.2em] uppercase text-silver mb-2">ТРИ ТИПА ЛЮДЕЙ, КОТОРЫМ ЗДЕСЬ МЕСТО</p>
+        <span class="section-num">04 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ДЛЯ КОГО</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- 0.1 Предприниматель -->
+        <div class="glass p-8 space-y-5 fade-up">
+          <div class="flex items-center gap-3">
+            <span class="text-blue-bright font-mono text-sm">0.1</span>
+            <h3 class="text-xl font-bold">ПРЕДПРИНИМАТЕЛЬ</h3>
+          </div>
+          <p class="text-silver italic text-sm">«Конкуренты уже автоматизируют. Я ещё не начал»</p>
+          <p class="text-silver text-sm leading-relaxed">Платишь маркетологу, таргетологу, копирайтеру — AI делает это в 10 раз дешевле. Нанять AI — значит стать исполнителем у себя, убрать лишних подрядчиков, снизить расходы.</p>
+          <div class="border-t border-white/5 pt-4 space-y-2 text-sm text-silver">
+            <p class="text-white font-semibold text-xs uppercase tracking-wider">Что получишь:</p>
+            <p>· Клиентов через AI за 7–14 дней</p>
+            <p>· Автоматизацию маркетинга и продаж</p>
+            <p>· Нужных партнёров в Синдикате</p>
+          </div>
+          <div class="pt-2">
+            <span class="pill text-xs text-blue-bright">🔵 Marcus + Dolores</span>
+          </div>
+        </div>
+
+        <!-- 0.2 Руководитель -->
+        <div class="glass p-8 space-y-5 fade-up" style="transition-delay: 0.15s">
+          <div class="flex items-center gap-3">
+            <span class="text-blue-bright font-mono text-sm">0.2</span>
+            <h3 class="text-xl font-bold">РУКОВОДИТЕЛЬ</h3>
+          </div>
+          <p class="text-silver italic text-sm">«Сверху требуют AI-стратегию. Я не понимаю с чего начать»</p>
+          <p class="text-silver text-sm leading-relaxed">Выделен бюджет, нет понимания как измерить результат. Нужны готовые кейсы внедрения, которые можно взять и показать.</p>
+          <div class="border-t border-white/5 pt-4 space-y-2 text-sm text-silver">
+            <p class="text-white font-semibold text-xs uppercase tracking-wider">Что получишь:</p>
+            <p>· Кейсы тех, кто уже внедрил</p>
+            <p>· Еженедельный срез «что реально работает»</p>
+            <p>· Круг руководителей твоего уровня</p>
+          </div>
+          <div class="pt-2">
+            <span class="pill text-xs text-blue-bright">🧠 AI-Радар + Синдикат</span>
+          </div>
+        </div>
+
+        <!-- 0.3 Специалист -->
+        <div class="glass p-8 space-y-5 fade-up" style="transition-delay: 0.3s">
+          <div class="flex items-center gap-3">
+            <span class="text-blue-bright font-mono text-sm">0.3</span>
+            <h3 class="text-xl font-bold">СПЕЦИАЛИСТ</h3>
+          </div>
+          <p class="text-silver italic text-sm">«Хочу зарабатывать больше, но упираюсь в личное время»</p>
+          <p class="text-silver text-sm leading-relaxed">Проектов много, времени мало, клиенты требуют быстрее. AI — способ делать больше без расширения команды.</p>
+          <div class="border-t border-white/5 pt-4 space-y-2 text-sm text-silver">
+            <p class="text-white font-semibold text-xs uppercase tracking-wider">Что получишь:</p>
+            <p>· Автоматизацию рутинных задач</p>
+            <p>· Масштаб без найма команды</p>
+            <p>· Партнёров через Синдикат</p>
+          </div>
+          <div class="pt-2">
+            <span class="pill text-xs text-blue-bright">💻 Вайб-кодинг + Лонгриды</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 05 — MARCUS & DOLORES                -->
+  <!-- =========================================== -->
+  <section class="py-32 px-6 lg:px-8 relative">
+    <div class="absolute inset-0 glow-blue-top pointer-events-none"></div>
+    <div class="max-w-[1200px] mx-auto relative z-10">
+      <div class="text-center mb-16 fade-up">
+        <span class="section-num">05 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">MARCUS & DOLORES</h2>
+        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
+          AI-ассистенты, которые находят клиентов за вас. Уже встроены в подписку.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Marcus -->
+        <div class="glass p-8 space-y-6 fade-up">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-blue-accent/20 flex items-center justify-center text-2xl">🔵</div>
+            <div>
+              <h3 class="text-2xl font-bold">Marcus</h3>
+              <p class="text-silver text-sm">AI-ассистент для поиска клиентов в Telegram</p>
+            </div>
+          </div>
+          <!-- Mock chat -->
+          <div class="bg-navy/80 rounded-xl p-5 border border-white/5 space-y-3">
+            <div class="flex items-center gap-2 text-sm text-silver">
+              <span class="w-2 h-2 rounded-full bg-green-400"></span>
+              Marcus онлайн
+            </div>
+            <p class="text-sm text-white/90 leading-relaxed">«Нашёл 3 горячих лида по вашим критериям. Отправляю контакты...»</p>
+            <div class="space-y-2 text-sm">
+              <div class="px-3 py-2 bg-blue-accent/10 rounded-lg border border-blue-accent/20 text-silver">→ Алексей М. — CEO, ищет AI-интегратора</div>
+              <div class="px-3 py-2 bg-blue-accent/10 rounded-lg border border-blue-accent/20 text-silver">→ Мария К. — маркетолог, нужна автоматизация</div>
+              <div class="px-3 py-2 bg-blue-accent/10 rounded-lg border border-blue-accent/20 text-silver">→ Руслан Д. — стартап, готов к MVP</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-silver text-sm">Розничная цена</p>
+              <p class="price-old text-lg">29 900 ₽</p>
+            </div>
+            <div class="text-right">
+              <p class="text-green-400 text-sm font-semibold">В клубе — включено ✓</p>
+            </div>
+          </div>
+          <div class="cursor-pointer group" onclick="this.classList.toggle('collapsible-open')">
+            <p class="text-silver text-sm flex items-center gap-1 hover:text-blue-bright transition-colors">▾ Что умеет Marcus</p>
+            <div class="collapsible-content text-silver text-sm space-y-1 pt-2">
+              <p>· Поиск целевых лидов в Telegram-группах</p>
+              <p>· Анализ профилей и фильтрация по критериям</p>
+              <p>· Персонализированные сообщения для первого контакта</p>
+              <p>· Подготовка ко встрече с потенциальным клиентом</p>
+              <p>· Мониторинг новых участников в целевых группах</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dolores -->
+        <div class="glass p-8 space-y-6 fade-up" style="transition-delay: 0.15s">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center text-2xl">🟣</div>
+            <div>
+              <h3 class="text-2xl font-bold">Dolores</h3>
+              <p class="text-silver text-sm">AI-ассистент для аудитории ВКонтакте</p>
+            </div>
+          </div>
+          <!-- Mock chat -->
+          <div class="bg-navy/80 rounded-xl p-5 border border-white/5 space-y-3">
+            <div class="flex items-center gap-2 text-sm text-silver">
+              <span class="w-2 h-2 rounded-full bg-green-400"></span>
+              Dolores онлайн
+            </div>
+            <p class="text-sm text-white/90 leading-relaxed">«Мониторинг завершён. В 14 группах обсуждают потребность в AI-решениях. Подготовила 5 персонализированных сообщений.»</p>
+            <div class="space-y-2 text-sm">
+              <div class="px-3 py-2 bg-purple-500/10 rounded-lg border border-purple-500/20 text-silver">→ Группа «Бизнес-автоматизация» — 3 горячих запроса</div>
+              <div class="px-3 py-2 bg-purple-500/10 rounded-lg border border-purple-500/20 text-silver">→ Сообщество «Digital-маркетинг» — 2 обсуждения</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-silver text-sm">Розничная цена</p>
+              <p class="price-old text-lg">19 900 ₽</p>
+            </div>
+            <div class="text-right">
+              <p class="text-green-400 text-sm font-semibold">В клубе — включено ✓</p>
+            </div>
+          </div>
+          <div class="cursor-pointer group" onclick="this.classList.toggle('collapsible-open')">
+            <p class="text-silver text-sm flex items-center gap-1 hover:text-blue-bright transition-colors">▾ Что умеет Dolores</p>
+            <div class="collapsible-content text-silver text-sm space-y-1 pt-2">
+              <p>· Мониторинг целевых групп ВКонтакте</p>
+              <p>· Анализ обсуждений и выявление потребностей</p>
+              <p>· Составление персонализированных сообщений</p>
+              <p>· Отслеживание активности целевой аудитории</p>
+              <p>· Подготовка отчётов по результатам мониторинга</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom banner -->
+      <div class="mt-12 glass p-8 text-center fade-up">
+        <p class="text-xl font-semibold text-white">Вместе: <span class="price-old">от 49 800 ₽</span></p>
+        <p class="text-silver mt-2">Среднее время до первого клиента: <span class="text-white font-bold">7–14 дней</span>. Один закрытый клиент покрывает подписку на несколько месяцев.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 06A — СИНДИКАТ                        -->
+  <!-- =========================================== -->
+  <section id="syndicate" class="py-32 px-6 lg:px-8 relative">
+    <div class="max-w-[1200px] mx-auto relative z-10">
+      <div class="text-center mb-16 fade-up">
+        <p class="text-xs tracking-[0.2em] uppercase text-yellow-cta mb-2">ГЛАВНОЕ ПРЕИМУЩЕСТВО, КОТОРОГО НЕТ НИ В ОДНОМ СООБЩЕСТВЕ СНГ</p>
+        <span class="section-num">06 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">СИНДИКАТ</h2>
+        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
+          Коллективный разум способен решить любую проблему. Просто задай запрос.
+        </p>
+      </div>
+
+      <!-- Syndicate animated graph -->
+      <div class="mb-16 fade-up">
+        <canvas id="syndicate-graph" class="w-full rounded-2xl"></canvas>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass p-8 space-y-4 fade-up">
+          <div class="text-3xl">🧠</div>
+          <h3 class="text-xl font-bold">Коллективный разум</h3>
+          <p class="text-silver leading-relaxed">50+ участников с разными компетенциями, связями и ресурсами. AI-матчинг находит нужного человека под конкретную задачу.</p>
+        </div>
+        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.15s">
+          <div class="text-3xl">🔗</div>
+          <h3 class="text-xl font-bold">Оцифровка связей</h3>
+          <p class="text-silver leading-relaxed">Глубинный опрос выгружает ключевую информацию: ресурсы, возможности, связи, сильные стороны. Синдикат превращает их в конкретные результаты.</p>
+        </div>
+        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.3s">
+          <div class="text-3xl">♾️</div>
+          <h3 class="text-xl font-bold">Уникальный продукт</h3>
+          <p class="text-silver leading-relaxed">Доступ к Синдикату — бесценен. Аналогов нет. Нигде в СНГ этого не существует.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 06B — КАК РАБОТАЕТ СИНДИКАТ           -->
+  <!-- =========================================== -->
+  <section class="py-24 px-6 lg:px-8">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <h2 class="font-bebas text-4xl sm:text-5xl text-white">КАК РАБОТАЕТ СИНДИКАТ</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 relative">
+        <!-- Connection line -->
+        <div class="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-accent/30 to-transparent" style="transform: translateY(-50%)"></div>
+
+        <div class="glass p-8 space-y-4 text-center fade-up relative">
+          <div class="w-14 h-14 mx-auto rounded-full bg-blue-accent/20 flex items-center justify-center font-bebas text-2xl text-blue-bright">01</div>
+          <h3 class="text-lg font-bold">Анкета</h3>
+          <p class="text-silver text-sm leading-relaxed">Заполняешь глубинный опрос: кто ты, что умеешь, какие ресурсы и связи есть. Всё фиксируется в базе.</p>
+        </div>
+        <div class="glass p-8 space-y-4 text-center fade-up relative" style="transition-delay: 0.15s">
+          <div class="w-14 h-14 mx-auto rounded-full bg-blue-accent/20 flex items-center justify-center font-bebas text-2xl text-blue-bright">02</div>
+          <h3 class="text-lg font-bold">Запрос</h3>
+          <p class="text-silver text-sm leading-relaxed">Нужен партнёр, подрядчик, клиент, совет — пишешь запрос. AI-система анализирует базу участников.</p>
+        </div>
+        <div class="glass p-8 space-y-4 text-center fade-up relative" style="transition-delay: 0.3s">
+          <div class="w-14 h-14 mx-auto rounded-full bg-blue-accent/20 flex items-center justify-center font-bebas text-2xl text-blue-bright">03</div>
+          <h3 class="text-lg font-bold">Матч</h3>
+          <p class="text-silver text-sm leading-relaxed">Получаешь конкретные контакты. Люди, которые реально могут помочь. Не список — точное совпадение.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center fade-up">
+        <a href="#" class="inline-flex items-center gap-2 px-8 py-3 border border-blue-accent/30 text-blue-bright rounded-xl hover:bg-blue-accent/10 transition-all">
+          Подробнее о Синдикате →
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 07 — ИНСТРУМЕНТЫ                      -->
+  <!-- =========================================== -->
+  <section id="tools" class="py-32 px-6 lg:px-8 relative">
+    <div class="absolute inset-0 glow-blue pointer-events-none"></div>
+    <div class="max-w-[1200px] mx-auto relative z-10">
+      <div class="text-center mb-6 fade-up">
+        <span class="section-num">07 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ИНСТРУМЕНТЫ</h2>
+        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
+          Берёте. Внедряете. Получаете результат.
+        </p>
+      </div>
+
+      <div class="text-center mb-12 fade-up">
+        <span class="pill text-yellow-cta border-yellow-cta/25 bg-yellow-cta/10">📦 Новый инструмент — каждый месяц</span>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass p-7 space-y-3 fade-up">
+          <div class="text-2xl">✍️</div>
+          <h3 class="font-bold">AI-Лонгриды</h3>
+          <p class="text-silver text-sm leading-relaxed">Продающие статьи под онлайн и офлайн проекты. Соцдоказательства — только у лонгридов.</p>
+        </div>
+        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.1s">
+          <div class="text-2xl">🎨</div>
+          <h3 class="font-bold">Генератор связок</h3>
+          <p class="text-silver text-sm leading-relaxed">Креатив + лендинг + оффер за минуты, не за дни.</p>
+        </div>
+        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.2s">
+          <div class="text-2xl">📄</div>
+          <h3 class="font-bold">Генератор лендингов</h3>
+          <p class="text-silver text-sm leading-relaxed">Полный HTML с нуля по одному брифу.</p>
+        </div>
+        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.1s">
+          <div class="text-2xl">🧪</div>
+          <h3 class="font-bold">AI-Фокус-группа</h3>
+          <p class="text-silver text-sm leading-relaxed">Тестируем маркетинг, экономя бюджет. Симуляция реакции аудитории на рекламу, лендинг, воронку, вебинар — до запуска.</p>
+        </div>
+        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.2s">
+          <div class="text-2xl">🔌</div>
+          <h3 class="font-bold">Плагины, скиллы и MCP</h3>
+          <p class="text-silver text-sm leading-relaxed">Подключение к любым сервисам. Расширяет возможности Claude.</p>
+        </div>
+        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.3s">
+          <div class="text-2xl">🤖</div>
+          <h3 class="font-bold">+ десятки других</h3>
+          <p class="text-silver text-sm leading-relaxed">База пополняется каждый месяц. 20+ инструментов прямо сейчас.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 08 — ОБУЧЕНИЕ                         -->
+  <!-- =========================================== -->
+  <section class="py-32 px-6 lg:px-8">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <span class="section-num">08 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ОБУЧЕНИЕ</h2>
+        <p class="text-silver text-lg mt-4">Три трека — под любой уровень и цель.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass p-8 space-y-5 fade-up">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-blue-accent/20 flex items-center justify-center text-lg">🔵</div>
+            <h3 class="font-bold text-lg">CLAUDE МАСТЕР</h3>
+          </div>
+          <div class="space-y-2 text-silver text-sm">
+            <p>· Промпты</p>
+            <p>· Подключение MCP</p>
+            <p>· Библиотека инструментов</p>
+            <p>· Анкета Синдиката</p>
+          </div>
+          <div class="border-t border-white/5 pt-4">
+            <p class="text-xs text-silver">Формат: Онбординг + практика</p>
+          </div>
+        </div>
+
+        <div class="glass p-8 space-y-5 fade-up" style="transition-delay: 0.15s">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-blue-accent/20 flex items-center justify-center text-lg">💻</div>
+            <h3 class="font-bold text-lg">ВАЙБ-КОДИНГ</h3>
+          </div>
+          <div class="space-y-2 text-silver text-sm">
+            <p>· Деплой за 1 час</p>
+            <p>· Продукт без кода</p>
+            <p>· Монетизация через агентство</p>
+          </div>
+          <div class="border-t border-white/5 pt-4">
+            <p class="text-xs text-silver">Формат: Воркшопы на эфирах + разборы</p>
+          </div>
+        </div>
+
+        <div class="glass p-8 space-y-5 fade-up" style="transition-delay: 0.3s">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-blue-accent/20 flex items-center justify-center text-lg">🧠</div>
+            <h3 class="font-bold text-lg">НОВЫЕ НЕЙРОСЕТИ</h3>
+          </div>
+          <div class="space-y-2 text-silver text-sm">
+            <p>· Сравнение на реальных задачах</p>
+            <p>· Как внедрить в бизнес сразу</p>
+          </div>
+          <div class="border-t border-white/5 pt-4">
+            <p class="text-xs text-silver">Формат: Еженедельный AI-радар + эфиры</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 09 — ВНУТРИ КЛУБА                     -->
+  <!-- =========================================== -->
+  <section class="py-32 px-6 lg:px-8">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-16 fade-up">
+        <span class="section-num">09 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ВНУТРИ КЛУБА</h2>
+        <p class="text-silver text-lg mt-4">Раз в неделю — живой эфир. Каждый день — инструменты, кейсы, находки.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        <div class="glass p-8 space-y-4 fade-up">
+          <div class="text-3xl">🎙</div>
+          <h3 class="text-xl font-bold">Эфир раз в неделю</h3>
+          <p class="text-silver leading-relaxed">Разбираем кейсы, тестируем новые инструменты, отвечаем на вопросы участников. Запись остаётся.</p>
+        </div>
+        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.15s">
+          <div class="text-3xl">📡</div>
+          <h3 class="text-xl font-bold">AI-Радар</h3>
+          <p class="text-silver leading-relaxed">Еженедельный дайджест: только то, что уже проверено участниками клуба и даёт результат.</p>
+        </div>
+      </div>
+
+      <div class="glass p-8 fade-up">
+        <h4 class="font-bold text-sm uppercase tracking-wider text-silver mb-6">Чаты и топики клуба</h4>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
+            <span class="text-lg">🔧</span>
+            <span class="text-sm text-silver">Инструменты</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
+            <span class="text-lg">💬</span>
+            <span class="text-sm text-silver">Вопрос-ответ</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
+            <span class="text-lg">💡</span>
+            <span class="text-sm text-silver">Кейсы</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
+            <span class="text-lg">🤝</span>
+            <span class="text-sm text-silver">Синдикат</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
+            <span class="text-lg">🛠</span>
+            <span class="text-sm text-silver">Вайб-кодинг</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 10 — ЦЕНА                             -->
+  <!-- =========================================== -->
+  <section id="price" class="py-32 px-6 lg:px-8 relative">
+    <div class="absolute inset-0 glow-blue pointer-events-none"></div>
+    <div class="max-w-[900px] mx-auto relative z-10">
+      <div class="text-center mb-16 fade-up">
+        <span class="section-num">10 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">СКОЛЬКО СТОИТ</h2>
+        <p class="text-silver text-lg mt-4">Дешевле, чем один AI-ассистент. Внутри — весь клуб.</p>
+      </div>
+
+      <div class="glass p-10 fade-up">
+        <!-- Price -->
+        <div class="text-center mb-10">
+          <p class="font-bebas text-6xl sm:text-8xl text-white">9 900 <span class="text-3xl text-silver">₽/мес</span></p>
+          <p class="text-silver mt-2">Полный доступ: Marcus, Dolores, Синдикат, все инструменты, обучение, эфиры, AI-Радар</p>
+        </div>
+
+        <!-- Comparison table -->
+        <table class="price-table w-full mb-10">
+          <tbody>
+            <tr>
+              <td class="text-silver">Marcus (AI-ассистент)</td>
+              <td class="text-right text-silver">29 900 ₽</td>
+            </tr>
+            <tr>
+              <td class="text-silver">Dolores (AI-ассистент)</td>
+              <td class="text-right text-silver">19 900 ₽</td>
+            </tr>
+            <tr>
+              <td class="text-silver">Плагины, скиллы и MCP</td>
+              <td class="text-right text-silver">от 20 000 ₽</td>
+            </tr>
+            <tr>
+              <td class="text-silver">Обучение и новые инструменты</td>
+              <td class="text-right text-silver">от 50 000 ₽</td>
+            </tr>
+            <tr>
+              <td class="text-silver">Эфиры и разборы</td>
+              <td class="text-right text-silver">от 20 000 ₽</td>
+            </tr>
+            <tr>
+              <td class="text-silver">Доступ к Синдикату</td>
+              <td class="text-right text-yellow-cta">∞</td>
+            </tr>
+            <tr class="border-t-2 border-white/10">
+              <td class="font-bold text-white pt-4">Итого в розницу</td>
+              <td class="text-right pt-4"><span class="price-old text-lg">от 139 800 ₽</span></td>
+            </tr>
+            <tr>
+              <td class="font-bold text-white text-lg">NextGenClub</td>
+              <td class="text-right text-yellow-cta font-bold text-2xl">9 900 ₽/мес</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Guarantee -->
+        <div class="p-5 rounded-xl border border-yellow-cta/20 bg-yellow-cta/5 flex items-center gap-4 mb-8">
+          <span class="text-3xl">🛡</span>
+          <div>
+            <p class="font-bold text-white">14 дней — если не подойдёт, вернём деньги.</p>
+            <p class="text-silver text-sm">Без вопросов.</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center">
+          <a href="#" class="inline-block px-12 py-5 bg-yellow-cta text-navy font-bold rounded-xl text-xl cta-pulse hover:brightness-110 transition-all">
+            Вступить в клуб
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 11 — ФИНАЛЬНЫЙ CTA                    -->
+  <!-- =========================================== -->
+  <section class="py-32 px-6 lg:px-8 relative">
+    <div class="absolute inset-0 glow-blue pointer-events-none" style="opacity: 1.5"></div>
+    <div class="max-w-[800px] mx-auto text-center relative z-10">
+      <div class="fade-up">
+        <span class="section-num">11 —</span>
+        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ДЛЯ ТЕХ, КТО УЖЕ В ТЕМЕ</h2>
+        <p class="text-silver text-lg mt-4 max-w-xl mx-auto">
+          NextGenClub — для тех, кто уже работает с нейросетями и хочет идти дальше.
+        </p>
+        <p class="text-2xl font-semibold text-white mt-8">Твой следующий уровень — здесь.</p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+          <a href="#" class="px-10 py-4 bg-yellow-cta text-navy font-bold rounded-xl text-lg cta-pulse hover:brightness-110 transition-all">
+            Вступить в клуб — 9 900 ₽/мес
+          </a>
+          <a href="#" class="px-10 py-4 border border-white/15 text-white rounded-xl text-lg hover:border-blue-bright/40 transition-colors">
+            Узнать подробнее
+          </a>
+        </div>
+
+        <p class="text-silver text-sm mt-6">🛡 14 дней — возврат без вопросов</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-6 lg:px-8 border-t border-white/5">
+    <div class="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <span class="font-bebas text-xl tracking-wider">NEXTGEN CLUB</span>
+        <p class="text-silver text-sm mt-1">Сообщество технологического доминирования</p>
+      </div>
+      <p class="text-silver text-sm">© 2025 NextGen Club. Все права защищены.</p>
+    </div>
+  </footer>
+
+
+  <!-- =========================================== -->
+  <!-- SCRIPTS                                      -->
+  <!-- =========================================== -->
+  <script>
+    // ===== DOT GRID ANIMATION =====
+    (function() {
+      const canvas = document.getElementById('dot-grid');
+      const ctx = canvas.getContext('2d');
+      let mouseX = 0, mouseY = 0;
+      let dots = [];
+      const DOT_SPACING = 50;
+      const DOT_RADIUS = 1;
+      const DOT_COLOR = 'rgba(26, 79, 214, 0.25)';
+      const MOUSE_RADIUS = 150;
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        createDots();
+      }
+
+      function createDots() {
+        dots = [];
+        const cols = Math.ceil(canvas.width / DOT_SPACING) + 1;
+        const rows = Math.ceil(canvas.height / DOT_SPACING) + 1;
+        for (let i = 0; i < cols; i++) {
+          for (let j = 0; j < rows; j++) {
+            dots.push({
+              x: i * DOT_SPACING,
+              y: j * DOT_SPACING,
+              baseX: i * DOT_SPACING,
+              baseY: j * DOT_SPACING
+            });
+          }
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const scrollY = window.scrollY;
+        // Only draw for the first 2 viewports
+        if (scrollY > window.innerHeight * 3) {
+          requestAnimationFrame(draw);
+          return;
+        }
+
+        for (let dot of dots) {
+          const dx = mouseX - dot.baseX;
+          const dy = mouseY - dot.baseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < MOUSE_RADIUS) {
+            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+            dot.x = dot.baseX + dx * force * 0.15;
+            dot.y = dot.baseY + dy * force * 0.15;
+          } else {
+            dot.x += (dot.baseX - dot.x) * 0.1;
+            dot.y += (dot.baseY - dot.y) * 0.1;
+          }
+
+          const opacity = dist < MOUSE_RADIUS ? 0.25 + (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.4 : 0.25;
+          ctx.fillStyle = `rgba(26, 79, 214, ${opacity})`;
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y - scrollY * 0.3, DOT_RADIUS, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      resize();
+      draw();
+    })();
+
+
+    // ===== SYNDICATE GRAPH ANIMATION =====
+    (function() {
+      const canvas = document.getElementById('syndicate-graph');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let nodes = [];
+      let animFrame;
+      const NODE_COUNT = 30;
+      const CONNECTION_DIST = 140;
+
+      function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = 400;
+        if (nodes.length === 0) initNodes();
+      }
+
+      function initNodes() {
+        nodes = [];
+        for (let i = 0; i < NODE_COUNT; i++) {
+          nodes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            r: 3 + Math.random() * 4,
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Connections
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < CONNECTION_DIST) {
+              const opacity = (1 - dist / CONNECTION_DIST) * 0.3;
+              ctx.strokeStyle = `rgba(45, 111, 255, ${opacity})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Nodes
+        for (let node of nodes) {
+          node.x += node.vx;
+          node.y += node.vy;
+          if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+          if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+          ctx.fillStyle = 'rgba(45, 111, 255, 0.6)';
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Glow
+          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.r * 3);
+          gradient.addColorStop(0, 'rgba(45, 111, 255, 0.15)');
+          gradient.addColorStop(1, 'rgba(45, 111, 255, 0)');
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.r * 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        animFrame = requestAnimationFrame(draw);
+      }
+
+      // Only animate when visible
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            resize();
+            draw();
+          } else {
+            cancelAnimationFrame(animFrame);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(canvas);
+      window.addEventListener('resize', resize);
+    })();
+
+
+    // ===== SCROLL FADE-IN =====
+    (function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    })();
+  </script>
+
+</body>
+</html>
