@@ -160,9 +160,76 @@
     }
 
     /* Strikethrough price */
-    .price-old {
-      text-decoration: line-through;
-      color: #8A9BBF;
+    .price-old { text-decoration: line-through; color: #52525B; }
+
+    /* Section fade gradient — плавный переход между секциями */
+    .section-fade-top {
+      background: linear-gradient(to bottom, #0E0E11 0%, transparent 100%);
+      position: absolute; top: 0; left: 0; right: 0; height: 80px; pointer-events: none; z-index: 2;
+    }
+    .section-fade-bottom {
+      background: linear-gradient(to top, #0E0E11 0%, transparent 100%);
+      position: absolute; bottom: 0; left: 0; right: 0; height: 80px; pointer-events: none; z-index: 2;
+    }
+
+    /* Stitch-style 2-col layout */
+    .stitch-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .stitch-layout { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* Tool tile */
+    .tool-tile {
+      background: #161619;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      min-height: 180px;
+    }
+    .tool-tile:hover {
+      border-color: rgba(255,255,255,0.11);
+      transform: translateY(-2px);
+    }
+    .tool-tile-large { min-height: 240px; }
+
+    /* Accordion item */
+    .accordion-item {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 0;
+      cursor: pointer;
+    }
+    .accordion-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+    .accordion-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .accordion-arrow {
+      transition: transform 0.3s ease;
+      color: #52525B; font-size: 14px;
+    }
+    .accordion-open .accordion-arrow { transform: rotate(45deg); color: #A1A1AA; }
+    .accordion-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+      opacity: 0;
+    }
+    .accordion-open .accordion-body { max-height: 300px; opacity: 1; }
+
+    /* Highlight stat */
+    .stat-highlight {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #E4E4E7;
+      line-height: 1;
     }
   </style>
 </head>
@@ -193,23 +260,17 @@
   <section class="relative min-h-screen flex items-center justify-center px-6 pt-16">
     <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
 
-    <div class="relative z-10 max-w-4xl mx-auto text-center fade-up" style="display:flex;flex-direction:column;align-items:center;gap:40px;">
-
-      <!-- Статус -->
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        Приём открыт
-      </div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center fade-up" style="display:flex;flex-direction:column;align-items:center;gap:36px;">
 
       <!-- Подзаголовок -->
-      <p style="font-size:12px;letter-spacing:0.22em;color:#52525B;text-transform:uppercase;">
+      <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;">
         Закрытый клуб · Технологическое доминирование
       </p>
 
       <!-- Заголовок -->
       <div style="display:flex;flex-direction:column;gap:0;line-height:0.88;">
         <h1 style="font-size:clamp(72px,12vw,148px);font-weight:800;letter-spacing:-0.02em;color:#E4E4E7;margin:0;">NEXTGEN</h1>
-        <h1 style="font-size:clamp(72px,12vw,148px);font-weight:300;letter-spacing:-0.02em;color:#52525B;margin:0;">CLUB</h1>
+        <h1 style="font-size:clamp(72px,12vw,148px);font-weight:300;letter-spacing:-0.02em;color:#3F3F46;margin:0;">CLUB</h1>
       </div>
 
       <!-- Дескриптор -->
@@ -217,10 +278,16 @@
         Среда, где предприниматели и команды используют AI не как инструмент — а как конкурентное преимущество.
       </p>
 
-      <!-- CTA -->
-      <div style="display:flex;flex-direction:row;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <a href="#price" class="cta-primary">Вступить в клуб</a>
-        <a href="#edge" class="cta-secondary">Узнать больше</a>
+      <!-- CTA c бейджем -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <div style="display:flex;flex-direction:row;gap:12px;flex-wrap:wrap;justify-content:center;">
+          <a href="#price" class="cta-primary">Вступить в клуб</a>
+          <a href="#edge" class="cta-secondary">Узнать больше</a>
+        </div>
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          Приём открыт
+        </div>
       </div>
     </div>
 
@@ -232,144 +299,132 @@
   <!-- =========================================== -->
   <!-- SCREEN 02 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
   <!-- =========================================== -->
-  <section id="edge" class="relative py-40 px-6 lg:px-8">
-    <div class="absolute inset-0 glow-ambient-top pointer-events-none"></div>
+  <section id="edge" class="relative py-36 px-6 lg:px-8">
+    <div class="section-fade-top"></div>
     <div class="max-w-[1100px] mx-auto relative z-10">
 
-      <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">02</p>
-        <h2 style="font-size:clamp(38px,6vw,72px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.05;">
-          Вы всегда<br><span style="color:#52525B;font-weight:300;">на острие</span>
-        </h2>
-        <p style="color:#71717A;font-size:16px;font-weight:300;max-width:440px;margin:20px auto 0;line-height:1.7;">
-          Рынок AI меняется каждую неделю. Следить за ним — отдельная работа. Мы делаем её за вас.
-        </p>
+      <!-- Stitch-стиль: заголовок слева, описание справа -->
+      <div class="stitch-layout mb-20 fade-up">
+        <div>
+          <p class="section-num" style="margin-bottom:20px;">02</p>
+          <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
+            Вы всегда<br><span style="font-weight:300;color:#52525B;">на острие</span>
+          </h2>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:24px;">
+          <p style="color:#71717A;font-size:16px;font-weight:300;line-height:1.75;">
+            Мы не просто следим за трендами. Мы создаём инфраструктуру, в которой AI работает на ваш капитал — пока остальные только учатся писать промпты.
+          </p>
+          <p style="color:#52525B;font-size:13px;font-weight:300;line-height:1.7;">
+            Рынок AI меняется каждую неделю. Следить за ним — отдельная работа. Мы делаем её за вас.
+          </p>
+        </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-5">
+      <!-- Три карточки — горизонтальные тайлы в стиле Stitch -->
+      <div class="grid md:grid-cols-3 gap-4">
 
-        <!-- Карточка 1 -->
-        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:20px;">
-          <div class="icon-box">
-            <!-- Иконка: лупа / сканирование -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/>
-            </svg>
-          </div>
+        <div class="tool-tile fade-up">
           <div>
-            <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;margin-bottom:10px;">Мониторим рынок</h3>
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Собираем всё, что выходит: инструменты, модели, кейсы, тренды. Фильтруем от хайпа — оставляем только то, что имеет реальный потенциал.</p>
+            <p style="font-size:11px;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;margin-bottom:16px;">Monitor</p>
+            <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Мониторим рынок</h3>
+            <p style="font-size:13px;color:#71717A;margin-top:10px;line-height:1.7;font-weight:300;">Постоянный мониторинг нейросетевых прорывов. Фильтруем шум — оставляем только то, что приносит деньги.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
           </div>
         </div>
 
-        <!-- Карточка 2 -->
-        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:20px;transition-delay:0.12s;">
-          <div class="icon-box">
-            <!-- Иконка: молния / интеграция -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-          </div>
+        <div class="tool-tile fade-up" style="transition-delay:0.1s;">
           <div>
-            <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;margin-bottom:10px;">Быстро внедряем</h3>
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Новый инструмент проходит проверку внутри клуба — и сразу попадает в базу с инструкцией, как применить в вашем деле.</p>
+            <p style="font-size:11px;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;margin-bottom:16px;">Deploy</p>
+            <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Быстро внедряем</h3>
+            <p style="font-size:13px;color:#71717A;margin-top:10px;line-height:1.7;font-weight:300;">Готовые пайплайны внедрения. От автоматизации контента до кастомных LLM-агентов для бизнеса.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
           </div>
         </div>
 
-        <!-- Карточка 3 -->
-        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:20px;transition-delay:0.24s;">
-          <div class="icon-box">
-            <!-- Иконка: люди / эксперты -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
+        <div class="tool-tile fade-up" style="transition-delay:0.2s;">
           <div>
-            <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;margin-bottom:10px;">Топовые эксперты</h3>
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Лучшие практики приносят люди, которые уже делают это на высшем уровне. Эксперты — часть клуба.</p>
+            <p style="font-size:11px;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;margin-bottom:16px;">Experts</p>
+            <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Топовые эксперты</h3>
+            <p style="font-size:13px;color:#71717A;margin-top:10px;line-height:1.7;font-weight:300;">Прямой доступ к архитекторам нейросетей и предпринимателям, которые уже масштабировались с AI.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
+            </svg>
           </div>
         </div>
 
       </div>
-
-      <!-- Итог-цитата -->
-      <div class="mt-20 text-center fade-up">
-        <div style="width:40px;height:1px;background:rgba(255,255,255,0.08);margin:0 auto 28px;"></div>
-        <p style="font-size:clamp(18px,2.5vw,24px);font-weight:300;color:#A1A1AA;max-width:600px;margin:0 auto;line-height:1.6;">
-          Мы нашли, отфильтровали, внедрили —<br>
-          <span style="color:#E4E4E7;font-weight:500;">вам остаётся применять.</span>
-        </p>
-      </div>
-
     </div>
+    <div class="section-fade-bottom"></div>
   </section>
 
 
   <!-- =========================================== -->
   <!-- SCREEN 03 — ЧТО ТАКОЕ NEXTGENCLUB           -->
   <!-- =========================================== -->
-  <section id="about" class="py-40 px-6 lg:px-8">
+  <section id="about" class="py-36 px-6 lg:px-8" style="position:relative;">
+    <div class="section-fade-top"></div>
     <div class="max-w-[1100px] mx-auto">
-      <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">03</p>
-        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
-          Что такое <span style="font-weight:300;color:#52525B;">NextGenClub</span>
-        </h2>
-        <p style="color:#71717A;font-size:16px;font-weight:300;max-width:420px;margin:18px auto 0;line-height:1.7;">
-          Всё для работы с AI на профессиональном уровне — в одном месте.
-        </p>
-      </div>
 
-      <div class="grid md:grid-cols-3 gap-5">
-
-        <div class="glass p-8 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')" style="display:flex;flex-direction:column;gap:16px;">
-          <div class="icon-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;">Сообщество</h3>
-            <span style="color:#52525B;font-size:12px;transition:color 0.2s;" class="group-hover:!text-zinc-light">↓</span>
-          </div>
-          <div class="collapsible-content">
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;padding-top:4px;">Живые люди, практики, разборы кейсов. Еженедельные эфиры и обсуждения. Среда, где каждый помогает каждому расти.</p>
-          </div>
+      <!-- Stitch-стиль: большой заголовок слева, аккордеон справа -->
+      <div class="stitch-layout fade-up" id="about-section">
+        <div>
+          <p class="section-num" style="margin-bottom:20px;">03</p>
+          <h2 style="font-size:clamp(38px,6vw,72px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
+            Что такое<br><span style="font-weight:300;color:#52525B;">NextGen<br>Club</span>
+          </h2>
+          <p style="color:#52525B;font-size:14px;font-weight:300;line-height:1.7;margin-top:24px;max-width:320px;">
+            Это закрытая экосистема для тех, кто понимает: в эпоху AI одиночки проигрывают сетям.
+          </p>
         </div>
 
-        <div class="glass p-8 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')" style="display:flex;flex-direction:column;gap:16px;transition-delay:0.12s;">
-          <div class="icon-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-            </svg>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;">Инструменты</h3>
-            <span style="color:#52525B;font-size:12px;transition:color 0.2s;" class="group-hover:!text-zinc-light">↓</span>
-          </div>
-          <div class="collapsible-content">
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;padding-top:4px;">Библиотека AI-плагинов, скиллов и MCP. 20+ инструментов сейчас, новые каждый месяц. Claude как основной движок.</p>
-          </div>
-        </div>
+        <!-- Аккордеон -->
+        <div id="about-accordion">
 
-        <div class="glass p-8 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')" style="display:flex;flex-direction:column;gap:16px;transition-delay:0.24s;">
-          <div class="icon-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
-              <path d="M12 7v4M12 11 5.5 17M12 11l6.5 6"/>
-            </svg>
+          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)">
+            <div class="accordion-header">
+              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Community</h3>
+              <span class="accordion-arrow">+</span>
+            </div>
+            <div class="accordion-body" style="padding-top:14px;">
+              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Более 500 активных участников, еженедельные созвоны и закрытые встречи в Москве и Дубае. Живые люди, практики, разборы кейсов.</p>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;">Синдикат</h3>
-            <span style="color:#52525B;font-size:12px;transition:color 0.2s;" class="group-hover:!text-zinc-light">↓</span>
-          </div>
-          <div class="collapsible-content">
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;padding-top:4px;">Умный нетворкинг с AI-матчингом. Оцифровка ваших связей, ресурсов и компетенций. Подбор нужных людей под конкретный запрос.</p>
-          </div>
-        </div>
 
+          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)" style="transition-delay:0.1s;">
+            <div class="accordion-header">
+              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Tools</h3>
+              <span class="accordion-arrow">+</span>
+            </div>
+            <div class="accordion-body" style="padding-top:14px;">
+              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Библиотека AI-плагинов, скиллов и MCP. 20+ инструментов прямо сейчас, новые каждый месяц. Claude как основной движок.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)" style="transition-delay:0.2s;">
+            <div class="accordion-header">
+              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Syndicate</h3>
+              <span class="accordion-arrow">+</span>
+            </div>
+            <div class="accordion-body" style="padding-top:14px;">
+              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Умный нетворкинг с AI-матчингом. Оцифровка связей, ресурсов, компетенций. Подбор нужных людей под конкретный запрос.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
+    <div class="section-fade-bottom"></div>
   </section>
 
 
@@ -456,7 +511,7 @@
       <div class="text-center mb-20 fade-up">
         <p class="section-num mb-4">05</p>
         <h2 style="font-size:clamp(28px,4.5vw,54px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
-          Маркус найдёт тебе клиентов.<br><span style="font-weight:300;color:#52525B;">Пока ты спишь.</span>
+          Маркус и Долорес найдут тебе клиентов.<br><span style="font-weight:300;color:#52525B;">Пока ты спишь.</span>
         </h2>
         <p style="color:#71717A;font-size:15px;font-weight:300;max-width:400px;margin:18px auto 0;line-height:1.7;">
           В клубе включены два инструмента, которые отдельно стоят от 49 800 ₽
@@ -662,89 +717,85 @@
     <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
     <div class="max-w-[1100px] mx-auto relative z-10">
 
-      <div class="text-center mb-6 fade-up">
-        <p class="section-num mb-4">07</p>
-        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
-          Инструменты
-        </h2>
-        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:14px;">Берёте. Внедряете. Получаете результат.</p>
+      <!-- Stitch-стиль для заголовка секции -->
+      <div class="stitch-layout mb-14 fade-up">
+        <div>
+          <p class="section-num" style="margin-bottom:20px;">07</p>
+          <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
+            Инстру-<br><span style="font-weight:300;color:#52525B;">менты</span>
+          </h2>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;">
+          <p style="color:#71717A;font-size:15px;font-weight:300;line-height:1.75;">Берёте. Внедряете. Получаете результат.</p>
+          <span class="pill" style="margin-top:16px;display:inline-block;width:fit-content;">Новый инструмент — каждый месяц</span>
+        </div>
       </div>
 
-      <div class="text-center mb-14 fade-up">
-        <span class="pill">Новый инструмент — каждый месяц</span>
-      </div>
+      <!-- Крупные Stitch-тайлы — верхний ряд 3 колонки, нижний 2 -->
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:12px;">
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;gap:14px;">
-          <div class="icon-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <div class="tool-tile tool-tile-large fade-up" style="grid-row:span 1;">
+          <div>
+            <h3 style="font-size:20px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Longreads Gen</h3>
+            <p style="font-size:13px;color:#71717A;margin-top:10px;line-height:1.7;font-weight:300;">Генерация экспертных статей на 20к+ символов на основе 5-минутного голосового сообщения.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
             </svg>
           </div>
-          <div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;margin-bottom:7px;">AI-Лонгриды</h3>
-            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Продающие статьи под онлайн и офлайн проекты. Соцдоказательства — только у лонгридов.</p>
-          </div>
         </div>
 
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.07s;">
-          <div class="icon-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        <div class="tool-tile fade-up" style="transition-delay:0.07s;">
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Funnel Gen</h3>
+            <p style="font-size:12px;color:#71717A;margin-top:8px;line-height:1.7;font-weight:300;">Креатив + лендинг + оффер за минуты.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
             </svg>
           </div>
-          <div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;margin-bottom:7px;">Генератор связок</h3>
-            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Креатив + лендинг + оффер за минуты, не за дни.</p>
-          </div>
         </div>
 
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.14s;">
-          <div class="icon-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <div class="tool-tile fade-up" style="transition-delay:0.14s;">
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Landing Gen</h3>
+            <p style="font-size:12px;color:#71717A;margin-top:8px;line-height:1.7;font-weight:300;">Полный HTML с нуля по одному брифу.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
             </svg>
           </div>
-          <div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;margin-bottom:7px;">Генератор лендингов</h3>
-            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Полный HTML с нуля по одному брифу.</p>
-          </div>
         </div>
 
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.07s;">
-          <div class="icon-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+
+        <div class="tool-tile fade-up" style="transition-delay:0.1s;">
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Focus Group AI</h3>
+            <p style="font-size:12px;color:#71717A;margin-top:8px;line-height:1.7;font-weight:300;">Симуляция реакции аудитории на рекламу, лендинг, воронку — до запуска.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
           </div>
-          <div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;margin-bottom:7px;">AI-Фокус-группа</h3>
-            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Симуляция реакции аудитории на рекламу, лендинг, воронку — до запуска.</p>
-          </div>
         </div>
 
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.14s;">
-          <div class="icon-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <div class="tool-tile fade-up" style="transition-delay:0.18s;">
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Browser Plugins</h3>
+            <p style="font-size:12px;color:#71717A;margin-top:8px;line-height:1.7;font-weight:300;">Набор расширений для браузера, расширяющих возможности Claude + подключение к любым сервисам.</p>
+          </div>
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:20px;">
+            <span style="font-size:11px;font-weight:500;color:#4ADE80;letter-spacing:0.05em;">GET ACCESS</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
             </svg>
-          </div>
-          <div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;margin-bottom:7px;">Плагины, скиллы и MCP</h3>
-            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Подключение к любым сервисам. Расширяет возможности Claude.</p>
-          </div>
-        </div>
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.21s;border:1px solid rgba(255,255,255,0.04);">
-          <div class="icon-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-          </div>
-          <div>
-            <h3 style="font-size:14px;font-weight:600;color:#52525B;margin-bottom:7px;">+ десятки других</h3>
-            <p style="font-size:13px;color:#52525B;line-height:1.7;font-weight:300;">База пополняется каждый месяц. 20+ инструментов прямо сейчас.</p>
           </div>
         </div>
 
@@ -813,55 +864,66 @@
         <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;">Раз в неделю — живой эфир. Каждый день — инструменты, кейсы, находки.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-5" style="margin-bottom:20px;">
-
-        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:16px;">
-          <div class="icon-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
-            </svg>
+      <!-- Stitch-стиль: заголовок слева + цифры справа -->
+      <div class="stitch-layout mb-16 fade-up">
+        <div>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <p class="stat-highlight">50+</p>
+              <p style="font-size:13px;color:#52525B;margin-top:6px;font-weight:300;">участников Синдиката</p>
+            </div>
+            <div>
+              <p class="stat-highlight">20+</p>
+              <p style="font-size:13px;color:#52525B;margin-top:6px;font-weight:300;">AI-инструментов</p>
+            </div>
+            <div>
+              <p class="stat-highlight">1×</p>
+              <p style="font-size:13px;color:#52525B;margin-top:6px;font-weight:300;">живой эфир в неделю</p>
+            </div>
+            <div>
+              <p class="stat-highlight">∞</p>
+              <p style="font-size:13px;color:#52525B;margin-top:6px;font-weight:300;">связей в Синдикате</p>
+            </div>
           </div>
-          <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;">Эфир раз в неделю</h3>
-          <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Разбираем кейсы, тестируем новые инструменты, отвечаем на вопросы. Запись остаётся.</p>
         </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
 
-        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:16px;transition-delay:0.12s;">
-          <div class="icon-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>
-            </svg>
+          <div class="glass p-7" style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="icon-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
+                </svg>
+              </div>
+              <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;">Эфир раз в неделю</h3>
+            </div>
+            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Разбираем кейсы, тестируем новые инструменты, отвечаем на вопросы. Запись остаётся.</p>
           </div>
-          <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;">AI-Радар</h3>
-          <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Еженедельный дайджест: только то, что уже проверено участниками и даёт результат.</p>
-        </div>
 
+          <div class="glass p-7" style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="icon-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>
+                </svg>
+              </div>
+              <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;">AI-Радар</h3>
+            </div>
+            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Еженедельный дайджест: только то, что уже проверено участниками и даёт результат.</p>
+          </div>
+
+        </div>
       </div>
 
-      <div class="glass p-8 fade-up">
-        <p style="font-size:11px;font-weight:500;color:#52525B;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:18px;">Чаты и топики клуба</p>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
-
-          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
-            <p style="font-size:13px;color:#E4E4E7;font-weight:500;margin-bottom:4px;">Инструменты</p>
-            <p style="font-size:11px;color:#52525B;line-height:1.5;">Новые находки каждый день</p>
-          </div>
-          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
-            <p style="font-size:13px;color:#E4E4E7;font-weight:500;margin-bottom:4px;">Вопрос-ответ</p>
-            <p style="font-size:11px;color:#52525B;line-height:1.5;">Спрашиваешь — получаешь ответ</p>
-          </div>
-          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
-            <p style="font-size:13px;color:#E4E4E7;font-weight:500;margin-bottom:4px;">Кейсы</p>
-            <p style="font-size:11px;color:#52525B;line-height:1.5;">Что внедрили, что получили</p>
-          </div>
-          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
-            <p style="font-size:13px;color:#E4E4E7;font-weight:500;margin-bottom:4px;">Синдикат</p>
-            <p style="font-size:11px;color:#52525B;line-height:1.5;">Запросы, партнёрства, проекты</p>
-          </div>
-          <div style="padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
-            <p style="font-size:13px;color:#E4E4E7;font-weight:500;margin-bottom:4px;">Вайб-кодинг</p>
-            <p style="font-size:11px;color:#52525B;line-height:1.5;">Помощь с проектами без кода</p>
-          </div>
-
+      <!-- Топики как тонкая горизонтальная полоса -->
+      <div class="fade-up" style="border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:0;">
+        <p style="font-size:11px;font-weight:500;color:#3F3F46;text-transform:uppercase;letter-spacing:0.12em;width:100%;margin-bottom:14px;">Чаты и топики</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Инструменты</span>
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Вопрос-ответ</span>
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Кейсы</span>
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Синдикат</span>
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Вайб-кодинг</span>
         </div>
       </div>
     </div>
@@ -931,6 +993,70 @@
 
 
   <!-- =========================================== -->
+  <!-- SCREEN 10.5 — ОСНОВАТЕЛЬ                     -->
+  <!-- =========================================== -->
+  <section class="py-36 px-6 lg:px-8 relative">
+    <div class="section-fade-top"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="stitch-layout items-center fade-up">
+
+        <!-- Фото основателя -->
+        <div style="position:relative;">
+          <div id="founder-photo-container" style="border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:#161619;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
+            <img id="founder-photo" src="founder.jpg" alt="Виктор — основатель NextGen Club"
+              style="width:100%;height:100%;object-fit:cover;display:block;"
+              onerror="this.style.display='none';document.getElementById('founder-placeholder').style.display='flex';">
+            <!-- Плейсхолдер если фото не загрузилось -->
+            <div id="founder-placeholder" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              <p style="font-size:11px;color:#3F3F46;text-align:center;padding:0 20px;">Добавьте founder.jpg<br>в папку landing/</p>
+            </div>
+          </div>
+          <!-- Декоративная рамка -->
+          <div style="position:absolute;inset:-8px;border:1px solid rgba(255,255,255,0.04);border-radius:22px;pointer-events:none;"></div>
+        </div>
+
+        <!-- Текст -->
+        <div style="display:flex;flex-direction:column;gap:28px;">
+          <div>
+            <p style="font-size:11px;letter-spacing:0.2em;color:#3F3F46;text-transform:uppercase;margin-bottom:20px;">Основатель</p>
+            <h2 style="font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.05;">
+              Виктор
+            </h2>
+            <p style="font-size:16px;font-weight:300;color:#52525B;margin-top:4px;">NextGen Club</p>
+          </div>
+
+          <div style="border-left:2px solid rgba(255,255,255,0.08);padding-left:20px;">
+            <p style="font-size:16px;color:#A1A1AA;line-height:1.8;font-weight:300;font-style:italic;">
+              «Я создал NextGen Club потому что видел: одиночки с AI проигрывают командам. Нам нужна была среда, где технологическое преимущество становится коллективным.»
+            </p>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;">Предприниматель, работает с AI с 2022 года</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;">Создал экосистему инструментов на Claude</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;">Синдикат — 50+ участников, реальные сделки</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="section-fade-bottom"></div>
+  </section>
+
+
+  <!-- =========================================== -->
   <!-- SCREEN 11 — ФИНАЛЬНЫЙ CTA                    -->
   <!-- =========================================== -->
   <section class="py-40 px-6 lg:px-8 relative">
@@ -980,6 +1106,11 @@
   <!-- SCRIPTS                                      -->
   <!-- =========================================== -->
   <script>
+    // ===== ACCORDION =====
+    function toggleAccordion(el) {
+      el.classList.toggle('accordion-open');
+    }
+
     // ===== DOT GRID ANIMATION =====
     (function() {
       const canvas = document.getElementById('dot-grid');
