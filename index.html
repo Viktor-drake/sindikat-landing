@@ -457,7 +457,7 @@
       </div>
 
       <!-- Syndicate animated graph -->
-      <div class="mb-16 fade-up" style="position:relative; width:100%; aspect-ratio:16/7; background:rgba(6,14,30,0.8); border-radius:20px; overflow:hidden; border:1px solid rgba(45,111,255,0.15);">
+      <div class="mb-16 fade-up" style="position:relative; width:100%; aspect-ratio:16/7; background:rgba(6,14,30,0.8); border-radius:20px; overflow:hidden; border:1px solid rgba(245,197,24,0.15);">
         <canvas id="syndicate-graph" style="position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;"></canvas>
         <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.2);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;pointer-events:none;white-space:nowrap;font-family:Inter,sans-serif;">перетаскивайте узлы</div>
       </div>
@@ -1100,7 +1100,7 @@ canvas.addEventListener('touchend',()=>{if(dragged)dragged.pinned=false;dragged=
 
 function getConn(node){const s=new Set();for(const e of edges){if(e.a===node.id)s.add(e.b);if(e.b===node.id)s.add(e.a);}return s;}
 
-// ── РЕНДЕР (цвет: синий 45,111,255) ─────────────────────────────────────────
+// ── РЕНДЕР (цвет: золото 245,197,24) ─────────────────────────────────────────
 let t=0;
 function draw(){
   t++;
@@ -1111,12 +1111,12 @@ function draw(){
     const act=hovered&&(e.a===hovered.id||e.b===hovered.id);
     const sec=hovered&&!act&&conn&&(conn.has(e.a)||conn.has(e.b));
     ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
-    ctx.strokeStyle=act?'rgba(45,111,255,0.7)':sec?'rgba(45,111,255,0.22)':hovered?'rgba(45,111,255,0.04)':'rgba(45,111,255,0.14)';
+    ctx.strokeStyle=act?'rgba(245,197,24,0.75)':sec?'rgba(245,197,24,0.22)':hovered?'rgba(245,197,24,0.04)':'rgba(245,197,24,0.14)';
     ctx.lineWidth=act?1.5:0.7;ctx.stroke();
     if(act){
       const p=((t*0.7+e.a*11)%100)/100;
       ctx.beginPath();ctx.arc(a.x+(b.x-a.x)*p,a.y+(b.y-a.y)*p,2,0,Math.PI*2);
-      ctx.fillStyle='rgba(100,160,255,0.95)';ctx.fill();
+      ctx.fillStyle='rgba(255,220,80,0.95)';ctx.fill();
     }
   }
   for(const n of nodes){
@@ -1124,28 +1124,28 @@ function draw(){
     const br=Math.sin(t*0.02+n.phase)*(isHub?.05:.08)+1,r=n.r*br;
     const gR=isHov?r*3.5:isHub?r*3:r*2,gA=isDim?.03:isHov?.4:isHub?.22:.10;
     const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,gR);
-    g.addColorStop(0,`rgba(45,111,255,${gA})`);g.addColorStop(.5,`rgba(45,111,255,${gA*.3})`);g.addColorStop(1,'rgba(45,111,255,0)');
+    g.addColorStop(0,`rgba(245,197,24,${gA})`);g.addColorStop(.5,`rgba(245,197,24,${gA*.3})`);g.addColorStop(1,'rgba(245,197,24,0)');
     ctx.beginPath();ctx.arc(n.x,n.y,gR,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
     const na=isDim?.1:isHov?1:isNbr?.9:isHub?.88:.55;
     ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);
     if(isHov||isHub||isNbr){
       const f=ctx.createRadialGradient(n.x-r*.3,n.y-r*.3,0,n.x,n.y,r);
-      f.addColorStop(0,`rgba(100,160,255,${na})`);f.addColorStop(1,`rgba(26,79,214,${na})`);
+      f.addColorStop(0,`rgba(255,220,80,${na})`);f.addColorStop(1,`rgba(180,140,0,${na})`);
       ctx.fillStyle=f;
-    } else {ctx.fillStyle=`rgba(45,111,255,${na*.28})`;}
+    } else {ctx.fillStyle=`rgba(245,197,24,${na*.28})`;}
     ctx.fill();
-    ctx.strokeStyle=`rgba(45,111,255,${na})`;ctx.lineWidth=isHov?2:isHub?1.8:.9;ctx.stroke();
+    ctx.strokeStyle=`rgba(245,197,24,${na})`;ctx.lineWidth=isHov?2:isHub?1.8:.9;ctx.stroke();
     if(isHub||isHov){
       const pulse=Math.sin(t*.04+n.phase)*.5+.5;
       ctx.beginPath();ctx.arc(n.x,n.y,r+4+pulse*3,0,Math.PI*2);
-      ctx.strokeStyle=`rgba(45,111,255,${.18*pulse})`;ctx.lineWidth=1;ctx.stroke();
+      ctx.strokeStyle=`rgba(245,197,24,${.18*pulse})`;ctx.lineWidth=1;ctx.stroke();
     }
     if(!isDim){
       const la=isHov?1:isNbr?.9:isHub?.75:.38,yy=n.y+r+11;
       ctx.font=`${isHub?700:500} ${isHub?10:8.5}px Inter,sans-serif`;ctx.textAlign='center';
       ctx.fillStyle=`rgba(223,226,235,${la})`;ctx.fillText(n.label,n.x,yy);
       ctx.font=`400 7.5px Inter,sans-serif`;
-      ctx.fillStyle=`rgba(100,160,255,${la*.65})`;ctx.fillText(n.role,n.x,yy+10);
+      ctx.fillStyle=`rgba(245,197,24,${la*.7})`;ctx.fillText(n.role,n.x,yy+10);
     }
   }
 }
