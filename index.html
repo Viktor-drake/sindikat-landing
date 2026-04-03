@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Карточка закупки № 0338300003326000051</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; padding: 20px; color: #1a1a2e; }
+.wrapper { max-width: 860px; margin: 0 auto; }
+
+.header {
+  background: linear-gradient(135deg, #1a237e, #283593);
+  color: white; padding: 20px 28px;
+  border-radius: 12px 12px 0 0;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.header h1 { font-size: 17px; font-weight: 600; }
+.header .badge { background: #ffd600; color: #1a237e; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+.card { background: white; border-radius: 0 0 12px 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+.section-title {
+  background: #e8eaf6; color: #1a237e;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  padding: 7px 20px; border-left: 4px solid #3949ab;
+}
+
+.fields-grid { display: grid; grid-template-columns: 1fr 1fr; }
+
+.field { padding: 13px 20px; border-bottom: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; }
+.field:nth-child(even) { border-right: none; }
+.field.full { grid-column: 1 / -1; border-right: none; }
+
+.field label { display: block; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: #9e9e9e; margin-bottom: 4px; }
+.field .val { font-size: 13.5px; color: #212121; font-weight: 500; line-height: 1.4; }
+.field .val.big { color: #1a237e; font-weight: 700; font-size: 15px; }
+.field .val.red { color: #c62828; font-weight: 600; }
+.field .val.chip-green { display:inline-block; background:#e8f5e9; color:#2e7d32; padding:2px 10px; border-radius:4px; font-weight:700; }
+.field .val.chip-blue { display:inline-block; background:#e3f2fd; color:#1565c0; padding:2px 10px; border-radius:4px; font-weight:600; }
+.field.nmck { background: linear-gradient(135deg,#e8f5e9,#f1f8e9); border:1px solid #a5d6a7; }
+.field.num  { background: linear-gradient(135deg,#e8eaf6,#ede7f6); }
+
+.sec-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; padding:14px 20px; border-bottom:1px solid #f0f0f0; }
+.sec-item { background:#fafafa; border:1px solid #e0e0e0; border-radius:8px; padding:10px 14px; text-align:center; }
+.sec-item .slbl { font-size:9px; color:#9e9e9e; font-weight:700; text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+.sec-item .sval { font-size:18px; color:#e65100; font-weight:700; }
+.sec-item .ssum { font-size:10px; color:#757575; margin-top:2px; }
+
+.files { padding:14px 20px; background:#fafafa; border-bottom:1px solid #f0f0f0; }
+.files .flbl { font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.7px; color:#9e9e9e; margin-bottom:8px; }
+.file-btn { display:inline-flex; align-items:center; gap:7px; background:white; border:1px solid #e0e0e0; border-radius:7px; padding:7px 13px; margin-right:8px; font-size:12px; color:#1a237e; font-weight:500; cursor:pointer; }
+.file-btn:hover { background:#e8eaf6; border-color:#3949ab; }
+
+.actions { padding:14px 20px; display:flex; gap:10px; justify-content:flex-end; }
+.btn-print { background:#1a237e; color:white; border:none; padding:9px 22px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; }
+.btn-print:hover { background:#283593; }
+.btn-copy { background:white; color:#1a237e; border:2px solid #1a237e; padding:9px 18px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; }
+
+.meta { padding:7px 20px; font-size:10px; color:#bdbdbd; border-top:1px solid #f0f0f0; text-align:right; }
+
+.warning { background:#fff8e1; border-left:4px solid #ffc107; padding:8px 20px; font-size:11px; color:#5d4037; }
+
+@media print {
+  body { background:white; padding:0; }
+  .btn-print, .btn-copy, .actions { display:none !important; }
+  .card { box-shadow:none; border:1px solid #ccc; }
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<div class="header">
+  <h1>📋 Карточка закупки</h1>
+  <span class="badge">44-ФЗ · Электронный аукцион</span>
+</div>
+
+<div class="card">
+
+  <div class="warning">
+    ⏰ Закупка в стадии <strong>«Работа комиссии»</strong> · Время по МСК+9 (Петропавловск-Камчатский, UTC+12)
+  </div>
+
+  <div class="section-title">Основная информация</div>
+  <div class="fields-grid">
+    <div class="field num">
+      <label>1. Номер процедуры (ЕИС)</label>
+      <div class="val big">0338300003326000051</div>
+    </div>
+    <div class="field">
+      <label>7. Закон</label>
+      <div class="val"><span class="chip-green">44-ФЗ</span></div>
+    </div>
+    <div class="field full">
+      <label>2. Заказчик</label>
+      <div class="val">ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ЗДРАВООХРАНЕНИЯ КАМЧАТСКОГО КРАЯ «ВИЛЮЧИНСКАЯ ГОРОДСКАЯ БОЛЬНИЦА»</div>
+    </div>
+    <div class="field">
+      <label>3. Площадка</label>
+      <div class="val">РТС-тендер · rts-tender.ru</div>
+    </div>
+    <div class="field">
+      <label>8. Вид процедуры</label>
+      <div class="val"><span class="chip-blue">Электронный аукцион</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Цена и сроки подачи</div>
+  <div class="fields-grid">
+    <div class="field nmck">
+      <label>4. НМЦК (начальная цена)</label>
+      <div class="val big">656 093,34 ₽</div>
+    </div>
+    <div class="field">
+      <label>5. Окончание подачи заявок</label>
+      <div class="val red">🕙 03.04.2026 &nbsp;12:29 (МСК+9)</div>
+    </div>
+    <div class="field">
+      <label>6. Дата торгов (подача предложений о цене)</label>
+      <div class="val red">🔨 03.04.2026</div>
+    </div>
+    <div class="field">
+      <label>Дата подведения итогов</label>
+      <div class="val">07.04.2026</div>
+    </div>
+  </div>
+
+  <div class="section-title">9. Обеспечение</div>
+  <div class="sec-grid">
+    <div class="sec-item">
+      <div class="slbl">Заявки</div>
+      <div class="sval">—</div>
+      <div class="ssum">Не требуется</div>
+    </div>
+    <div class="sec-item">
+      <div class="slbl">Исполнения</div>
+      <div class="sval">5%</div>
+      <div class="ssum">от цены контракта</div>
+    </div>
+    <div class="sec-item">
+      <div class="slbl">Гарантия качества</div>
+      <div class="sval">≥ 12 мес.</div>
+      <div class="ssum">от даты поставки</div>
+    </div>
+  </div>
+
+  <div class="section-title">Условия контракта</div>
+  <div class="fields-grid">
+    <div class="field">
+      <label>10. Срок действия контракта</label>
+      <div class="val">с даты заключения до 17.05.2027</div>
+    </div>
+    <div class="field">
+      <label>11. Срок поставки</label>
+      <div class="val">Устанавливается контрактом · ЗАТО г. Вилючинск (требуется пропуск)</div>
+    </div>
+    <div class="field full">
+      <label>12. Срок оплаты</label>
+      <div class="val">В соответствии с условиями контракта (финансирование: 456 093,34 ₽ — 2026 г., 200 000,00 ₽ — 2027 г.)</div>
+    </div>
+  </div>
+
+  <div class="section-title">Объект закупки</div>
+  <div class="fields-grid">
+    <div class="field full">
+      <label>Наименование</label>
+      <div class="val">Поставка расходных материалов (материал пломбировочный, гуттаперча, нагрудник и прочее) для стоматологического отделения ГБУЗ КК ВГБ для оказания помощи по системе ОМС</div>
+    </div>
+    <div class="field full">
+      <label>Адрес поставки</label>
+      <div class="val">684090, Камчатский край, г. Вилючинск (ЗАТО), ул. Победы, д. 1А — <strong>требуется пропуск!</strong></div>
+    </div>
+    <div class="field">
+      <label>Позиций в ТЗ</label>
+      <div class="val big">10 позиций</div>
+    </div>
+    <div class="field">
+      <label>Источник финансирования</label>
+      <div class="val">Внебюджетные средства (ОМС)</div>
+    </div>
+  </div>
+
+  <div class="files">
+    <div class="flbl">Прикреплённые файлы</div>
+    <a class="file-btn" href="/tz.xlsx" download title="Excel-таблица: все позиции ТЗ с простыми названиями и столбцами для вашего предложения">
+      📊 Расшифровка ТЗ.xlsx
+      <span style="font-size:10px;color:#9e9e9e;margin-left:4px">10 позиций</span>
+    </a>
+    <a class="file-btn" href="#" onclick="alert('Файл РУ: прикрепите PDF с Регистрационными удостоверениями (РУ) от Росздравнадзора на каждое медицинское изделие из ТЗ. Без РУ заявка будет отклонена!')" title="Регистрационные удостоверения Росздравнадзора на медизделия">
+      📜 Сертификаты и РУ.pdf
+      <span style="font-size:10px;color:#c62828;margin-left:4px">⚠ обязательно</span>
+    </a>
+  </div>
+  <div style="padding:8px 20px;background:#fff8e1;font-size:11px;color:#5d4037;border-bottom:1px solid #f0f0f0">
+    <strong>Что такое РУ?</strong> Регистрационное удостоверение — обязательный документ для каждого медицинского изделия (выдаёт Росздравнадзор).
+    Подтверждает что товар разрешён к применению в РФ. <strong>Без РУ заявка отклоняется автоматически.</strong>
+  </div>
+
+  <div class="actions">
+    <button class="btn-copy" onclick="copyCard()">📋 Скопировать</button>
+    <button class="btn-print" onclick="window.print()">🖨️ Распечатать</button>
+  </div>
+
+  <div class="meta">Данные получены из ЕИС zakupki.gov.ru · 03.04.2026</div>
+</div>
+</div>
+
+<script>
+function copyCard() {
+  const t = `КАРТОЧКА ЗАКУПКИ
+════════════════════════════════════════
+1.  Номер:            0338300003326000051
+2.  Заказчик:         ГБУЗ КК «Вилючинская городская больница»
+3.  Площадка:         РТС-тендер (rts-tender.ru)
+4.  НМЦК:             656 093,34 ₽
+5.  Окончание заявок: 03.04.2026 12:29 (МСК+9)
+6.  Дата торгов:      03.04.2026
+7.  Закон:            44-ФЗ
+8.  Вид процедуры:    Электронный аукцион
+9.  Обеспечение:      заявки — не требуется | исполнения — 5% | гарантия — ≥12 мес.
+10. Срок контракта:   с даты заключения до 17.05.2027
+11. Срок поставки:    по условиям контракта (ЗАТО, нужен пропуск)
+12. Срок оплаты:      по контракту (2026: 456 093,34 ₽ / 2027: 200 000 ₽)
+════════════════════════════════════════
+Объект: расходные материалы для стоматологии (10 позиций)`;
+  navigator.clipboard.writeText(t).then(() => alert('Скопировано!'));
+}
+</script>
+</body>
+</html>

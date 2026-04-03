@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "tz.xlsx", "use": "@vercel/static" }
+  ],
+  "headers": [
+    {
+      "source": "/tz.xlsx",
+      "headers": [
+        { "key": "Content-Type", "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Расшифровка_ТЗ_0338300003326000051.xlsx\"" }
+      ]
+    }
+  ]
+}
