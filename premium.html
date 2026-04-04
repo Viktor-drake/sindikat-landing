@@ -167,7 +167,7 @@
     #s02-sticky { position:sticky; top:0; height:100vh; overflow:hidden; }
     #s02-canvas { position:absolute; inset:0; width:100%; height:100%; }
     #s02-text {
-      position:absolute; top:8%; left:64px;
+      position:absolute; top:32%; left:64px;
       z-index:10; pointer-events:none; max-width:500px;
     }
     #s02-headline {
@@ -313,7 +313,6 @@
       <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
         <div style="display:flex;flex-direction:row;gap:12px;flex-wrap:wrap;justify-content:center;">
           <a href="#price" class="cta-primary">Вступить в клуб</a>
-          <a href="#edge" class="cta-secondary">Узнать больше</a>
         </div>
       </div>
     </div>
@@ -1205,7 +1204,7 @@
       function draw(){
         ctx.clearRect(0,0,W,H);time+=0.016;
         const p=eio(Math.max(0,Math.min(1,progress)));
-        if(p<0.25){const fa=p<0.12?p/0.12:(0.25-p)/0.13;ctx.font='300 11px Inter';ctx.fillStyle=`rgba(82,82,91,${fa*0.65})`;ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС',W/2,52);}
+        if(p<0.30){const fa=p<0.18?1.0:Math.max(0,(0.30-p)/0.12);ctx.font='300 11px Inter';ctx.fillStyle=`rgba(82,82,91,${fa*0.65})`;ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС',W/2,52);}
         nodes.forEach((n,i)=>{const sp=(1-p)*0.98+0.02;n.cx+=n.cvx*sp;n.cy+=n.cvy*sp;const pad=80;if(n.cx<pad||n.cx>W-pad)n.cvx*=-1;if(n.cy<pad||n.cy>H-pad)n.cvy*=-1;n.cx=Math.max(pad,Math.min(W-pad,n.cx));n.cy=Math.max(pad,Math.min(H-pad,n.cy));const tl=p>0.65?Math.min(1,(p-0.65)/0.35):0;n.lit+=(tl-n.lit)*0.04;});
         const pos=nodes.map(n=>({x:lerp(n.cx,n.tx,p),y:lerp(n.cy,n.ty,p)}));
         const ep=Math.max(0,(p-0.22)/0.78);
