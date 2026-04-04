@@ -1206,23 +1206,8 @@
       function draw(){
         ctx.clearRect(0,0,W,H);time+=0.016;
         const p=eio(Math.max(0,Math.min(1,progress)));
-        // Хаос-надпись — в центре, крупно, ярко
-        const chaosTextX=W/2, chaosTextY=H*0.44;
-        if(p<0.35){
-          const fa=p<0.20?1.0:Math.max(0,(0.35-p)/0.15);
-          // Свечение за текстом
-          const tg=ctx.createRadialGradient(chaosTextX,chaosTextY,0,chaosTextX,chaosTextY,200);
-          tg.addColorStop(0,`rgba(228,228,231,${fa*0.04})`);tg.addColorStop(1,'rgba(228,228,231,0)');
-          ctx.beginPath();ctx.ellipse(chaosTextX,chaosTextY,280,80,0,0,Math.PI*2);ctx.fillStyle=tg;ctx.fill();
-          // Текст
-          ctx.font=`700 28px Inter`;ctx.fillStyle=`rgba(228,228,231,${fa*0.92})`;
-          ctx.textAlign='center';ctx.textBaseline='middle';
-          ctx.letterSpacing='0.12em';ctx.fillText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС',chaosTextX,chaosTextY);ctx.letterSpacing='0';
-        }
         nodes.forEach((n,i)=>{
           const sp=(1-p)*0.98+0.02;n.cx+=n.cvx*sp;n.cy+=n.cvy*sp;
-          // Отталкивание от хаос-надписи
-          if(p<0.35){const rdx=n.cx-chaosTextX,rdy=n.cy-chaosTextY,rdist=Math.sqrt(rdx*rdx+rdy*rdy),repR=160;if(rdist<repR&&rdist>1){const f=(repR-rdist)/repR*1.2*(1-p/0.35);n.cvx+=(rdx/rdist)*f;n.cvy+=(rdy/rdist)*f;}}
           const pad=80;if(n.cx<pad||n.cx>W-pad)n.cvx*=-1;if(n.cy<pad||n.cy>H-pad)n.cvy*=-1;n.cx=Math.max(pad,Math.min(W-pad,n.cx));n.cy=Math.max(pad,Math.min(H-pad,n.cy));const tl=p>0.65?Math.min(1,(p-0.65)/0.35):0;n.lit+=(tl-n.lit)*0.04;
         });
         const pos=nodes.map(n=>({x:lerp(n.cx,n.tx,p),y:lerp(n.cy,n.ty,p)}));
