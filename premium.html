@@ -264,7 +264,7 @@
 
       <!-- Подзаголовок -->
       <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;">
-        Закрытый клуб · Технологическое доминирование
+        Закрытый клуб · NextGen Club
       </p>
 
       <!-- Заголовок -->
@@ -275,7 +275,7 @@
 
       <!-- Дескриптор -->
       <p style="font-size:17px;font-weight:300;color:#71717A;max-width:480px;line-height:1.65;letter-spacing:0.01em;">
-        Среда, где предприниматели и команды используют AI не как инструмент — а как конкурентное преимущество.
+        Ваш путь к технологическому доминированию.
       </p>
 
       <!-- CTA c бейджем -->
@@ -283,10 +283,6 @@
         <div style="display:flex;flex-direction:row;gap:12px;flex-wrap:wrap;justify-content:center;">
           <a href="#price" class="cta-primary">Вступить в клуб</a>
           <a href="#edge" class="cta-secondary">Узнать больше</a>
-        </div>
-        <div class="status-badge">
-          <span class="status-dot"></span>
-          Приём открыт
         </div>
       </div>
     </div>
@@ -1111,66 +1107,109 @@
       el.classList.toggle('accordion-open');
     }
 
-    // ===== DOT GRID ANIMATION =====
+    // ===== HERO NEURAL GRAPH =====
     (function() {
       const canvas = document.getElementById('dot-grid');
       const ctx = canvas.getContext('2d');
-      let mouseX = 0, mouseY = 0;
-      let dots = [];
-      const DOT_SPACING = 52;
-      const DOT_RADIUS = 0.9;
-      const DOT_COLOR = 'rgba(255, 255, 255, 0.07)';
-      const MOUSE_RADIUS = 140;
+      let W, H;
+      let mouseX = -9999, mouseY = -9999;
+
+      const NODE_COUNT = 68;
+      const CONNECT_DIST = 185;
+      const GLOW_RADIUS = 210;
+
+      let nodes = [];
 
       function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        createDots();
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+        initNodes();
       }
 
-      function createDots() {
-        dots = [];
-        const cols = Math.ceil(canvas.width / DOT_SPACING) + 1;
-        const rows = Math.ceil(canvas.height / DOT_SPACING) + 1;
-        for (let i = 0; i < cols; i++) {
-          for (let j = 0; j < rows; j++) {
-            dots.push({
-              x: i * DOT_SPACING,
-              y: j * DOT_SPACING,
-              baseX: i * DOT_SPACING,
-              baseY: j * DOT_SPACING
-            });
-          }
+      function initNodes() {
+        nodes = [];
+        for (let i = 0; i < NODE_COUNT; i++) {
+          const speed = 0.12 + Math.random() * 0.22;
+          const angle = Math.random() * Math.PI * 2;
+          nodes.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            r: 1.1 + Math.random() * 1.3,
+            glow: 0
+          });
         }
       }
 
       function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, W, H);
+
+        // Постепенно гасим при скролле
         const scrollY = window.scrollY;
-        // Only draw for the first 2 viewports
-        if (scrollY > window.innerHeight * 3) {
-          requestAnimationFrame(draw);
-          return;
+        const fadeOut = Math.max(0, 1 - scrollY / (H * 0.7));
+        if (fadeOut <= 0) { requestAnimationFrame(draw); return; }
+
+        // Обновляем узлы
+        for (let n of nodes) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0)  { n.x = 0;  n.vx *= -1; }
+          if (n.x > W)  { n.x = W;  n.vx *= -1; }
+          if (n.y < 0)  { n.y = 0;  n.vy *= -1; }
+          if (n.y > H)  { n.y = H;  n.vy *= -1; }
+
+          // Близость к курсору
+          const dx = n.x - mouseX;
+          const dy = n.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const target = dist < GLOW_RADIUS ? Math.pow(1 - dist / GLOW_RADIUS, 1.8) : 0;
+          n.glow += (target - n.glow) * 0.07;
         }
 
-        for (let dot of dots) {
-          const dx = mouseX - dot.baseX;
-          const dy = mouseY - dot.baseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+        // Рёбра
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i], b = nodes[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < CONNECT_DIST) {
+              const fade = 1 - dist / CONNECT_DIST;
+              const glowBoost = (a.glow + b.glow) * 0.5;
+              const alpha = fade * (0.035 + glowBoost * 0.6) * fadeOut;
+              if (alpha < 0.004) continue;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(100,200,210,${alpha})`;
+              ctx.lineWidth = 0.4 + glowBoost * 1.0;
+              ctx.stroke();
+            }
+          }
+        }
 
-          if (dist < MOUSE_RADIUS) {
-            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
-            dot.x = dot.baseX + dx * force * 0.15;
-            dot.y = dot.baseY + dy * force * 0.15;
-          } else {
-            dot.x += (dot.baseX - dot.x) * 0.1;
-            dot.y += (dot.baseY - dot.y) * 0.1;
+        // Узлы
+        for (let n of nodes) {
+          const alpha = (0.07 + n.glow * 0.88) * fadeOut;
+          const r = n.r + n.glow * 6;
+
+          // Ореол свечения
+          if (n.glow > 0.02) {
+            const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 6);
+            grad.addColorStop(0, `rgba(100,200,210,${n.glow * 0.38 * fadeOut})`);
+            grad.addColorStop(0.35, `rgba(100,200,210,${n.glow * 0.09 * fadeOut})`);
+            grad.addColorStop(1, 'rgba(100,200,210,0)');
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, r * 6, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
+            ctx.fill();
           }
 
-          const opacity = dist < MOUSE_RADIUS ? 0.25 + (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.4 : 0.25;
-          ctx.fillStyle = `rgba(26, 79, 214, ${opacity})`;
+          // Сам узел
           ctx.beginPath();
-          ctx.arc(dot.x, dot.y - scrollY * 0.3, DOT_RADIUS, 0, Math.PI * 2);
+          ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(160,230,240,${alpha})`;
           ctx.fill();
         }
 
@@ -1178,10 +1217,7 @@
       }
 
       window.addEventListener('resize', resize);
-      window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
+      window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
 
       resize();
       draw();
