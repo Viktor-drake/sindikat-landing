@@ -6,21 +6,20 @@
   <title>NextGen Club — Сообщество технологического доминирования</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            navy: '#060E1E',
-            'navy-card': '#0C1628',
-            'blue-accent': '#1A4FD6',
-            'blue-bright': '#2D6FFF',
+            graphite: '#0E0E11',
+            'graphite-card': '#161619',
+            platinum: '#E4E4E7',
+            zinc: '#71717A',
+            'zinc-light': '#A1A1AA',
             'yellow-cta': '#F5C518',
-            'silver': '#8A9BBF',
           },
           fontFamily: {
-            bebas: ['Bebas Neue', 'sans-serif'],
             inter: ['Inter', 'sans-serif'],
           }
         }
@@ -28,91 +27,123 @@
     }
   </script>
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .font-bebas { font-family: 'Bebas Neue', sans-serif; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #060E1E; }
-    ::-webkit-scrollbar-thumb { background: #1A4FD6; border-radius: 3px; }
+    :root { --gold: #C9A87C; --gold-dim: rgba(201,168,124,0.75); }
+    body { font-family: 'Inter', sans-serif; background: #0E0E11; }
 
-    /* Glass card */
+    /* Noise texture — глубина без шума */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      z-index: 0; pointer-events: none; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0E0E11; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+    /* Карточки */
     .glass {
-      background: rgba(12, 22, 40, 0.7);
-      border: 1px solid rgba(45, 111, 255, 0.15);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
+      background: #161619;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .glass:hover {
-      border-color: rgba(45, 111, 255, 0.35);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 40px rgba(26, 79, 214, 0.15);
-    }
-    .glass { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-
-    /* Glow */
-    .glow-blue {
-      background: radial-gradient(ellipse 600px 300px at center bottom, rgba(26,79,214,0.2), transparent);
-    }
-    .glow-blue-top {
-      background: radial-gradient(ellipse 600px 200px at center top, rgba(26,79,214,0.12), transparent);
+      border-color: rgba(255,255,255,0.11);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.45);
     }
 
-    /* Section number */
+    /* Ambient glow — очень мягкий */
+    .glow-ambient {
+      background: radial-gradient(ellipse 800px 400px at 50% 100%, rgba(245,197,24,0.035), transparent);
+    }
+    .glow-ambient-top {
+      background: radial-gradient(ellipse 700px 300px at 50% 0%, rgba(255,255,255,0.025), transparent);
+    }
+    /* Старые классы — переопределены для совместимости */
+    .glow-blue { background: radial-gradient(ellipse 700px 350px at 50% 100%, rgba(245,197,24,0.03), transparent); }
+    .glow-blue-top { background: radial-gradient(ellipse 600px 250px at 50% 0%, rgba(255,255,255,0.02), transparent); }
+
+    /* Номер секции */
     .section-num {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: #1A4FD6;
-      letter-spacing: 0.15em;
+      font-size: 11px; font-weight: 400;
+      color: #52525B; letter-spacing: 0.22em;
     }
 
-    /* CTA button pulse */
-    .cta-pulse {
-      animation: pulse-glow 3s ease-in-out infinite;
-    }
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.5), 0 0 80px rgba(245, 197, 24, 0.2); }
-    }
-
-    /* Fade in on scroll */
+    /* Fade-up */
     .fade-up {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), transform 0.9s cubic-bezier(0.4,0,0.2,1);
     }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Бейдж статуса */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px; padding: 7px 18px;
+      font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.14em; color: #71717A;
+    }
+    .status-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #4ADE80; box-shadow: 0 0 5px rgba(74,222,128,0.7);
+      animation: sdot 2.5s ease-in-out infinite;
+    }
+    @keyframes sdot { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+    /* Кнопки */
+    .cta-primary {
+      background: #E4E4E7; color: #0E0E11;
+      font-weight: 600; font-size: 14px; letter-spacing: 0.03em;
+      border-radius: 9px; padding: 13px 34px;
+      transition: all 0.22s ease; border: none;
+    }
+    .cta-primary:hover { background: #fff; box-shadow: 0 0 28px rgba(228,228,231,0.12); }
+
+    .cta-secondary {
+      background: transparent; color: #71717A;
+      font-size: 14px; font-weight: 400; letter-spacing: 0.02em;
+      border-radius: 9px; padding: 13px 34px;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: all 0.22s ease;
+    }
+    .cta-secondary:hover { color: #E4E4E7; border-color: rgba(255,255,255,0.16); }
+
+    /* SVG иконка-контейнер */
+    .icon-box {
+      width: 42px; height: 42px; border-radius: 9px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.025);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
 
-    /* Pill badge */
+    /* Pill */
     .pill {
-      background: rgba(26, 79, 214, 0.12);
-      border: 1px solid rgba(26, 79, 214, 0.25);
-      border-radius: 100px;
-      padding: 8px 20px;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 100px; padding: 5px 14px;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.06em; color: #71717A;
     }
 
     /* Comparison table */
     .price-table td, .price-table th {
       padding: 14px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .price-table tr:last-child td { border-bottom: none; }
 
     /* Collapsible */
-    .collapsible-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    .collapsible-open .collapsible-content {
-      max-height: 500px;
-    }
+    .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .collapsible-open .collapsible-content { max-height: 500px; }
+
+    /* cta-pulse — убран, оставлен stub */
+    .cta-pulse {}
 
     /* Canvas behind hero */
     #dot-grid {
@@ -130,29 +161,128 @@
     }
 
     /* Strikethrough price */
-    .price-old {
-      text-decoration: line-through;
-      color: #8A9BBF;
+    .price-old { text-decoration: line-through; color: #52525B; }
+
+    /* ── Screen 02: Chaos→Order animation ── */
+    #s02-chaos { position:relative; height:300vh; }
+    #s02-sticky { position:sticky; top:0; height:100vh; overflow:hidden; }
+    #s02-canvas { position:absolute; inset:0; width:100%; height:100%; }
+    #s02-text {
+      position:absolute; top:32%; left:64px;
+      z-index:10; pointer-events:none; max-width:500px;
+    }
+    #s02-headline {
+      font-size:62px; font-weight:800;
+      letter-spacing:-0.03em; line-height:1.05; color:#E4E4E7;
+      opacity:0; transform:translateX(-12px);
+      transition:opacity 0.7s ease, transform 0.7s ease;
+      white-space:nowrap; margin-top:24px;
+    }
+    #s02-headline.show { opacity:1; transform:translateX(0); }
+    #s02-headline .s02-line { display:block; }
+    #s02-headline .s02-muted { color:var(--gold); font-weight:300; }
+    #s02-sub {
+      margin-top:24px; font-size:15px; font-weight:300;
+      color:#52525B; line-height:1.65;
+      opacity:0; transform:translateX(-8px);
+      transition:opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+    }
+    #s02-sub.show { opacity:1; transform:translateX(0); }
+    #s02-hint {
+      position:absolute; bottom:48px; left:50%; transform:translateX(-50%);
+      font-size:10px; letter-spacing:0.2em; color:#252528;
+      text-transform:uppercase; z-index:10; transition:opacity 0.4s;
+    }
+
+    /* Section fade gradient — плавный переход между секциями */
+    .section-fade-top {
+      background: linear-gradient(to bottom, #0E0E11 0%, transparent 100%);
+      position: absolute; top: 0; left: 0; right: 0; height: 80px; pointer-events: none; z-index: 2;
+    }
+    .section-fade-bottom {
+      background: linear-gradient(to top, #0E0E11 0%, transparent 100%);
+      position: absolute; bottom: 0; left: 0; right: 0; height: 80px; pointer-events: none; z-index: 2;
+    }
+
+    /* Stitch-style 2-col layout */
+    .stitch-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .stitch-layout { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* Tool tile */
+    .tool-tile {
+      background: #161619;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      min-height: 180px;
+    }
+    .tool-tile:hover {
+      border-color: rgba(255,255,255,0.11);
+      transform: translateY(-2px);
+    }
+    .tool-tile-large { min-height: 240px; }
+
+    /* Accordion item */
+    .accordion-item {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 0;
+      cursor: pointer;
+    }
+    .accordion-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+    .accordion-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .accordion-arrow {
+      transition: transform 0.3s ease;
+      color: #52525B; font-size: 14px;
+    }
+    .accordion-open .accordion-arrow { transform: rotate(45deg); color: #A1A1AA; }
+    .accordion-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+      opacity: 0;
+    }
+    .accordion-open .accordion-body { max-height: 300px; opacity: 1; }
+
+    /* Highlight stat */
+    .stat-highlight {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      color: var(--gold) !important;
+      letter-spacing: -0.03em;
+      color: #E4E4E7;
+      line-height: 1;
     }
   </style>
 </head>
-<body class="bg-navy text-white antialiased overflow-x-hidden">
+<body class="bg-graphite text-platinum antialiased overflow-x-hidden">
 
   <!-- DOT GRID CANVAS -->
   <canvas id="dot-grid"></canvas>
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-navy/80 backdrop-blur-xl border-b border-white/5">
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b" style="background:rgba(14,14,17,0.85);border-color:rgba(255,255,255,0.05);">
     <div class="max-w-[1200px] mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
-      <span class="font-bebas text-xl tracking-wider text-white">NEXTGEN CLUB</span>
-      <div class="hidden md:flex items-center gap-8 text-sm text-silver">
-        <a href="#about" class="hover:text-white transition-colors">О КЛУБЕ</a>
-        <a href="#tools" class="hover:text-white transition-colors">ИНСТРУМЕНТЫ</a>
-        <a href="#syndicate" class="hover:text-white transition-colors">СИНДИКАТ</a>
-        <a href="#price" class="hover:text-white transition-colors">ЦЕНА</a>
+      <span class="text-sm font-semibold tracking-[0.18em] text-platinum uppercase">NEXTGEN CLUB</span>
+      <div class="hidden md:flex items-center gap-8" style="font-size:12px;letter-spacing:0.12em;color:#52525B;">
+        <a href="#about" class="hover:text-zinc-light transition-colors uppercase">О клубе</a>
+        <a href="#tools" class="hover:text-zinc-light transition-colors uppercase">Инструменты</a>
+        <a href="#syndicate" class="hover:text-zinc-light transition-colors uppercase">Синдикат</a>
+        <a href="#price" class="hover:text-zinc-light transition-colors uppercase">Цена</a>
       </div>
-      <a href="#price" class="px-5 py-2.5 bg-yellow-cta text-navy font-bold text-sm rounded-lg hover:brightness-110 transition-all">
-        Вступить в клуб
+      <a href="#price" class="cta-primary" style="padding:8px 22px;font-size:12px;letter-spacing:0.06em;">
+        Вступить
       </a>
     </div>
   </nav>
@@ -161,198 +291,259 @@
   <!-- SCREEN 01 — HERO                            -->
   <!-- =========================================== -->
   <section class="relative min-h-screen flex items-center justify-center px-6 pt-16">
-    <!-- Blue glow underneath -->
-    <div class="absolute inset-0 glow-blue pointer-events-none"></div>
+    <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
 
-    <div class="relative z-10 max-w-5xl mx-auto text-center space-y-8 fade-up">
-      <!-- Pill badge -->
-      <div class="inline-flex items-center gap-2 pill text-blue-bright">
-        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-        ПРИЁМ ОТКРЫТ
-      </div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center fade-up" style="display:flex;flex-direction:column;align-items:center;gap:36px;">
 
-      <!-- Caps label -->
-      <p class="text-silver text-xs sm:text-sm tracking-[0.2em] uppercase">
-        Закрытый клуб · Сообщество технологического доминирования
+      <!-- Подзаголовок -->
+      <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;">
+        Закрытый клуб · NextGen Club
       </p>
 
-      <!-- Giant headline -->
-      <h1 class="font-bebas text-[80px] sm:text-[120px] lg:text-[160px] leading-[0.85] tracking-wide text-white">
-        NEXTGEN<br>CLUB
-      </h1>
+      <!-- Заголовок -->
+      <div style="display:flex;flex-direction:column;gap:0;line-height:0.88;">
+        <h1 style="font-size:clamp(72px,12vw,148px);font-weight:800;letter-spacing:-0.02em;color:#E4E4E7;margin:0;">NEXTGEN</h1>
+        <h1 style="font-size:clamp(72px,12vw,148px);font-weight:300;letter-spacing:-0.02em;color:#3F3F46;margin:0;">CLUB</h1>
+      </div>
 
-      <!-- CTA buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-        <a href="#price" class="px-10 py-4 bg-yellow-cta text-navy font-bold rounded-xl text-lg cta-pulse hover:brightness-110 transition-all">
-          Вступить в клуб
-        </a>
-        <a href="#edge" class="px-10 py-4 border border-white/15 text-white rounded-xl text-lg hover:border-blue-bright/40 transition-colors">
-          Смотреть дальше ↓
-        </a>
+      <!-- Дескриптор -->
+      <p style="font-size:17px;font-weight:300;color:#71717A;max-width:480px;line-height:1.65;letter-spacing:0.01em;">
+        Ваш путь к технологическому доминированию.
+      </p>
+
+      <!-- CTA c бейджем -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+        <div style="display:flex;flex-direction:row;gap:12px;flex-wrap:wrap;justify-content:center;">
+          <a href="#price" class="cta-primary">Вступить в клуб</a>
+        </div>
       </div>
     </div>
+
+    <!-- Тонкая линия снизу -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(255,255,255,0.04);"></div>
   </section>
 
 
   <!-- =========================================== -->
-  <!-- SCREEN 02 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
+  <!-- SCREEN 02 — CHAOS→ORDER ANIMATION          -->
   <!-- =========================================== -->
-  <section id="edge" class="relative py-32 px-6 lg:px-8">
-    <div class="absolute inset-0 glow-blue-top pointer-events-none"></div>
-    <div class="max-w-[1200px] mx-auto relative z-10">
-      <div class="text-center mb-16 fade-up">
-        <span class="section-num">02 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ВЫ ВСЕГДА НА ОСТРИЕ</h2>
-        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
-          Рынок AI меняется каждую неделю. Следить за ним — отдельная работа. Мы делаем её за вас.
-        </p>
+  <div id="s02-chaos">
+    <div id="s02-sticky">
+      <canvas id="s02-canvas"></canvas>
+      <div id="s02-text">
+        <p class="section-num">02</p>
+        <h2 id="s02-headline">
+          <span class="s02-line">С этой системой</span>
+          <span class="s02-line">ты обойдёшь</span>
+          <span class="s02-line s02-muted">99% конкурентов</span>
+        </h2>
+        <p id="s02-sub">Работает пока ты спишь.</p>
+      </div>
+      <div id="s02-hint">↓ прокрути</div>
+    </div>
+  </div>
+
+  <!-- =========================================== -->
+  <!-- SCREEN 03 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
+  <!-- =========================================== -->
+  <section id="edge" class="relative py-36 px-6 lg:px-8">
+    <div class="section-fade-top"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10">
+
+      <!-- Stitch-стиль: заголовок слева, описание справа -->
+      <div class="stitch-layout mb-20 fade-up">
+        <div>
+          <p class="section-num" style="margin-bottom:20px;">03</p>
+          <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
+            Вы всегда<br><span style="font-weight:300;color:#52525B;">на острие</span>
+          </h2>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:24px;">
+          <p style="color:#71717A;font-size:16px;font-weight:300;line-height:1.75;">
+            Мы не просто следим за трендами. Мы создаём инфраструктуру, в которой AI работает на ваш капитал — пока остальные только учатся писать промпты.
+          </p>
+          <p style="color:#52525B;font-size:13px;font-weight:300;line-height:1.7;">
+            Рынок AI меняется каждую неделю. Следить за ним — отдельная работа. Мы делаем её за вас.
+          </p>
+        </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="glass p-8 space-y-4 fade-up">
-          <div class="w-12 h-12 rounded-xl bg-blue-accent/15 flex items-center justify-center text-2xl">🔍</div>
-          <h3 class="text-xl font-bold">Мониторим рынок</h3>
-          <p class="text-silver leading-relaxed">Собираем всё, что выходит: инструменты, модели, кейсы, тренды. Фильтруем от хайпа — оставляем только то, что имеет реальный потенциал.</p>
-        </div>
-        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.15s">
-          <div class="w-12 h-12 rounded-xl bg-blue-accent/15 flex items-center justify-center text-2xl">⚡</div>
-          <h3 class="text-xl font-bold">Быстро внедряем</h3>
-          <p class="text-silver leading-relaxed">Новый инструмент проходит проверку внутри клуба — и сразу попадает в базу с инструкцией, как применить в вашем деле.</p>
-        </div>
-        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.3s">
-          <div class="w-12 h-12 rounded-xl bg-blue-accent/15 flex items-center justify-center text-2xl">🎯</div>
-          <h3 class="text-xl font-bold">Привлекаем топовых экспертов</h3>
-          <p class="text-silver leading-relaxed">Лучшие практики приносят люди, которые уже делают это на высшем уровне. Эксперты — часть клуба.</p>
-        </div>
-      </div>
+      <!-- Три карточки — горизонтальные тайлы в стиле Stitch -->
+      <div class="grid md:grid-cols-3 gap-4">
 
-      <div class="mt-16 text-center fade-up">
-        <p class="text-xl sm:text-2xl font-semibold text-white max-w-3xl mx-auto leading-relaxed">
-          Вы всегда с самыми передовыми технологиями.<br>
-          <span class="text-silver">Мы нашли, отфильтровали, внедрили — вам остаётся применять.</span>
-        </p>
+        <div class="tool-tile fade-up">
+          <div>
+            <p style="font-size:11px;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;margin-bottom:16px;">Мониторинг</p>
+            <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Мониторим рынок</h3>
+            <p style="font-size:13px;color:#71717A;margin-top:10px;line-height:1.7;font-weight:300;">Постоянный мониторинг нейросетевых прорывов. Фильтруем шум — оставляем только то, что приносит деньги.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool-tile fade-up" style="transition-delay:0.1s;">
+          <div>
+            <p style="font-size:11px;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;margin-bottom:16px;">Внедрение</p>
+            <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Быстро внедряем</h3>
+            <p style="font-size:13px;color:#71717A;margin-top:10px;line-height:1.7;font-weight:300;">Готовые пайплайны внедрения. От автоматизации контента до кастомных LLM-агентов для бизнеса.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool-tile fade-up" style="transition-delay:0.2s;">
+          <div>
+            <p style="font-size:11px;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;margin-bottom:16px;">Эксперты</p>
+            <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Топовые эксперты</h3>
+            <p style="font-size:13px;color:#71717A;margin-top:10px;line-height:1.7;font-weight:300;">Прямой доступ к архитекторам нейросетей и предпринимателям, которые уже масштабировались с AI.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
+            </svg>
+          </div>
+        </div>
+
       </div>
     </div>
+    <div class="section-fade-bottom"></div>
   </section>
 
 
   <!-- =========================================== -->
   <!-- SCREEN 03 — ЧТО ТАКОЕ NEXTGENCLUB           -->
   <!-- =========================================== -->
-  <section id="about" class="py-32 px-6 lg:px-8">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="text-center mb-16 fade-up">
-        <span class="section-num">03 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ЧТО ТАКОЕ NEXTGENCLUB</h2>
-        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
-          Всё, что нужно для работы с AI на профессиональном уровне — в одном месте.
-        </p>
-      </div>
+  <section id="about" class="py-36 px-6 lg:px-8" style="position:relative;">
+    <div class="section-fade-top"></div>
+    <div class="max-w-[1100px] mx-auto">
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="glass p-8 space-y-4 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')">
-          <div class="text-4xl">◎</div>
-          <h3 class="text-xl font-bold flex items-center gap-2">
-            Сообщество
-            <span class="text-silver text-sm group-hover:text-blue-bright transition-colors">▾</span>
-          </h3>
-          <div class="collapsible-content">
-            <p class="text-silver leading-relaxed pt-2">Живые люди, практики, разборы кейсов. Еженедельные эфиры и обсуждения. Среда, где каждый помогает каждому расти.</p>
-          </div>
+      <!-- Stitch-стиль: большой заголовок слева, аккордеон справа -->
+      <div class="stitch-layout fade-up" id="about-section">
+        <div>
+          <p class="section-num" style="margin-bottom:20px;">04</p>
+          <h2 style="font-size:clamp(38px,6vw,72px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
+            Что такое<br><span style="font-weight:300;color:#52525B;">NextGen<br>Club</span>
+          </h2>
+          <p style="color:#52525B;font-size:14px;font-weight:300;line-height:1.7;margin-top:24px;max-width:320px;">
+            Это закрытая экосистема для тех, кто понимает: в эпоху AI одиночки проигрывают сетям.
+          </p>
         </div>
-        <div class="glass p-8 space-y-4 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')" style="transition-delay: 0.15s">
-          <div class="text-4xl">⚡</div>
-          <h3 class="text-xl font-bold flex items-center gap-2">
-            Инструменты
-            <span class="text-silver text-sm group-hover:text-blue-bright transition-colors">▾</span>
-          </h3>
-          <div class="collapsible-content">
-            <p class="text-silver leading-relaxed pt-2">Библиотека AI-плагинов, скиллов и MCP. 20+ инструментов сейчас, новые каждый месяц. Claude как основной движок.</p>
+
+        <!-- Аккордеон -->
+        <div id="about-accordion">
+
+          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)">
+            <div class="accordion-header">
+              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Сообщество</h3>
+              <span class="accordion-arrow">+</span>
+            </div>
+            <div class="accordion-body" style="padding-top:14px;">
+              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Более 500 активных участников, еженедельные созвоны и закрытые встречи в Москве и Дубае. Живые люди, практики, разборы кейсов.</p>
+            </div>
           </div>
-        </div>
-        <div class="glass p-8 space-y-4 cursor-pointer group fade-up" onclick="this.classList.toggle('collapsible-open')" style="transition-delay: 0.3s">
-          <div class="text-4xl">🤖</div>
-          <h3 class="text-xl font-bold flex items-center gap-2">
-            Синдикат
-            <span class="text-silver text-sm group-hover:text-blue-bright transition-colors">▾</span>
-          </h3>
-          <div class="collapsible-content">
-            <p class="text-silver leading-relaxed pt-2">Умный нетворкинг с AI-матчингом. Оцифровка ваших связей, ресурсов и компетенций. Подбор нужных людей под конкретный запрос.</p>
+
+          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)" style="transition-delay:0.1s;">
+            <div class="accordion-header">
+              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Инструменты</h3>
+              <span class="accordion-arrow">+</span>
+            </div>
+            <div class="accordion-body" style="padding-top:14px;">
+              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Библиотека AI-плагинов, скиллов и MCP. 20+ инструментов прямо сейчас, новые каждый месяц. Claude как основной движок.</p>
+            </div>
           </div>
+
+          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)" style="transition-delay:0.2s;">
+            <div class="accordion-header">
+              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Синдикат</h3>
+              <span class="accordion-arrow">+</span>
+            </div>
+            <div class="accordion-body" style="padding-top:14px;">
+              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Умный нетворкинг с AI-матчингом. Оцифровка связей, ресурсов, компетенций. Подбор нужных людей под конкретный запрос.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
+    <div class="section-fade-bottom"></div>
   </section>
 
 
   <!-- =========================================== -->
   <!-- SCREEN 04 — ДЛЯ КОГО                        -->
   <!-- =========================================== -->
-  <section class="py-32 px-6 lg:px-8">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="text-center mb-16 fade-up">
-        <p class="text-xs tracking-[0.2em] uppercase text-silver mb-2">ТРИ ТИПА ЛЮДЕЙ, КОТОРЫМ ЗДЕСЬ МЕСТО</p>
-        <span class="section-num">04 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ДЛЯ КОГО</h2>
+  <section class="py-40 px-6 lg:px-8">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="text-center mb-20 fade-up">
+        <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">Три типа людей, которым здесь место</p>
+        <p class="section-num mb-4">05</p>
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Для <span style="font-weight:300;color:#52525B;">кого</span>
+        </h2>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- 0.1 Предприниматель -->
-        <div class="glass p-8 space-y-5 fade-up">
-          <div class="flex items-center gap-3">
-            <span class="text-blue-bright font-mono text-sm">0.1</span>
-            <h3 class="text-xl font-bold">ПРЕДПРИНИМАТЕЛЬ</h3>
+      <div class="grid md:grid-cols-3 gap-5">
+
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:11px;font-weight:400;color:#3F3F46;letter-spacing:0.12em;font-variant-numeric:tabular-nums;">01</span>
+            <h3 style="font-size:13px;font-weight:600;color:#E4E4E7;letter-spacing:0.06em;text-transform:uppercase;">Предприниматель</h3>
           </div>
-          <p class="text-silver text-sm leading-relaxed">Раньше нужен был целый отдел. Теперь двое AI-грамотных справляются с тем же объёмом.</p>
-          <p class="text-silver text-sm leading-relaxed">Но чтобы их нанять — нужно самому понимать что к чему.</p>
-          <div class="border-t border-white/5 pt-4 space-y-2 text-sm text-silver">
-            <p class="text-white font-semibold text-xs uppercase tracking-wider">Что получишь:</p>
-            <p>· Клиентов через AI за 7–14 дней</p>
-            <p>· Автоматизацию маркетинга и продаж</p>
-            <p>· Нужных партнёров в Синдикате</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Раньше нужен был целый отдел. Теперь двое AI-грамотных справляются с тем же объёмом.</p>
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Но чтобы их нанять — нужно самому понимать что к чему.</p>
           </div>
-          <div class="pt-2">
-            <span class="pill text-xs text-blue-bright">🔵 Marcus + Dolores</span>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:16px;display:flex;flex-direction:column;gap:6px;">
+            <p style="font-size:11px;font-weight:500;color:#52525B;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Что получишь:</p>
+            <p style="font-size:13px;color:#71717A;">— Клиентов через AI за 7–14 дней</p>
+            <p style="font-size:13px;color:#71717A;">— Автоматизацию маркетинга и продаж</p>
+            <p style="font-size:13px;color:#71717A;">— Нужных партнёров в Синдикате</p>
           </div>
+          <div><span class="pill">Marcus + Dolores</span></div>
         </div>
 
-        <!-- 0.2 Руководитель -->
-        <div class="glass p-8 space-y-5 fade-up" style="transition-delay: 0.15s">
-          <div class="flex items-center gap-3">
-            <span class="text-blue-bright font-mono text-sm">0.2</span>
-            <h3 class="text-xl font-bold">РУКОВОДИТЕЛЬ</h3>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:20px;transition-delay:0.12s;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:11px;font-weight:400;color:#3F3F46;letter-spacing:0.12em;">02</span>
+            <h3 style="font-size:13px;font-weight:600;color:#E4E4E7;letter-spacing:0.06em;text-transform:uppercase;">Руководитель</h3>
           </div>
-          <p class="text-silver text-sm leading-relaxed">Вложил бюджет в AI. Внедрили. Не работает.</p>
-          <p class="text-silver text-sm leading-relaxed">Где найти систему, которая реально даёт результат — непонятно.</p>
-          <div class="border-t border-white/5 pt-4 space-y-2 text-sm text-silver">
-            <p class="text-white font-semibold text-xs uppercase tracking-wider">Что получишь:</p>
-            <p>· Кейсы тех, кто уже внедрил</p>
-            <p>· Еженедельный срез «что реально работает»</p>
-            <p>· Круг руководителей твоего уровня</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Вложил бюджет в AI. Внедрили. Не работает.</p>
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Где найти систему, которая реально даёт результат — непонятно.</p>
           </div>
-          <div class="pt-2">
-            <span class="pill text-xs text-blue-bright">🧠 AI-Радар + Синдикат</span>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:16px;display:flex;flex-direction:column;gap:6px;">
+            <p style="font-size:11px;font-weight:500;color:#52525B;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Что получишь:</p>
+            <p style="font-size:13px;color:#71717A;">— Кейсы тех, кто уже внедрил</p>
+            <p style="font-size:13px;color:#71717A;">— Еженедельный срез «что реально работает»</p>
+            <p style="font-size:13px;color:#71717A;">— Круг руководителей твоего уровня</p>
           </div>
+          <div><span class="pill">AI-Радар + Синдикат</span></div>
         </div>
 
-        <!-- 0.3 Специалист -->
-        <div class="glass p-8 space-y-5 fade-up" style="transition-delay: 0.3s">
-          <div class="flex items-center gap-3">
-            <span class="text-blue-bright font-mono text-sm">0.3</span>
-            <h3 class="text-xl font-bold">СПЕЦИАЛИСТ</h3>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:20px;transition-delay:0.24s;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:11px;font-weight:400;color:#3F3F46;letter-spacing:0.12em;">03</span>
+            <h3 style="font-size:13px;font-weight:600;color:#E4E4E7;letter-spacing:0.06em;text-transform:uppercase;">Специалист</h3>
           </div>
-          <p class="text-silver text-sm leading-relaxed">Та же работа — в 3 раза быстрее.</p>
-          <p class="text-silver text-sm leading-relaxed">Или те же часы — в 3 раза больше проектов.</p>
-          <div class="border-t border-white/5 pt-4 space-y-2 text-sm text-silver">
-            <p class="text-white font-semibold text-xs uppercase tracking-wider">Что получишь:</p>
-            <p>· Автоматизацию рутинных задач</p>
-            <p>· Масштаб без найма команды</p>
-            <p>· Партнёров через Синдикат</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Та же работа — в 3 раза быстрее.</p>
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Или те же часы — в 3 раза больше проектов.</p>
           </div>
-          <div class="pt-2">
-            <span class="pill text-xs text-blue-bright">💻 Вайб-кодинг + Лонгриды</span>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:16px;display:flex;flex-direction:column;gap:6px;">
+            <p style="font-size:11px;font-weight:500;color:#52525B;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Что получишь:</p>
+            <p style="font-size:13px;color:#71717A;">— Автоматизацию рутинных задач</p>
+            <p style="font-size:13px;color:#71717A;">— Масштаб без найма команды</p>
+            <p style="font-size:13px;color:#71717A;">— Партнёров через Синдикат</p>
           </div>
+          <div><span class="pill">Вайб-кодинг + Лонгриды</span></div>
         </div>
+
       </div>
     </div>
   </section>
@@ -361,81 +552,85 @@
   <!-- =========================================== -->
   <!-- SCREEN 05 — MARCUS & DOLORES                -->
   <!-- =========================================== -->
-  <section class="py-32 px-6 lg:px-8 relative">
-    <div class="absolute inset-0 glow-blue-top pointer-events-none"></div>
-    <div class="max-w-[1200px] mx-auto relative z-10">
-      <div class="text-center mb-16 fade-up">
-        <span class="section-num">05 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2 leading-tight">МАРКУС НАЙДЁТ ТЕБЕ<br>КЛИЕНТОВ. ПОКА ТЫ СПИШЬ.</h2>
-        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
+  <section class="py-40 px-6 lg:px-8 relative">
+    <div class="absolute inset-0 glow-ambient-top pointer-events-none"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="text-center mb-20 fade-up">
+        <p class="section-num mb-4">06</p>
+        <h2 style="font-size:clamp(28px,4.5vw,54px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Маркус и Долорес найдут тебе клиентов.<br><span style="font-weight:300;color:#52525B;">Пока ты спишь.</span>
+        </h2>
+        <p style="color:#71717A;font-size:15px;font-weight:300;max-width:400px;margin:18px auto 0;line-height:1.7;">
           В клубе включены два инструмента, которые отдельно стоят от 49 800 ₽
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-6">
+
         <!-- Marcus -->
-        <div class="glass p-8 space-y-6 fade-up">
-          <div class="flex items-center gap-4">
-            <div class="w-14 h-14 rounded-2xl bg-blue-accent/20 flex items-center justify-center text-2xl">🔵</div>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:22px;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="icon-box" style="width:48px;height:48px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
             <div>
-              <h3 class="text-2xl font-bold">Marcus</h3>
-              <p class="text-silver text-sm">AI-ассистент для поиска клиентов в Telegram</p>
+              <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;">Marcus</h3>
+              <p style="font-size:13px;color:#52525B;margin-top:2px;">AI-ассистент · Telegram</p>
             </div>
           </div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-green-400 text-sm font-semibold">3–5 лидов в день</span>
+          <p style="font-size:12px;font-weight:500;color:#4ADE80;letter-spacing:0.06em;">3–5 лидов в день</p>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <p style="font-size:13px;color:#71717A;">— Находит клиентов в Telegram-группах</p>
+            <p style="font-size:13px;color:#71717A;">— Пишет персонализированные сообщения</p>
+            <p style="font-size:13px;color:#71717A;">— Ставит реакции, комментирует посты</p>
+            <p style="font-size:13px;color:#71717A;">— Готовит стратегию перед встречей</p>
           </div>
-          <div class="space-y-1.5 text-silver text-sm">
-            <p>→ Находит клиентов в Telegram-группах</p>
-            <p>→ Пишет персонализированные сообщения</p>
-            <p>→ Ставит реакции, комментирует посты</p>
-            <p>→ Готовит стратегию перед встречей: анализирует канал, сайт, Instagram клиента</p>
-          </div>
-          <div class="flex items-center justify-between pt-2 border-t border-white/5">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);">
             <div>
-              <p class="text-silver text-xs">Отдельно</p>
-              <p class="price-old text-base">от 29 900 ₽</p>
+              <p style="font-size:11px;color:#52525B;">Отдельно</p>
+              <p class="price-old" style="font-size:14px;">от 29 900 ₽</p>
             </div>
-            <div class="text-right">
-              <p class="text-green-400 text-sm font-semibold">В клубе — включено ✓</p>
-            </div>
+            <p style="font-size:13px;font-weight:500;color:#4ADE80;">В клубе — включено</p>
           </div>
         </div>
 
         <!-- Dolores -->
-        <div class="glass p-8 space-y-6 fade-up" style="transition-delay: 0.15s">
-          <div class="flex items-center gap-4">
-            <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center text-2xl">🟣</div>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:22px;transition-delay:0.12s;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="icon-box" style="width:48px;height:48px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M12 18h.01"/>
+              </svg>
+            </div>
             <div>
-              <h3 class="text-2xl font-bold">Dolores</h3>
-              <p class="text-silver text-sm">AI-ассистент для аудитории ВКонтакте</p>
+              <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;">Dolores</h3>
+              <p style="font-size:13px;color:#52525B;margin-top:2px;">AI-ассистент · ВКонтакте</p>
             </div>
           </div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-green-400 text-sm font-semibold">3–5 лидов в день</span>
+          <p style="font-size:12px;font-weight:500;color:#4ADE80;letter-spacing:0.06em;">3–5 лидов в день</p>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <p style="font-size:13px;color:#71717A;">— Анализирует аудиторию ВКонтакте</p>
+            <p style="font-size:13px;color:#71717A;">— Пишет персонализированные сообщения</p>
+            <p style="font-size:13px;color:#71717A;">— Отвечает на запросы, ставит лайки</p>
+            <p style="font-size:13px;color:#71717A;">— Комментирует посты целевой аудитории</p>
           </div>
-          <div class="space-y-1.5 text-silver text-sm">
-            <p>→ Анализирует аудиторию ВКонтакте</p>
-            <p>→ Пишет персонализированные сообщения</p>
-            <p>→ Отвечает на запросы, ставит лайки</p>
-            <p>→ Комментирует посты целевой аудитории</p>
-          </div>
-          <div class="flex items-center justify-between pt-2 border-t border-white/5">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);">
             <div>
-              <p class="text-silver text-xs">Отдельно</p>
-              <p class="price-old text-base">от 19 900 ₽</p>
+              <p style="font-size:11px;color:#52525B;">Отдельно</p>
+              <p class="price-old" style="font-size:14px;">от 19 900 ₽</p>
             </div>
-            <div class="text-right">
-              <p class="text-green-400 text-sm font-semibold">В клубе — включено ✓</p>
-            </div>
+            <p style="font-size:13px;font-weight:500;color:#4ADE80;">В клубе — включено</p>
           </div>
         </div>
+
       </div>
 
-      <!-- Bottom banner -->
-      <div class="mt-12 glass p-8 text-center fade-up">
-        <p class="text-xl font-semibold text-white">Вместе: <span class="price-old">от 49 800 ₽</span></p>
-        <p class="text-silver mt-2">Среднее время до первого клиента: <span class="text-white font-bold">7–14 дней</span>. Один закрытый клиент покрывает подписку на несколько месяцев.</p>
+      <!-- Баннер итог -->
+      <div class="glass p-8 text-center fade-up" style="margin-top:24px;">
+        <p style="font-size:16px;font-weight:500;color:#E4E4E7;">Вместе: <span class="price-old">от 49 800 ₽</span></p>
+        <p style="font-size:14px;color:#71717A;margin-top:8px;line-height:1.7;">Среднее время до первого клиента: <span style="color:#E4E4E7;font-weight:500;">7–14 дней</span>. Один закрытый клиент покрывает подписку на несколько месяцев.</p>
       </div>
     </div>
   </section>
@@ -444,51 +639,64 @@
   <!-- =========================================== -->
   <!-- SCREEN 06A — СИНДИКАТ                        -->
   <!-- =========================================== -->
-  <section id="syndicate" class="py-32 px-6 lg:px-8 relative">
-    <div class="max-w-[1200px] mx-auto relative z-10">
-      <div class="text-center mb-16 fade-up">
-        <p class="text-xs tracking-[0.2em] uppercase text-yellow-cta mb-2">ГЛАВНОЕ ПРЕИМУЩЕСТВО, КОТОРОГО НЕТ НИ В ОДНОМ СООБЩЕСТВЕ СНГ</p>
-        <span class="section-num">06 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">СИНДИКАТ</h2>
-        <p class="text-white text-2xl font-semibold mt-2">КОЛЛЕКТИВНЫЙ РАЗУМ</p>
-        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
+  <section id="syndicate" class="py-40 px-6 lg:px-8 relative">
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="text-center mb-20 fade-up">
+        <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">Главное преимущество, которого нет ни в одном сообществе СНГ</p>
+        <p class="section-num mb-4">07</p>
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Синдикат
+        </h2>
+        <p style="font-size:clamp(16px,2vw,22px);font-weight:300;color:#52525B;margin-top:6px;">Коллективный разум</p>
+        <p style="color:#71717A;font-size:15px;font-weight:300;max-width:460px;margin:18px auto 0;line-height:1.7;">
           Инструмент оцифровки связей. Синдикат проявляет те связи, которые уже существуют между вами — но вы об этом ещё не знаете.
         </p>
       </div>
 
-      <!-- Syndicate animated graph -->
-      <div class="mb-16 fade-up" style="position:relative; width:100%; aspect-ratio:16/7; background:rgba(6,14,30,0.8); border-radius:20px; overflow:hidden; border:1px solid rgba(245,197,24,0.15);">
+      <!-- Граф -->
+      <div class="mb-16 fade-up" style="position:relative;width:100%;aspect-ratio:16/7;background:#111115;border-radius:16px;overflow:hidden;border:1px solid rgba(100,200,210,0.12);">
         <canvas id="syndicate-graph" style="position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;"></canvas>
-        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.2);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;pointer-events:none;white-space:nowrap;font-family:Inter,sans-serif;">перетаскивайте узлы</div>
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.18);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;pointer-events:none;white-space:nowrap;">перетаскивайте узлы</div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="glass p-8 space-y-4 fade-up">
-          <div class="text-3xl">🔧</div>
-          <h3 class="text-xl font-bold">Нужен подрядчик?</h3>
-          <p class="text-silver leading-relaxed">AI-матчинг найдёт нужного специалиста среди 50+ участников с разными компетенциями. Точный подбор под задачу.</p>
-        </div>
-        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.15s">
-          <div class="text-3xl">🤝</div>
-          <h3 class="text-xl font-bold">Ищешь партнёра?</h3>
-          <p class="text-silver leading-relaxed">Синдикат проявляет пересечения между участниками — общие ресурсы, интересы, возможности для совместных проектов.</p>
-        </div>
-        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.3s">
-          <div class="text-3xl">🎯</div>
-          <h3 class="text-xl font-bold">Хочешь клиентов?</h3>
-          <p class="text-silver leading-relaxed">Участники рекомендуют друг друга. Тёплые знакомства через доверенную сеть — конверсия в разы выше холодных.</p>
-        </div>
-      </div>
-
-      <!-- Syndicate pricing -->
-      <div class="mt-10 glass p-6 fade-up">
-        <p class="text-silver text-center leading-relaxed mb-4">Коллективный разум способен решить любую задачу — под конкретный запрос.</p>
-        <div class="flex items-center justify-center gap-8 flex-wrap">
-          <div>
-            <p class="text-silver text-sm">Отдельно</p>
-            <p class="price-old text-lg">от 200 000 ₽</p>
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:16px;">
+          <div class="icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
           </div>
-          <div class="text-green-400 font-semibold text-lg">В клубе — включено ✓</div>
+          <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;">Нужен подрядчик?</h3>
+          <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">AI-матчинг найдёт нужного специалиста среди 50+ участников. Точный подбор под задачу.</p>
+        </div>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:16px;transition-delay:0.12s;">
+          <div class="icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+            </svg>
+          </div>
+          <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;">Ищешь партнёра?</h3>
+          <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Синдикат проявляет пересечения между участниками — общие ресурсы, интересы, возможности.</p>
+        </div>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:16px;transition-delay:0.24s;">
+          <div class="icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+            </svg>
+          </div>
+          <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;">Хочешь клиентов?</h3>
+          <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Участники рекомендуют друг друга. Тёплые знакомства через доверенную сеть — конверсия в разы выше холодных.</p>
+        </div>
+      </div>
+
+      <div class="glass p-6 fade-up" style="margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <p style="font-size:14px;color:#71717A;font-weight:300;">Коллективный разум способен решить любую задачу.</p>
+        <div style="display:flex;align-items:center;gap:20px;">
+          <div>
+            <p style="font-size:11px;color:#52525B;">Отдельно</p>
+            <p class="price-old" style="font-size:14px;">от 200 000 ₽</p>
+          </div>
+          <p style="font-size:13px;font-weight:500;color:#4ADE80;">В клубе — включено</p>
         </div>
       </div>
     </div>
@@ -499,53 +707,51 @@
   <!-- SCREEN 06B — КАК РАБОТАЕТ СИНДИКАТ           -->
   <!-- =========================================== -->
   <section class="py-24 px-6 lg:px-8">
-    <div class="max-w-[1200px] mx-auto">
+    <div class="max-w-[760px] mx-auto">
       <div class="text-center mb-16 fade-up">
-        <span class="section-num">05.1 —</span>
-        <h2 class="font-bebas text-4xl sm:text-5xl text-white mt-2">КАК ЭТО РАБОТАЕТ</h2>
+        <h2 style="font-size:clamp(22px,3vw,34px);font-weight:600;letter-spacing:-0.01em;color:#E4E4E7;">Как это работает</h2>
       </div>
 
-      <div class="max-w-[800px] mx-auto space-y-6">
-        <!-- Step 1 -->
-        <div class="glass p-8 space-y-4 fade-up">
-          <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-full bg-blue-accent/20 flex items-center justify-center font-bebas text-xl text-blue-bright flex-shrink-0">①</div>
-            <h3 class="text-xl font-bold">ГЛУБИННЫЙ ОПРОС</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:11px;color:#52525B;font-weight:400;">1</span>
+            </div>
+            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Глубинный опрос</h3>
           </div>
-          <div class="border-t border-white/5 pt-4">
-            <p class="text-silver leading-relaxed">При вступлении вы проходите опрос. Он составляет полную карту ваших ресурсов и запросов:</p>
-            <p class="text-silver mt-3 text-sm">ресурсы · связи · возможности · сильные стороны · потребности · цели</p>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">При вступлении вы проходите опрос. Он составляет полную карту ваших ресурсов и запросов:</p>
+            <p style="font-size:12px;color:#52525B;margin-top:10px;letter-spacing:0.06em;">ресурсы · связи · возможности · сильные стороны · потребности · цели</p>
           </div>
         </div>
 
-        <!-- Step 2 -->
-        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.15s">
-          <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-full bg-blue-accent/20 flex items-center justify-center font-bebas text-xl text-blue-bright flex-shrink-0">②</div>
-            <h3 class="text-xl font-bold">AI-МАТЧИНГ</h3>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.1s;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:11px;color:#52525B;font-weight:400;">2</span>
+            </div>
+            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">AI-матчинг</h3>
           </div>
-          <div class="border-t border-white/5 pt-4">
-            <p class="text-silver leading-relaxed">Нейросеть анализирует профили всех участников и находит точки соприкосновения:</p>
-            <p class="text-silver mt-3 text-sm">с людьми · с нишами · с инструментами · с AI-системами</p>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Нейросеть анализирует профили всех участников и находит точки соприкосновения:</p>
+            <p style="font-size:12px;color:#52525B;margin-top:10px;letter-spacing:0.06em;">с людьми · с нишами · с инструментами · с AI-системами</p>
           </div>
         </div>
 
-        <!-- Step 3 -->
-        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.3s">
-          <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-full bg-blue-accent/20 flex items-center justify-center font-bebas text-xl text-blue-bright flex-shrink-0">③</div>
-            <h3 class="text-xl font-bold">СИНЕРГИИ</h3>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.2s;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:11px;color:#52525B;font-weight:400;">3</span>
+            </div>
+            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Синергии</h3>
           </div>
-          <div class="border-t border-white/5 pt-4">
-            <p class="text-silver leading-relaxed">Рождаются партнёрства, сделки и коллаборации — которые невозможно найти в обычном нетворкинге.</p>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Рождаются партнёрства, сделки и коллаборации — которые невозможно найти в обычном нетворкинге.</p>
           </div>
         </div>
-      </div>
 
-      <div class="mt-12 text-center fade-up">
-        <a href="#" class="inline-flex items-center gap-2 px-8 py-3 border border-blue-accent/30 text-blue-bright rounded-xl hover:bg-blue-accent/10 transition-all">
-          Подробнее о Синдикате →
-        </a>
       </div>
     </div>
   </section>
@@ -554,52 +760,92 @@
   <!-- =========================================== -->
   <!-- SCREEN 07 — ИНСТРУМЕНТЫ                      -->
   <!-- =========================================== -->
-  <section id="tools" class="py-32 px-6 lg:px-8 relative">
-    <div class="absolute inset-0 glow-blue pointer-events-none"></div>
-    <div class="max-w-[1200px] mx-auto relative z-10">
-      <div class="text-center mb-6 fade-up">
-        <span class="section-num">07 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ИНСТРУМЕНТЫ</h2>
-        <p class="text-silver text-lg mt-4 max-w-2xl mx-auto">
-          Берёте. Внедряете. Получаете результат.
-        </p>
+  <section id="tools" class="py-40 px-6 lg:px-8 relative">
+    <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10">
+
+      <!-- Stitch-стиль для заголовка секции -->
+      <div class="stitch-layout mb-14 fade-up">
+        <div>
+          <p class="section-num" style="margin-bottom:20px;">08</p>
+          <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
+            Инстру-<br><span style="font-weight:300;color:#52525B;">менты</span>
+          </h2>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;">
+          <p style="color:#A1A1AA;font-size:22px;font-weight:300;line-height:1.4;letter-spacing:-0.01em;">Берёте.<br>Внедряете.<br>Получаете результат.</p>
+          <span class="pill" style="margin-top:20px;display:inline-block;width:fit-content;">Новый инструмент — каждый месяц</span>
+        </div>
       </div>
 
-      <div class="text-center mb-12 fade-up">
-        <span class="pill text-yellow-cta border-yellow-cta/25 bg-yellow-cta/10">📦 Новый инструмент — каждый месяц</span>
+      <!-- Крупные Stitch-тайлы — верхний ряд 3 колонки, нижний 2 -->
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+
+        <div class="tool-tile tool-tile-large fade-up" style="grid-row:span 1;">
+          <div>
+            <h3 style="font-size:20px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">AI-Лонгриды</h3>
+            <p style="font-size:13px;color:#71717A;margin-top:10px;line-height:1.7;font-weight:300;">Генерация экспертных статей на 20к+ символов на основе 5-минутного голосового сообщения.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:24px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool-tile fade-up" style="transition-delay:0.07s;">
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Генератор связок</h3>
+            <p style="font-size:12px;color:#71717A;margin-top:8px;line-height:1.7;font-weight:300;">Креатив + лендинг + оффер за минуты.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="tool-tile fade-up" style="transition-delay:0.14s;">
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Генератор лендингов</h3>
+            <p style="font-size:12px;color:#71717A;margin-top:8px;line-height:1.7;font-weight:300;">Полный HTML с нуля по одному брифу.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+        </div>
+
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="glass p-7 space-y-3 fade-up">
-          <div class="text-2xl">✍️</div>
-          <h3 class="font-bold">AI-Лонгриды</h3>
-          <p class="text-silver text-sm leading-relaxed">Продающие статьи под онлайн и офлайн проекты. Соцдоказательства — только у лонгридов.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+
+        <div class="tool-tile fade-up" style="transition-delay:0.1s;">
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">AI-Фокус-группа</h3>
+            <p style="font-size:12px;color:#71717A;margin-top:8px;line-height:1.7;font-weight:300;">Симуляция реакции аудитории на рекламу, лендинг, воронку — до запуска.</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
         </div>
-        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.1s">
-          <div class="text-2xl">🎨</div>
-          <h3 class="font-bold">Генератор связок</h3>
-          <p class="text-silver text-sm leading-relaxed">Креатив + лендинг + оффер за минуты, не за дни.</p>
+
+        <div class="tool-tile fade-up" style="transition-delay:0.18s;">
+          <div>
+            <h3 style="font-size:16px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;">Плагины и MCP</h3>
+            <p style="font-size:12px;color:#71717A;margin-top:8px;line-height:1.7;font-weight:300;">Набор расширений для браузера, расширяющих возможности Claude + подключение к любым сервисам.</p>
+          </div>
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:20px;">
+            <span style="font-size:11px;font-weight:500;color:#4ADE80;letter-spacing:0.05em;">GET ACCESS</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+          </div>
         </div>
-        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.2s">
-          <div class="text-2xl">📄</div>
-          <h3 class="font-bold">Генератор лендингов</h3>
-          <p class="text-silver text-sm leading-relaxed">Полный HTML с нуля по одному брифу.</p>
-        </div>
-        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.1s">
-          <div class="text-2xl">🧪</div>
-          <h3 class="font-bold">AI-Фокус-группа</h3>
-          <p class="text-silver text-sm leading-relaxed">Тестируем маркетинг, экономя бюджет. Симуляция реакции аудитории на рекламу, лендинг, воронку, вебинар — до запуска.</p>
-        </div>
-        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.2s">
-          <div class="text-2xl">🔌</div>
-          <h3 class="font-bold">Плагины, скиллы и MCP</h3>
-          <p class="text-silver text-sm leading-relaxed">Подключение к любым сервисам. Расширяет возможности Claude.</p>
-        </div>
-        <div class="glass p-7 space-y-3 fade-up" style="transition-delay: 0.3s">
-          <div class="text-2xl">🤖</div>
-          <h3 class="font-bold">+ десятки других</h3>
-          <p class="text-silver text-sm leading-relaxed">База пополняется каждый месяц. 20+ инструментов прямо сейчас.</p>
-        </div>
+
       </div>
     </div>
   </section>
@@ -608,47 +854,45 @@
   <!-- =========================================== -->
   <!-- SCREEN 08 — ОБУЧЕНИЕ                         -->
   <!-- =========================================== -->
-  <section class="py-32 px-6 lg:px-8">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="text-center mb-16 fade-up">
-        <span class="section-num">08 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2 leading-tight">ОБУЧЕНИЕ<br>КОТОРОЕ РАБОТАЕТ</h2>
-        <p class="text-silver text-lg mt-4">Три трека — под разные задачи.</p>
+  <section class="py-40 px-6 lg:px-8">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="text-center mb-20 fade-up">
+        <p class="section-num mb-4">09</p>
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Обучение,<br><span style="font-weight:300;color:#52525B;">которое работает</span>
+        </h2>
+        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;">Три трека — под разные задачи.</p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="glass p-8 space-y-5 fade-up">
-          <div class="flex items-center gap-3">
-            <span class="text-blue-bright font-mono text-sm font-bold">01 —</span>
-            <h3 class="font-bold text-lg">CLAUDE & AI</h3>
-          </div>
-          <p class="text-silver text-sm leading-relaxed">Работа с Claude, промпты, агенты, автоматизация</p>
-          <div class="border-t border-white/5 pt-4">
-            <p class="text-xs text-silver">Формат: Онбординг + практика</p>
+      <div class="grid md:grid-cols-3 gap-5">
+
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:18px;">
+          <span style="font-size:11px;color:#3F3F46;letter-spacing:0.14em;">01</span>
+          <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;">CLAUDE & AI</h3>
+          <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;flex:1;">Работа с Claude, промпты, агенты, автоматизация.</p>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
+            <p style="font-size:12px;color:#3F3F46;letter-spacing:0.05em;">Формат: Онбординг + практика</p>
           </div>
         </div>
 
-        <div class="glass p-8 space-y-5 fade-up" style="transition-delay: 0.15s">
-          <div class="flex items-center gap-3">
-            <span class="text-blue-bright font-mono text-sm font-bold">02 —</span>
-            <h3 class="font-bold text-lg">ВАЙБ-КОДИНГ</h3>
-          </div>
-          <p class="text-silver text-sm leading-relaxed">Создать продукт без программиста. Cursor, Lovable — с нуля до деплоя.</p>
-          <div class="border-t border-white/5 pt-4">
-            <p class="text-xs text-silver">Формат: Воркшопы на эфирах + разборы</p>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:18px;transition-delay:0.12s;">
+          <span style="font-size:11px;color:#3F3F46;letter-spacing:0.14em;">02</span>
+          <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;">ВАЙБ-КОДИНГ</h3>
+          <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;flex:1;">Создать продукт без программиста. Cursor, Lovable — с нуля до деплоя.</p>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
+            <p style="font-size:12px;color:#3F3F46;letter-spacing:0.05em;">Формат: Воркшопы на эфирах + разборы</p>
           </div>
         </div>
 
-        <div class="glass p-8 space-y-5 fade-up" style="transition-delay: 0.3s">
-          <div class="flex items-center gap-3">
-            <span class="text-blue-bright font-mono text-sm font-bold">03 —</span>
-            <h3 class="font-bold text-lg">НОВЫЕ НЕЙРОСЕТИ</h3>
-          </div>
-          <p class="text-silver text-sm leading-relaxed">Разбор новинок: что внедрять, что игнорировать.</p>
-          <div class="border-t border-white/5 pt-4">
-            <p class="text-xs text-silver">Формат: Еженедельный AI-радар + эфиры</p>
+        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:18px;transition-delay:0.24s;">
+          <span style="font-size:11px;color:#3F3F46;letter-spacing:0.14em;">03</span>
+          <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;">НОВЫЕ НЕЙРОСЕТИ</h3>
+          <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;flex:1;">Разбор новинок: что внедрять, что игнорировать.</p>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
+            <p style="font-size:12px;color:#3F3F46;letter-spacing:0.05em;">Формат: Еженедельный AI-радар + эфиры</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -657,65 +901,76 @@
   <!-- =========================================== -->
   <!-- SCREEN 09 — ВНУТРИ КЛУБА                     -->
   <!-- =========================================== -->
-  <section class="py-32 px-6 lg:px-8">
-    <div class="max-w-[1200px] mx-auto">
-      <div class="text-center mb-16 fade-up">
-        <span class="section-num">09 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ВНУТРИ КЛУБА</h2>
-        <p class="text-silver text-lg mt-4">Раз в неделю — живой эфир. Каждый день — инструменты, кейсы, находки.</p>
+  <section class="py-40 px-6 lg:px-8">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="text-center mb-20 fade-up">
+        <p class="section-num mb-4">10</p>
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Внутри <span style="font-weight:300;color:#52525B;">клуба</span>
+        </h2>
+        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;">Раз в неделю — живой эфир. Каждый день — инструменты, кейсы, находки.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 mb-12">
-        <div class="glass p-8 space-y-4 fade-up">
-          <div class="text-3xl">🎙</div>
-          <h3 class="text-xl font-bold">Эфир раз в неделю</h3>
-          <p class="text-silver leading-relaxed">Разбираем кейсы, тестируем новые инструменты, отвечаем на вопросы участников. Запись остаётся.</p>
+      <!-- Stitch-стиль: заголовок слева + цифры справа -->
+      <div class="stitch-layout mb-16 fade-up">
+        <div>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <p class="stat-highlight">50+</p>
+              <p style="font-size:13px;color:#52525B;margin-top:6px;font-weight:300;">участников Синдиката</p>
+            </div>
+            <div>
+              <p class="stat-highlight">20+</p>
+              <p style="font-size:13px;color:#52525B;margin-top:6px;font-weight:300;">AI-инструментов</p>
+            </div>
+            <div>
+              <p class="stat-highlight">1×</p>
+              <p style="font-size:13px;color:#52525B;margin-top:6px;font-weight:300;">живой эфир в неделю</p>
+            </div>
+            <div>
+              <p class="stat-highlight">∞</p>
+              <p style="font-size:13px;color:#52525B;margin-top:6px;font-weight:300;">связей в Синдикате</p>
+            </div>
+          </div>
         </div>
-        <div class="glass p-8 space-y-4 fade-up" style="transition-delay: 0.15s">
-          <div class="text-3xl">📡</div>
-          <h3 class="text-xl font-bold">AI-Радар</h3>
-          <p class="text-silver leading-relaxed">Еженедельный дайджест: только то, что уже проверено участниками клуба и даёт результат.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+
+          <div class="glass p-7" style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="icon-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
+                </svg>
+              </div>
+              <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;">Эфир раз в неделю</h3>
+            </div>
+            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Разбираем кейсы, тестируем новые инструменты, отвечаем на вопросы. Запись остаётся.</p>
+          </div>
+
+          <div class="glass p-7" style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="icon-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>
+                </svg>
+              </div>
+              <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;">AI-Радар</h3>
+            </div>
+            <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Еженедельный дайджест: только то, что уже проверено участниками и даёт результат.</p>
+          </div>
+
         </div>
       </div>
 
-      <div class="glass p-8 fade-up">
-        <h4 class="font-bold text-sm uppercase tracking-wider text-silver mb-6">Чаты и топики клуба</h4>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div class="flex items-start gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
-            <span class="text-lg mt-0.5">🔧</span>
-            <div>
-              <p class="text-sm text-white font-medium">Инструменты</p>
-              <p class="text-xs text-silver mt-0.5">Новые находки каждый день</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
-            <span class="text-lg mt-0.5">💬</span>
-            <div>
-              <p class="text-sm text-white font-medium">Вопрос-ответ</p>
-              <p class="text-xs text-silver mt-0.5">Спрашиваешь — получаешь ответ</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
-            <span class="text-lg mt-0.5">💡</span>
-            <div>
-              <p class="text-sm text-white font-medium">Кейсы</p>
-              <p class="text-xs text-silver mt-0.5">Что внедрили, что получили</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
-            <span class="text-lg mt-0.5">🤝</span>
-            <div>
-              <p class="text-sm text-white font-medium">Синдикат</p>
-              <p class="text-xs text-silver mt-0.5">Запросы, партнёрства, проекты</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3 p-3 rounded-xl bg-navy/50 border border-white/5">
-            <span class="text-lg mt-0.5">🛠</span>
-            <div>
-              <p class="text-sm text-white font-medium">Вайб-кодинг</p>
-              <p class="text-xs text-silver mt-0.5">Помощь с проектами без кода</p>
-            </div>
-          </div>
+      <!-- Топики как тонкая горизонтальная полоса -->
+      <div class="fade-up" style="border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:0;">
+        <p style="font-size:11px;font-weight:500;color:#3F3F46;text-transform:uppercase;letter-spacing:0.12em;width:100%;margin-bottom:14px;">Чаты и топики</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Инструменты</span>
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Вопрос-ответ</span>
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Кейсы</span>
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Синдикат</span>
+          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Вайб-кодинг</span>
         </div>
       </div>
     </div>
@@ -725,117 +980,171 @@
   <!-- =========================================== -->
   <!-- SCREEN 10 — ЦЕНА                             -->
   <!-- =========================================== -->
-  <section id="price" class="py-32 px-6 lg:px-8 relative">
-    <div class="absolute inset-0 glow-blue pointer-events-none"></div>
-    <div class="max-w-[900px] mx-auto relative z-10">
-      <div class="text-center mb-16 fade-up">
-        <span class="section-num">10 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">СКОЛЬКО СТОИТ</h2>
-        <p class="text-silver text-lg mt-4">Дешевле, чем один AI-ассистент. Внутри — весь клуб.</p>
+  <section id="price" class="py-40 px-6 lg:px-8 relative">
+    <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
+    <div class="max-w-[820px] mx-auto relative z-10">
+      <div class="text-center mb-20 fade-up">
+        <p class="section-num mb-4">11</p>
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Сколько <span style="font-weight:300;color:#52525B;">стоит</span>
+        </h2>
+        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;">Дешевле, чем один AI-ассистент. Внутри — весь клуб.</p>
       </div>
 
       <div class="glass p-10 fade-up">
-        <!-- Price -->
-        <div class="text-center mb-10">
-          <p class="font-bebas text-6xl sm:text-8xl text-white">9 900 <span class="text-3xl text-silver">₽/мес</span></p>
-          <p class="text-silver mt-2">Полный доступ: Marcus, Dolores, Синдикат, все инструменты, обучение, эфиры, AI-Радар</p>
+
+        <!-- Цена -->
+        <div class="text-center" style="margin-bottom:40px;">
+          <p style="font-size:clamp(52px,9vw,88px);font-weight:800;letter-spacing:-0.03em;color:var(--gold);line-height:1;">9 900 <span style="font-size:0.35em;font-weight:300;color:#71717A;">₽/мес</span></p>
+          <p style="font-size:13px;color:#52525B;margin-top:10px;font-weight:300;">Полный доступ: Marcus, Dolores, Синдикат, все инструменты, обучение, эфиры, AI-Радар</p>
         </div>
 
-        <!-- Comparison table -->
-        <table class="price-table w-full mb-10">
+        <!-- Таблица -->
+        <table class="price-table w-full" style="margin-bottom:32px;">
           <tbody>
-            <tr>
-              <td class="text-silver">Marcus (AI-ассистент)</td>
-              <td class="text-right text-silver">29 900 ₽</td>
+            <tr><td style="color:#71717A;font-size:14px;">Marcus (AI-ассистент)</td><td style="text-align:right;color:#71717A;font-size:14px;">29 900 ₽</td></tr>
+            <tr><td style="color:#71717A;font-size:14px;">Dolores (AI-ассистент)</td><td style="text-align:right;color:#71717A;font-size:14px;">19 900 ₽</td></tr>
+            <tr><td style="color:#71717A;font-size:14px;">Плагины, скиллы и MCP</td><td style="text-align:right;color:#71717A;font-size:14px;">от 20 000 ₽</td></tr>
+            <tr><td style="color:#71717A;font-size:14px;">Обучение и новые инструменты</td><td style="text-align:right;color:#71717A;font-size:14px;">от 50 000 ₽</td></tr>
+            <tr><td style="color:#71717A;font-size:14px;">Эфиры и разборы</td><td style="text-align:right;color:#71717A;font-size:14px;">от 20 000 ₽</td></tr>
+            <tr><td style="color:#71717A;font-size:14px;">Доступ к Синдикату</td><td style="text-align:right;color:#A1A1AA;font-size:14px;">∞</td></tr>
+            <tr style="border-top:1px solid rgba(255,255,255,0.08);">
+              <td style="color:#E4E4E7;font-weight:600;font-size:14px;padding-top:16px;">Итого в розницу</td>
+              <td style="text-align:right;padding-top:16px;"><span class="price-old" style="font-size:15px;">от 139 800 ₽</span></td>
             </tr>
             <tr>
-              <td class="text-silver">Dolores (AI-ассистент)</td>
-              <td class="text-right text-silver">19 900 ₽</td>
-            </tr>
-            <tr>
-              <td class="text-silver">Плагины, скиллы и MCP</td>
-              <td class="text-right text-silver">от 20 000 ₽</td>
-            </tr>
-            <tr>
-              <td class="text-silver">Обучение и новые инструменты</td>
-              <td class="text-right text-silver">от 50 000 ₽</td>
-            </tr>
-            <tr>
-              <td class="text-silver">Эфиры и разборы</td>
-              <td class="text-right text-silver">от 20 000 ₽</td>
-            </tr>
-            <tr>
-              <td class="text-silver">Доступ к Синдикату</td>
-              <td class="text-right text-yellow-cta">∞</td>
-            </tr>
-            <tr class="border-t-2 border-white/10">
-              <td class="font-bold text-white pt-4">Итого в розницу</td>
-              <td class="text-right pt-4"><span class="price-old text-lg">от 139 800 ₽</span></td>
-            </tr>
-            <tr>
-              <td class="font-bold text-white text-lg">NextGenClub</td>
-              <td class="text-right text-yellow-cta font-bold text-2xl">9 900 ₽/мес</td>
+              <td style="color:#E4E4E7;font-weight:700;font-size:16px;">NextGenClub</td>
+              <td style="text-align:right;color:#E4E4E7;font-weight:800;font-size:22px;">9 900 ₽/мес</td>
             </tr>
           </tbody>
         </table>
 
-        <!-- Guarantee -->
-        <div class="p-5 rounded-xl border border-yellow-cta/20 bg-yellow-cta/5 flex items-center gap-4 mb-8">
-          <span class="text-3xl">🛡</span>
+        <!-- Гарантия -->
+        <div style="padding:16px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);display:flex;align-items:center;gap:14px;margin-bottom:28px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
           <div>
-            <p class="font-bold text-white">14 дней — если не подойдёт, вернём деньги.</p>
-            <p class="text-silver text-sm">Без вопросов.</p>
+            <p style="font-size:14px;font-weight:600;color:#E4E4E7;">14 дней — если не подойдёт, вернём деньги.</p>
+            <p style="font-size:13px;color:#71717A;margin-top:2px;">Без вопросов.</p>
           </div>
         </div>
 
         <!-- CTA -->
         <div class="text-center">
-          <a href="#" class="inline-block px-12 py-5 bg-yellow-cta text-navy font-bold rounded-xl text-xl cta-pulse hover:brightness-110 transition-all">
-            Вступить в клуб
-          </a>
+          <a href="#" class="cta-primary" style="display:inline-block;font-size:15px;padding:15px 48px;">Вступить в клуб</a>
         </div>
       </div>
     </div>
+  </section>
+
+
+  <!-- =========================================== -->
+  <!-- SCREEN 10.5 — ОСНОВАТЕЛЬ                     -->
+  <!-- =========================================== -->
+  <section class="py-36 px-6 lg:px-8 relative">
+    <div class="section-fade-top"></div>
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="stitch-layout items-center fade-up">
+
+        <!-- Фото основателя -->
+        <div style="position:relative;display:flex;justify-content:center;">
+          <div id="founder-photo-container" style="border-radius:16px;overflow:hidden;aspect-ratio:3/4;width:320px;background:#161619;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
+            <img id="founder-photo" src="founder.jpg" alt="Виктор — основатель NextGen Club"
+              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"
+              onerror="this.style.display='none';document.getElementById('founder-placeholder').style.display='flex';">
+            <!-- Плейсхолдер если фото не загрузилось -->
+            <div id="founder-placeholder" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              <p style="font-size:11px;color:#3F3F46;text-align:center;padding:0 20px;">Добавьте founder.jpg<br>в папку landing/</p>
+            </div>
+          </div>
+          <!-- Декоративная рамка -->
+          <div style="position:absolute;inset:-8px;border:1px solid rgba(255,255,255,0.04);border-radius:22px;pointer-events:none;"></div>
+        </div>
+
+        <!-- Текст -->
+        <div style="display:flex;flex-direction:column;gap:28px;">
+          <div>
+            <p style="font-size:11px;letter-spacing:0.2em;color:#3F3F46;text-transform:uppercase;margin-bottom:20px;">Основатель</p>
+            <h2 style="font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.05;">
+              Виктор Дачников
+            </h2>
+            <p style="font-size:16px;font-weight:300;color:#52525B;margin-top:4px;">Основатель NextGen Club</p>
+          </div>
+
+          <div style="border-left:2px solid rgba(255,255,255,0.08);padding-left:20px;">
+            <p style="font-size:16px;color:#A1A1AA;line-height:1.8;font-weight:300;font-style:italic;">
+              «Я создал NextGen Club потому что видел: одиночки с AI проигрывают командам. Нам нужна была среда, где технологическое преимущество становится коллективным.»
+            </p>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;">Предприниматель, работает с AI с 2022 года</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;">Создал экосистему инструментов на Claude</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;">Синдикат — 50+ участников, реальные сделки</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="section-fade-bottom"></div>
   </section>
 
 
   <!-- =========================================== -->
   <!-- SCREEN 11 — ФИНАЛЬНЫЙ CTA                    -->
   <!-- =========================================== -->
-  <section class="py-32 px-6 lg:px-8 relative">
-    <div class="absolute inset-0 glow-blue pointer-events-none" style="opacity: 1.5"></div>
-    <div class="max-w-[800px] mx-auto text-center relative z-10">
-      <div class="fade-up">
-        <span class="section-num">11 —</span>
-        <h2 class="font-bebas text-5xl sm:text-7xl text-white mt-2">ДЛЯ ТЕХ, КТО УЖЕ В ТЕМЕ</h2>
-        <p class="text-silver text-lg mt-4 max-w-xl mx-auto">
+  <section class="py-40 px-6 lg:px-8 relative">
+    <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
+    <div class="max-w-[680px] mx-auto text-center relative z-10">
+      <div class="fade-up" style="display:flex;flex-direction:column;align-items:center;gap:28px;">
+
+        <p class="section-num">12</p>
+
+        <h2 style="font-size:clamp(32px,5.5vw,64px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.05;">
+          Для тех,<br><span style="font-weight:300;color:#52525B;">кто уже в теме</span>
+        </h2>
+
+        <p style="font-size:15px;color:#71717A;font-weight:300;max-width:420px;line-height:1.7;">
           NextGenClub — для тех, кто уже работает с нейросетями и хочет идти дальше.
         </p>
-        <p class="text-2xl font-semibold text-white mt-8">Твой следующий уровень — здесь.</p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-          <a href="#" class="px-10 py-4 bg-yellow-cta text-navy font-bold rounded-xl text-lg cta-pulse hover:brightness-110 transition-all">
-            Вступить в клуб — 9 900 ₽/мес
-          </a>
-          <a href="#" class="px-10 py-4 border border-white/15 text-white rounded-xl text-lg hover:border-blue-bright/40 transition-colors">
-            Узнать подробнее
-          </a>
+        <p style="font-size:clamp(18px,2.5vw,24px);font-weight:500;color:#E4E4E7;">
+          Твой следующий уровень — здесь.
+        </p>
+
+        <div style="display:flex;flex-direction:row;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
+          <a href="#" class="cta-primary" style="font-size:14px;">Вступить в клуб — 9 900 ₽/мес</a>
+          <a href="#" class="cta-secondary" style="font-size:14px;">Узнать подробнее</a>
         </div>
 
-        <p class="text-silver text-sm mt-6">🛡 14 дней — возврат без вопросов</p>
+        <p style="font-size:12px;color:#3F3F46;margin-top:4px;">14 дней — возврат без вопросов</p>
+
       </div>
     </div>
   </section>
 
 
   <!-- FOOTER -->
-  <footer class="py-12 px-6 lg:px-8 border-t border-white/5">
-    <div class="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+  <footer class="py-12 px-6 lg:px-8" style="border-top:1px solid rgba(255,255,255,0.04);">
+    <div class="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
-        <span class="font-bebas text-xl tracking-wider">NEXTGEN CLUB</span>
-        <p class="text-silver text-sm mt-1">Сообщество технологического доминирования</p>
+        <span style="font-size:12px;font-weight:600;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;">NEXTGEN CLUB</span>
+        <p style="font-size:12px;color:#3F3F46;margin-top:4px;font-weight:300;">Сообщество технологического доминирования</p>
       </div>
-      <p class="text-silver text-sm">© 2026 NextGen Club. Все права защищены.</p>
+      <p style="font-size:12px;color:#3F3F46;font-weight:300;">© 2026 NextGen Club. Все права защищены.</p>
     </div>
   </footer>
 
@@ -844,66 +1153,198 @@
   <!-- SCRIPTS                                      -->
   <!-- =========================================== -->
   <script>
-    // ===== DOT GRID ANIMATION =====
+    // ===== ACCORDION =====
+    function toggleAccordion(el) {
+      el.classList.toggle('accordion-open');
+    }
+
+    // ===== SCREEN 02: CHAOS→ORDER =====
+    (function(){
+      const canvas = document.getElementById('s02-canvas');
+      if (!canvas) return;
+      const ctx    = canvas.getContext('2d');
+      const section = document.getElementById('s02-chaos');
+      const headline = document.getElementById('s02-headline');
+      const sub      = document.getElementById('s02-sub');
+      const hint     = document.getElementById('s02-hint');
+      let W, H, progress = 0, time = 0;
+      const NODES = [
+        ['Claude','xl',0.61,0.42,'core'],['MCP','lg',0.61,0.65,'infra'],['Skills','md',0.61,0.20,'infra'],
+        ['Gemini','md',0.84,0.22,'ai'],['Obsidian','md',0.84,0.62,'service'],
+        ['Telegram','sm',0.38,0.83,'service'],['AmoCRM','sm',0.51,0.89,'service'],
+        ['NextBot','sm',0.62,0.89,'service'],['Nano Banana','sm',0.74,0.83,'service'],['Stitch','sm',0.87,0.77,'service'],
+      ];
+      const EDGES=[[2,0,false],[3,0,false],[0,1,false],[4,1,true],[1,5,false],[1,6,false],[1,7,false],[1,8,false],[1,9,false],[7,1,false],[0,4,false]];
+      const SIGNALS=[];
+      EDGES.forEach((e,i)=>{const c=(i<4)?2:1;for(let k=0;k<c;k++)SIGNALS.push({edgeIdx:i,t:Math.random(),speed:0.003+Math.random()*0.005,r:1.8+Math.random()*1.4});});
+      let nodes=[];
+      function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;initNodes();}
+      function initNodes(){NODES.forEach(([l,s,tx,ty],i)=>{const sp=1.4+Math.random()*2,an=Math.random()*Math.PI*2;if(!nodes[i])nodes[i]={cx:Math.random()*W,cy:Math.random()*H,cvx:Math.cos(an)*sp,cvy:Math.sin(an)*sp,lit:0};nodes[i].tx=tx*W;nodes[i].ty=ty*H;});}
+      const DIMS={xl:[15,44],lg:[13,36],md:[12,30],sm:[11,26]};
+      function pW(l,s){return l.length*DIMS[s][0]*0.60+28;}
+      function drawPill(x,y,label,size,type,lit,alpha){
+        const[fs,ph]=DIMS[size],pw=pW(label,size),r=ph/2,ic=type==='core',ii=type==='infra';
+        const bA=((ic?0.22:ii?0.12:0.07)+lit*0.18)*alpha,bgA=((ic?0.08:ii?0.05:0.03)+lit*0.07)*alpha;
+        if(ic&&lit>0.01){const ig=ctx.createRadialGradient(x,y-ph*0.3,0,x,y,ph*1.2);ig.addColorStop(0,`rgba(255,255,255,${lit*0.06*alpha})`);ig.addColorStop(1,'rgba(255,255,255,0)');ctx.beginPath();ctx.roundRect(x-pw/2,y-ph/2,pw,ph,r);ctx.fillStyle=ig;ctx.fill();}
+        ctx.beginPath();ctx.roundRect(x-pw/2,y-ph/2,pw,ph,r);ctx.fillStyle=`rgba(255,255,255,${bgA})`;ctx.fill();
+        ctx.strokeStyle=ic?`rgba(170,200,255,${bA})`:`rgba(140,175,240,${bA})`;ctx.lineWidth=ic?1.2:0.8;ctx.stroke();
+        ctx.font=`${ic?'700':ii?'500':'400'} ${fs}px Inter`;ctx.fillStyle=`rgba(220,222,232,${((ic?0.88:ii?0.68:0.50)+lit*0.12)*alpha})`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,x,y);
+      }
+      const SB={r:140,g:180,b:255};
+      function drawEdge(ax,ay,bx,by,ep,bd){
+        const a=0.08+ep*0.10;ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.strokeStyle=`rgba(${SB.r},${SB.g},${SB.b},${a})`;ctx.lineWidth=0.6;ctx.setLineDash([2,8]);ctx.stroke();ctx.setLineDash([]);
+        if(!bd&&ep>0.3){const dx=bx-ax,dy=by-ay,an=Math.atan2(dy,dx),mx=ax+dx*0.58,my=ay+dy*0.58,hl=6;ctx.beginPath();ctx.moveTo(mx-hl*Math.cos(an-0.45),my-hl*Math.sin(an-0.45));ctx.lineTo(mx,my);ctx.lineTo(mx-hl*Math.cos(an+0.45),my-hl*Math.sin(an+0.45));ctx.strokeStyle=`rgba(${SB.r},${SB.g},${SB.b},${a*0.8})`;ctx.lineWidth=0.6;ctx.stroke();}
+      }
+      function drawSignal(sig,ax,ay,bx,by,sa){
+        const x=ax+(bx-ax)*sig.t,y=ay+(by-ay)*sig.t,t0=Math.max(0,sig.t-0.07),tx0=ax+(bx-ax)*t0,ty0=ay+(by-ay)*t0;
+        const g=ctx.createLinearGradient(tx0,ty0,x,y);g.addColorStop(0,`rgba(${SB.r},${SB.g},${SB.b},0)`);g.addColorStop(1,`rgba(${SB.r},${SB.g},${SB.b},${sa*0.5})`);ctx.beginPath();ctx.moveTo(tx0,ty0);ctx.lineTo(x,y);ctx.strokeStyle=g;ctx.lineWidth=1.4;ctx.stroke();
+        const gw=ctx.createRadialGradient(x,y,0,x,y,sig.r*4);gw.addColorStop(0,`rgba(${SB.r},${SB.g},${SB.b},${sa*0.45})`);gw.addColorStop(1,`rgba(${SB.r},${SB.g},${SB.b},0)`);ctx.beginPath();ctx.arc(x,y,sig.r*4,0,Math.PI*2);ctx.fillStyle=gw;ctx.fill();
+        ctx.beginPath();ctx.arc(x,y,sig.r*0.7,0,Math.PI*2);ctx.fillStyle=`rgba(210,225,255,${sa*0.95})`;ctx.fill();
+      }
+      function eio(t){return t<0.5?2*t*t:-1+(4-2*t)*t;}
+      function lerp(a,b,t){return a+(b-a)*t;}
+      function draw(){
+        ctx.clearRect(0,0,W,H);time+=0.016;
+        const p=eio(Math.max(0,Math.min(1,progress)));
+        // Хаос-надпись — в центре, крупно, ярко
+        const chaosTextX=W/2, chaosTextY=H*0.44;
+        if(p<0.35){
+          const fa=p<0.20?1.0:Math.max(0,(0.35-p)/0.15);
+          // Свечение за текстом
+          const tg=ctx.createRadialGradient(chaosTextX,chaosTextY,0,chaosTextX,chaosTextY,200);
+          tg.addColorStop(0,`rgba(228,228,231,${fa*0.04})`);tg.addColorStop(1,'rgba(228,228,231,0)');
+          ctx.beginPath();ctx.ellipse(chaosTextX,chaosTextY,280,80,0,0,Math.PI*2);ctx.fillStyle=tg;ctx.fill();
+          // Текст
+          ctx.font=`700 28px Inter`;ctx.fillStyle=`rgba(228,228,231,${fa*0.92})`;
+          ctx.textAlign='center';ctx.textBaseline='middle';
+          ctx.letterSpacing='0.12em';ctx.fillText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС',chaosTextX,chaosTextY);ctx.letterSpacing='0';
+        }
+        nodes.forEach((n,i)=>{
+          const sp=(1-p)*0.98+0.02;n.cx+=n.cvx*sp;n.cy+=n.cvy*sp;
+          // Отталкивание от хаос-надписи
+          if(p<0.35){const rdx=n.cx-chaosTextX,rdy=n.cy-chaosTextY,rdist=Math.sqrt(rdx*rdx+rdy*rdy),repR=160;if(rdist<repR&&rdist>1){const f=(repR-rdist)/repR*1.2*(1-p/0.35);n.cvx+=(rdx/rdist)*f;n.cvy+=(rdy/rdist)*f;}}
+          const pad=80;if(n.cx<pad||n.cx>W-pad)n.cvx*=-1;if(n.cy<pad||n.cy>H-pad)n.cvy*=-1;n.cx=Math.max(pad,Math.min(W-pad,n.cx));n.cy=Math.max(pad,Math.min(H-pad,n.cy));const tl=p>0.65?Math.min(1,(p-0.65)/0.35):0;n.lit+=(tl-n.lit)*0.04;
+        });
+        const pos=nodes.map(n=>({x:lerp(n.cx,n.tx,p),y:lerp(n.cy,n.ty,p)}));
+        const ep=Math.max(0,(p-0.22)/0.78);
+        if(ep>0)EDGES.forEach(([f,t,bd])=>{const a=pos[f],b=pos[t],dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy),off=16;if(len<2)return;drawEdge(a.x+dx/len*off,a.y+dy/len*off,b.x-dx/len*off,b.y-dy/len*off,ep,bd);});
+        const sa=Math.max(0,(p-0.50)/0.50);
+        if(sa>0)SIGNALS.forEach(sig=>{sig.t+=sig.speed;if(sig.t>1)sig.t=0;const[f,t]=EDGES[sig.edgeIdx],a=pos[f],b=pos[t],dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy),off=16;if(len<2)return;drawSignal(sig,a.x+dx/len*off,a.y+dy/len*off,b.x-dx/len*off,b.y-dy/len*off,sa);});
+        const cl=nodes[0].lit;
+        if(cl>0.01){const pu=0.5+0.5*Math.sin(time*1.8),pr=pos[0],g=ctx.createRadialGradient(pr.x,pr.y,0,pr.x,pr.y,90);g.addColorStop(0,`rgba(140,180,255,${cl*pu*0.08})`);g.addColorStop(1,'rgba(140,180,255,0)');ctx.beginPath();ctx.arc(pr.x,pr.y,90,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();}
+        NODES.forEach(([label,size,,,type],i)=>drawPill(pos[i].x,pos[i].y,label,size,type,nodes[i].lit,1));
+        if(p>0.82){const la=(p-0.82)/0.18*0.22;ctx.font='400 9px Inter';ctx.fillStyle=`rgba(60,62,70,${la})`;ctx.textAlign='left';const lx=W*0.34;[{y:0.13,t:'AI СЛОЙ'},{y:0.38,t:'ЯДРО'},{y:0.60,t:'КОННЕКТОР'},{y:0.80,t:'СЕРВИСЫ'}].forEach(l=>ctx.fillText(l.t,lx,H*l.y));ctx.strokeStyle=`rgba(255,255,255,${la*0.25})`;ctx.lineWidth=0.5;ctx.setLineDash([1,14]);[0.30,0.53,0.73].forEach(yp=>{ctx.beginPath();ctx.moveTo(W*0.34,H*yp);ctx.lineTo(W*0.95,H*yp);ctx.stroke();});ctx.setLineDash([]);}
+        requestAnimationFrame(draw);
+      }
+      function onScroll(){const rect=section.getBoundingClientRect(),sc=section.offsetHeight-window.innerHeight;progress=Math.max(0,Math.min(1,-rect.top/sc));const show=progress>0.60;headline.classList.toggle('show',show);sub.classList.toggle('show',show);if(hint)hint.style.opacity=progress>0.12?'0':'1';}
+      window.addEventListener('scroll',onScroll,{passive:true});
+      new ResizeObserver(resize).observe(canvas);
+      resize();draw();onScroll();
+    })();
+
+    // ===== HERO NEURAL GRAPH =====
     (function() {
       const canvas = document.getElementById('dot-grid');
       const ctx = canvas.getContext('2d');
-      let mouseX = 0, mouseY = 0;
-      let dots = [];
-      const DOT_SPACING = 50;
-      const DOT_RADIUS = 1;
-      const DOT_COLOR = 'rgba(26, 79, 214, 0.25)';
-      const MOUSE_RADIUS = 150;
+      let W, H;
+      let mouseX = -9999, mouseY = -9999;
+
+      const NODE_COUNT = 68;
+      const CONNECT_DIST = 185;
+      const GLOW_RADIUS = 210;
+
+      let nodes = [];
 
       function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        createDots();
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+        initNodes();
       }
 
-      function createDots() {
-        dots = [];
-        const cols = Math.ceil(canvas.width / DOT_SPACING) + 1;
-        const rows = Math.ceil(canvas.height / DOT_SPACING) + 1;
-        for (let i = 0; i < cols; i++) {
-          for (let j = 0; j < rows; j++) {
-            dots.push({
-              x: i * DOT_SPACING,
-              y: j * DOT_SPACING,
-              baseX: i * DOT_SPACING,
-              baseY: j * DOT_SPACING
-            });
-          }
+      function initNodes() {
+        nodes = [];
+        for (let i = 0; i < NODE_COUNT; i++) {
+          const speed = 0.12 + Math.random() * 0.22;
+          const angle = Math.random() * Math.PI * 2;
+          nodes.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            r: 1.1 + Math.random() * 1.3,
+            glow: 0
+          });
         }
       }
 
       function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, W, H);
+
+        // Постепенно гасим при скролле
         const scrollY = window.scrollY;
-        // Only draw for the first 2 viewports
-        if (scrollY > window.innerHeight * 3) {
-          requestAnimationFrame(draw);
-          return;
+        const fadeOut = Math.max(0, 1 - scrollY / (H * 0.7));
+        if (fadeOut <= 0) { requestAnimationFrame(draw); return; }
+
+        // Обновляем узлы
+        for (let n of nodes) {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0)  { n.x = 0;  n.vx *= -1; }
+          if (n.x > W)  { n.x = W;  n.vx *= -1; }
+          if (n.y < 0)  { n.y = 0;  n.vy *= -1; }
+          if (n.y > H)  { n.y = H;  n.vy *= -1; }
+
+          // Близость к курсору
+          const dx = n.x - mouseX;
+          const dy = n.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const target = dist < GLOW_RADIUS ? Math.pow(1 - dist / GLOW_RADIUS, 1.8) : 0;
+          n.glow += (target - n.glow) * 0.07;
         }
 
-        for (let dot of dots) {
-          const dx = mouseX - dot.baseX;
-          const dy = mouseY - dot.baseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+        // Рёбра
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i], b = nodes[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < CONNECT_DIST) {
+              const fade = 1 - dist / CONNECT_DIST;
+              const glowBoost = (a.glow + b.glow) * 0.5;
+              const alpha = fade * (0.035 + glowBoost * 0.6) * fadeOut;
+              if (alpha < 0.004) continue;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(100,200,210,${alpha})`;
+              ctx.lineWidth = 0.4 + glowBoost * 1.0;
+              ctx.stroke();
+            }
+          }
+        }
 
-          if (dist < MOUSE_RADIUS) {
-            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
-            dot.x = dot.baseX + dx * force * 0.15;
-            dot.y = dot.baseY + dy * force * 0.15;
-          } else {
-            dot.x += (dot.baseX - dot.x) * 0.1;
-            dot.y += (dot.baseY - dot.y) * 0.1;
+        // Узлы
+        for (let n of nodes) {
+          const alpha = (0.07 + n.glow * 0.88) * fadeOut;
+          const r = n.r + n.glow * 6;
+
+          // Ореол свечения
+          if (n.glow > 0.02) {
+            const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 6);
+            grad.addColorStop(0, `rgba(100,200,210,${n.glow * 0.38 * fadeOut})`);
+            grad.addColorStop(0.35, `rgba(100,200,210,${n.glow * 0.09 * fadeOut})`);
+            grad.addColorStop(1, 'rgba(100,200,210,0)');
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, r * 6, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
+            ctx.fill();
           }
 
-          const opacity = dist < MOUSE_RADIUS ? 0.25 + (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.4 : 0.25;
-          ctx.fillStyle = `rgba(26, 79, 214, ${opacity})`;
+          // Сам узел
           ctx.beginPath();
-          ctx.arc(dot.x, dot.y - scrollY * 0.3, DOT_RADIUS, 0, Math.PI * 2);
+          ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(160,230,240,${alpha})`;
           ctx.fill();
         }
 
@@ -911,10 +1352,7 @@
       }
 
       window.addEventListener('resize', resize);
-      window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
+      window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
 
       resize();
       draw();
@@ -1100,7 +1538,7 @@ canvas.addEventListener('touchend',()=>{if(dragged)dragged.pinned=false;dragged=
 
 function getConn(node){const s=new Set();for(const e of edges){if(e.a===node.id)s.add(e.b);if(e.b===node.id)s.add(e.a);}return s;}
 
-// ── РЕНДЕР (цвет: золото 245,197,24) ─────────────────────────────────────────
+// ── РЕНДЕР (цвет: аквамарин 100,200,210) ──────────────────────────────────────
 let t=0;
 function draw(){
   t++;
@@ -1111,41 +1549,41 @@ function draw(){
     const act=hovered&&(e.a===hovered.id||e.b===hovered.id);
     const sec=hovered&&!act&&conn&&(conn.has(e.a)||conn.has(e.b));
     ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
-    ctx.strokeStyle=act?'rgba(245,197,24,0.75)':sec?'rgba(245,197,24,0.22)':hovered?'rgba(245,197,24,0.04)':'rgba(245,197,24,0.14)';
+    ctx.strokeStyle=act?'rgba(100,200,210,0.75)':sec?'rgba(100,200,210,0.22)':hovered?'rgba(100,200,210,0.04)':'rgba(100,200,210,0.16)';
     ctx.lineWidth=act?1.5:0.7;ctx.stroke();
     if(act){
       const p=((t*0.7+e.a*11)%100)/100;
       ctx.beginPath();ctx.arc(a.x+(b.x-a.x)*p,a.y+(b.y-a.y)*p,2,0,Math.PI*2);
-      ctx.fillStyle='rgba(255,220,80,0.95)';ctx.fill();
+      ctx.fillStyle='rgba(160,230,240,0.95)';ctx.fill();
     }
   }
   for(const n of nodes){
     const isHub=n.id===0,isHov=n===hovered,isNbr=hovered&&conn&&conn.has(n.id),isDim=hovered&&!isHov&&!isNbr;
     const br=Math.sin(t*0.02+n.phase)*(isHub?.05:.08)+1,r=n.r*br;
-    const gR=isHov?r*3.5:isHub?r*3:r*2,gA=isDim?.03:isHov?.4:isHub?.22:.10;
+    const gR=isHov?r*3.5:isHub?r*3:r*2,gA=isDim?.03:isHov?.35:isHub?.18:.08;
     const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,gR);
-    g.addColorStop(0,`rgba(245,197,24,${gA})`);g.addColorStop(.5,`rgba(245,197,24,${gA*.3})`);g.addColorStop(1,'rgba(245,197,24,0)');
+    g.addColorStop(0,`rgba(100,200,210,${gA})`);g.addColorStop(.5,`rgba(100,200,210,${gA*.3})`);g.addColorStop(1,'rgba(100,200,210,0)');
     ctx.beginPath();ctx.arc(n.x,n.y,gR,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
     const na=isDim?.1:isHov?1:isNbr?.9:isHub?.88:.55;
     ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);
     if(isHov||isHub||isNbr){
       const f=ctx.createRadialGradient(n.x-r*.3,n.y-r*.3,0,n.x,n.y,r);
-      f.addColorStop(0,`rgba(255,220,80,${na})`);f.addColorStop(1,`rgba(180,140,0,${na})`);
+      f.addColorStop(0,`rgba(160,230,240,${na})`);f.addColorStop(1,`rgba(60,160,175,${na})`);
       ctx.fillStyle=f;
-    } else {ctx.fillStyle=`rgba(245,197,24,${na*.28})`;}
+    } else {ctx.fillStyle=`rgba(100,200,210,${na*.28})`;}
     ctx.fill();
-    ctx.strokeStyle=`rgba(245,197,24,${na})`;ctx.lineWidth=isHov?2:isHub?1.8:.9;ctx.stroke();
+    ctx.strokeStyle=`rgba(100,200,210,${na})`;ctx.lineWidth=isHov?2:isHub?1.8:.9;ctx.stroke();
     if(isHub||isHov){
       const pulse=Math.sin(t*.04+n.phase)*.5+.5;
       ctx.beginPath();ctx.arc(n.x,n.y,r+4+pulse*3,0,Math.PI*2);
-      ctx.strokeStyle=`rgba(245,197,24,${.18*pulse})`;ctx.lineWidth=1;ctx.stroke();
+      ctx.strokeStyle=`rgba(100,200,210,${.16*pulse})`;ctx.lineWidth=1;ctx.stroke();
     }
     if(!isDim){
       const la=isHov?1:isNbr?.9:isHub?.75:.38,yy=n.y+r+11;
       ctx.font=`${isHub?700:500} ${isHub?10:8.5}px Inter,sans-serif`;ctx.textAlign='center';
       ctx.fillStyle=`rgba(223,226,235,${la})`;ctx.fillText(n.label,n.x,yy);
       ctx.font=`400 7.5px Inter,sans-serif`;
-      ctx.fillStyle=`rgba(245,197,24,${la*.7})`;ctx.fillText(n.role,n.x,yy+10);
+      ctx.fillStyle=`rgba(100,200,210,${la*.65})`;ctx.fillText(n.role,n.x,yy+10);
     }
   }
 }
