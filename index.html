@@ -1177,7 +1177,7 @@
       const EDGES=[[2,0,false],[3,0,false],[0,1,false],[4,1,true],[1,5,false],[1,6,false],[1,7,false],[1,8,false],[1,9,false],[7,1,false],[0,4,false]];
       const SIGNALS=[];
       EDGES.forEach((e,i)=>{const c=(i<4)?2:1;for(let k=0;k<c;k++)SIGNALS.push({edgeIdx:i,t:Math.random(),speed:0.003+Math.random()*0.005,r:1.8+Math.random()*1.4});});
-      let nodes=[];
+      let nodes=[],particles=[],chaosTextRect=null;
       function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;initNodes();}
       function initNodes(){NODES.forEach(([l,s,tx,ty],i)=>{const sp=1.4+Math.random()*2,an=Math.random()*Math.PI*2;if(!nodes[i])nodes[i]={cx:Math.random()*W,cy:Math.random()*H,cvx:Math.cos(an)*sp,cvy:Math.sin(an)*sp,lit:0};nodes[i].tx=tx*W;nodes[i].ty=ty*H;});}
       const DIMS={xl:[15,44],lg:[13,36],md:[12,30],sm:[11,26]};
@@ -1201,16 +1201,73 @@
         const gw=ctx.createRadialGradient(x,y,0,x,y,sig.r*4);gw.addColorStop(0,`rgba(${SB.r},${SB.g},${SB.b},${sa*0.45})`);gw.addColorStop(1,`rgba(${SB.r},${SB.g},${SB.b},0)`);ctx.beginPath();ctx.arc(x,y,sig.r*4,0,Math.PI*2);ctx.fillStyle=gw;ctx.fill();
         ctx.beginPath();ctx.arc(x,y,sig.r*0.7,0,Math.PI*2);ctx.fillStyle=`rgba(210,225,255,${sa*0.95})`;ctx.fill();
       }
+      function addSparks(x,y,vx,vy,count){for(let k=0;k<count;k++){const angle=Math.random()*Math.PI*2,spd=2.5+Math.random()*5,life=22+Math.floor(Math.random()*18);particles.push({x,y,vx:Math.cos(angle)*spd+vx*0.15,vy:Math.sin(angle)*spd+vy*0.15,life,maxLife:life,r:1.2+Math.random()*2.5,bright:Math.random()<0.3});}}
       function eio(t){return t<0.5?2*t*t:-1+(4-2*t)*t;}
       function lerp(a,b,t){return a+(b-a)*t;}
       function draw(){
         ctx.clearRect(0,0,W,H);time+=0.016;
         const p=eio(Math.max(0,Math.min(1,progress)));
+        const chaosPhase=p<0.28?1.0:p<0.54?Math.max(0,(0.54-p)/0.26):0;
+        // Measure text rect for collision
+        if(chaosPhase>0){
+          const cfs=Math.round(Math.min(W*0.040,42));
+          ctx.font=`800 ${cfs}px Inter`;ctx.letterSpacing='0.07em';
+          const tw=ctx.measureText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС').width;
+          chaosTextRect={cx:W/2,cy:H*0.50,w:tw+52,h:cfs*1.5+18,fs:cfs};
+          ctx.letterSpacing='0';
+        } else {chaosTextRect=null;}
         nodes.forEach((n,i)=>{
           const sp=(1-p)*0.98+0.02;n.cx+=n.cvx*sp;n.cy+=n.cvy*sp;
+          // Collision with chaos headline
+          if(chaosTextRect){
+            const {cx,cy,w,h}=chaosTextRect,hw=w/2+10,hh=h/2+10;
+            if(Math.abs(n.cx-cx)<hw&&Math.abs(n.cy-cy)<hh){
+              const ox=Math.abs(n.cx-cx)/hw,oy=Math.abs(n.cy-cy)/hh;
+              if(ox>oy){n.cvx*=-1.5;n.cx=cx+Math.sign(n.cx-cx)*(hw+6);}
+              else{n.cvy*=-1.5;n.cy=cy+Math.sign(n.cy-cy)*(hh+6);}
+              addSparks(n.cx,n.cy,n.cvx,n.cvy,14);
+            }
+          }
           const pad=80;if(n.cx<pad||n.cx>W-pad)n.cvx*=-1;if(n.cy<pad||n.cy>H-pad)n.cvy*=-1;n.cx=Math.max(pad,Math.min(W-pad,n.cx));n.cy=Math.max(pad,Math.min(H-pad,n.cy));const tl=p>0.65?Math.min(1,(p-0.65)/0.35):0;n.lit+=(tl-n.lit)*0.04;
         });
         const pos=nodes.map(n=>({x:lerp(n.cx,n.tx,p),y:lerp(n.cy,n.ty,p)}));
+        // Draw chaos text
+        if(chaosPhase>0&&chaosTextRect){
+          const {cx,cy,fs}=chaosTextRect;
+          // Halo glow
+          const gl=ctx.createRadialGradient(cx,cy,0,cx,cy,240);
+          gl.addColorStop(0,`rgba(160,185,255,${chaosPhase*0.22})`);gl.addColorStop(1,'rgba(160,185,255,0)');
+          ctx.beginPath();ctx.ellipse(cx,cy,400,110,0,0,Math.PI*2);ctx.fillStyle=gl;ctx.fill();
+          // Text with glow
+          ctx.save();
+          ctx.shadowColor=`rgba(140,175,255,${chaosPhase*0.7})`;ctx.shadowBlur=28;
+          ctx.font=`800 ${fs}px Inter`;ctx.letterSpacing='0.07em';
+          ctx.fillStyle=`rgba(232,237,255,${chaosPhase})`;ctx.textAlign='center';ctx.textBaseline='middle';
+          ctx.fillText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС',cx,cy);
+          // Second pass for stronger glow
+          ctx.shadowBlur=10;ctx.fillStyle=`rgba(255,255,255,${chaosPhase*0.35})`;
+          ctx.fillText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС',cx,cy);
+          ctx.letterSpacing='0';ctx.restore();
+        }
+        // Particles — star-burst sparks
+        particles=particles.filter(par=>par.life>0);
+        particles.forEach(par=>{
+          par.x+=par.vx;par.y+=par.vy;par.vx*=0.87;par.vy*=0.87;par.life--;
+          const fa=par.life/par.maxLife,sz=par.r*fa;
+          // Streak
+          ctx.beginPath();ctx.moveTo(par.x-par.vx*2.5,par.y-par.vy*2.5);ctx.lineTo(par.x,par.y);
+          ctx.strokeStyle=`rgba(${par.bright?'255,240,200':'190,215,255'},${fa*0.9})`;ctx.lineWidth=sz*0.9;ctx.stroke();
+          // Star point: 4-point cross
+          if(par.bright){
+            ctx.save();ctx.translate(par.x,par.y);ctx.rotate(time*3);
+            const sp2=sz*3;ctx.beginPath();
+            ctx.moveTo(-sp2,0);ctx.lineTo(0,-sz*0.4);ctx.lineTo(sp2,0);ctx.lineTo(0,sz*0.4);ctx.closePath();
+            ctx.fillStyle=`rgba(255,245,200,${fa*0.85})`;ctx.fill();ctx.restore();
+          } else {
+            ctx.beginPath();ctx.arc(par.x,par.y,sz*0.8,0,Math.PI*2);
+            ctx.fillStyle=`rgba(210,228,255,${fa*0.9})`;ctx.fill();
+          }
+        });
         const ep=Math.max(0,(p-0.22)/0.78);
         if(ep>0)EDGES.forEach(([f,t,bd])=>{const a=pos[f],b=pos[t],dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy),off=16;if(len<2)return;drawEdge(a.x+dx/len*off,a.y+dy/len*off,b.x-dx/len*off,b.y-dy/len*off,ep,bd);});
         const sa=Math.max(0,(p-0.50)/0.50);
