@@ -162,6 +162,37 @@
     /* Strikethrough price */
     .price-old { text-decoration: line-through; color: #52525B; }
 
+    /* ── Screen 02: Chaos→Order animation ── */
+    #s02-chaos { position:relative; height:300vh; }
+    #s02-sticky { position:sticky; top:0; height:100vh; overflow:hidden; }
+    #s02-canvas { position:absolute; inset:0; width:100%; height:100%; }
+    #s02-text {
+      position:absolute; top:8%; left:64px;
+      z-index:10; pointer-events:none; max-width:500px;
+    }
+    #s02-headline {
+      font-size:62px; font-weight:800;
+      letter-spacing:-0.03em; line-height:1.05; color:#E4E4E7;
+      opacity:0; transform:translateX(-12px);
+      transition:opacity 0.7s ease, transform 0.7s ease;
+      white-space:nowrap; margin-top:24px;
+    }
+    #s02-headline.show { opacity:1; transform:translateX(0); }
+    #s02-headline .s02-line { display:block; }
+    #s02-headline .s02-muted { color:#3F3F46; font-weight:300; }
+    #s02-sub {
+      margin-top:24px; font-size:15px; font-weight:300;
+      color:#52525B; line-height:1.65;
+      opacity:0; transform:translateX(-8px);
+      transition:opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+    }
+    #s02-sub.show { opacity:1; transform:translateX(0); }
+    #s02-hint {
+      position:absolute; bottom:48px; left:50%; transform:translateX(-50%);
+      font-size:10px; letter-spacing:0.2em; color:#252528;
+      text-transform:uppercase; z-index:10; transition:opacity 0.4s;
+    }
+
     /* Section fade gradient — плавный переход между секциями */
     .section-fade-top {
       background: linear-gradient(to bottom, #0E0E11 0%, transparent 100%);
@@ -293,7 +324,26 @@
 
 
   <!-- =========================================== -->
-  <!-- SCREEN 02 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
+  <!-- SCREEN 02 — CHAOS→ORDER ANIMATION          -->
+  <!-- =========================================== -->
+  <div id="s02-chaos">
+    <div id="s02-sticky">
+      <canvas id="s02-canvas"></canvas>
+      <div id="s02-text">
+        <p class="section-num">02</p>
+        <h2 id="s02-headline">
+          <span class="s02-line">С этой системой</span>
+          <span class="s02-line">ты обойдёшь</span>
+          <span class="s02-line s02-muted">99% конкурентов</span>
+        </h2>
+        <p id="s02-sub">Работает пока ты спишь.</p>
+      </div>
+      <div id="s02-hint">↓ прокрути</div>
+    </div>
+  </div>
+
+  <!-- =========================================== -->
+  <!-- SCREEN 03 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
   <!-- =========================================== -->
   <section id="edge" class="relative py-36 px-6 lg:px-8">
     <div class="section-fade-top"></div>
@@ -302,7 +352,7 @@
       <!-- Stitch-стиль: заголовок слева, описание справа -->
       <div class="stitch-layout mb-20 fade-up">
         <div>
-          <p class="section-num" style="margin-bottom:20px;">02</p>
+          <p class="section-num" style="margin-bottom:20px;">03</p>
           <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
             Вы всегда<br><span style="font-weight:300;color:#52525B;">на острие</span>
           </h2>
@@ -375,7 +425,7 @@
       <!-- Stitch-стиль: большой заголовок слева, аккордеон справа -->
       <div class="stitch-layout fade-up" id="about-section">
         <div>
-          <p class="section-num" style="margin-bottom:20px;">03</p>
+          <p class="section-num" style="margin-bottom:20px;">04</p>
           <h2 style="font-size:clamp(38px,6vw,72px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
             Что такое<br><span style="font-weight:300;color:#52525B;">NextGen<br>Club</span>
           </h2>
@@ -431,7 +481,7 @@
     <div class="max-w-[1100px] mx-auto">
       <div class="text-center mb-20 fade-up">
         <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">Три типа людей, которым здесь место</p>
-        <p class="section-num mb-4">04</p>
+        <p class="section-num mb-4">05</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Для <span style="font-weight:300;color:#52525B;">кого</span>
         </h2>
@@ -505,7 +555,7 @@
     <div class="absolute inset-0 glow-ambient-top pointer-events-none"></div>
     <div class="max-w-[1100px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">05</p>
+        <p class="section-num mb-4">06</p>
         <h2 style="font-size:clamp(28px,4.5vw,54px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Маркус и Долорес найдут тебе клиентов.<br><span style="font-weight:300;color:#52525B;">Пока ты спишь.</span>
         </h2>
@@ -592,7 +642,7 @@
     <div class="max-w-[1100px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
         <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">Главное преимущество, которого нет ни в одном сообществе СНГ</p>
-        <p class="section-num mb-4">06</p>
+        <p class="section-num mb-4">07</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Синдикат
         </h2>
@@ -716,7 +766,7 @@
       <!-- Stitch-стиль для заголовка секции -->
       <div class="stitch-layout mb-14 fade-up">
         <div>
-          <p class="section-num" style="margin-bottom:20px;">07</p>
+          <p class="section-num" style="margin-bottom:20px;">08</p>
           <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
             Инстру-<br><span style="font-weight:300;color:#52525B;">менты</span>
           </h2>
@@ -806,7 +856,7 @@
   <section class="py-40 px-6 lg:px-8">
     <div class="max-w-[1100px] mx-auto">
       <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">08</p>
+        <p class="section-num mb-4">09</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Обучение,<br><span style="font-weight:300;color:#52525B;">которое работает</span>
         </h2>
@@ -853,7 +903,7 @@
   <section class="py-40 px-6 lg:px-8">
     <div class="max-w-[1100px] mx-auto">
       <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">09</p>
+        <p class="section-num mb-4">10</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Внутри <span style="font-weight:300;color:#52525B;">клуба</span>
         </h2>
@@ -933,7 +983,7 @@
     <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
     <div class="max-w-[820px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">10</p>
+        <p class="section-num mb-4">11</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Сколько <span style="font-weight:300;color:#52525B;">стоит</span>
         </h2>
@@ -1060,7 +1110,7 @@
     <div class="max-w-[680px] mx-auto text-center relative z-10">
       <div class="fade-up" style="display:flex;flex-direction:column;align-items:center;gap:28px;">
 
-        <p class="section-num">11</p>
+        <p class="section-num">12</p>
 
         <h2 style="font-size:clamp(32px,5.5vw,64px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.05;">
           Для тех,<br><span style="font-weight:300;color:#52525B;">кто уже в теме</span>
@@ -1106,6 +1156,73 @@
     function toggleAccordion(el) {
       el.classList.toggle('accordion-open');
     }
+
+    // ===== SCREEN 02: CHAOS→ORDER =====
+    (function(){
+      const canvas = document.getElementById('s02-canvas');
+      if (!canvas) return;
+      const ctx    = canvas.getContext('2d');
+      const section = document.getElementById('s02-chaos');
+      const headline = document.getElementById('s02-headline');
+      const sub      = document.getElementById('s02-sub');
+      const hint     = document.getElementById('s02-hint');
+      let W, H, progress = 0, time = 0;
+      const NODES = [
+        ['Claude','xl',0.61,0.42,'core'],['MCP','lg',0.61,0.65,'infra'],['Skills','md',0.61,0.20,'infra'],
+        ['Gemini','md',0.84,0.22,'ai'],['Obsidian','md',0.84,0.62,'service'],
+        ['Telegram','sm',0.38,0.83,'service'],['AmoCRM','sm',0.51,0.89,'service'],
+        ['NextBot','sm',0.62,0.89,'service'],['Nano Banana','sm',0.74,0.83,'service'],['Stitch','sm',0.87,0.77,'service'],
+      ];
+      const EDGES=[[2,0,false],[3,0,false],[0,1,false],[4,1,true],[1,5,false],[1,6,false],[1,7,false],[1,8,false],[1,9,false],[7,1,false],[0,4,false]];
+      const SIGNALS=[];
+      EDGES.forEach((e,i)=>{const c=(i<4)?2:1;for(let k=0;k<c;k++)SIGNALS.push({edgeIdx:i,t:Math.random(),speed:0.003+Math.random()*0.005,r:1.8+Math.random()*1.4});});
+      let nodes=[];
+      function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;initNodes();}
+      function initNodes(){NODES.forEach(([l,s,tx,ty],i)=>{const sp=1.4+Math.random()*2,an=Math.random()*Math.PI*2;if(!nodes[i])nodes[i]={cx:Math.random()*W,cy:Math.random()*H,cvx:Math.cos(an)*sp,cvy:Math.sin(an)*sp,lit:0};nodes[i].tx=tx*W;nodes[i].ty=ty*H;});}
+      const DIMS={xl:[15,44],lg:[13,36],md:[12,30],sm:[11,26]};
+      function pW(l,s){return l.length*DIMS[s][0]*0.60+28;}
+      function drawPill(x,y,label,size,type,lit,alpha){
+        const[fs,ph]=DIMS[size],pw=pW(label,size),r=ph/2,ic=type==='core',ii=type==='infra';
+        const bA=((ic?0.22:ii?0.12:0.07)+lit*0.18)*alpha,bgA=((ic?0.08:ii?0.05:0.03)+lit*0.07)*alpha;
+        if(ic&&lit>0.01){const ig=ctx.createRadialGradient(x,y-ph*0.3,0,x,y,ph*1.2);ig.addColorStop(0,`rgba(255,255,255,${lit*0.06*alpha})`);ig.addColorStop(1,'rgba(255,255,255,0)');ctx.beginPath();ctx.roundRect(x-pw/2,y-ph/2,pw,ph,r);ctx.fillStyle=ig;ctx.fill();}
+        ctx.beginPath();ctx.roundRect(x-pw/2,y-ph/2,pw,ph,r);ctx.fillStyle=`rgba(255,255,255,${bgA})`;ctx.fill();
+        ctx.strokeStyle=ic?`rgba(170,200,255,${bA})`:`rgba(140,175,240,${bA})`;ctx.lineWidth=ic?1.2:0.8;ctx.stroke();
+        ctx.font=`${ic?'700':ii?'500':'400'} ${fs}px Inter`;ctx.fillStyle=`rgba(220,222,232,${((ic?0.88:ii?0.68:0.50)+lit*0.12)*alpha})`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,x,y);
+      }
+      const SB={r:140,g:180,b:255};
+      function drawEdge(ax,ay,bx,by,ep,bd){
+        const a=0.08+ep*0.10;ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.strokeStyle=`rgba(${SB.r},${SB.g},${SB.b},${a})`;ctx.lineWidth=0.6;ctx.setLineDash([2,8]);ctx.stroke();ctx.setLineDash([]);
+        if(!bd&&ep>0.3){const dx=bx-ax,dy=by-ay,an=Math.atan2(dy,dx),mx=ax+dx*0.58,my=ay+dy*0.58,hl=6;ctx.beginPath();ctx.moveTo(mx-hl*Math.cos(an-0.45),my-hl*Math.sin(an-0.45));ctx.lineTo(mx,my);ctx.lineTo(mx-hl*Math.cos(an+0.45),my-hl*Math.sin(an+0.45));ctx.strokeStyle=`rgba(${SB.r},${SB.g},${SB.b},${a*0.8})`;ctx.lineWidth=0.6;ctx.stroke();}
+      }
+      function drawSignal(sig,ax,ay,bx,by,sa){
+        const x=ax+(bx-ax)*sig.t,y=ay+(by-ay)*sig.t,t0=Math.max(0,sig.t-0.07),tx0=ax+(bx-ax)*t0,ty0=ay+(by-ay)*t0;
+        const g=ctx.createLinearGradient(tx0,ty0,x,y);g.addColorStop(0,`rgba(${SB.r},${SB.g},${SB.b},0)`);g.addColorStop(1,`rgba(${SB.r},${SB.g},${SB.b},${sa*0.5})`);ctx.beginPath();ctx.moveTo(tx0,ty0);ctx.lineTo(x,y);ctx.strokeStyle=g;ctx.lineWidth=1.4;ctx.stroke();
+        const gw=ctx.createRadialGradient(x,y,0,x,y,sig.r*4);gw.addColorStop(0,`rgba(${SB.r},${SB.g},${SB.b},${sa*0.45})`);gw.addColorStop(1,`rgba(${SB.r},${SB.g},${SB.b},0)`);ctx.beginPath();ctx.arc(x,y,sig.r*4,0,Math.PI*2);ctx.fillStyle=gw;ctx.fill();
+        ctx.beginPath();ctx.arc(x,y,sig.r*0.7,0,Math.PI*2);ctx.fillStyle=`rgba(210,225,255,${sa*0.95})`;ctx.fill();
+      }
+      function eio(t){return t<0.5?2*t*t:-1+(4-2*t)*t;}
+      function lerp(a,b,t){return a+(b-a)*t;}
+      function draw(){
+        ctx.clearRect(0,0,W,H);time+=0.016;
+        const p=eio(Math.max(0,Math.min(1,progress)));
+        if(p<0.25){const fa=p<0.12?p/0.12:(0.25-p)/0.13;ctx.font='300 11px Inter';ctx.fillStyle=`rgba(82,82,91,${fa*0.65})`;ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС',W/2,52);}
+        nodes.forEach((n,i)=>{const sp=(1-p)*0.98+0.02;n.cx+=n.cvx*sp;n.cy+=n.cvy*sp;const pad=80;if(n.cx<pad||n.cx>W-pad)n.cvx*=-1;if(n.cy<pad||n.cy>H-pad)n.cvy*=-1;n.cx=Math.max(pad,Math.min(W-pad,n.cx));n.cy=Math.max(pad,Math.min(H-pad,n.cy));const tl=p>0.65?Math.min(1,(p-0.65)/0.35):0;n.lit+=(tl-n.lit)*0.04;});
+        const pos=nodes.map(n=>({x:lerp(n.cx,n.tx,p),y:lerp(n.cy,n.ty,p)}));
+        const ep=Math.max(0,(p-0.22)/0.78);
+        if(ep>0)EDGES.forEach(([f,t,bd])=>{const a=pos[f],b=pos[t],dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy),off=16;if(len<2)return;drawEdge(a.x+dx/len*off,a.y+dy/len*off,b.x-dx/len*off,b.y-dy/len*off,ep,bd);});
+        const sa=Math.max(0,(p-0.50)/0.50);
+        if(sa>0)SIGNALS.forEach(sig=>{sig.t+=sig.speed;if(sig.t>1)sig.t=0;const[f,t]=EDGES[sig.edgeIdx],a=pos[f],b=pos[t],dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy),off=16;if(len<2)return;drawSignal(sig,a.x+dx/len*off,a.y+dy/len*off,b.x-dx/len*off,b.y-dy/len*off,sa);});
+        const cl=nodes[0].lit;
+        if(cl>0.01){const pu=0.5+0.5*Math.sin(time*1.8),pr=pos[0],g=ctx.createRadialGradient(pr.x,pr.y,0,pr.x,pr.y,90);g.addColorStop(0,`rgba(140,180,255,${cl*pu*0.08})`);g.addColorStop(1,'rgba(140,180,255,0)');ctx.beginPath();ctx.arc(pr.x,pr.y,90,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();}
+        NODES.forEach(([label,size,,,type],i)=>drawPill(pos[i].x,pos[i].y,label,size,type,nodes[i].lit,1));
+        if(p>0.82){const la=(p-0.82)/0.18*0.22;ctx.font='400 9px Inter';ctx.fillStyle=`rgba(60,62,70,${la})`;ctx.textAlign='left';const lx=W*0.34;[{y:0.13,t:'AI СЛОЙ'},{y:0.38,t:'ЯДРО'},{y:0.60,t:'КОННЕКТОР'},{y:0.80,t:'СЕРВИСЫ'}].forEach(l=>ctx.fillText(l.t,lx,H*l.y));ctx.strokeStyle=`rgba(255,255,255,${la*0.25})`;ctx.lineWidth=0.5;ctx.setLineDash([1,14]);[0.30,0.53,0.73].forEach(yp=>{ctx.beginPath();ctx.moveTo(W*0.34,H*yp);ctx.lineTo(W*0.95,H*yp);ctx.stroke();});ctx.setLineDash([]);}
+        requestAnimationFrame(draw);
+      }
+      function onScroll(){const rect=section.getBoundingClientRect(),sc=section.offsetHeight-window.innerHeight;progress=Math.max(0,Math.min(1,-rect.top/sc));const show=progress>0.60;headline.classList.toggle('show',show);sub.classList.toggle('show',show);if(hint)hint.style.opacity=progress>0.12?'0':'1';}
+      window.addEventListener('scroll',onScroll,{passive:true});
+      new ResizeObserver(resize).observe(canvas);
+      resize();draw();onScroll();
+    })();
 
     // ===== HERO NEURAL GRAPH =====
     (function() {
