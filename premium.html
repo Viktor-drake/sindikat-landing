@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NextGen Club — Сообщество технологического доминирования</title>
+  <title>NextGen Club — Всё о нейросетях в одном месте</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -27,6 +27,7 @@
     }
   </script>
   <style>
+    :root { --gold: #C9A87C; --gold-dim: rgba(201,168,124,0.75); }
     body { font-family: 'Inter', sans-serif; background: #0E0E11; }
 
     /* Noise texture — глубина без шума */
@@ -179,7 +180,16 @@
     }
     #s02-headline.show { opacity:1; transform:translateX(0); }
     #s02-headline .s02-line { display:block; }
-    #s02-headline .s02-muted { color:#3F3F46; font-weight:300; }
+    #s02-headline .s02-muted { color:var(--gold); font-weight:300; }
+    #s02-chaos-title {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      font-size:clamp(22px,3.6vw,40px);
+      font-weight:800; color:#E4E4E7;
+      white-space:nowrap; pointer-events:none;
+      z-index:5; letter-spacing:0.05em;
+      user-select:none;
+    }
     #s02-sub {
       margin-top:24px; font-size:15px; font-weight:300;
       color:#52525B; line-height:1.65;
@@ -258,9 +268,59 @@
     .stat-highlight {
       font-size: clamp(36px, 5vw, 56px);
       font-weight: 800;
+      color: var(--gold) !important;
       letter-spacing: -0.03em;
       color: #E4E4E7;
       line-height: 1;
+    }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      html { overflow-x: hidden; }
+
+      /* Screen 02 — chaos title: allow wrap on mobile */
+      #s02-chaos-title {
+        white-space: normal;
+        text-align: center;
+        width: 86%;
+        left: 7%;
+        transform: translateY(-50%);
+        font-size: clamp(18px, 5.8vw, 32px);
+        line-height: 1.3;
+      }
+
+      /* Screen 02 — order text: move to bottom */
+      #s02-text {
+        left: 20px !important;
+        right: 20px !important;
+        top: auto !important;
+        bottom: 88px;
+        max-width: none !important;
+      }
+      #s02-headline {
+        font-size: 36px !important;
+        white-space: normal !important;
+        line-height: 1.08;
+      }
+      #s02-sub { font-size: 13px; }
+
+      /* Nav — hide text links, keep logo + CTA */
+      nav .hidden { display: none !important; }
+
+      /* Cards — remove hover lift on touch */
+      .glass:hover { transform: none; }
+
+      /* Price table */
+      .price-table td, .price-table th { padding: 10px 12px; font-size: 13px; }
+
+      /* Sections — ensure no overflow */
+      section, .max-w-\[1100px\], .max-w-\[1200px\] { overflow-x: hidden; }
+    }
+
+    @media (max-width: 480px) {
+      #s02-headline { font-size: 28px !important; }
+      #s02-chaos-title { font-size: clamp(16px, 5.5vw, 22px); }
+      .cta-primary, .cta-secondary { padding: 11px 22px; font-size: 13px; }
     }
   </style>
 </head>
@@ -300,13 +360,13 @@
 
       <!-- Заголовок -->
       <div style="display:flex;flex-direction:column;gap:0;line-height:0.88;">
-        <h1 style="font-size:clamp(72px,12vw,148px);font-weight:800;letter-spacing:-0.02em;color:#E4E4E7;margin:0;">NEXTGEN</h1>
-        <h1 style="font-size:clamp(72px,12vw,148px);font-weight:300;letter-spacing:-0.02em;color:#3F3F46;margin:0;">CLUB</h1>
+        <h1 style="font-size:clamp(46px,13vw,148px);font-weight:800;letter-spacing:-0.02em;color:#E4E4E7;margin:0;">NEXTGEN</h1>
+        <h1 style="font-size:clamp(46px,13vw,148px);font-weight:300;letter-spacing:-0.02em;color:#3F3F46;margin:0;">CLUB</h1>
       </div>
 
       <!-- Дескриптор -->
       <p style="font-size:17px;font-weight:300;color:#71717A;max-width:480px;line-height:1.65;letter-spacing:0.01em;">
-        Ваш путь к технологическому доминированию.
+        Всё что нужно знать о нейросетях — в одном месте.
       </p>
 
       <!-- CTA c бейджем -->
@@ -328,6 +388,8 @@
   <div id="s02-chaos">
     <div id="s02-sticky">
       <canvas id="s02-canvas"></canvas>
+      <!-- Chaos title rendered as DOM text — same quality as main headline -->
+      <div id="s02-chaos-title">НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС</div>
       <div id="s02-text">
         <p class="section-num">02</p>
         <h2 id="s02-headline">
@@ -342,7 +404,74 @@
   </div>
 
   <!-- =========================================== -->
-  <!-- SCREEN 03 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
+  <!-- SCREEN 03 — РЫНОЧНЫЙ КОНТЕКСТ              -->
+  <!-- =========================================== -->
+  <section class="relative py-40 px-6 lg:px-8 overflow-hidden">
+    <div class="section-fade-top"></div>
+
+    <!-- Фоновый акцент — тёплое золотое свечение слева -->
+    <div style="position:absolute;top:0;left:-10%;bottom:0;width:55%;background:radial-gradient(ellipse at 20% 50%,rgba(201,168,124,0.055) 0%,transparent 65%);pointer-events:none;"></div>
+
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="fade-up" style="max-width:820px;">
+
+        <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;margin-bottom:36px;">Рыночный контекст</p>
+
+        <h2 style="font-size:clamp(38px,5.8vw,72px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;margin-bottom:48px;">
+          Снаружи — <span style="font-weight:300;color:#52525B;">давление.</span><br>
+          Внутри — <span style="color:#C9A87C;">другая история.</span>
+        </h2>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:56px;" class="crisis-grid">
+          <!-- Левая колонка — боль -->
+          <div style="border-left:1px solid rgba(255,255,255,0.06);padding-left:28px;display:flex;flex-direction:column;gap:16px;">
+            <p style="font-size:16px;color:#71717A;line-height:1.8;font-weight:300;">
+              В стране и в мире закручиваются гайки. Платёжеспособность падает. Бюджеты режут. Клиенты тяжелее расстаются с деньгами.
+            </p>
+            <p style="font-size:15px;color:#52525B;line-height:1.75;font-weight:300;">
+              Каждый контракт даётся сложнее. Конкуренция за одних и тех же клиентов растёт. Маржа — падает.
+            </p>
+          </div>
+          <!-- Правая колонка — выход -->
+          <div style="border-left:1px solid rgba(201,168,124,0.2);padding-left:28px;display:flex;flex-direction:column;gap:16px;">
+            <p style="font-size:16px;color:#A1A1AA;line-height:1.8;font-weight:300;">
+              Но я знаю место, где денег достаточно. Где за экспертизу платят хорошо, и сама работа — интересная, а не изматывающая.
+            </p>
+            <p style="font-size:15px;color:#C9A87C;line-height:1.75;font-weight:400;">
+              Это рынок людей, которые умеют делать то, что другие ещё только планируют автоматизировать. NextGen Club — это то самое место.
+            </p>
+          </div>
+        </div>
+
+        <!-- Три факта — горизонтальные -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.05);border-radius:8px;overflow:hidden;">
+          <div style="background:#0E0E11;padding:24px 28px;">
+            <p style="font-size:11px;letter-spacing:0.16em;color:#52525B;text-transform:uppercase;margin-bottom:10px;">Снаружи</p>
+            <p style="font-size:13px;color:#52525B;line-height:1.7;font-weight:300;">Бюджеты режут. Клиенты не принимают решений. Каждая сделка — бой.</p>
+          </div>
+          <div style="background:#0E0E11;padding:24px 28px;">
+            <p style="font-size:11px;letter-spacing:0.16em;color:#52525B;text-transform:uppercase;margin-bottom:10px;">Снаружи</p>
+            <p style="font-size:13px;color:#52525B;line-height:1.7;font-weight:300;">Конкуренция растёт. Демпинг. Выгорание. Ощущение что работаешь больше — зарабатываешь меньше.</p>
+          </div>
+          <div style="background:rgba(201,168,124,0.04);padding:24px 28px;border:1px solid rgba(201,168,124,0.12);">
+            <p style="font-size:11px;letter-spacing:0.16em;color:#C9A87C;text-transform:uppercase;margin-bottom:10px;">NextGen Club</p>
+            <p style="font-size:13px;color:#A1A1AA;line-height:1.7;font-weight:300;">Инструменты, люди и знания — там, где деньги есть. И работа приносит кайф.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="section-fade-bottom"></div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .crisis-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    }
+  </style>
+
+  <!-- =========================================== -->
+  <!-- SCREEN 04 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
   <!-- =========================================== -->
   <section id="edge" class="relative py-36 px-6 lg:px-8">
     <div class="section-fade-top"></div>
@@ -993,7 +1122,7 @@
 
         <!-- Цена -->
         <div class="text-center" style="margin-bottom:40px;">
-          <p style="font-size:clamp(52px,9vw,88px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:1;">9 900 <span style="font-size:0.35em;font-weight:300;color:#71717A;">₽/мес</span></p>
+          <p style="font-size:clamp(52px,9vw,88px);font-weight:800;letter-spacing:-0.03em;color:var(--gold);line-height:1;">9 900 <span style="font-size:0.35em;font-weight:300;color:#71717A;">₽/мес</span></p>
           <p style="font-size:13px;color:#52525B;margin-top:10px;font-weight:300;">Полный доступ: Marcus, Dolores, Синдикат, все инструменты, обучение, эфиры, AI-Радар</p>
         </div>
 
@@ -1140,7 +1269,7 @@
     <div class="max-w-[1100px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
         <span style="font-size:12px;font-weight:600;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;">NEXTGEN CLUB</span>
-        <p style="font-size:12px;color:#3F3F46;margin-top:4px;font-weight:300;">Сообщество технологического доминирования</p>
+        <p style="font-size:12px;color:#3F3F46;margin-top:4px;font-weight:300;">Всё о нейросетях — в одном месте</p>
       </div>
       <p style="font-size:12px;color:#3F3F46;font-weight:300;">© 2026 NextGen Club. Все права защищены.</p>
     </div>
@@ -1158,15 +1287,16 @@
 
     // ===== SCREEN 02: CHAOS→ORDER =====
     (function(){
-      const canvas = document.getElementById('s02-canvas');
-      if (!canvas) return;
-      const ctx    = canvas.getContext('2d');
-      const section = document.getElementById('s02-chaos');
+      const canvas   = document.getElementById('s02-canvas');
+      if(!canvas) return;
+      const ctx      = canvas.getContext('2d');
+      const section  = document.getElementById('s02-chaos');
+      const chaosEl  = document.getElementById('s02-chaos-title');
       const headline = document.getElementById('s02-headline');
       const sub      = document.getElementById('s02-sub');
       const hint     = document.getElementById('s02-hint');
       let W, H, progress = 0, time = 0;
-      const NODES = [
+      const NODES=[
         ['Claude','xl',0.61,0.42,'core'],['MCP','lg',0.61,0.65,'infra'],['Skills','md',0.61,0.20,'infra'],
         ['Gemini','md',0.84,0.22,'ai'],['Obsidian','md',0.84,0.62,'service'],
         ['Telegram','sm',0.38,0.83,'service'],['AmoCRM','sm',0.51,0.89,'service'],
@@ -1175,10 +1305,15 @@
       const EDGES=[[2,0,false],[3,0,false],[0,1,false],[4,1,true],[1,5,false],[1,6,false],[1,7,false],[1,8,false],[1,9,false],[7,1,false],[0,4,false]];
       const SIGNALS=[];
       EDGES.forEach((e,i)=>{const c=(i<4)?2:1;for(let k=0;k<c;k++)SIGNALS.push({edgeIdx:i,t:Math.random(),speed:0.003+Math.random()*0.005,r:1.8+Math.random()*1.4});});
-      let nodes=[];
-      function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;initNodes();}
-      function initNodes(){NODES.forEach(([l,s,tx,ty],i)=>{const sp=1.4+Math.random()*2,an=Math.random()*Math.PI*2;if(!nodes[i])nodes[i]={cx:Math.random()*W,cy:Math.random()*H,cvx:Math.cos(an)*sp,cvy:Math.sin(an)*sp,lit:0};nodes[i].tx=tx*W;nodes[i].ty=ty*H;});}
       const DIMS={xl:[15,44],lg:[13,36],md:[12,30],sm:[11,26]};
+      const COLL_R={xl:28,lg:22,md:18,sm:14};
+      let nodes=[],particles=[],chaosTextRect=null;
+      const collCooldown=new Array(NODES.length).fill(0);
+      const nodeCC=[];for(let i=0;i<NODES.length;i++){nodeCC[i]=[];for(let j=0;j<NODES.length;j++)nodeCC[i][j]=0;}
+      function getChaosRect(){const r=chaosEl.getBoundingClientRect(),sr=canvas.getBoundingClientRect();return{cx:r.left-sr.left+r.width/2,cy:r.top-sr.top+r.height/2,w:r.width,h:r.height};}
+      function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;initNodes();chaosTextRect=getChaosRect();}
+      function initNodes(){NODES.forEach(([l,s,tx,ty],i)=>{const speed=1.0+Math.random()*0.8,an=Math.random()*Math.PI*2;if(!nodes[i])nodes[i]={cx:Math.random()*W,cy:Math.random()*H,cvx:Math.cos(an)*speed,cvy:Math.sin(an)*speed,speed,lit:0};nodes[i].tx=tx*W;nodes[i].ty=ty*H;});}
+      function fixSpeed(n){const s=Math.sqrt(n.cvx*n.cvx+n.cvy*n.cvy);if(s>0.001){n.cvx=n.cvx/s*n.speed;n.cvy=n.cvy/s*n.speed;}}
       function pW(l,s){return l.length*DIMS[s][0]*0.60+28;}
       function drawPill(x,y,label,size,type,lit,alpha){
         const[fs,ph]=DIMS[size],pw=pW(label,size),r=ph/2,ic=type==='core',ii=type==='infra';
@@ -1199,14 +1334,62 @@
         const gw=ctx.createRadialGradient(x,y,0,x,y,sig.r*4);gw.addColorStop(0,`rgba(${SB.r},${SB.g},${SB.b},${sa*0.45})`);gw.addColorStop(1,`rgba(${SB.r},${SB.g},${SB.b},0)`);ctx.beginPath();ctx.arc(x,y,sig.r*4,0,Math.PI*2);ctx.fillStyle=gw;ctx.fill();
         ctx.beginPath();ctx.arc(x,y,sig.r*0.7,0,Math.PI*2);ctx.fillStyle=`rgba(210,225,255,${sa*0.95})`;ctx.fill();
       }
+      function addSparks(x,y,vx,vy,count,big){for(let k=0;k<count;k++){const angle=Math.random()*Math.PI*2,spd=(big?4.5:3.0)+Math.random()*(big?6.0:4.5),life=28+Math.floor(Math.random()*24);particles.push({x,y,vx:Math.cos(angle)*spd+(vx||0)*0.06,vy:Math.sin(angle)*spd+(vy||0)*0.06,life,maxLife:life,r:(big?2.5:1.8)+Math.random()*3.0,gold:Math.random()<0.22});}}
       function eio(t){return t<0.5?2*t*t:-1+(4-2*t)*t;}
       function lerp(a,b,t){return a+(b-a)*t;}
       function draw(){
         ctx.clearRect(0,0,W,H);time+=0.016;
         const p=eio(Math.max(0,Math.min(1,progress)));
-        if(p<0.32){const fa=p<0.18?1.0:Math.max(0,(0.32-p)/0.14);ctx.font='600 18px Inter';ctx.fillStyle=`rgba(200,200,210,${fa*0.85})`;ctx.textAlign='center';ctx.textBaseline='top';ctx.letterSpacing='0.14em';ctx.fillText('НЕЙРОСЕТИ БЕЗ СИСТЕМЫ — ХАОС',W/2,58);ctx.letterSpacing='0';}
-        nodes.forEach((n,i)=>{const sp=(1-p)*0.98+0.02;n.cx+=n.cvx*sp;n.cy+=n.cvy*sp;const pad=80;if(n.cx<pad||n.cx>W-pad)n.cvx*=-1;if(n.cy<pad||n.cy>H-pad)n.cvy*=-1;n.cx=Math.max(pad,Math.min(W-pad,n.cx));n.cy=Math.max(pad,Math.min(H-pad,n.cy));const tl=p>0.65?Math.min(1,(p-0.65)/0.35):0;n.lit+=(tl-n.lit)*0.04;});
+        const chaosPhase=p<0.26?1.0:p<0.50?Math.max(0,(0.50-p)/0.24):0;
+        chaosEl.style.opacity=chaosPhase;
+        if(chaosPhase>0) chaosTextRect=getChaosRect();
+        else chaosTextRect=null;
+        collCooldown.forEach((_,i)=>{if(collCooldown[i]>0)collCooldown[i]--;});
+        for(let i=0;i<NODES.length;i++)for(let j=0;j<NODES.length;j++){if(nodeCC[i][j]>0)nodeCC[i][j]--;}
+        const ss=(1-p);
+        nodes.forEach((n,i)=>{
+          n.cx+=n.cvx*ss;n.cy+=n.cvy*ss;
+          if(chaosTextRect&&collCooldown[i]===0){
+            const{cx,cy,w,h}=chaosTextRect,hw=w/2+8,hh=h/2+8;
+            if(Math.abs(n.cx-cx)<hw&&Math.abs(n.cy-cy)<hh){
+              const ox=Math.abs(n.cx-cx)/hw,oy=Math.abs(n.cy-cy)/hh;
+              if(ox>oy){n.cvx*=-1;n.cx=cx+Math.sign(n.cx-cx)*(hw+5);}
+              else{n.cvy*=-1;n.cy=cy+Math.sign(n.cy-cy)*(hh+5);}
+              fixSpeed(n);addSparks(n.cx,n.cy,n.cvx,n.cvy,14,true);collCooldown[i]=22;
+            }
+          }
+          const pad=80;
+          if(n.cx<pad){n.cvx=Math.abs(n.cvx);n.cx=pad;fixSpeed(n);}
+          if(n.cx>W-pad){n.cvx=-Math.abs(n.cvx);n.cx=W-pad;fixSpeed(n);}
+          if(n.cy<pad){n.cvy=Math.abs(n.cvy);n.cy=pad;fixSpeed(n);}
+          if(n.cy>H-pad){n.cvy=-Math.abs(n.cvy);n.cy=H-pad;fixSpeed(n);}
+          const tl=p>0.65?Math.min(1,(p-0.65)/0.35):0;n.lit+=(tl-n.lit)*0.04;
+        });
+        if(chaosPhase>0){
+          for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+            if(nodeCC[i][j]>0)continue;
+            const ni=nodes[i],nj=nodes[j],ri=COLL_R[NODES[i][1]],rj=COLL_R[NODES[j][1]];
+            const dx=nj.cx-ni.cx,dy=nj.cy-ni.cy,dist=Math.sqrt(dx*dx+dy*dy),minD=ri+rj;
+            if(dist<minD&&dist>0.1){
+              const nx2=dx/dist,ny2=dy/dist;
+              const vi_n=ni.cvx*nx2+ni.cvy*ny2,vj_n=nj.cvx*nx2+nj.cvy*ny2;
+              ni.cvx+=(vj_n-vi_n)*nx2;ni.cvy+=(vj_n-vi_n)*ny2;
+              nj.cvx+=(vi_n-vj_n)*nx2;nj.cvy+=(vi_n-vj_n)*ny2;
+              const ov=(minD-dist)/2+2;ni.cx-=nx2*ov;ni.cy-=ny2*ov;nj.cx+=nx2*ov;nj.cy+=ny2*ov;
+              fixSpeed(ni);fixSpeed(nj);
+              addSparks((ni.cx+nj.cx)/2,(ni.cy+nj.cy)/2,0,0,8,false);
+              nodeCC[i][j]=nodeCC[j][i]=18;
+            }
+          }
+        }
         const pos=nodes.map(n=>({x:lerp(n.cx,n.tx,p),y:lerp(n.cy,n.ty,p)}));
+        particles=particles.filter(par=>par.life>0);
+        particles.forEach(par=>{
+          par.x+=par.vx;par.y+=par.vy;par.vx*=0.88;par.vy*=0.88;par.life--;
+          const fa=par.life/par.maxLife,sz=par.r*fa;
+          if(par.gold){ctx.save();ctx.translate(par.x,par.y);ctx.rotate(time*5+par.r*2);const arm=sz*4.5;ctx.beginPath();ctx.moveTo(-arm,0);ctx.lineTo(0,-sz*0.65);ctx.lineTo(arm,0);ctx.lineTo(0,sz*0.65);ctx.closePath();ctx.fillStyle=`rgba(255,238,180,${fa*0.95})`;ctx.fill();ctx.restore();}
+          else{const px2=par.x-par.vx*3.5,py2=par.y-par.vy*3.5;ctx.beginPath();ctx.moveTo(px2,py2);ctx.lineTo(par.x,par.y);ctx.strokeStyle=`rgba(225,233,255,${fa*0.88})`;ctx.lineWidth=Math.max(0.5,sz*1.1);ctx.stroke();ctx.beginPath();ctx.arc(par.x,par.y,Math.max(0.5,sz*0.85),0,Math.PI*2);ctx.fillStyle=`rgba(245,248,255,${fa*0.95})`;ctx.fill();}
+        });
         const ep=Math.max(0,(p-0.22)/0.78);
         if(ep>0)EDGES.forEach(([f,t,bd])=>{const a=pos[f],b=pos[t],dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy),off=16;if(len<2)return;drawEdge(a.x+dx/len*off,a.y+dy/len*off,b.x-dx/len*off,b.y-dy/len*off,ep,bd);});
         const sa=Math.max(0,(p-0.50)/0.50);
@@ -1220,7 +1403,7 @@
       function onScroll(){const rect=section.getBoundingClientRect(),sc=section.offsetHeight-window.innerHeight;progress=Math.max(0,Math.min(1,-rect.top/sc));const show=progress>0.60;headline.classList.toggle('show',show);sub.classList.toggle('show',show);if(hint)hint.style.opacity=progress>0.12?'0':'1';}
       window.addEventListener('scroll',onScroll,{passive:true});
       new ResizeObserver(resize).observe(canvas);
-      resize();draw();onScroll();
+      setTimeout(()=>{resize();draw();onScroll();},80);
     })();
 
     // ===== HERO NEURAL GRAPH =====
@@ -1334,6 +1517,8 @@
 
       window.addEventListener('resize', resize);
       window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+      canvas.addEventListener('touchmove', (e) => { e.preventDefault(); mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }, {passive:false});
+      canvas.addEventListener('touchend', () => { mouseX = -9999; mouseY = -9999; });
 
       resize();
       draw();
