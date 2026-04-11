@@ -51,17 +51,17 @@
       transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .glass:hover {
-      border-color: rgba(255,255,255,0.11);
+      border-color: rgba(201,168,124,0.25);
       transform: translateY(-3px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.45);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.45), 0 0 24px rgba(201,168,124,0.06);
     }
 
-    /* Ambient glow — очень мягкий */
+    /* Ambient glow */
     .glow-ambient {
-      background: radial-gradient(ellipse 800px 400px at 50% 100%, rgba(245,197,24,0.035), transparent);
+      background: radial-gradient(ellipse 900px 500px at 50% 100%, rgba(201,168,124,0.07), transparent);
     }
     .glow-ambient-top {
-      background: radial-gradient(ellipse 700px 300px at 50% 0%, rgba(255,255,255,0.025), transparent);
+      background: radial-gradient(ellipse 700px 300px at 50% 0%, rgba(201,168,124,0.04), transparent);
     }
     /* Старые классы — переопределены для совместимости */
     .glow-blue { background: radial-gradient(ellipse 700px 350px at 50% 100%, rgba(245,197,24,0.03), transparent); }
@@ -70,7 +70,7 @@
     /* Номер секции */
     .section-num {
       font-size: 11px; font-weight: 400;
-      color: #52525B; letter-spacing: 0.22em;
+      color: var(--gold); opacity: 0.55; letter-spacing: 0.22em;
     }
 
     /* Fade-up */
@@ -103,7 +103,7 @@
       border-radius: 9px; padding: 13px 34px;
       transition: all 0.22s ease; border: none;
     }
-    .cta-primary:hover { background: #fff; box-shadow: 0 0 28px rgba(228,228,231,0.12); }
+    .cta-primary:hover { background: #fff; box-shadow: 0 0 32px rgba(201,168,124,0.25); }
 
     .cta-secondary {
       background: transparent; color: #71717A;
@@ -124,11 +124,11 @@
 
     /* Pill */
     .pill {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(201,168,124,0.06);
+      border: 1px solid rgba(201,168,124,0.22);
       border-radius: 100px; padding: 5px 14px;
       font-size: 11px; font-weight: 500;
-      letter-spacing: 0.06em; color: #71717A;
+      letter-spacing: 0.06em; color: var(--gold);
     }
 
     /* Comparison table */
@@ -237,8 +237,9 @@
       min-height: 180px;
     }
     .tool-tile:hover {
-      border-color: rgba(255,255,255,0.11);
+      border-color: rgba(201,168,124,0.25);
       transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 16px rgba(201,168,124,0.05);
     }
     .tool-tile-large { min-height: 240px; }
 
@@ -768,12 +769,12 @@
   <!-- =========================================== -->
   <!-- SCREEN 06A — СИНДИКАТ                        -->
   <!-- =========================================== -->
-  <section id="syndicate" class="py-40 px-6 lg:px-8 relative">
+  <section id="syndicate" class="py-40 px-6 lg:px-8 relative" style="background:radial-gradient(ellipse 900px 600px at 50% 40%, rgba(201,168,124,0.05) 0%, transparent 70%)">
     <div class="max-w-[1100px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
         <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">Главное преимущество, которого нет ни в одном сообществе СНГ</p>
         <p class="section-num mb-4">07</p>
-        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#C9A87C;line-height:1.1;">
           Синдикат
         </h2>
         <p style="font-size:clamp(16px,2vw,22px);font-weight:300;color:#52525B;margin-top:6px;">Коллективный разум</p>
@@ -783,7 +784,7 @@
       </div>
 
       <!-- Граф -->
-      <div class="mb-16 fade-up" style="position:relative;width:100%;aspect-ratio:16/7;background:#111115;border-radius:16px;overflow:hidden;border:1px solid rgba(100,200,210,0.12);">
+      <div class="mb-16 fade-up" style="position:relative;width:100%;aspect-ratio:16/7;background:#0F0F12;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,124,0.28);box-shadow:0 0 60px rgba(201,168,124,0.07),inset 0 0 80px rgba(201,168,124,0.03);">
         <canvas id="syndicate-graph" style="position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;"></canvas>
         <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.18);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;pointer-events:none;white-space:nowrap;">перетаскивайте узлы</div>
       </div>
@@ -1717,12 +1718,12 @@ function draw(){
     const act=hovered&&(e.a===hovered.id||e.b===hovered.id);
     const sec=hovered&&!act&&conn&&(conn.has(e.a)||conn.has(e.b));
     ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
-    ctx.strokeStyle=act?'rgba(100,200,210,0.75)':sec?'rgba(100,200,210,0.22)':hovered?'rgba(100,200,210,0.04)':'rgba(100,200,210,0.16)';
+    ctx.strokeStyle=act?'rgba(201,168,124,0.75)':sec?'rgba(201,168,124,0.22)':hovered?'rgba(201,168,124,0.04)':'rgba(201,168,124,0.16)';
     ctx.lineWidth=act?1.5:0.7;ctx.stroke();
     if(act){
       const p=((t*0.7+e.a*11)%100)/100;
       ctx.beginPath();ctx.arc(a.x+(b.x-a.x)*p,a.y+(b.y-a.y)*p,2,0,Math.PI*2);
-      ctx.fillStyle='rgba(160,230,240,0.95)';ctx.fill();
+      ctx.fillStyle='rgba(220,188,148,0.95)';ctx.fill();
     }
   }
   for(const n of nodes){
@@ -1730,28 +1731,28 @@ function draw(){
     const br=Math.sin(t*0.02+n.phase)*(isHub?.05:.08)+1,r=n.r*br;
     const gR=isHov?r*3.5:isHub?r*3:r*2,gA=isDim?.03:isHov?.35:isHub?.18:.08;
     const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,gR);
-    g.addColorStop(0,`rgba(100,200,210,${gA})`);g.addColorStop(.5,`rgba(100,200,210,${gA*.3})`);g.addColorStop(1,'rgba(100,200,210,0)');
+    g.addColorStop(0,`rgba(201,168,124,${gA})`);g.addColorStop(.5,`rgba(201,168,124,${gA*.3})`);g.addColorStop(1,'rgba(201,168,124,0)');
     ctx.beginPath();ctx.arc(n.x,n.y,gR,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
     const na=isDim?.1:isHov?1:isNbr?.9:isHub?.88:.55;
     ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);
     if(isHov||isHub||isNbr){
       const f=ctx.createRadialGradient(n.x-r*.3,n.y-r*.3,0,n.x,n.y,r);
-      f.addColorStop(0,`rgba(160,230,240,${na})`);f.addColorStop(1,`rgba(60,160,175,${na})`);
+      f.addColorStop(0,`rgba(220,188,148,${na})`);f.addColorStop(1,`rgba(160,128,88,${na})`);
       ctx.fillStyle=f;
-    } else {ctx.fillStyle=`rgba(100,200,210,${na*.28})`;}
+    } else {ctx.fillStyle=`rgba(201,168,124,${na*.28})`;}
     ctx.fill();
-    ctx.strokeStyle=`rgba(100,200,210,${na})`;ctx.lineWidth=isHov?2:isHub?1.8:.9;ctx.stroke();
+    ctx.strokeStyle=`rgba(201,168,124,${na})`;ctx.lineWidth=isHov?2:isHub?1.8:.9;ctx.stroke();
     if(isHub||isHov){
       const pulse=Math.sin(t*.04+n.phase)*.5+.5;
       ctx.beginPath();ctx.arc(n.x,n.y,r+4+pulse*3,0,Math.PI*2);
-      ctx.strokeStyle=`rgba(100,200,210,${.16*pulse})`;ctx.lineWidth=1;ctx.stroke();
+      ctx.strokeStyle=`rgba(201,168,124,${.16*pulse})`;ctx.lineWidth=1;ctx.stroke();
     }
     if(!isDim){
       const la=isHov?1:isNbr?.9:isHub?.75:.38,yy=n.y+r+11;
       ctx.font=`${isHub?700:500} ${isHub?10:8.5}px Inter,sans-serif`;ctx.textAlign='center';
       ctx.fillStyle=`rgba(223,226,235,${la})`;ctx.fillText(n.label,n.x,yy);
       ctx.font=`400 7.5px Inter,sans-serif`;
-      ctx.fillStyle=`rgba(100,200,210,${la*.65})`;ctx.fillText(n.role,n.x,yy+10);
+      ctx.fillStyle=`rgba(201,168,124,${la*.65})`;ctx.fillText(n.role,n.x,yy+10);
     }
   }
 }
