@@ -274,9 +274,11 @@
       line-height: 1;
     }
 
+    /* overflow-x: clip не создаёт scroll container → position:sticky работает на iOS Safari */
+    html, body { overflow-x: clip; }
+
     /* ===== MOBILE RESPONSIVE ===== */
     @media (max-width: 768px) {
-      html { overflow-x: hidden; }
 
       /* Screen 02 — chaos title: allow wrap on mobile */
       #s02-chaos-title {
@@ -313,8 +315,8 @@
       /* Price table */
       .price-table td, .price-table th { padding: 10px 12px; font-size: 13px; }
 
-      /* Sections — ensure no overflow */
-      section, .max-w-\[1100px\], .max-w-\[1200px\] { overflow-x: hidden; }
+      /* Sections — ensure no overflow (clip не ломает sticky) */
+      section, .max-w-\[1100px\], .max-w-\[1200px\] { overflow-x: clip; }
     }
 
     @media (max-width: 480px) {
@@ -324,7 +326,7 @@
     }
   </style>
 </head>
-<body class="bg-graphite text-platinum antialiased overflow-x-hidden">
+<body class="bg-graphite text-platinum antialiased">
 
   <!-- DOT GRID CANVAS -->
   <canvas id="dot-grid"></canvas>
@@ -360,13 +362,13 @@
 
       <!-- Заголовок -->
       <div style="display:flex;flex-direction:column;gap:0;line-height:0.88;">
-        <h1 style="font-size:clamp(46px,13vw,148px);font-weight:800;letter-spacing:-0.02em;color:#E4E4E7;margin:0;">NEXTGEN</h1>
-        <h1 style="font-size:clamp(46px,13vw,148px);font-weight:300;letter-spacing:-0.02em;color:#3F3F46;margin:0;">CLUB</h1>
+        <h1 style="font-size:clamp(46px,13vw,148px);font-weight:800;letter-spacing:-0.02em;color:#C9A87C;margin:0;">NEXTGEN</h1>
+        <h1 style="font-size:clamp(46px,13vw,148px);font-weight:300;letter-spacing:-0.02em;color:#E4E4E7;margin:0;">CLUB</h1>
       </div>
 
       <!-- Дескриптор -->
       <p style="font-size:17px;font-weight:300;color:#71717A;max-width:480px;line-height:1.65;letter-spacing:0.01em;">
-        Всё что нужно знать о нейросетях — в одном месте.
+        Всё, что нужно знать о нейросетях, находится здесь.
       </p>
 
       <!-- CTA c бейджем -->
@@ -1481,7 +1483,7 @@
               ctx.beginPath();
               ctx.moveTo(a.x, a.y);
               ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = `rgba(100,200,210,${alpha})`;
+              ctx.strokeStyle = `rgba(201,168,124,${alpha})`;
               ctx.lineWidth = 0.4 + glowBoost * 1.0;
               ctx.stroke();
             }
@@ -1496,9 +1498,9 @@
           // Ореол свечения
           if (n.glow > 0.02) {
             const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 6);
-            grad.addColorStop(0, `rgba(100,200,210,${n.glow * 0.38 * fadeOut})`);
-            grad.addColorStop(0.35, `rgba(100,200,210,${n.glow * 0.09 * fadeOut})`);
-            grad.addColorStop(1, 'rgba(100,200,210,0)');
+            grad.addColorStop(0, `rgba(201,168,124,${n.glow * 0.38 * fadeOut})`);
+            grad.addColorStop(0.35, `rgba(201,168,124,${n.glow * 0.09 * fadeOut})`);
+            grad.addColorStop(1, 'rgba(201,168,124,0)');
             ctx.beginPath();
             ctx.arc(n.x, n.y, r * 6, 0, Math.PI * 2);
             ctx.fillStyle = grad;
@@ -1508,7 +1510,7 @@
           // Сам узел
           ctx.beginPath();
           ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(160,230,240,${alpha})`;
+          ctx.fillStyle = `rgba(201,168,124,${alpha})`;
           ctx.fill();
         }
 
