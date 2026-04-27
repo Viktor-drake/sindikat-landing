@@ -164,8 +164,8 @@
     .price-old { text-decoration: line-through; color: #52525B; }
 
     /* ── Screen 02: Chaos→Order animation ── */
-    #s02-chaos { position:relative; height:300vh; }
-    #s02-sticky { position:sticky; top:0; height:100vh; overflow:hidden; }
+    #s02-chaos { position:relative; height:300vh; height:300dvh; }
+    #s02-sticky { position:sticky; top:0; height:100vh; height:100dvh; overflow:hidden; }
     #s02-canvas { position:absolute; inset:0; width:100%; height:100%; }
     #s02-text {
       position:absolute; top:32%; left:64px;
@@ -297,7 +297,7 @@
         left: 20px !important;
         right: 20px !important;
         top: auto !important;
-        bottom: 88px;
+        bottom: max(88px, env(safe-area-inset-bottom, 0px) + 72px);
         max-width: none !important;
       }
       #s02-headline {
