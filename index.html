@@ -32,6 +32,22 @@
 
 
 
+
+    /* Syndicate graph — вертикальный на мобиле для лучшей анимации */
+    @media (max-width: 768px) {
+      #syndicate-graph {
+        height: 480px !important;
+      }
+      .syndicate-graph-wrap {
+        aspect-ratio: 3/4 !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .syndicate-graph-wrap {
+        aspect-ratio: 9/12 !important;
+      }
+    }
+
     /* Wide screens — больше воздуха и контента */
     @media (min-width: 1600px) {
       .max-w-\[1100px\] { max-width: 1280px !important; }
@@ -339,20 +355,34 @@
         line-height: 1.3;
       }
 
-      /* Screen 02 — order text: move to bottom */
+      /* Screen 02 — order text: move to bottom + полупрозрачный фон для читаемости */
       #s02-text {
-        left: 20px !important;
-        right: 20px !important;
+        left: 16px !important;
+        right: 16px !important;
         top: auto !important;
-        bottom: max(88px, env(safe-area-inset-bottom, 0px) + 72px);
+        bottom: max(40px, env(safe-area-inset-bottom, 0px) + 24px) !important;
         max-width: none !important;
+        padding: 18px 18px 18px 18px;
+        background: linear-gradient(to top, rgba(14,14,17,0.95) 0%, rgba(14,14,17,0.85) 60%, rgba(14,14,17,0.0) 100%);
+        border-radius: 14px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
       }
       #s02-headline {
-        font-size: 36px !important;
+        font-size: 30px !important;
         white-space: normal !important;
-        line-height: 1.08;
+        line-height: 1.1;
+        margin-top: 12px !important;
       }
-      #s02-sub { font-size: 13px; }
+      #s02-sub {
+        font-size: 12px;
+        margin-top: 14px !important;
+        color: #71717A !important;
+      }
+      #s02-chaos-title {
+        top: 38% !important;
+      }
+      #s02-hint { display: none !important; }
 
       /* Nav — hide text links, keep logo + CTA */
       nav .hidden { display: none !important; }
@@ -816,7 +846,7 @@
       </div>
 
       <!-- Граф -->
-      <div class="mb-16 fade-up" style="position:relative;width:100%;aspect-ratio:16/7;background:#0F0F12;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,124,0.28);box-shadow:0 0 60px rgba(201,168,124,0.07),inset 0 0 80px rgba(201,168,124,0.03);">
+      <div class="mb-16 fade-up syndicate-graph-wrap" style="position:relative;width:100%;aspect-ratio:16/7;background:#0F0F12;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,124,0.28);box-shadow:0 0 60px rgba(201,168,124,0.07),inset 0 0 80px rgba(201,168,124,0.03);">
         <canvas id="syndicate-graph" style="position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;"></canvas>
         <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.18);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;pointer-events:none;white-space:nowrap;">перетаскивайте узлы</div>
       </div>
@@ -878,10 +908,15 @@
 
         <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:14px;">
           <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:rgba(201,168,124,0.06);border:1px solid rgba(201,168,124,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <span style="font-size:11px;color:#C9A87C;font-weight:600;">01</span>
+            <img src="team-nova.png" alt="Nova" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(201,168,124,0.4);box-shadow:0 0 16px rgba(201,168,124,0.15);flex-shrink:0;">
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:10px;color:#C9A87C;font-weight:600;letter-spacing:0.1em;">01</span>
+                <span style="width:3px;height:3px;background:#52525B;border-radius:50%;"></span>
+                <span style="font-size:10px;color:#52525B;letter-spacing:0.1em;text-transform:uppercase;">AI-ассистент</span>
+              </div>
+              <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Разговор с Новой</h3>
             </div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Разговор с Новой</h3>
           </div>
           <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
             <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Нова — AI-ассистент Синдиката — задаёт точные вопросы и составляет твой профиль: ресурсы, запросы, цели, экспертиза.</p>
@@ -1028,7 +1063,16 @@
       <div class="grid md:grid-cols-3 gap-5">
 
         <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:18px;">
-          <span style="font-size:11px;color:#3F3F46;letter-spacing:0.14em;">01</span>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:11px;color:#3F3F46;letter-spacing:0.14em;">01</span>
+            <!-- Claude badge -->
+            <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(204,120,92,0.08);border:1px solid rgba(204,120,92,0.25);border-radius:100px;padding:4px 10px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#CC785C">
+                <path d="M4.709 15.955l4.72-2.647.079-.23-.079-.128h-.23l-.785-.048-2.687-.072-2.330-.097-2.259-.122-.569-.122L0 11.766l.054-.351.479-.32.687.061 1.518.103 2.277.158 1.652.097 2.447.255h.389l.054-.158-.133-.097-.103-.097-2.358-1.598-2.553-1.689-1.336-.971-.722-.491-.364-.461-.158-1.008.656-.722.881.061.225.061.892.686 1.906 1.476 2.49 1.834.365.304.146-.103.018-.072-.164-.273-1.355-2.45-1.446-2.494-.644-1.032-.17-.619c-.061-.255-.103-.467-.103-.728L8.184.43 8.557 0 9.469.376l.752 1.045 1.111 1.953 1.708 2.96.534 1.057.279.973.103.298h.181v-.17l.146-1.952.273-2.396.267-3.082.091-.867.43-1.045.851-.564.668.32.546.785-.078.503-.328 2.139-.643 3.342-.42 2.241h.243l.279-.279 1.13-1.501 1.895-2.367.836-.94.972-1.039.625-.497h1.184l.872 1.293-.39 1.337-1.221 1.553-1.013 1.317-1.451 1.953-.906 1.566.084.122.218-.017 3.298-.703 1.781-.319 2.124-.365.964.45.105.451-.376.927-2.262.557-2.654.521-3.951.94-.048.036.054.072 1.781.169.762.042h1.866l3.479.255.911.6.546.733-.091.557-1.401.707-1.895-.45-4.418-1.045-1.514-.376h-.21v.122l1.262 1.227 2.314 2.087 2.901 2.69.146.658-.376.524-.388-.054-2.508-1.875-.973-.85-2.181-1.834h-.146v.182l.503.736 2.661 4.001.139 1.224-.194.4-.687.243-.751-.139-1.541-2.165-1.591-2.434-1.282-2.18-.158.097-.764 8.171-.358.418-.821.314-.685-.522-.358-.819.358-1.638.428-2.142.346-1.694.314-2.105.182-.703-.013-.048-.158.018-1.611 2.211-2.453 3.319-1.943 2.087-.467.182-.806-.418.073-.749.443-.665 2.726-3.476 1.643-2.156 1.063-1.252-.012-.182h-.061l-7.085 4.59-1.262.175-.546-.522.073-.829.249-.279 2.05-1.413z"/>
+              </svg>
+              <span style="font-size:10px;color:#CC785C;font-weight:600;letter-spacing:0.04em;">Claude</span>
+            </div>
+          </div>
           <h3 style="font-size:15px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;">CLAUDE & AI</h3>
           <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;flex:1;">Работа с Claude, промпты, агенты, автоматизация.</p>
           <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
