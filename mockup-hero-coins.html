@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero · Engraved Coins Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0E0E11; color:#E4E4E7; }
+  :root { --gold:#C9A87C; }
+
+  .label {
+    position:absolute; top:24px; left:24px;
+    font-size:11px; letter-spacing:0.2em; color:var(--gold);
+    text-transform:uppercase; padding:6px 14px;
+    background:rgba(201,168,124,0.08); border:1px solid rgba(201,168,124,0.3);
+    border-radius:100px; z-index:80;
+  }
+
+  .variant {
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding:48px 80px;
+    position:relative;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    overflow:hidden;
+  }
+  .glow {
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 900px 500px at 70% 50%, rgba(201,168,124,0.05), transparent);
+  }
+
+  .hero-wrap {
+    position:relative; z-index:10; width:100%;
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap:60px; align-items:center;
+  }
+
+  .hero-left {
+    display:flex; flex-direction:column; gap:32px;
+    align-items:flex-start; padding-left:40px;
+  }
+  .eyebrow { font-size:11px; letter-spacing:0.26em; color:#3F3F46; text-transform:uppercase; }
+  .title-row { display:flex; align-items:center; gap:20px; line-height:0.88; }
+  .title-row > .nav-logo { width:96px; height:96px; flex-shrink:0; opacity:0.95; }
+  .title-stack { display:flex; flex-direction:column; gap:0; line-height:0.88; }
+  .title-stack h1 {
+    font-size:clamp(46px,8vw,108px);
+    letter-spacing:-0.02em; margin:0;
+  }
+  .title-stack h1:first-child { color:var(--gold); font-weight:800; }
+  .title-stack h1:last-child { color:#E4E4E7; font-weight:300; }
+  .desc { font-size:17px; font-weight:300; color:#71717A; max-width:420px; line-height:1.65; }
+  .cta {
+    background:var(--gold); color:#0E0E11;
+    padding:13px 32px; border-radius:100px;
+    font-size:14px; font-weight:600; letter-spacing:0.04em;
+    text-decoration:none; transition:all 0.3s; display:inline-block;
+  }
+  .cta:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(201,168,124,0.3); }
+
+  .hero-right {
+    position:relative; height:520px;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ============================================================
+     БАЗОВАЯ МОНЕТА — embossed metal, debossed engraving
+     ============================================================ */
+  .coin {
+    --c-base: #b08960;
+    --c-light: #e6c895;
+    --c-deep: #5a3f24;
+    --c-dark: #2a1a0a;
+    width:140px; height:140px; border-radius:50%;
+    position:relative;
+    /* Сама поверхность монеты — радиальный градиент с brand-цветом */
+    background:
+      radial-gradient(circle at 32% 28%, var(--c-light) 0%, var(--c-base) 35%, var(--c-deep) 80%, var(--c-dark) 100%);
+    box-shadow:
+      /* Выпуклый bevel: верхний хайлайт, нижняя тень */
+      inset 6px 6px 14px rgba(255,255,255,0.18),
+      inset -8px -10px 20px rgba(0,0,0,0.55),
+      /* Внешняя тень */
+      0 18px 40px rgba(0,0,0,0.65),
+      0 4px 12px rgba(0,0,0,0.5),
+      /* Brand glow */
+      0 0 30px var(--c-glow, rgba(176,137,96,0.18));
+    transition: transform 0.4s ease;
+  }
+  .coin:hover { transform: scale(1.06) rotate(2deg); }
+
+  /* Outer rim — тёмная окружность по краю */
+  .coin::before {
+    content:''; position:absolute; inset:0;
+    border-radius:50%;
+    border:1px solid rgba(0,0,0,0.4);
+    box-shadow:
+      inset 0 0 0 3px rgba(0,0,0,0.18),
+      inset 0 0 0 4px rgba(255,255,255,0.08);
+    pointer-events:none;
+  }
+
+  /* Inner field — углубление под логотип */
+  .coin-field {
+    position:absolute;
+    inset:18px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 35% 30%, rgba(255,255,255,0.08) 0%, transparent 50%),
+      radial-gradient(circle at center, var(--c-base) 0%, var(--c-deep) 100%);
+    box-shadow:
+      inset 0 2px 4px rgba(0,0,0,0.6),
+      inset 0 -1px 2px rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* Гравировка — debossed логотип */
+  .coin-field svg {
+    width:60%; height:60%;
+    fill: var(--c-dark);
+    opacity:0.85;
+    /* Эффект вдавленности: тёмная заливка + хайлайт снизу = выемка */
+    filter:
+      drop-shadow(0 1px 0 rgba(255,255,255,0.18))
+      drop-shadow(0 -1px 0 rgba(0,0,0,0.6));
+  }
+
+  /* Подпись бренда (опционально под монетой) */
+  .coin-label {
+    position:absolute;
+    bottom:-30px; left:50%; transform:translateX(-50%);
+    font-size:10px; letter-spacing:0.18em; color:rgba(255,255,255,0.4);
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  /* === Brand colour palettes === */
+  .coin.c-claude {
+    --c-base:#a86a4a; --c-light:#e8a37e; --c-deep:#5e3520; --c-dark:#2a1408;
+    --c-glow: rgba(204,120,92,0.22);
+  }
+  .coin.c-gpt {
+    --c-base:#3a8a72; --c-light:#7adcb6; --c-deep:#1d4a3c; --c-dark:#0a221a;
+    --c-glow: rgba(16,163,127,0.22);
+  }
+  .coin.c-gemini {
+    --c-base:#4a6dba; --c-light:#9bb6f0; --c-deep:#1f3470; --c-dark:#0a1532;
+    --c-glow: rgba(66,133,244,0.22);
+  }
+  .coin.c-perplex {
+    --c-base:#3a7986; --c-light:#7bbac6; --c-deep:#1a3d44; --c-dark:#08191c;
+    --c-glow: rgba(32,128,141,0.22);
+  }
+
+  /* ============================================================
+     M1 — СТЕК НА СТОЛЕ (3D perspective tilt)
+     ============================================================ */
+  .var-m1 .stage {
+    position:relative; width:520px; height:480px;
+    perspective:1400px;
+  }
+  .var-m1 .table {
+    position:absolute; inset:0;
+    transform: rotateX(58deg);
+    transform-style:preserve-3d;
+  }
+  .var-m1 .coin {
+    position:absolute;
+    animation: floatHover 5s ease-in-out infinite;
+  }
+  .var-m1 .coin:nth-child(1) {
+    top:20%; left:18%; width:160px; height:160px;
+    transform: translateZ(8px) rotate(-8deg);
+    animation-delay:0s;
+  }
+  .var-m1 .coin:nth-child(2) {
+    top:8%; right:18%; width:140px; height:140px;
+    transform: translateZ(20px) rotate(12deg);
+    animation-delay:1.2s;
+  }
+  .var-m1 .coin:nth-child(3) {
+    bottom:18%; left:14%; width:130px; height:130px;
+    transform: translateZ(16px) rotate(-3deg);
+    animation-delay:2.4s;
+  }
+  .var-m1 .coin:nth-child(4) {
+    bottom:10%; right:22%; width:150px; height:150px;
+    transform: translateZ(4px) rotate(7deg);
+    animation-delay:3.6s;
+  }
+  /* Тень на "столе" */
+  .var-m1 .stage::after {
+    content:''; position:absolute;
+    bottom:8%; left:50%; transform:translateX(-50%);
+    width:70%; height:14px; border-radius:50%;
+    background:radial-gradient(ellipse, rgba(0,0,0,0.4) 0%, transparent 70%);
+    filter:blur(8px);
+  }
+  @keyframes floatHover {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -8px; }
+  }
+
+  /* ============================================================
+     M2 — ДИАГОНАЛЬНЫЙ ВЕЕР
+     ============================================================ */
+  .var-m2 .fan { position:relative; width:520px; height:440px; }
+  .var-m2 .coin {
+    position:absolute; top:50%; left:50%; margin-top:-70px; margin-left:-70px;
+    width:140px; height:140px;
+    animation: bobUpDown 4s ease-in-out infinite;
+  }
+  .var-m2 .coin:nth-child(1) { transform: translate(-180px,-90px) rotate(-22deg); animation-delay:0s; }
+  .var-m2 .coin:nth-child(2) { transform: translate(-60px,-30px) rotate(-7deg); animation-delay:0.5s; z-index:3; }
+  .var-m2 .coin:nth-child(3) { transform: translate(60px,40px) rotate(8deg); animation-delay:1s; z-index:2; }
+  .var-m2 .coin:nth-child(4) { transform: translate(180px,100px) rotate(22deg); animation-delay:1.5s; }
+  @keyframes bobUpDown {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+  }
+
+  /* ============================================================
+     M3 — СЕТКА 2x2 ФРОНТАЛЬНО
+     ============================================================ */
+  .var-m3 .grid-coins {
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap:42px;
+  }
+  .var-m3 .coin {
+    width:160px; height:160px;
+    animation: spinSlow 8s ease-in-out infinite;
+  }
+  .var-m3 .coin:nth-child(2) { animation-delay:0.6s; }
+  .var-m3 .coin:nth-child(3) { animation-delay:1.2s; }
+  .var-m3 .coin:nth-child(4) { animation-delay:1.8s; }
+  @keyframes spinSlow {
+    0%,100% { transform: rotate(0deg); }
+    50% { transform: rotate(8deg); }
+  }
+
+  /* ============================================================
+     M4 — БРОШЕННЫЕ МОНЕТЫ (организованный хаос)
+     ============================================================ */
+  .var-m4 .scatter { position:relative; width:520px; height:480px; }
+  .var-m4 .coin {
+    position:absolute;
+    animation: floatHover 6s ease-in-out infinite;
+  }
+  .var-m4 .coin:nth-child(1) {
+    top:20px; left:80px; width:170px; height:170px;
+    transform: rotate(-12deg); animation-delay:0s;
+  }
+  .var-m4 .coin:nth-child(2) {
+    top:80px; right:30px; width:130px; height:130px;
+    transform: rotate(18deg); animation-delay:1.5s;
+  }
+  .var-m4 .coin:nth-child(3) {
+    bottom:90px; left:20px; width:140px; height:140px;
+    transform: rotate(8deg); animation-delay:3s;
+  }
+  .var-m4 .coin:nth-child(4) {
+    bottom:30px; right:80px; width:150px; height:150px;
+    transform: rotate(-6deg); animation-delay:4.5s;
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width:1024px) {
+    .variant { padding:48px 32px; }
+    .hero-wrap { grid-template-columns: 1fr; gap:40px; }
+    .hero-left { padding-left:0; align-items:center; text-align:center; }
+    .hero-right { height:380px; }
+    .var-m1 .stage { width:340px; height:340px; }
+    .var-m2 .fan { width:340px; height:340px; }
+    .var-m3 .grid-coins { gap:24px; }
+    .var-m3 .coin { width:120px; height:120px; }
+    .var-m4 .scatter { width:340px; height:380px; }
+    .coin { width:110px !important; height:110px !important; }
+  }
+  @media (max-width:640px) {
+    .title-row > .nav-logo { width:64px; height:64px; }
+    .title-stack h1 { font-size:clamp(40px,12vw,60px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Удобный helper для иконок: SVG-определения, чтобы не дублировать -->
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <symbol id="logo-claude" viewBox="0 0 24 24">
+      <path d="M4.709 15.955l4.72-2.647.079-.23-.079-.128h-.23l-.785-.048-2.687-.072-2.330-.097-2.259-.122-.569-.122L0 11.766l.054-.351.479-.32.687.061 1.518.103 2.277.158 1.652.097 2.447.255h.389l.054-.158-.133-.097-.103-.097-2.358-1.598-2.553-1.689-1.336-.971-.722-.491-.364-.461-.158-1.008.656-.722.881.061.225.061.892.686 1.906 1.476 2.49 1.834.365.304.146-.103.018-.072-.164-.273-1.355-2.45-1.446-2.494-.644-1.032-.17-.619c-.061-.255-.103-.467-.103-.728L8.184.43 8.557 0 9.469.376l.752 1.045 1.111 1.953 1.708 2.96.534 1.057.279.973.103.298h.181v-.17l.146-1.952.273-2.396.267-3.082.091-.867.43-1.045.851-.564.668.32.546.785-.078.503-.328 2.139-.643 3.342-.42 2.241h.243l.279-.279 1.13-1.501 1.895-2.367.836-.94.972-1.039.625-.497h1.184l.872 1.293-.39 1.337-1.221 1.553-1.013 1.317-1.451 1.953-.906 1.566.084.122.218-.017 3.298-.703 1.781-.319 2.124-.365.964.45.105.451-.376.927-2.262.557-2.654.521-3.951.94-.048.036.054.072 1.781.169.762.042h1.866l3.479.255.911.6.546.733-.091.557-1.401.707-1.895-.45-4.418-1.045-1.514-.376h-.21v.122l1.262 1.227 2.314 2.087 2.901 2.69.146.658-.376.524-.388-.054-2.508-1.875-.973-.85-2.181-1.834h-.146v.182l.503.736 2.661 4.001.139 1.224-.194.4-.687.243-.751-.139-1.541-2.165-1.591-2.434-1.282-2.18-.158.097-.764 8.171-.358.418-.821.314-.685-.522-.358-.819.358-1.638.428-2.142.346-1.694.314-2.105.182-.703-.013-.048-.158.018-1.611 2.211-2.453 3.319-1.943 2.087-.467.182-.806-.418.073-.749.443-.665 2.726-3.476 1.643-2.156 1.063-1.252-.012-.182h-.061l-7.085 4.59-1.262.175-.546-.522.073-.829.249-.279 2.05-1.413z"/>
+    </symbol>
+    <symbol id="logo-gpt" viewBox="0 0 24 24">
+      <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/>
+    </symbol>
+    <symbol id="logo-gemini" viewBox="0 0 24 24">
+      <path d="M12 0L13.5 8.5L22 10L13.5 11.5L12 20L10.5 11.5L2 10L10.5 8.5L12 0Z"/>
+      <path d="M19 14L19.5 16.5L22 17L19.5 17.5L19 20L18.5 17.5L16 17L18.5 16.5L19 14Z" opacity="0.85"/>
+    </symbol>
+    <symbol id="logo-perplex" viewBox="0 0 24 24">
+      <path d="M12 2L20 7V17L12 22L4 17V7L12 2Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+      <circle cx="12" cy="12" r="2.4"/>
+      <line x1="12" y1="2" x2="12" y2="9.6" stroke="currentColor" stroke-width="1.4"/>
+      <line x1="12" y1="14.4" x2="12" y2="22" stroke="currentColor" stroke-width="1.4"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============== M1 — СТЕК НА СТОЛЕ ============== -->
+<section class="variant var-m1">
+  <div class="label">M1 · Монеты на столе (3D перспектива)</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <p class="eyebrow">Закрытый клуб · NextGen Club</p>
+      <div class="title-row">
+        <img src="logo.png" alt="" class="nav-logo">
+        <div class="title-stack">
+          <h1>NEXTGEN</h1>
+          <h1>CLUB</h1>
+        </div>
+      </div>
+      <p class="desc">Все главные нейросети — внутри одного клуба.</p>
+      <a href="#" class="cta">Вступить в клуб</a>
+    </div>
+    <div class="hero-right">
+      <div class="stage">
+        <div class="table">
+          <div class="coin c-claude"><div class="coin-field"><svg><use href="#logo-claude"/></svg></div></div>
+          <div class="coin c-gpt"><div class="coin-field"><svg><use href="#logo-gpt"/></svg></div></div>
+          <div class="coin c-gemini"><div class="coin-field"><svg><use href="#logo-gemini"/></svg></div></div>
+          <div class="coin c-perplex"><div class="coin-field"><svg><use href="#logo-perplex"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== M2 — ДИАГОНАЛЬНЫЙ ВЕЕР ============== -->
+<section class="variant var-m2">
+  <div class="label">M2 · Диагональный веер</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <p class="eyebrow">Закрытый клуб · NextGen Club</p>
+      <div class="title-row">
+        <img src="logo.png" alt="" class="nav-logo">
+        <div class="title-stack">
+          <h1>NEXTGEN</h1>
+          <h1>CLUB</h1>
+        </div>
+      </div>
+      <p class="desc">Все главные нейросети — внутри одного клуба.</p>
+      <a href="#" class="cta">Вступить в клуб</a>
+    </div>
+    <div class="hero-right">
+      <div class="fan">
+        <div class="coin c-claude"><div class="coin-field"><svg><use href="#logo-claude"/></svg></div></div>
+        <div class="coin c-gpt"><div class="coin-field"><svg><use href="#logo-gpt"/></svg></div></div>
+        <div class="coin c-gemini"><div class="coin-field"><svg><use href="#logo-gemini"/></svg></div></div>
+        <div class="coin c-perplex"><div class="coin-field"><svg><use href="#logo-perplex"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== M3 — СЕТКА 2×2 ============== -->
+<section class="variant var-m3">
+  <div class="label">M3 · Сетка 2×2 (фронтально)</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <p class="eyebrow">Закрытый клуб · NextGen Club</p>
+      <div class="title-row">
+        <img src="logo.png" alt="" class="nav-logo">
+        <div class="title-stack">
+          <h1>NEXTGEN</h1>
+          <h1>CLUB</h1>
+        </div>
+      </div>
+      <p class="desc">Все главные нейросети — внутри одного клуба.</p>
+      <a href="#" class="cta">Вступить в клуб</a>
+    </div>
+    <div class="hero-right">
+      <div class="grid-coins">
+        <div class="coin c-claude"><div class="coin-field"><svg><use href="#logo-claude"/></svg></div></div>
+        <div class="coin c-gpt"><div class="coin-field"><svg><use href="#logo-gpt"/></svg></div></div>
+        <div class="coin c-gemini"><div class="coin-field"><svg><use href="#logo-gemini"/></svg></div></div>
+        <div class="coin c-perplex"><div class="coin-field"><svg><use href="#logo-perplex"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== M4 — БРОШЕННЫЕ МОНЕТЫ ============== -->
+<section class="variant var-m4">
+  <div class="label">M4 · Брошенные монеты (организованный хаос)</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <p class="eyebrow">Закрытый клуб · NextGen Club</p>
+      <div class="title-row">
+        <img src="logo.png" alt="" class="nav-logo">
+        <div class="title-stack">
+          <h1>NEXTGEN</h1>
+          <h1>CLUB</h1>
+        </div>
+      </div>
+      <p class="desc">Все главные нейросети — внутри одного клуба.</p>
+      <a href="#" class="cta">Вступить в клуб</a>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="coin c-claude"><div class="coin-field"><svg><use href="#logo-claude"/></svg></div></div>
+        <div class="coin c-gpt"><div class="coin-field"><svg><use href="#logo-gpt"/></svg></div></div>
+        <div class="coin c-gemini"><div class="coin-field"><svg><use href="#logo-gemini"/></svg></div></div>
+        <div class="coin c-perplex"><div class="coin-field"><svg><use href="#logo-perplex"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
