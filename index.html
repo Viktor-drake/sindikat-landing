@@ -31,6 +31,21 @@
     body { font-family: 'Inter', sans-serif; background: #0E0E11; }
 
 
+
+    /* Wide screens — больше воздуха и контента */
+    @media (min-width: 1600px) {
+      .max-w-\[1100px\] { max-width: 1280px !important; }
+      .max-w-\[1200px\] { max-width: 1360px !important; }
+    }
+    @media (min-width: 1920px) {
+      .max-w-\[1100px\] { max-width: 1380px !important; }
+      .max-w-\[1200px\] { max-width: 1480px !important; }
+      .hero-side-logo { width: 640px !important; height: 640px !important; right: -40px !important; opacity: 0.1 !important; }
+    }
+    @media (max-width: 768px) {
+      .hero-side-logo { display: none; }
+    }
+
     /* Gold section highlights */
     .section-gold-bg {
       background: linear-gradient(135deg, rgba(201,168,124,0.06) 0%, rgba(201,168,124,0.02) 100%);
@@ -389,6 +404,9 @@
   <section class="relative min-h-screen flex items-center justify-center px-6 pt-16">
     <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
 
+    <!-- Большой логотип сбоку — декоративный -->
+    <img src="logo.png" alt="" class="hero-side-logo" style="position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:520px;height:520px;opacity:0.08;pointer-events:none;filter:blur(0.5px);z-index:1;">
+
     <div class="relative z-10 max-w-4xl mx-auto text-center fade-up" style="display:flex;flex-direction:column;align-items:center;gap:36px;">
 
       <!-- Подзаголовок -->
@@ -440,6 +458,98 @@
       <div id="s02-hint">↓ прокрути</div>
     </div>
   </div>
+
+  <!-- =========================================== -->
+  <!-- SCREEN 03 — ЧТО ТАКОЕ NEXTGEN CLUB (NEW)    -->
+  <!-- =========================================== -->
+  <section id="about" class="relative py-40 px-6 lg:px-8 overflow-hidden">
+    <div class="section-fade-top"></div>
+
+    <!-- Сильное золотое свечение -->
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1200px;height:600px;background:radial-gradient(ellipse at center,rgba(201,168,124,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+
+    <div class="max-w-[1200px] mx-auto relative z-10">
+
+      <!-- Хедер -->
+      <div class="text-center fade-up" style="margin-bottom:64px;">
+        <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;margin-bottom:24px;">Что такое NextGen Club</p>
+        <h2 style="font-size:clamp(38px,6.5vw,86px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:1.0;max-width:900px;margin:0 auto;">
+          Это <span style="color:#C9A87C;">не курс.</span><br>
+          <span style="font-weight:300;color:#52525B;">Не марафон. Не ещё один Telegram-чат.</span>
+        </h2>
+      </div>
+
+      <!-- Манифест: что мы и что нам не -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:48px;" class="manifesto-grid">
+
+        <div class="manifesto-card fade-up">
+          <div class="manifesto-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A87C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;margin-bottom:12px;">Среда</h3>
+          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">Где AI становится <span style="color:#C9A87C;">коллективным преимуществом.</span> Тебя окружают практики, которые уже зарабатывают на нейросетях.</p>
+        </div>
+
+        <div class="manifesto-card fade-up" style="transition-delay:0.1s;">
+          <div class="manifesto-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A87C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;margin-bottom:12px;">Доступ</h3>
+          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">К людям, инструментам и знаниям, <span style="color:#C9A87C;">которых нет в открытом доступе.</span> Внутренняя кухня нейросетей.</p>
+        </div>
+
+        <div class="manifesto-card fade-up" style="transition-delay:0.2s;">
+          <div class="manifesto-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A87C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;margin-bottom:12px;">Сделки</h3>
+          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">Партнёрства, клиенты и решения <span style="color:#C9A87C;">рождаются между участниками.</span> Без воды, без новичков, без курсов.</p>
+        </div>
+
+      </div>
+
+      <!-- Сильный manifest line -->
+      <div class="fade-up" style="text-align:center;padding:36px 28px;border-radius:16px;background:linear-gradient(135deg,rgba(201,168,124,0.1) 0%,rgba(201,168,124,0.03) 100%);border:1px solid rgba(201,168,124,0.25);">
+        <p style="font-size:clamp(18px,2.4vw,26px);color:#E4E4E7;font-weight:600;line-height:1.4;margin:0;letter-spacing:-0.01em;">
+          В эпоху AI <span style="color:#C9A87C;">одиночки проигрывают сетям.</span><br>
+          <span style="font-weight:400;color:#A1A1AA;font-size:0.78em;">NextGen Club — это сеть, в которой ты по правильную сторону.</span>
+        </p>
+      </div>
+
+    </div>
+    <div class="section-fade-bottom"></div>
+  </section>
+
+  <style>
+    .manifesto-card {
+      background: #161619;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .manifesto-card:hover {
+      border-color: rgba(201,168,124,0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(201,168,124,0.08);
+    }
+    .manifesto-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(201,168,124,0.08);
+      border: 1px solid rgba(201,168,124,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px;
+    }
+    @media (max-width: 768px) {
+      .manifesto-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
 
   <!-- =========================================== -->
   <!-- SCREEN 03 — РЫНОЧНЫЙ КОНТЕКСТ              -->
@@ -566,66 +676,7 @@
   </section>
 
 
-  <!-- =========================================== -->
-  <!-- SCREEN 03 — ЧТО ТАКОЕ NEXTGENCLUB           -->
-  <!-- =========================================== -->
-  <section id="about" class="py-36 px-6 lg:px-8" style="position:relative;">
-    <div class="section-fade-top"></div>
-    <div class="max-w-[1100px] mx-auto">
-
-      <!-- Stitch-стиль: большой заголовок слева, аккордеон справа -->
-      <div class="stitch-layout fade-up" id="about-section">
-        <div>
-          <p class="section-num" style="margin-bottom:20px;">04</p>
-          <h2 style="font-size:clamp(38px,6vw,72px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
-            Что такое<br><span style="font-weight:300;color:#52525B;">NextGen<br>Club</span>
-          </h2>
-          <p style="color:#52525B;font-size:14px;font-weight:300;line-height:1.7;margin-top:24px;max-width:320px;">
-            Это закрытая экосистема для тех, кто понимает: в эпоху AI одиночки проигрывают сетям.
-          </p>
-        </div>
-
-        <!-- Аккордеон -->
-        <div id="about-accordion">
-
-          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)">
-            <div class="accordion-header">
-              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Сообщество</h3>
-              <span class="accordion-arrow">+</span>
-            </div>
-            <div class="accordion-body" style="padding-top:14px;">
-              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Еженедельные созвоны и закрытые встречи в Москве и Дубае. Живые люди, практики, разборы кейсов.</p>
-            </div>
-          </div>
-
-          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)" style="transition-delay:0.1s;">
-            <div class="accordion-header">
-              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Инструменты</h3>
-              <span class="accordion-arrow">+</span>
-            </div>
-            <div class="accordion-body" style="padding-top:14px;">
-              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Библиотека AI-плагинов, скиллов и MCP. 20+ инструментов прямо сейчас, новые каждый месяц. Claude как основной движок.</p>
-            </div>
-          </div>
-
-          <div class="accordion-item accordion-open" onclick="toggleAccordion(this)" style="transition-delay:0.2s;">
-            <div class="accordion-header">
-              <h3 style="font-size:16px;font-weight:600;color:#E4E4E7;letter-spacing:0.02em;">Синдикат</h3>
-              <span class="accordion-arrow">+</span>
-            </div>
-            <div class="accordion-body" style="padding-top:14px;">
-              <p style="font-size:14px;color:#71717A;line-height:1.75;font-weight:300;">Умный нетворкинг с AI-матчингом. Оцифровка связей, ресурсов, компетенций. Подбор нужных людей под конкретный запрос.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="section-fade-bottom"></div>
-  </section>
-
-
-  <!-- =========================================== -->
+<!-- =========================================== -->
   <!-- SCREEN 04 — ДЛЯ КОГО                        -->
   <!-- =========================================== -->
   <section class="py-40 px-6 lg:px-8">
@@ -655,7 +706,7 @@
             <p style="font-size:13px;color:#71717A;">— Автоматизацию маркетинга и продаж</p>
             <p style="font-size:13px;color:#71717A;">— Нужных партнёров в Синдикате</p>
           </div>
-          <div><span class="pill">Marcus + Dolores</span></div>
+          <div><span class="pill">Marcus</span></div>
         </div>
 
         <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:20px;transition-delay:0.12s;">
@@ -857,7 +908,7 @@
             <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Офферы синергии</h3>
           </div>
           <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Получаешь персональные офферы: кто из участников может усилить тебя прямо сейчас. Тёплые знакомства — без холодных продаж.</p>
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Получаешь персональные офферы: <span style="color:#C9A87C;">клиентов, партнёров и подрядчиков</span> среди участников. Тёплые знакомства — без холодных продаж.</p>
           </div>
         </div>
 
@@ -884,6 +935,7 @@
         <div style="display:flex;flex-direction:column;justify-content:flex-end;">
           <p style="color:#A1A1AA;font-size:22px;font-weight:300;line-height:1.4;letter-spacing:-0.01em;">Берёте.<br>Внедряете.<br>Получаете результат.</p>
           <span class="pill" style="margin-top:20px;display:inline-block;width:fit-content;">Новый инструмент — каждый месяц</span>
+          <p style="font-size:13px;color:#52525B;font-weight:300;margin-top:14px;line-height:1.6;">…и многое другое — библиотека пополняется участниками клуба.</p>
         </div>
       </div>
 
@@ -1077,6 +1129,109 @@
 
 
   <!-- =========================================== -->
+  <!-- TEAM SECTION — Команда NextGen Club          -->
+  <!-- =========================================== -->
+  <section class="py-40 px-6 lg:px-8 relative" style="background:radial-gradient(ellipse 1100px 600px at 50% 50%, rgba(201,168,124,0.05) 0%, transparent 70%);">
+    <div class="max-w-[1200px] mx-auto relative z-10">
+      <div class="text-center mb-20 fade-up">
+        <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">AI-ассистенты клуба</p>
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Команда <span style="color:#C9A87C;">NextGen Club</span>
+        </h2>
+        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:18px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7;">Четыре AI-ассистента — у каждого своя роль. Работают на тебя 24/7.</p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-6 team-grid">
+
+        <div class="team-card fade-up">
+          <div class="team-photo">
+            <img src="team-nova.png" alt="Nova" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <h3 class="team-name">Nova</h3>
+          <p class="team-role">Синдикат · Нетворкинг</p>
+          <p class="team-desc">Оцифровывает участников, строит граф связей и находит возможности — клиентов, партнёров, подрядчиков.</p>
+        </div>
+
+        <div class="team-card fade-up" style="transition-delay:0.1s;">
+          <div class="team-photo">
+            <img src="team-darina.png" alt="Darina" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <h3 class="team-name">Darina</h3>
+          <p class="team-role">Вступление · Онбординг</p>
+          <p class="team-desc">Встречает новых участников, проводит знакомство с клубом и помогает пройти первые шаги.</p>
+        </div>
+
+        <div class="team-card fade-up" style="transition-delay:0.2s;">
+          <div class="team-photo">
+            <img src="team-marcus.png" alt="Marcus" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <h3 class="team-name">Marcus</h3>
+          <p class="team-role">Лидген · Telegram</p>
+          <p class="team-desc">Находит клиентов в Telegram, пишет персональные сообщения, приносит 3–5 лидов в день.</p>
+        </div>
+
+        <div class="team-card fade-up" style="transition-delay:0.3s;">
+          <div class="team-photo">
+            <img src="team-lira.png" alt="Lyra" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <h3 class="team-name">Lyra</h3>
+          <p class="team-role">Контент · AI-Радар</p>
+          <p class="team-desc">Создаёт экспертный контент, мониторит рынок AI и отвечает на вопросы участников клуба.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .team-card {
+      background: #161619;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 28px 22px;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201,168,124,0.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45), 0 0 40px rgba(201,168,124,0.1);
+    }
+    .team-photo {
+      width: 124px; height: 124px; border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(201,168,124,0.3);
+      box-shadow: 0 0 24px rgba(201,168,124,0.08);
+      flex-shrink: 0;
+      transition: all 0.4s ease;
+    }
+    .team-card:hover .team-photo {
+      border-color: rgba(201,168,124,0.6);
+      box-shadow: 0 0 32px rgba(201,168,124,0.18);
+      transform: scale(1.04);
+    }
+    .team-name {
+      font-size: 19px; font-weight: 700; color: #E4E4E7;
+      margin-top: 4px;
+    }
+    .team-role {
+      font-size: 12px; color: #C9A87C; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .team-desc {
+      font-size: 13px; color: #71717A; line-height: 1.7; font-weight: 300;
+    }
+    @media (max-width: 1024px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 540px) {
+      .team-grid { grid-template-columns: 1fr !important; }
+      .team-photo { width: 110px; height: 110px; }
+    }
+  </style>
+
+  <!-- =========================================== -->
   <!-- SCREEN 10 — ЦЕНА                             -->
   <!-- =========================================== -->
   <section id="price" class="py-40 px-6 lg:px-8 relative section-gold-bg">
@@ -1201,151 +1356,6 @@
   </section>
 
 
-
-  <!-- =========================================== -->
-  <!-- TEAM SECTION                                 -->
-  <!-- =========================================== -->
-  <section class="py-40 px-6 lg:px-8 relative" style="background:radial-gradient(ellipse 900px 500px at 50% 50%, rgba(201,168,124,0.04) 0%, transparent 70%);">
-    <div class="max-w-[1100px] mx-auto relative z-10">
-      <div class="text-center mb-20 fade-up">
-        <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">AI-ассистенты клуба</p>
-        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
-          Команда <span style="font-weight:300;color:#52525B;">NextGen</span>
-        </h2>
-        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;max-width:420px;margin-left:auto;margin-right:auto;">Четыре AI-ассистента, каждый со своей ролью. Работают вместе — для тебя.</p>
-      </div>
-
-      <div class="grid md:grid-cols-4 gap-5 team-grid">
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
-          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
-            <img src="team-nova.png" alt="Nova" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Nova</h3>
-            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Синдикат · Нетворкинг</p>
-          </div>
-          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Оцифровывает участников, строит граф связей и находит офферы синергии.</p>
-        </div>
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.08s;">
-          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
-            <img src="team-darina.png" alt="Darina" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Darina</h3>
-            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Вступление · Онбординг</p>
-          </div>
-          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Встречает новых участников, рассказывает о клубе и помогает пройти онбординг.</p>
-        </div>
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.16s;">
-          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
-            <img src="team-marcus.png" alt="Marcus" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Marcus</h3>
-            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Лидген · Telegram</p>
-          </div>
-          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Находит клиентов в Telegram, пишет персональные сообщения, даёт 3–5 лидов в день.</p>
-        </div>
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.24s;">
-          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
-            <img src="team-lira.png" alt="Lira" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Lira</h3>
-            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Контент · Лонгриды</p>
-          </div>
-          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Создаёт экспертный контент: лонгриды, посты, стратегии — по голосовому сообщению.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <style>
-    @media (max-width: 768px) {
-      .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    }
-    @media (max-width: 480px) {
-      .team-grid { grid-template-columns: 1fr !important; }
-    }
-  </style>
-
-
-  <!-- =========================================== -->
-  <!-- TEAM SECTION                                 -->
-  <!-- =========================================== -->
-  <section class="py-40 px-6 lg:px-8 relative" style="background:radial-gradient(ellipse 900px 500px at 50% 50%, rgba(201,168,124,0.04) 0%, transparent 70%);">
-    <div class="max-w-[1100px] mx-auto relative z-10">
-      <div class="text-center mb-20 fade-up">
-        <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">AI-ассистенты клуба</p>
-        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
-          Команда <span style="font-weight:300;color:#52525B;">NextGen</span>
-        </h2>
-        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;max-width:420px;margin-left:auto;margin-right:auto;">Четыре AI-ассистента, каждый со своей ролью. Работают вместе — для тебя.</p>
-      </div>
-
-      <div class="grid md:grid-cols-4 gap-5 team-grid">
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
-          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
-            <img src="team-nova.png" alt="Nova" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Nova</h3>
-            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Синдикат · Нетворкинг</p>
-          </div>
-          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Оцифровывает участников, строит граф связей и находит офферы синергии.</p>
-        </div>
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.08s;">
-          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
-            <img src="team-darina.png" alt="Darina" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Darina</h3>
-            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Вступление · Онбординг</p>
-          </div>
-          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Встречает новых участников, рассказывает о клубе и помогает пройти онбординг.</p>
-        </div>
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.16s;">
-          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
-            <img src="team-marcus.png" alt="Marcus" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Marcus</h3>
-            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Лидген · Telegram</p>
-          </div>
-          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Находит клиентов в Telegram, пишет персональные сообщения, даёт 3–5 лидов в день.</p>
-        </div>
-
-        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.24s;">
-          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
-            <img src="team-lira.png" alt="Lira" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Lira</h3>
-            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Контент · Лонгриды</p>
-          </div>
-          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Создаёт экспертный контент: лонгриды, посты, стратегии — по голосовому сообщению.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <style>
-    @media (max-width: 768px) {
-      .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    }
-    @media (max-width: 480px) {
-      .team-grid { grid-template-columns: 1fr !important; }
-    }
-  </style>
 
   <!-- =========================================== -->
   <!-- SCREEN 11 — ФИНАЛЬНЫЙ CTA                    -->
