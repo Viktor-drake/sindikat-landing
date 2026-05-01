@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Logo Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0E0E11; color:#E4E4E7; min-height:100vh; }
+  :root { --gold: #C9A87C; }
+
+  .label {
+    position:absolute; top:24px; left:24px;
+    font-size:11px; letter-spacing:0.2em; color:var(--gold);
+    text-transform:uppercase; padding:6px 14px;
+    background:rgba(201,168,124,0.08); border:1px solid rgba(201,168,124,0.3);
+    border-radius:100px; z-index:50;
+  }
+
+  .variant {
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding:48px 24px;
+    position:relative;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+  }
+  .glow {
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 900px 500px at 50% 50%,rgba(201,168,124,0.07),transparent);
+  }
+  .content {
+    position:relative; z-index:10;
+    display:flex; flex-direction:column; align-items:center; gap:36px;
+  }
+
+  /* Подзаголовок-кикер */
+  .eyebrow {
+    font-size:11px; letter-spacing:0.26em; color:#3F3F46;
+    text-transform:uppercase;
+  }
+  /* Дескриптор */
+  .desc {
+    font-size:17px; font-weight:300; color:#71717A;
+    max-width:480px; text-align:center; line-height:1.65;
+  }
+  /* Кнопка */
+  .cta {
+    background:var(--gold); color:#0E0E11;
+    padding:13px 32px; border-radius:100px;
+    font-size:14px; font-weight:600; letter-spacing:0.04em;
+    text-decoration:none; transition:all 0.3s;
+  }
+  .cta:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(201,168,124,0.3); }
+
+  /* ============== ВАРИАНТ A — Лого слева от строчных букв NEXTGEN CLUB ============== */
+  .var-a .title-row {
+    display:flex; align-items:center; gap:20px;
+    line-height:0.88;
+  }
+  .var-a .title-row img {
+    width:96px; height:96px;
+    flex-shrink:0;
+    opacity:0.95;
+  }
+  .var-a .title-stack {
+    display:flex; flex-direction:column; gap:0;
+    line-height:0.88; text-align:left;
+  }
+  .var-a .title-stack h1 {
+    font-size:clamp(46px,9vw,108px);
+    letter-spacing:-0.02em; margin:0;
+  }
+  .var-a .title-stack h1:first-child { color:var(--gold); font-weight:800; }
+  .var-a .title-stack h1:last-child { color:#E4E4E7; font-weight:300; }
+
+  /* ============== ВАРИАНТ B — Лого над текстом ============== */
+  .var-b .logo-top {
+    width:88px; height:88px;
+    margin-bottom:8px;
+    opacity:0.95;
+  }
+  .var-b .title-stack {
+    display:flex; flex-direction:column; gap:0;
+    line-height:0.88; text-align:center;
+  }
+  .var-b .title-stack h1 {
+    font-size:clamp(46px,11vw,128px);
+    letter-spacing:-0.02em; margin:0;
+  }
+  .var-b .title-stack h1:first-child { color:var(--gold); font-weight:800; }
+  .var-b .title-stack h1:last-child { color:#E4E4E7; font-weight:300; }
+
+  /* ============== ВАРИАНТ C — Лого слева от ОДНОЙ строки NEXTGEN CLUB ============== */
+  .var-c .title-row {
+    display:flex; align-items:center; gap:24px;
+    line-height:1;
+  }
+  .var-c .title-row img {
+    width:80px; height:80px;
+    flex-shrink:0;
+    opacity:0.92;
+  }
+  .var-c .title-row h1 {
+    font-size:clamp(36px,7vw,84px);
+    font-weight:700; letter-spacing:-0.01em;
+    margin:0;
+    background: linear-gradient(135deg,var(--gold) 0%,#E4E4E7 60%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media (max-width:640px) {
+    .var-a .title-row { flex-direction:column; gap:12px; }
+    .var-a .title-stack { text-align:center; }
+    .var-a .title-row img { width:72px; height:72px; }
+    .var-b .logo-top { width:64px; height:64px; }
+    .var-c .title-row { flex-direction:column; gap:14px; }
+    .var-c .title-row img { width:64px; height:64px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ====== VAR A — Лого слева, два слова в столбик ====== -->
+  <section class="variant var-a">
+    <div class="label">Вариант A · Лого слева, NEXTGEN/CLUB в два уровня</div>
+    <div class="glow"></div>
+    <div class="content">
+      <p class="eyebrow">Закрытый клуб · NextGen Club</p>
+      <div class="title-row">
+        <img src="logo.png" alt="NextGen logo">
+        <div class="title-stack">
+          <h1>NEXTGEN</h1>
+          <h1>CLUB</h1>
+        </div>
+      </div>
+      <p class="desc">Всё, что нужно знать о нейросетях, находится здесь.</p>
+      <a href="#" class="cta">Вступить в клуб</a>
+    </div>
+  </section>
+
+  <!-- ====== VAR B — Лого сверху по центру ====== -->
+  <section class="variant var-b">
+    <div class="label">Вариант B · Лого сверху по центру</div>
+    <div class="glow"></div>
+    <div class="content">
+      <p class="eyebrow">Закрытый клуб · NextGen Club</p>
+      <img src="logo.png" alt="NextGen logo" class="logo-top">
+      <div class="title-stack">
+        <h1>NEXTGEN</h1>
+        <h1>CLUB</h1>
+      </div>
+      <p class="desc">Всё, что нужно знать о нейросетях, находится здесь.</p>
+      <a href="#" class="cta">Вступить в клуб</a>
+    </div>
+  </section>
+
+  <!-- ====== VAR C — Лого слева, ОДНА строка NEXTGEN CLUB ====== -->
+  <section class="variant var-c">
+    <div class="label">Вариант C · Лого + одна строка с градиентным текстом</div>
+    <div class="glow"></div>
+    <div class="content">
+      <p class="eyebrow">Закрытый клуб · NextGen Club</p>
+      <div class="title-row">
+        <img src="logo.png" alt="NextGen logo">
+        <h1>NEXTGEN&nbsp;CLUB</h1>
+      </div>
+      <p class="desc">Всё, что нужно знать о нейросетях, находится здесь.</p>
+      <a href="#" class="cta">Вступить в клуб</a>
+    </div>
+  </section>
+
+</body>
+</html>
