@@ -91,6 +91,42 @@
       .section-num { font-size: 12px !important; letter-spacing: 0.24em !important; }
     }
 
+
+    /* === АГРЕССИВНЫЕ ДЕСКТОП-СТИЛИ === */
+
+    /* Экран 02 — текст крупнее, ближе к центру, граф плотнее */
+    @media (min-width: 1024px) {
+      #s02-text { left: 96px !important; top: 24% !important; max-width: 640px !important; }
+      #s02-headline { font-size: 76px !important; }
+      #s02-sub { font-size: 17px !important; margin-top: 28px !important; }
+      #s02-chaos-title { font-size: clamp(34px, 4vw, 52px) !important; }
+    }
+    @media (min-width: 1600px) {
+      #s02-text { left: 140px !important; max-width: 720px !important; }
+      #s02-headline { font-size: 92px !important; }
+      #s02-sub { font-size: 19px !important; }
+    }
+
+    /* Hero — крупнее на больших */
+    @media (min-width: 1280px) {
+      #s01-hero h1 { font-size: clamp(86px, 13vw, 168px) !important; }
+    }
+
+    /* Section заголовки крупнее */
+    @media (min-width: 1280px) {
+      h2[style*="clamp(28px,4.5vw,54px)"] { font-size: clamp(48px, 4.6vw, 68px) !important; }
+      h2[style*="clamp(32px,5vw,60px)"] { font-size: clamp(48px, 4.8vw, 72px) !important; }
+      h2[style*="clamp(32px,5.5vw,64px)"] { font-size: clamp(52px, 5vw, 76px) !important; }
+      h2[style*="clamp(38px,6vw,72px)"] { font-size: clamp(56px, 5.4vw, 84px) !important; }
+    }
+
+    /* Уменьшение зияющих пустот mb-20 на широких */
+    @media (min-width: 1600px) {
+      .mb-20 { margin-bottom: 64px !important; }
+      .mb-16 { margin-bottom: 56px !important; }
+      .mb-14 { margin-bottom: 48px !important; }
+    }
+
     /* Wide screens — больше воздуха и контента */
     @media (min-width: 1600px) {
       .max-w-\[1100px\] { max-width: 1280px !important; }
@@ -552,7 +588,7 @@
 
       <!-- Заголовок -->
       <div style="display:flex;flex-direction:column;gap:0;line-height:0.88;">
-        <h1 style="font-size:clamp(46px,13vw,148px);font-weight:800;letter-spacing:-0.02em;color:#C9A87C;margin:0;">NEXTGEN</h1>
+        <h1 id="s01-hero" style="font-size:clamp(46px,13vw,148px);font-weight:800;letter-spacing:-0.02em;color:#C9A87C;margin:0;">NEXTGEN</h1>
         <h1 style="font-size:clamp(46px,13vw,148px);font-weight:300;letter-spacing:-0.02em;color:#E4E4E7;margin:0;">CLUB</h1>
       </div>
 
@@ -761,8 +797,6 @@
     @media (max-width: 768px) {
       .context-grid { grid-template-columns: 1fr !important; }
       .context-grid > div { padding: 28px 24px !important; }
-    }
-  </style>
     }
   </style>
 
