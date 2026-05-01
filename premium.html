@@ -430,18 +430,37 @@
     .coin-r3.c-gemini   { --c-base:#3f5da5; --c-light:#86a4e0; --c-deep:#172a5e; --c-dark:#080f24; --c-glow: rgba(66,133,244,0.20); }
     .coin-r3.c-perplex  { --c-base:#306872; --c-light:#69a5b1; --c-deep:#142f37; --c-dark:#061416; --c-glow: rgba(32,128,141,0.20); }
 
-    /* Mobile: на узких — стек, монеты прячем (мокап делается отдельно) */
+    /* Mobile-only монеты между title и desc */
+    .hero-coins-mobile { display: none; }
+
+    /* Mobile: left-align, мини-монеты после title */
     @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr !important; gap:32px !important; }
+      .hero-grid { grid-template-columns: 1fr !important; gap:24px !important; }
       .hero-right-block { display:none !important; }
-      .hero-left-block { align-items:center; text-align:center; }
-      .hero-title-row { flex-direction:row; gap:14px; }
-      .hero-logo-center { width:64px; height:64px; }
-      .hero-title-stack h1 { font-size:clamp(40px,11vw,64px) !important; }
-      .hero-desc { text-align:center; }
-      /* На мобиле отменить смещение вправо */
+      .hero-left-block { align-items: flex-start !important; text-align: left !important; gap:20px !important; }
+      .hero-title-row { flex-direction:row; gap:14px; align-items:flex-start; }
+      .hero-logo-center { width:56px; height:56px; margin-top:6px; }
+      .hero-title-stack { align-items: flex-start; }
+      .hero-title-stack h1 { font-size:clamp(40px,11vw,64px) !important; text-align:left; }
+      .hero-eyebrow { text-align:left; }
+      .hero-desc { text-align: left !important; }
+      /* Отменить смещение вправо на мобиле — всё клеится к левому краю */
       .hero-indent { padding-left: 0 !important; }
-      .hero-indent-cta { margin-left: 0 !important; align-self: center !important; }
+      .hero-indent-cta { margin-left: 0 !important; align-self: flex-start !important; }
+      /* Монеты — горизонтальный ряд между названием и описанием */
+      .hero-coins-mobile {
+        display: flex !important;
+        gap: 12px;
+        margin: 4px 0 4px;
+        align-items: center;
+      }
+      .hero-coins-mobile > .coin-r3 {
+        position: relative;
+        animation: coinFloat 5s ease-in-out infinite;
+      }
+      .hero-coins-mobile > .coin-r3:nth-child(2) { animation-delay: 0.5s; }
+      .hero-coins-mobile > .coin-r3:nth-child(3) { animation-delay: 1s; }
+      .hero-coins-mobile > .coin-r3:nth-child(4) { animation-delay: 1.5s; }
     }
 
     /* ── Screen 02: Chaos→Order animation ── */
@@ -750,6 +769,13 @@
             <h1 id="s01-hero" class="hero-title-gold">NEXTGEN</h1>
             <h1 class="hero-title-light">CLUB</h1>
           </div>
+        </div>
+        <!-- Mobile-only: монеты между title и desc -->
+        <div class="hero-coins-mobile">
+          <div class="coin-r3 c-claude" style="width:62px;height:62px;transform:rotate(-8deg);"><div class="coin-field"><svg><use href="#logo-claude"/></svg></div></div>
+          <div class="coin-r3 c-gpt" style="width:58px;height:58px;transform:rotate(10deg);"><div class="coin-field"><svg><use href="#logo-gpt"/></svg></div></div>
+          <div class="coin-r3 c-gemini" style="width:60px;height:60px;transform:rotate(-4deg);"><div class="coin-field"><svg><use href="#logo-gemini"/></svg></div></div>
+          <div class="coin-r3 c-perplex" style="width:58px;height:58px;transform:rotate(6deg);"><div class="coin-field"><svg><use href="#logo-perplex"/></svg></div></div>
         </div>
         <p class="hero-desc hero-indent">Научи нейросети зарабатывать тебе деньги.</p>
         <a href="https://t.me/darina_nextgen_club_bot" target="_blank" class="cta-primary hero-cta hero-indent-cta">Вступить в клуб</a>
