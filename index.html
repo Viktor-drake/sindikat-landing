@@ -514,14 +514,41 @@
 
     <div class="max-w-[1200px] mx-auto relative z-10">
 
-      <!-- Хедер -->
-      <div class="text-center fade-up" style="margin-bottom:64px;">
+      <!-- Хедер с цитатой -->
+      <div class="text-center fade-up" style="margin-bottom:56px;">
         <p class="section-num" style="margin-bottom:14px;">03</p>
-        <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;margin-bottom:24px;">Что такое NextGen Club</p>
-        <h2 style="font-size:clamp(34px,5.8vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:1.05;max-width:980px;margin:0 auto;">
-          Это <span style="color:#C9A87C;">не курс.</span><br>
-          <span style="font-weight:300;color:#52525B;">Не марафон. Не очередное «AI-сообщество» с мёртвым чатом.</span>
+        <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;margin-bottom:32px;">Что такое NextGen Club</p>
+        <h2 style="font-size:clamp(28px,4.4vw,54px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.2;max-width:920px;margin:0 auto;">
+          «За полтора месяца я в одиночку<br>
+          сделал больше, <span style="color:#C9A87C;">чем за два года.»</span>
         </h2>
+      </div>
+
+      <!-- Stats — твёрдые цифры -->
+      <div class="stats-row fade-up" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,124,0.15);border-radius:18px;overflow:hidden;margin-bottom:18px;border:1px solid rgba(201,168,124,0.2);">
+        <div style="background:#0E0E11;padding:38px 28px;text-align:center;display:flex;flex-direction:column;gap:10px;">
+          <p style="font-size:clamp(46px,6vw,84px);font-weight:800;color:#C9A87C;letter-spacing:-0.04em;line-height:1;">300+</p>
+          <p style="font-size:13px;color:#A1A1AA;font-weight:400;letter-spacing:0.02em;">часов в Claude</p>
+        </div>
+        <div style="background:#0E0E11;padding:38px 28px;text-align:center;display:flex;flex-direction:column;gap:10px;">
+          <p style="font-size:clamp(46px,6vw,84px);font-weight:800;color:#C9A87C;letter-spacing:-0.04em;line-height:1;">25</p>
+          <p style="font-size:13px;color:#A1A1AA;font-weight:400;letter-spacing:0.02em;">AI-агентов в работе</p>
+        </div>
+        <div style="background:#0E0E11;padding:38px 28px;text-align:center;display:flex;flex-direction:column;gap:10px;">
+          <p style="font-size:clamp(46px,6vw,84px);font-weight:800;color:#C9A87C;letter-spacing:-0.04em;line-height:1;">11</p>
+          <p style="font-size:13px;color:#A1A1AA;font-weight:400;letter-spacing:0.02em;">дней — собрал клуб</p>
+        </div>
+      </div>
+
+      <!-- Доп факты, тонкая полоса -->
+      <div class="fade-up" style="display:flex;justify-content:center;flex-wrap:wrap;gap:8px 24px;padding:18px 24px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;margin-bottom:48px;background:rgba(255,255,255,0.015);">
+        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;">3</span> направления бизнеса</span>
+        <span style="color:#3F3F46;">·</span>
+        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;">0</span> разработчиков</span>
+        <span style="color:#3F3F46;">·</span>
+        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;">0</span> инвестиций</span>
+        <span style="color:#3F3F46;">·</span>
+        <span style="font-size:13px;color:#71717A;">только Claude и время</span>
       </div>
 
       <!-- Манифест: что мы и что нам не -->
@@ -559,11 +586,11 @@
 
       </div>
 
-      <!-- Сильный manifest line -->
-      <div class="fade-up" style="text-align:center;padding:36px 28px;border-radius:16px;background:linear-gradient(135deg,rgba(201,168,124,0.1) 0%,rgba(201,168,124,0.03) 100%);border:1px solid rgba(201,168,124,0.25);">
-        <p style="font-size:clamp(18px,2.6vw,28px);color:#E4E4E7;font-weight:700;line-height:1.4;margin:0;letter-spacing:-0.01em;">
-          В одиночку с AI <span style="color:#A1A1AA;font-weight:400;">ты учишься.</span><br>
-          В сети практиков — <span style="color:#C9A87C;">зарабатываешь.</span>
+      <!-- Финальная строка — без пафоса -->
+      <div class="fade-up" style="text-align:center;padding:32px 28px;border-radius:16px;background:linear-gradient(135deg,rgba(201,168,124,0.08) 0%,rgba(201,168,124,0.02) 100%);border:1px solid rgba(201,168,124,0.22);">
+        <p style="font-size:clamp(17px,2.2vw,24px);color:#E4E4E7;font-weight:600;line-height:1.45;margin:0;letter-spacing:-0.01em;">
+          Внутри клуба — <span style="color:#C9A87C;">то, что нужно,</span><br>
+          чтобы делать так же.
         </p>
       </div>
 
@@ -1489,12 +1516,26 @@
       const sub      = document.getElementById('s02-sub');
       const hint     = document.getElementById('s02-hint');
       let W, H, progress = 0, time = 0;
-      const NODES=[
+      const NODES_DESKTOP=[
         ['Claude','xl',0.61,0.42,'core'],['MCP','lg',0.61,0.65,'infra'],['Skills','md',0.61,0.20,'infra'],
         ['Gemini','md',0.84,0.22,'ai'],['Obsidian','md',0.84,0.62,'service'],
         ['Telegram','sm',0.38,0.83,'service'],['AmoCRM','sm',0.51,0.89,'service'],
         ['NextBot','sm',0.62,0.89,'service'],['Nano Banana','sm',0.74,0.83,'service'],['Stitch','sm',0.87,0.77,'service'],
       ];
+      // Mobile: компактное созвездие, шире по горизонтали, меньше по вертикали
+      const NODES_MOBILE=[
+        ['Claude','xl',0.50,0.46,'core'],['MCP','lg',0.50,0.66,'infra'],['Skills','md',0.30,0.30,'infra'],
+        ['Gemini','md',0.78,0.30,'ai'],['Obsidian','md',0.80,0.62,'service'],
+        ['Telegram','sm',0.16,0.62,'service'],['AmoCRM','sm',0.30,0.82,'service'],
+        ['NextBot','sm',0.52,0.84,'service'],['Nano Banana','sm',0.72,0.82,'service'],['Stitch','sm',0.86,0.50,'service'],
+      ];
+      const NODES = (window.innerWidth <= 768) ? NODES_MOBILE : NODES_DESKTOP;
+      window.addEventListener('resize', () => {
+        const want = (window.innerWidth <= 768) ? NODES_MOBILE : NODES_DESKTOP;
+        if (want === NODES) return;
+        // hot-swap: обновить целевые tx/ty для существующих nodes
+        want.forEach((n, i) => { if (NODES[i]) { NODES[i][2] = n[2]; NODES[i][3] = n[3]; } });
+      });
       const EDGES=[[2,0,false],[3,0,false],[0,1,false],[4,1,true],[1,5,false],[1,6,false],[1,7,false],[1,8,false],[1,9,false],[7,1,false],[0,4,false]];
       const SIGNALS=[];
       EDGES.forEach((e,i)=>{const c=(i<4)?2:1;for(let k=0;k<c;k++)SIGNALS.push({edgeIdx:i,t:Math.random(),speed:0.003+Math.random()*0.005,r:1.8+Math.random()*1.4});});
