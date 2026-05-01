@@ -373,32 +373,41 @@
         line-height: 1.3;
       }
 
-      /* Screen 02 — order text: move to bottom + полупрозрачный фон для читаемости */
-      #s02-text {
-        left: 16px !important;
-        right: 16px !important;
-        top: auto !important;
-        bottom: max(40px, env(safe-area-inset-bottom, 0px) + 24px) !important;
-        max-width: none !important;
-        padding: 18px 18px 18px 18px;
-        background: linear-gradient(to top, rgba(14,14,17,0.95) 0%, rgba(14,14,17,0.85) 60%, rgba(14,14,17,0.0) 100%);
-        border-radius: 14px;
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-      }
-      #s02-headline {
-        font-size: 30px !important;
-        white-space: normal !important;
-        line-height: 1.1;
-        margin-top: 12px !important;
-      }
-      #s02-sub {
-        font-size: 12px;
-        margin-top: 14px !important;
-        color: #71717A !important;
+      /* Screen 02 — четкое разделение: canvas вверху, текст внизу */
+      #s02-canvas {
+        height: 58% !important;
       }
       #s02-chaos-title {
-        top: 38% !important;
+        top: 28% !important;
+        font-size: clamp(15px, 4.6vw, 22px) !important;
+      }
+      #s02-text {
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        bottom: 0 !important;
+        height: 42% !important;
+        max-width: none !important;
+        padding: 28px 22px !important;
+        background: #0E0E11 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-radius: 0 !important;
+        border-top: 1px solid rgba(201,168,124,0.15) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+      }
+      #s02-headline {
+        font-size: 28px !important;
+        white-space: normal !important;
+        line-height: 1.12 !important;
+        margin-top: 10px !important;
+      }
+      #s02-sub {
+        font-size: 13px !important;
+        margin-top: 12px !important;
+        color: #71717A !important;
       }
       #s02-hint { display: none !important; }
 
@@ -420,6 +429,52 @@
       #s02-chaos-title { font-size: clamp(16px, 5.5vw, 22px); }
       .cta-primary, .cta-secondary { padding: 11px 22px; font-size: 13px; }
     }
+
+    /* Screen 03 — мобильный фикс */
+    @media (max-width: 768px) {
+      #about h2 {
+        font-size: clamp(20px, 5.6vw, 32px) !important;
+        line-height: 1.25 !important;
+      }
+      #about .stats-row {
+        grid-template-columns: 1fr !important;
+        gap: 1px !important;
+      }
+      #about .stats-row > div {
+        padding: 24px 18px !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: baseline !important;
+        gap: 14px !important;
+      }
+      #about .stats-row > div p:first-child {
+        font-size: 44px !important;
+      }
+      #about .stats-row > div p:last-child {
+        font-size: 14px !important;
+      }
+      #about .facts-strip {
+        flex-direction: column !important;
+        gap: 8px !important;
+        padding: 18px 20px !important;
+        align-items: flex-start !important;
+      }
+      #about .facts-strip > .facts-divider {
+        display: none !important;
+      }
+      #about .manifesto-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 480px) {
+      #about h2 {
+        font-size: clamp(18px, 5vw, 24px) !important;
+      }
+      #about .stats-row > div p:first-child {
+        font-size: 36px !important;
+      }
+    }
+
   </style>
 </head>
 <body class="bg-graphite text-platinum antialiased">
@@ -541,13 +596,13 @@
       </div>
 
       <!-- Доп факты, тонкая полоса -->
-      <div class="fade-up" style="display:flex;justify-content:center;flex-wrap:wrap;gap:8px 24px;padding:18px 24px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;margin-bottom:48px;background:rgba(255,255,255,0.015);">
-        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;">3</span> направления бизнеса</span>
-        <span style="color:#3F3F46;">·</span>
-        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;">0</span> разработчиков</span>
-        <span style="color:#3F3F46;">·</span>
-        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;">0</span> инвестиций</span>
-        <span style="color:#3F3F46;">·</span>
+      <div class="fade-up facts-strip" style="display:flex;justify-content:center;flex-wrap:wrap;gap:8px 24px;padding:18px 24px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;margin-bottom:48px;background:rgba(255,255,255,0.015);">
+        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;font-weight:600;">3</span> направления бизнеса</span>
+        <span class="facts-divider" style="color:#3F3F46;">·</span>
+        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;font-weight:600;">0</span> разработчиков</span>
+        <span class="facts-divider" style="color:#3F3F46;">·</span>
+        <span style="font-size:13px;color:#71717A;"><span style="color:#C9A87C;font-weight:600;">0</span> инвестиций</span>
+        <span class="facts-divider" style="color:#3F3F46;">·</span>
         <span style="font-size:13px;color:#71717A;">только Claude и время</span>
       </div>
 
