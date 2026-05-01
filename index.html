@@ -48,6 +48,24 @@
       }
     }
 
+
+    /* Tools mobile fix — на узких экранах одна колонка */
+    @media (max-width: 768px) {
+      #tools .grid,
+      #tools [style*="grid-template-columns:2fr 1fr 1fr"],
+      #tools [style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .tool-tile, .tool-tile-large {
+        min-height: auto !important;
+        padding: 22px !important;
+      }
+      .tool-tile h3 { font-size: 17px !important; }
+      .tool-tile-large h3 { font-size: 19px !important; }
+      .tool-tile p { font-size: 13px !important; }
+    }
+
     /* Wide screens — больше воздуха и контента */
     @media (min-width: 1600px) {
       .max-w-\[1100px\] { max-width: 1280px !important; }
@@ -227,8 +245,8 @@
     .price-old { text-decoration: line-through; color: #52525B; }
 
     /* ── Screen 02: Chaos→Order animation ── */
-    #s02-chaos { position:relative; height:300vh; height:300dvh; }
-    #s02-sticky { position:sticky; top:0; height:100vh; height:100dvh; overflow:hidden; }
+    #s02-chaos { position:relative; height:300vh; height:300svh; }
+    #s02-sticky { position:sticky; top:0; height:100vh; height:100svh; overflow:hidden; will-change:transform; }
     #s02-canvas { position:absolute; inset:0; width:100%; height:100%; }
     #s02-text {
       position:absolute; top:32%; left:64px;
@@ -434,9 +452,6 @@
   <section class="relative min-h-screen flex items-center justify-center px-6 pt-16">
     <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
 
-    <!-- Большой логотип сбоку — декоративный -->
-    <img src="logo.png" alt="" class="hero-side-logo" style="position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:520px;height:520px;opacity:0.08;pointer-events:none;filter:blur(0.5px);z-index:1;">
-
     <div class="relative z-10 max-w-4xl mx-auto text-center fade-up" style="display:flex;flex-direction:column;align-items:center;gap:36px;">
 
       <!-- Подзаголовок -->
@@ -493,7 +508,6 @@
   <!-- SCREEN 03 — ЧТО ТАКОЕ NEXTGEN CLUB (NEW)    -->
   <!-- =========================================== -->
   <section id="about" class="relative py-40 px-6 lg:px-8 overflow-hidden">
-    <div class="section-fade-top"></div>
 
     <!-- Сильное золотое свечение -->
     <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1200px;height:600px;background:radial-gradient(ellipse at center,rgba(201,168,124,0.07) 0%,transparent 65%);pointer-events:none;"></div>
@@ -502,10 +516,11 @@
 
       <!-- Хедер -->
       <div class="text-center fade-up" style="margin-bottom:64px;">
+        <p class="section-num" style="margin-bottom:14px;">03</p>
         <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;margin-bottom:24px;">Что такое NextGen Club</p>
-        <h2 style="font-size:clamp(38px,6.5vw,86px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:1.0;max-width:900px;margin:0 auto;">
+        <h2 style="font-size:clamp(34px,5.8vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:1.05;max-width:980px;margin:0 auto;">
           Это <span style="color:#C9A87C;">не курс.</span><br>
-          <span style="font-weight:300;color:#52525B;">Не марафон. Не ещё один Telegram-чат.</span>
+          <span style="font-weight:300;color:#52525B;">Не марафон. Не очередное «AI-сообщество» с мёртвым чатом.</span>
         </h2>
       </div>
 
@@ -519,7 +534,7 @@
             </svg>
           </div>
           <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;margin-bottom:12px;">Среда</h3>
-          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">Где AI становится <span style="color:#C9A87C;">коллективным преимуществом.</span> Тебя окружают практики, которые уже зарабатывают на нейросетях.</p>
+          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">Рядом те, <span style="color:#C9A87C;">кто уже зарабатывает на AI.</span> Каждый день — кейсы, разборы, ошибки и победы из первых рук.</p>
         </div>
 
         <div class="manifesto-card fade-up" style="transition-delay:0.1s;">
@@ -529,7 +544,7 @@
             </svg>
           </div>
           <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;margin-bottom:12px;">Доступ</h3>
-          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">К людям, инструментам и знаниям, <span style="color:#C9A87C;">которых нет в открытом доступе.</span> Внутренняя кухня нейросетей.</p>
+          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">AI-агенты, связки и промпты, <span style="color:#C9A87C;">которых нет в открытом доступе.</span> То, до чего другие дойдут через год.</p>
         </div>
 
         <div class="manifesto-card fade-up" style="transition-delay:0.2s;">
@@ -539,21 +554,20 @@
             </svg>
           </div>
           <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;letter-spacing:-0.01em;margin-bottom:12px;">Сделки</h3>
-          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">Партнёрства, клиенты и решения <span style="color:#C9A87C;">рождаются между участниками.</span> Без воды, без новичков, без курсов.</p>
+          <p style="font-size:14px;color:#A1A1AA;line-height:1.7;font-weight:300;">Партнёры, клиенты и подрядчики — <span style="color:#C9A87C;">внутри клуба.</span> Тёплые знакомства вместо холодных продаж.</p>
         </div>
 
       </div>
 
       <!-- Сильный manifest line -->
       <div class="fade-up" style="text-align:center;padding:36px 28px;border-radius:16px;background:linear-gradient(135deg,rgba(201,168,124,0.1) 0%,rgba(201,168,124,0.03) 100%);border:1px solid rgba(201,168,124,0.25);">
-        <p style="font-size:clamp(18px,2.4vw,26px);color:#E4E4E7;font-weight:600;line-height:1.4;margin:0;letter-spacing:-0.01em;">
-          В эпоху AI <span style="color:#C9A87C;">одиночки проигрывают сетям.</span><br>
-          <span style="font-weight:400;color:#A1A1AA;font-size:0.78em;">NextGen Club — это сеть, в которой ты по правильную сторону.</span>
+        <p style="font-size:clamp(18px,2.6vw,28px);color:#E4E4E7;font-weight:700;line-height:1.4;margin:0;letter-spacing:-0.01em;">
+          В одиночку с AI <span style="color:#A1A1AA;font-weight:400;">ты учишься.</span><br>
+          В сети практиков — <span style="color:#C9A87C;">зарабатываешь.</span>
         </p>
       </div>
 
     </div>
-    <div class="section-fade-bottom"></div>
   </section>
 
   <style>
@@ -593,6 +607,7 @@
     <div class="max-w-[1100px] mx-auto relative z-10">
       <div class="fade-up">
 
+        <p class="section-num" style="margin-bottom:14px;">04</p>
         <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;margin-bottom:36px;">Рыночный контекст</p>
 
         <div style="max-width:860px;margin-bottom:64px;">
@@ -634,7 +649,7 @@
   </style>
 
   <!-- =========================================== -->
-  <!-- SCREEN 04 — ВЫ ВСЕГДА НА ОСТРИЕ            -->
+  <!-- SCREEN 05 — ТЫ ВСЕГДА НА ОСТРИЕ            -->
   <!-- =========================================== -->
   <section id="edge" class="relative py-36 px-6 lg:px-8">
     <div class="section-fade-top"></div>
@@ -643,17 +658,17 @@
       <!-- Stitch-стиль: заголовок слева, описание справа -->
       <div class="stitch-layout mb-20 fade-up">
         <div>
-          <p class="section-num" style="margin-bottom:20px;">03</p>
+          <p class="section-num" style="margin-bottom:20px;">05</p>
           <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
-            Вы всегда<br><span style="font-weight:300;color:#52525B;">на острие</span>
+            Ты всегда<br><span style="font-weight:300;color:#52525B;">на острие</span>
           </h2>
         </div>
         <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:24px;">
           <p style="color:#71717A;font-size:16px;font-weight:300;line-height:1.75;">
-            Мы не просто следим за трендами. Мы создаём инфраструктуру, в которой AI работает на ваш капитал — пока остальные только учатся писать промпты.
+            Мы не просто следим за трендами. Мы создаём инфраструктуру, в которой AI работает на твой капитал — пока остальные только учатся писать промпты.
           </p>
           <p style="color:#52525B;font-size:13px;font-weight:300;line-height:1.7;">
-            Рынок AI меняется каждую неделю. Следить за ним — отдельная работа. Мы делаем её за вас.
+            Рынок AI меняется каждую неделю. Следить за ним — отдельная работа. Мы делаем её за тебя.
           </p>
         </div>
       </div>
@@ -713,7 +728,7 @@
     <div class="max-w-[1100px] mx-auto">
       <div class="text-center mb-20 fade-up">
         <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">Три типа людей, которым здесь место</p>
-        <p class="section-num mb-4">05</p>
+        <p class="section-num mb-4">06</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Для <span style="font-weight:300;color:#52525B;">кого</span>
         </h2>
@@ -787,7 +802,7 @@
     <div class="absolute inset-0 glow-ambient-top pointer-events-none"></div>
     <div class="max-w-[1100px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">06</p>
+        <p class="section-num mb-4">07</p>
         <h2 style="font-size:clamp(28px,4.5vw,54px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Маркус найдёт тебе клиентов.<br><span style="font-weight:300;color:#52525B;">Пока ты спишь.</span>
         </h2>
@@ -835,13 +850,13 @@
     <div class="max-w-[1100px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
         <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">Главное преимущество, которого нет ни в одном сообществе СНГ</p>
-        <p class="section-num mb-4">07</p>
+        <p class="section-num mb-4">08</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#C9A87C;line-height:1.1;">
           Синдикат
         </h2>
         <p style="font-size:clamp(16px,2vw,22px);font-weight:300;color:#52525B;margin-top:6px;">Коллективный разум</p>
         <p style="color:#71717A;font-size:15px;font-weight:300;max-width:460px;margin:18px auto 0;line-height:1.7;">
-          Инструмент оцифровки связей. Синдикат проявляет те связи, которые уже существуют между вами — но вы об этом ещё не знаете.
+          Инструмент оцифровки связей. Синдикат проявляет те связи, которые уже существуют между участниками клуба — но ты об этом ещё не знаешь.
         </p>
       </div>
 
@@ -962,7 +977,7 @@
       <!-- Stitch-стиль для заголовка секции -->
       <div class="stitch-layout mb-14 fade-up">
         <div>
-          <p class="section-num" style="margin-bottom:20px;">08</p>
+          <p class="section-num" style="margin-bottom:20px;">09</p>
           <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
             <span style="font-weight:800;">Инстру</span><span style="font-weight:300;color:#52525B;">менты</span>
           </h2>
@@ -1053,7 +1068,7 @@
   <section class="py-40 px-6 lg:px-8">
     <div class="max-w-[1100px] mx-auto">
       <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">09</p>
+        <p class="section-num mb-4">10</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Обучение,<br><span style="font-weight:300;color:#52525B;">которое работает</span>
         </h2>
@@ -1109,7 +1124,7 @@
   <section class="py-40 px-6 lg:px-8">
     <div class="max-w-[1100px] mx-auto">
       <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">10</p>
+        <p class="section-num mb-4">11</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Внутри <span style="font-weight:300;color:#52525B;">клуба</span>
         </h2>
@@ -1178,6 +1193,7 @@
   <section class="py-40 px-6 lg:px-8 relative" style="background:radial-gradient(ellipse 1100px 600px at 50% 50%, rgba(201,168,124,0.05) 0%, transparent 70%);">
     <div class="max-w-[1200px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
+        <p class="section-num mb-4">12</p>
         <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">AI-ассистенты клуба</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Команда <span style="color:#C9A87C;">NextGen Club</span>
@@ -1282,7 +1298,7 @@
     <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
     <div class="max-w-[820px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
-        <p class="section-num mb-4">11</p>
+        <p class="section-num mb-4">13</p>
         <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
           Сколько <span style="font-weight:300;color:#52525B;">стоит</span>
         </h2>
@@ -1412,7 +1428,7 @@
     <div class="max-w-[680px] mx-auto text-center relative z-10">
       <div class="fade-up" style="display:flex;flex-direction:column;align-items:center;gap:28px;">
 
-        <p class="section-num">12</p>
+        <p class="section-num">14</p>
 
         <h2 style="font-size:clamp(32px,5.5vw,64px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.05;">
           Для тех,<br><span style="font-weight:300;color:#52525B;">кто уже в теме</span>
