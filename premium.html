@@ -343,7 +343,22 @@
       max-width:440px; line-height:1.55;
       margin-top:6px;
     }
-    .hero-cta { margin-top:8px; }
+    .hero-cta {
+      margin-top:8px;
+      background: transparent !important;
+      color: #C9A87C !important;
+      border: 1.5px solid #C9A87C !important;
+      transition: all 0.25s ease !important;
+    }
+    .hero-cta:hover {
+      background: rgba(201,168,124,0.1) !important;
+      border-color: #E0BF93 !important;
+      color: #E0BF93 !important;
+    }
+
+    /* Смещение вправо до уровня NEXTGEN (logo 108px + gap 24px = 132px) */
+    .hero-indent { padding-left: 132px; }
+    .hero-indent-cta { margin-left: 132px; align-self: flex-start; }
 
     .hero-right-block {
       position:relative; height:540px;
@@ -424,6 +439,9 @@
       .hero-logo-center { width:64px; height:64px; }
       .hero-title-stack h1 { font-size:clamp(40px,11vw,64px) !important; }
       .hero-desc { text-align:center; }
+      /* На мобиле отменить смещение вправо */
+      .hero-indent { padding-left: 0 !important; }
+      .hero-indent-cta { margin-left: 0 !important; align-self: center !important; }
     }
 
     /* ── Screen 02: Chaos→Order animation ── */
@@ -725,7 +743,7 @@
 
       <!-- LEFT — лого + текст -->
       <div class="hero-left-block">
-        <p class="hero-eyebrow">Закрытый клуб</p>
+        <p class="hero-eyebrow hero-indent">Закрытый клуб</p>
         <div class="hero-title-row">
           <img src="logo.png" alt="" class="hero-logo-center">
           <div class="hero-title-stack">
@@ -733,23 +751,23 @@
             <h1 class="hero-title-light">CLUB</h1>
           </div>
         </div>
-        <p class="hero-desc">Научи нейросети зарабатывать тебе деньги.</p>
-        <a href="https://t.me/darina_nextgen_club_bot" target="_blank" class="cta-primary hero-cta">Вступить в клуб</a>
+        <p class="hero-desc hero-indent">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="https://t.me/darina_nextgen_club_bot" target="_blank" class="cta-primary hero-cta hero-indent-cta">Вступить в клуб</a>
       </div>
 
-      <!-- RIGHT — R3 coins -->
+      <!-- RIGHT — R3 coins (уменьшены) -->
       <div class="hero-right-block">
         <div class="hero-coins-scatter">
-          <div class="coin-r3 c-claude" style="top:0;left:60px;transform:rotate(-12deg);width:170px;height:170px;animation-delay:0s;">
+          <div class="coin-r3 c-claude" style="top:10px;left:60px;transform:rotate(-12deg);width:130px;height:130px;animation-delay:0s;">
             <div class="coin-field"><svg><use href="#logo-claude"/></svg></div>
           </div>
-          <div class="coin-r3 c-gpt" style="top:90px;right:30px;width:140px;height:140px;transform:rotate(18deg);animation-delay:1.5s;">
+          <div class="coin-r3 c-gpt" style="top:80px;right:30px;width:108px;height:108px;transform:rotate(18deg);animation-delay:1.5s;">
             <div class="coin-field"><svg><use href="#logo-gpt"/></svg></div>
           </div>
-          <div class="coin-r3 c-gemini" style="bottom:110px;left:0;width:160px;height:160px;transform:rotate(8deg);animation-delay:3s;">
+          <div class="coin-r3 c-gemini" style="bottom:90px;left:10px;width:122px;height:122px;transform:rotate(8deg);animation-delay:3s;">
             <div class="coin-field"><svg><use href="#logo-gemini"/></svg></div>
           </div>
-          <div class="coin-r3 c-perplex" style="bottom:30px;right:60px;width:155px;height:155px;transform:rotate(-6deg);animation-delay:4.5s;">
+          <div class="coin-r3 c-perplex" style="bottom:30px;right:60px;width:118px;height:118px;transform:rotate(-6deg);animation-delay:4.5s;">
             <div class="coin-field"><svg><use href="#logo-perplex"/></svg></div>
           </div>
         </div>
