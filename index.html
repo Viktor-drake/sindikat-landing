@@ -30,6 +30,38 @@
     :root { --gold: #C9A87C; --gold-dim: rgba(201,168,124,0.75); }
     body { font-family: 'Inter', sans-serif; background: #0E0E11; }
 
+
+    /* Gold section highlights */
+    .section-gold-bg {
+      background: linear-gradient(135deg, rgba(201,168,124,0.06) 0%, rgba(201,168,124,0.02) 100%);
+      border-top: 1px solid rgba(201,168,124,0.1);
+      border-bottom: 1px solid rgba(201,168,124,0.1);
+    }
+    .gold-card {
+      background: linear-gradient(135deg, rgba(201,168,124,0.1) 0%, rgba(201,168,124,0.04) 100%);
+      border: 1px solid rgba(201,168,124,0.25) !important;
+    }
+    .gold-card:hover {
+      border-color: rgba(201,168,124,0.45) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.45), 0 0 32px rgba(201,168,124,0.1) !important;
+    }
+
+
+    /* Gold section highlights */
+    .section-gold-bg {
+      background: linear-gradient(135deg, rgba(201,168,124,0.06) 0%, rgba(201,168,124,0.02) 100%);
+      border-top: 1px solid rgba(201,168,124,0.1);
+      border-bottom: 1px solid rgba(201,168,124,0.1);
+    }
+    .gold-card {
+      background: linear-gradient(135deg, rgba(201,168,124,0.1) 0%, rgba(201,168,124,0.04) 100%);
+      border: 1px solid rgba(201,168,124,0.25) !important;
+    }
+    .gold-card:hover {
+      border-color: rgba(201,168,124,0.45) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.45), 0 0 32px rgba(201,168,124,0.1) !important;
+    }
+
     /* Noise texture — глубина без шума */
     body::before {
       content: '';
@@ -419,50 +451,32 @@
     <div style="position:absolute;top:0;left:-10%;bottom:0;width:55%;background:radial-gradient(ellipse at 20% 50%,rgba(201,168,124,0.055) 0%,transparent 65%);pointer-events:none;"></div>
 
     <div class="max-w-[1100px] mx-auto relative z-10">
-      <div class="fade-up" style="max-width:820px;">
+      <div class="fade-up">
 
         <p style="font-size:11px;letter-spacing:0.26em;color:#3F3F46;text-transform:uppercase;margin-bottom:36px;">Рыночный контекст</p>
 
-        <h2 style="font-size:clamp(38px,5.8vw,72px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;margin-bottom:48px;">
-          Снаружи — <span style="font-weight:300;color:#52525B;">давление.</span><br>
-          Внутри — <span style="color:#C9A87C;">другая история.</span>
-        </h2>
+        <div style="max-width:860px;margin-bottom:64px;">
+          <h2 style="font-size:clamp(32px,5.2vw,64px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:1.05;margin-bottom:0;">
+            Рынок изменился.<br>
+            <span style="font-weight:300;color:#52525B;">Старые правила игры перестают работать.</span>
+          </h2>
+        </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:56px;" class="crisis-grid">
-          <!-- Левая колонка — боль -->
-          <div style="border-left:1px solid rgba(255,255,255,0.06);padding-left:28px;display:flex;flex-direction:column;gap:16px;">
-            <p style="font-size:16px;color:#71717A;line-height:1.8;font-weight:300;">
-              В стране и в мире закручиваются гайки. Платёжеспособность падает. Бюджеты режут. Клиенты тяжелее расстаются с деньгами.
-            </p>
-            <p style="font-size:15px;color:#52525B;line-height:1.75;font-weight:300;">
-              Каждый контракт даётся сложнее. Конкуренция за одних и тех же клиентов растёт. Маржа — падает.
-            </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.05);border-radius:16px;overflow:hidden;margin-bottom:24px;" class="context-grid">
+          <div style="background:#0E0E11;padding:36px 40px;display:flex;flex-direction:column;gap:14px;">
+            <p style="font-size:11px;letter-spacing:0.18em;color:#52525B;text-transform:uppercase;">Остальные</p>
+            <p style="font-size:clamp(15px,1.8vw,18px);color:#52525B;line-height:1.75;font-weight:300;">Работают по-старому. Теряют клиентов и время. Не понимают, почему конкуренты обходят их.</p>
           </div>
-          <!-- Правая колонка — выход -->
-          <div style="border-left:1px solid rgba(201,168,124,0.2);padding-left:28px;display:flex;flex-direction:column;gap:16px;">
-            <p style="font-size:16px;color:#A1A1AA;line-height:1.8;font-weight:300;">
-              Но я знаю место, где денег достаточно. Где за экспертизу платят хорошо, и сама работа — интересная, а не изматывающая.
-            </p>
-            <p style="font-size:15px;color:#C9A87C;line-height:1.75;font-weight:400;">
-              Это рынок людей, которые умеют делать то, что другие ещё только планируют автоматизировать. NextGen Club — это то самое место.
-            </p>
+          <div style="background:rgba(201,168,124,0.04);padding:36px 40px;display:flex;flex-direction:column;gap:14px;border-left:1px solid rgba(201,168,124,0.15);">
+            <p style="font-size:11px;letter-spacing:0.18em;color:#C9A87C;text-transform:uppercase;">Те, кто освоил нейросети</p>
+            <p style="font-size:clamp(15px,1.8vw,18px);color:#A1A1AA;line-height:1.75;font-weight:300;">Больше продают, работают быстрее и эффективнее. <span style="color:#C9A87C;font-weight:500;">Разрыв между ними и остальными растёт каждый месяц.</span></p>
           </div>
         </div>
 
-        <!-- Три факта — горизонтальные -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.05);border-radius:8px;overflow:hidden;">
-          <div style="background:#0E0E11;padding:24px 28px;">
-            <p style="font-size:11px;letter-spacing:0.16em;color:#52525B;text-transform:uppercase;margin-bottom:10px;">Снаружи</p>
-            <p style="font-size:13px;color:#52525B;line-height:1.7;font-weight:300;">Бюджеты режут. Клиенты не принимают решений. Каждая сделка — бой.</p>
-          </div>
-          <div style="background:#0E0E11;padding:24px 28px;">
-            <p style="font-size:11px;letter-spacing:0.16em;color:#52525B;text-transform:uppercase;margin-bottom:10px;">Снаружи</p>
-            <p style="font-size:13px;color:#52525B;line-height:1.7;font-weight:300;">Конкуренция растёт. Демпинг. Выгорание. Ощущение что работаешь больше — зарабатываешь меньше.</p>
-          </div>
-          <div style="background:rgba(201,168,124,0.04);padding:24px 28px;border:1px solid rgba(201,168,124,0.12);">
-            <p style="font-size:11px;letter-spacing:0.16em;color:#C9A87C;text-transform:uppercase;margin-bottom:10px;">NextGen Club</p>
-            <p style="font-size:13px;color:#A1A1AA;line-height:1.7;font-weight:300;">Инструменты, люди и знания — там, где деньги есть. И работа приносит кайф.</p>
-          </div>
+        <div style="padding:28px 36px;border-radius:12px;background:linear-gradient(135deg,rgba(201,168,124,0.08) 0%,rgba(201,168,124,0.03) 100%);border:1px solid rgba(201,168,124,0.2);">
+          <p style="font-size:clamp(16px,2vw,20px);color:#E4E4E7;font-weight:500;line-height:1.6;margin:0;">
+            NextGen Club — среда, где ты оказываешься на <span style="color:#C9A87C;">правильной стороне разрыва.</span>
+          </p>
         </div>
 
       </div>
@@ -472,7 +486,10 @@
 
   <style>
     @media (max-width: 768px) {
-      .crisis-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .context-grid { grid-template-columns: 1fr !important; }
+      .context-grid > div { padding: 28px 24px !important; }
+    }
+  </style>
     }
   </style>
 
@@ -691,26 +708,22 @@
       <div class="text-center mb-20 fade-up">
         <p class="section-num mb-4">06</p>
         <h2 style="font-size:clamp(28px,4.5vw,54px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
-          Маркус и Долорес найдут тебе клиентов.<br><span style="font-weight:300;color:#52525B;">Пока ты спишь.</span>
+          Маркус найдёт тебе клиентов.<br><span style="font-weight:300;color:#52525B;">Пока ты спишь.</span>
         </h2>
         <p style="color:#71717A;font-size:15px;font-weight:300;max-width:400px;margin:18px auto 0;line-height:1.7;">
-          В клубе включены два инструмента, которые отдельно стоят от 49 800 ₽
+          AI-ассистент, который работает на тебя 24/7 в Telegram
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-1 gap-6" style="max-width:640px;margin:0 auto;">
 
         <!-- Marcus -->
         <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:22px;">
-          <div style="display:flex;align-items:center;gap:14px;">
-            <div class="icon-box" style="width:48px;height:48px;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
-            </div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <img src="team-marcus.png" alt="Marcus" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:1px solid rgba(201,168,124,0.3);">
             <div>
-              <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;">Marcus</h3>
-              <p style="font-size:13px;color:#52525B;margin-top:2px;">AI-ассистент · Telegram</p>
+              <h3 style="font-size:20px;font-weight:700;color:#E4E4E7;">Marcus</h3>
+              <p style="font-size:13px;color:#C9A87C;margin-top:2px;">AI-ассистент · Telegram</p>
             </div>
           </div>
           <p style="font-size:12px;font-weight:500;color:#4ADE80;letter-spacing:0.06em;">3–5 лидов в день</p>
@@ -729,41 +742,6 @@
           </div>
         </div>
 
-        <!-- Dolores -->
-        <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:22px;transition-delay:0.12s;">
-          <div style="display:flex;align-items:center;gap:14px;">
-            <div class="icon-box" style="width:48px;height:48px;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A1A1AA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><path d="M12 18h.01"/>
-              </svg>
-            </div>
-            <div>
-              <h3 style="font-size:18px;font-weight:700;color:#E4E4E7;">Dolores</h3>
-              <p style="font-size:13px;color:#52525B;margin-top:2px;">AI-ассистент · ВКонтакте</p>
-            </div>
-          </div>
-          <p style="font-size:12px;font-weight:500;color:#4ADE80;letter-spacing:0.06em;">3–5 лидов в день</p>
-          <div style="display:flex;flex-direction:column;gap:7px;">
-            <p style="font-size:13px;color:#71717A;">— Анализирует аудиторию ВКонтакте</p>
-            <p style="font-size:13px;color:#71717A;">— Пишет персонализированные сообщения</p>
-            <p style="font-size:13px;color:#71717A;">— Отвечает на запросы, ставит лайки</p>
-            <p style="font-size:13px;color:#71717A;">— Комментирует посты целевой аудитории</p>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);">
-            <div>
-              <p style="font-size:11px;color:#52525B;">Отдельно</p>
-              <p class="price-old" style="font-size:14px;">от 19 900 ₽</p>
-            </div>
-            <p style="font-size:13px;font-weight:500;color:#4ADE80;">В клубе — включено</p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Баннер итог -->
-      <div class="glass p-8 text-center fade-up" style="margin-top:24px;">
-        <p style="font-size:16px;font-weight:500;color:#E4E4E7;">Вместе: <span class="price-old">от 49 800 ₽</span></p>
-        <p style="font-size:14px;color:#71717A;margin-top:8px;line-height:1.7;">Среднее время до первого клиента: <span style="color:#E4E4E7;font-weight:500;">7–14 дней</span>. Один закрытый клиент покрывает подписку на несколько месяцев.</p>
       </div>
     </div>
   </section>
@@ -772,7 +750,7 @@
   <!-- =========================================== -->
   <!-- SCREEN 06A — СИНДИКАТ                        -->
   <!-- =========================================== -->
-  <section id="syndicate" class="py-40 px-6 lg:px-8 relative" style="background:radial-gradient(ellipse 900px 600px at 50% 40%, rgba(201,168,124,0.05) 0%, transparent 70%)">
+  <section id="syndicate" class="py-40 px-6 lg:px-8 relative section-gold-bg">
     <div class="max-w-[1100px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
         <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">Главное преимущество, которого нет ни в одном сообществе СНГ</p>
@@ -849,39 +827,37 @@
 
         <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:14px;">
           <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <span style="font-size:11px;color:#52525B;font-weight:400;">1</span>
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(201,168,124,0.06);border:1px solid rgba(201,168,124,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:11px;color:#C9A87C;font-weight:600;">01</span>
             </div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Глубинный опрос</h3>
+            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Разговор с Новой</h3>
           </div>
           <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">При вступлении вы проходите опрос. Он составляет полную карту ваших ресурсов и запросов:</p>
-            <p style="font-size:12px;color:#52525B;margin-top:10px;letter-spacing:0.06em;">ресурсы · связи · возможности · сильные стороны · потребности · цели</p>
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Нова — AI-ассистент Синдиката — задаёт точные вопросы и составляет твой профиль: ресурсы, запросы, цели, экспертиза.</p>
           </div>
         </div>
 
         <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.1s;">
           <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <span style="font-size:11px;color:#52525B;font-weight:400;">2</span>
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(201,168,124,0.06);border:1px solid rgba(201,168,124,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:11px;color:#C9A87C;font-weight:600;">02</span>
             </div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">AI-матчинг</h3>
+            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Анализ в графе</h3>
           </div>
           <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Нейросеть анализирует профили всех участников и находит точки соприкосновения:</p>
-            <p style="font-size:12px;color:#52525B;margin-top:10px;letter-spacing:0.06em;">с людьми · с нишами · с инструментами · с AI-системами</p>
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Твой профиль попадает в граф связей Синдиката. AI находит пересечения с другими участниками — по нише, ресурсам, задачам.</p>
           </div>
         </div>
 
         <div class="glass p-8 fade-up" style="display:flex;flex-direction:column;gap:14px;transition-delay:0.2s;">
           <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <span style="font-size:11px;color:#52525B;font-weight:400;">3</span>
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(201,168,124,0.06);border:1px solid rgba(201,168,124,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <span style="font-size:11px;color:#C9A87C;font-weight:600;">03</span>
             </div>
-            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Синергии</h3>
+            <h3 style="font-size:14px;font-weight:600;color:#E4E4E7;letter-spacing:0.04em;text-transform:uppercase;">Офферы синергии</h3>
           </div>
           <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:14px;">
-            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Рождаются партнёрства, сделки и коллаборации — которые невозможно найти в обычном нетворкинге.</p>
+            <p style="font-size:14px;color:#71717A;line-height:1.7;font-weight:300;">Получаешь персональные офферы: кто из участников может усилить тебя прямо сейчас. Тёплые знакомства — без холодных продаж.</p>
           </div>
         </div>
 
@@ -902,7 +878,7 @@
         <div>
           <p class="section-num" style="margin-bottom:20px;">08</p>
           <h2 style="font-size:clamp(42px,6vw,76px);font-weight:800;letter-spacing:-0.03em;color:#E4E4E7;line-height:0.95;">
-            Инстру-<br><span style="font-weight:300;color:#52525B;">менты</span>
+            <span style="font-weight:800;">Инстру</span><span style="font-weight:300;color:#52525B;">менты</span>
           </h2>
         </div>
         <div style="display:flex;flex-direction:column;justify-content:flex-end;">
@@ -1095,17 +1071,7 @@
         </div>
       </div>
 
-      <!-- Топики как тонкая горизонтальная полоса -->
-      <div class="fade-up" style="border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:0;">
-        <p style="font-size:11px;font-weight:500;color:#3F3F46;text-transform:uppercase;letter-spacing:0.12em;width:100%;margin-bottom:14px;">Чаты и топики</p>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;">
-          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Инструменты</span>
-          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Вопрос-ответ</span>
-          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Кейсы</span>
-          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Синдикат</span>
-          <span style="padding:6px 14px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:12px;color:#A1A1AA;">Вайб-кодинг</span>
-        </div>
-      </div>
+
     </div>
   </section>
 
@@ -1113,7 +1079,7 @@
   <!-- =========================================== -->
   <!-- SCREEN 10 — ЦЕНА                             -->
   <!-- =========================================== -->
-  <section id="price" class="py-40 px-6 lg:px-8 relative">
+  <section id="price" class="py-40 px-6 lg:px-8 relative section-gold-bg">
     <div class="absolute inset-0 glow-ambient pointer-events-none"></div>
     <div class="max-w-[820px] mx-auto relative z-10">
       <div class="text-center mb-20 fade-up">
@@ -1124,26 +1090,25 @@
         <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;">Дешевле, чем один AI-ассистент. Внутри — весь клуб.</p>
       </div>
 
-      <div class="glass p-10 fade-up">
+      <div class="glass gold-card p-10 fade-up">
 
         <!-- Цена -->
         <div class="text-center" style="margin-bottom:40px;">
           <p style="font-size:clamp(52px,9vw,88px);font-weight:800;letter-spacing:-0.03em;color:var(--gold);line-height:1;">9 900 <span style="font-size:0.35em;font-weight:300;color:#71717A;">₽/мес</span></p>
-          <p style="font-size:13px;color:#52525B;margin-top:10px;font-weight:300;">Полный доступ: Marcus, Dolores, Синдикат, все инструменты, обучение, эфиры, AI-Радар</p>
+          <p style="font-size:13px;color:#52525B;margin-top:10px;font-weight:300;">Полный доступ: Marcus, Синдикат, все инструменты, обучение, эфиры, AI-Радар</p>
         </div>
 
         <!-- Таблица -->
         <table class="price-table w-full" style="margin-bottom:32px;">
           <tbody>
             <tr><td style="color:#71717A;font-size:14px;">Marcus (AI-ассистент)</td><td style="text-align:right;color:#71717A;font-size:14px;">29 900 ₽</td></tr>
-            <tr><td style="color:#71717A;font-size:14px;">Dolores (AI-ассистент)</td><td style="text-align:right;color:#71717A;font-size:14px;">19 900 ₽</td></tr>
             <tr><td style="color:#71717A;font-size:14px;">Плагины, скиллы и MCP</td><td style="text-align:right;color:#71717A;font-size:14px;">от 20 000 ₽</td></tr>
             <tr><td style="color:#71717A;font-size:14px;">Обучение и новые инструменты</td><td style="text-align:right;color:#71717A;font-size:14px;">от 50 000 ₽</td></tr>
             <tr><td style="color:#71717A;font-size:14px;">Эфиры и разборы</td><td style="text-align:right;color:#71717A;font-size:14px;">от 20 000 ₽</td></tr>
             <tr><td style="color:#71717A;font-size:14px;">Доступ к Синдикату</td><td style="text-align:right;color:#A1A1AA;font-size:14px;">∞</td></tr>
             <tr style="border-top:1px solid rgba(255,255,255,0.08);">
               <td style="color:#E4E4E7;font-weight:600;font-size:14px;padding-top:16px;">Итого в розницу</td>
-              <td style="text-align:right;padding-top:16px;"><span class="price-old" style="font-size:15px;">от 139 800 ₽</span></td>
+              <td style="text-align:right;padding-top:16px;"><span class="price-old" style="font-size:15px;">от 119 900 ₽</span></td>
             </tr>
             <tr>
               <td style="color:#E4E4E7;font-weight:700;font-size:16px;">NextGenClub</td>
@@ -1216,16 +1181,16 @@
 
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
-              <p style="font-size:14px;color:#71717A;font-weight:300;">Предприниматель, работает с AI с 2022 года</p>
+              <div style="width:4px;height:4px;border-radius:50%;background:#C9A87C;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;"><span style="color:#A1A1AA;font-weight:500;">NextGen Media</span> — рекламное агентство · 800+ млн выручки клиентам</p>
             </div>
             <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
-              <p style="font-size:14px;color:#71717A;font-weight:300;">Создал экосистему инструментов на Claude</p>
+              <div style="width:4px;height:4px;border-radius:50%;background:#C9A87C;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;"><span style="color:#A1A1AA;font-weight:500;">NextGen AI</span> — внедрение ИИ в бизнес-процессы</p>
             </div>
             <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:4px;height:4px;border-radius:50%;background:#52525B;flex-shrink:0;"></div>
-              <p style="font-size:14px;color:#71717A;font-weight:300;">Синдикат — реальные сделки и партнёрства</p>
+              <div style="width:4px;height:4px;border-radius:50%;background:#C9A87C;flex-shrink:0;"></div>
+              <p style="font-size:14px;color:#71717A;font-weight:300;"><span style="color:#A1A1AA;font-weight:500;">NextGen Club</span> — закрытый клуб практиков ИИ</p>
             </div>
           </div>
         </div>
@@ -1235,6 +1200,152 @@
     <div class="section-fade-bottom"></div>
   </section>
 
+
+
+  <!-- =========================================== -->
+  <!-- TEAM SECTION                                 -->
+  <!-- =========================================== -->
+  <section class="py-40 px-6 lg:px-8 relative" style="background:radial-gradient(ellipse 900px 500px at 50% 50%, rgba(201,168,124,0.04) 0%, transparent 70%);">
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="text-center mb-20 fade-up">
+        <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">AI-ассистенты клуба</p>
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Команда <span style="font-weight:300;color:#52525B;">NextGen</span>
+        </h2>
+        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;max-width:420px;margin-left:auto;margin-right:auto;">Четыре AI-ассистента, каждый со своей ролью. Работают вместе — для тебя.</p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-5 team-grid">
+
+        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
+          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
+            <img src="team-nova.png" alt="Nova" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Nova</h3>
+            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Синдикат · Нетворкинг</p>
+          </div>
+          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Оцифровывает участников, строит граф связей и находит офферы синергии.</p>
+        </div>
+
+        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.08s;">
+          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
+            <img src="team-darina.png" alt="Darina" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Darina</h3>
+            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Вступление · Онбординг</p>
+          </div>
+          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Встречает новых участников, рассказывает о клубе и помогает пройти онбординг.</p>
+        </div>
+
+        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.16s;">
+          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
+            <img src="team-marcus.png" alt="Marcus" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Marcus</h3>
+            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Лидген · Telegram</p>
+          </div>
+          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Находит клиентов в Telegram, пишет персональные сообщения, даёт 3–5 лидов в день.</p>
+        </div>
+
+        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.24s;">
+          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
+            <img src="team-lira.png" alt="Lira" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Lira</h3>
+            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Контент · Лонгриды</p>
+          </div>
+          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Создаёт экспертный контент: лонгриды, посты, стратегии — по голосовому сообщению.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+
+
+  <!-- =========================================== -->
+  <!-- TEAM SECTION                                 -->
+  <!-- =========================================== -->
+  <section class="py-40 px-6 lg:px-8 relative" style="background:radial-gradient(ellipse 900px 500px at 50% 50%, rgba(201,168,124,0.04) 0%, transparent 70%);">
+    <div class="max-w-[1100px] mx-auto relative z-10">
+      <div class="text-center mb-20 fade-up">
+        <p style="font-size:11px;letter-spacing:0.22em;color:#3F3F46;text-transform:uppercase;margin-bottom:16px;">AI-ассистенты клуба</p>
+        <h2 style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.02em;color:#E4E4E7;line-height:1.1;">
+          Команда <span style="font-weight:300;color:#52525B;">NextGen</span>
+        </h2>
+        <p style="color:#71717A;font-size:15px;font-weight:300;margin-top:16px;max-width:420px;margin-left:auto;margin-right:auto;">Четыре AI-ассистента, каждый со своей ролью. Работают вместе — для тебя.</p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-5 team-grid">
+
+        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;">
+          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
+            <img src="team-nova.png" alt="Nova" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Nova</h3>
+            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Синдикат · Нетворкинг</p>
+          </div>
+          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Оцифровывает участников, строит граф связей и находит офферы синергии.</p>
+        </div>
+
+        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.08s;">
+          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
+            <img src="team-darina.png" alt="Darina" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Darina</h3>
+            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Вступление · Онбординг</p>
+          </div>
+          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Встречает новых участников, рассказывает о клубе и помогает пройти онбординг.</p>
+        </div>
+
+        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.16s;">
+          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
+            <img src="team-marcus.png" alt="Marcus" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Marcus</h3>
+            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Лидген · Telegram</p>
+          </div>
+          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Находит клиентов в Telegram, пишет персональные сообщения, даёт 3–5 лидов в день.</p>
+        </div>
+
+        <div class="glass p-7 fade-up" style="display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;transition-delay:0.24s;">
+          <div style="width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,168,124,0.25);flex-shrink:0;">
+            <img src="team-lira.png" alt="Lira" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#E4E4E7;">Lira</h3>
+            <p style="font-size:12px;color:#C9A87C;margin-top:4px;letter-spacing:0.08em;">Контент · Лонгриды</p>
+          </div>
+          <p style="font-size:13px;color:#71717A;line-height:1.7;font-weight:300;">Создаёт экспертный контент: лонгриды, посты, стратегии — по голосовому сообщению.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
 
   <!-- =========================================== -->
   <!-- SCREEN 11 — ФИНАЛЬНЫЙ CTA                    -->
