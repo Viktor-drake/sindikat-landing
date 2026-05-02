@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero · iOS Icons v2 (real logos)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0E0E11; color:#E4E4E7; }
+  :root { --gold:#C9A87C; }
+
+  .label {
+    position:absolute; top:24px; left:24px;
+    font-size:11px; letter-spacing:0.2em; color:var(--gold);
+    text-transform:uppercase; padding:6px 14px;
+    background:rgba(201,168,124,0.08); border:1px solid rgba(201,168,124,0.3);
+    border-radius:100px; z-index:80;
+  }
+  .label-desc {
+    position:absolute; top:60px; left:24px;
+    font-size:12px; color:#71717A; max-width:340px;
+    line-height:1.5; z-index:80;
+  }
+
+  .variant {
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding:48px 80px;
+    position:relative;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    overflow:hidden;
+  }
+  .glow {
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 1000px 600px at 70% 50%, rgba(201,168,124,0.05), transparent);
+  }
+  .hero-wrap {
+    position:relative; z-index:10; width:100%;
+    display:grid; grid-template-columns: minmax(420px, 1fr) 1fr;
+    gap:48px; align-items:center;
+  }
+  .hero-left { display:flex; align-items:flex-start; gap:20px; }
+  .hero-logo { width:108px; height:108px; flex-shrink:0; margin-top:8px; }
+  .hero-content { display:flex; flex-direction:column; gap:18px; align-items:flex-start; }
+  .eyebrow { font-size:11px; letter-spacing:0.26em; color:#3F3F46; text-transform:uppercase; }
+  .title-stack { display:flex; flex-direction:column; line-height:0.88; }
+  .title-stack h1 { font-size:clamp(46px,7.8vw,96px); letter-spacing:-0.02em; margin:0; }
+  .title-stack h1:first-child { color:var(--gold); font-weight:800; }
+  .title-stack h1:last-child { color:#E4E4E7; font-weight:300; }
+  .desc { font-size:17px; font-weight:300; color:#A1A1AA; max-width:440px; line-height:1.55; }
+  .cta {
+    background: transparent; color: var(--gold); border: 1.5px solid var(--gold);
+    padding:13px 32px; border-radius:100px;
+    font-size:14px; font-weight:600; letter-spacing:0.04em;
+    text-decoration:none;
+  }
+  .hero-right { position:relative; height:560px; display:flex; align-items:center; justify-content:center; }
+
+  /* ============================================================
+     iOS APP ICON — squircle, объём
+     ============================================================ */
+  .ios-icon {
+    border-radius: 23.5%;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+  }
+  .ios-icon::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+    pointer-events:none;
+  }
+  .ios-icon:hover { transform: scale(1.06) rotate(2deg); }
+  .ios-icon .logo-inner {
+    width: 60%; height: 60%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ios-icon .logo-inner img,
+  .ios-icon .logo-inner .mask-icon {
+    width: 100%; height: 100%; display: block;
+    /* Объёмная выпуклость через 3 drop-shadow */
+    filter:
+      drop-shadow(0 -1px 0 rgba(255,255,255,0.25))
+      drop-shadow(0 2px 3px rgba(0,0,0,0.6))
+      drop-shadow(0 5px 8px rgba(0,0,0,0.45));
+  }
+  .ios-icon-lg { width: 138px; height: 138px; }
+  .ios-icon-md { width: 118px; height: 118px; }
+  .ios-icon-sm { width: 100px; height: 100px; }
+
+  /* === ПАЛИТРЫ ПЛИТОК === */
+  .pal-dark .ios-icon {
+    background: linear-gradient(180deg, #2c2c30 0%, #18181c 100%);
+    box-shadow:
+      0 14px 32px rgba(0,0,0,0.55),
+      0 4px 10px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .pal-silver .ios-icon {
+    background: linear-gradient(180deg, #e8e8ec 0%, #a8a8b0 100%);
+    box-shadow:
+      0 14px 32px rgba(0,0,0,0.4),
+      0 4px 10px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      inset 0 -1px 0 rgba(0,0,0,0.15);
+  }
+  .pal-silver .ios-icon::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 100%);
+  }
+  .pal-graphite .ios-icon {
+    background: linear-gradient(180deg, #4a4a52 0%, #2a2a32 100%);
+    box-shadow:
+      0 14px 32px rgba(0,0,0,0.55),
+      0 4px 10px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.18),
+      inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .pal-graphite .ios-icon::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, transparent 100%);
+  }
+
+  /* === MASK иконки для Gemini (rainbow) и NotebookLM (silver) === */
+  .mask-icon { background: var(--icon-gradient); }
+  .mask-gemini {
+    --icon-gradient: linear-gradient(135deg, #4796E3 0%, #7BC58A 30%, #F2C94C 50%, #E97A4A 70%, #9968E5 100%);
+    -webkit-mask: url('https://cdn.simpleicons.org/googlegemini/000') center/contain no-repeat;
+            mask: url('https://cdn.simpleicons.org/googlegemini/000') center/contain no-repeat;
+  }
+  .mask-notebook {
+    --icon-gradient: linear-gradient(135deg, #B8C5E0 0%, #E0E0E5 50%, #909098 100%);
+    -webkit-mask: url('https://cdn.simpleicons.org/googlenotebooklm/000') center/contain no-repeat;
+            mask: url('https://cdn.simpleicons.org/googlenotebooklm/000') center/contain no-repeat;
+  }
+
+  /* На серебристых плитках Gemini/NotebookLM делаем чуть тёмнее для контраста */
+  .pal-silver .mask-gemini {
+    --icon-gradient: linear-gradient(135deg, #2563cf 0%, #4a9e5e 30%, #c79620 50%, #c45520 70%, #6b3eb5 100%);
+  }
+  .pal-silver .mask-notebook {
+    --icon-gradient: linear-gradient(135deg, #4a5e85 0%, #6a6a78 50%, #2a2a35 100%);
+  }
+
+  /* На серебристых ChatGPT и Perplexity должны быть чёрными */
+  .pal-silver .invert-on-light { filter:
+    drop-shadow(0 -1px 0 rgba(255,255,255,0.4))
+    drop-shadow(0 2px 3px rgba(0,0,0,0.4))
+    invert(1) brightness(0.15);
+  }
+
+  /* === SCATTER === */
+  .scatter { position:relative; width:560px; height:520px; }
+  .scatter > .ios-icon {
+    position:absolute;
+    animation: floatHover 6s ease-in-out infinite;
+  }
+  .scatter > .ios-icon:nth-child(1) { top:20px; left:80px; transform:rotate(-10deg); animation-delay:0s; }
+  .scatter > .ios-icon:nth-child(2) { top:80px; right:30px; transform:rotate(14deg); animation-delay:1.5s; }
+  .scatter > .ios-icon:nth-child(3) { bottom:90px; left:20px; transform:rotate(7deg); animation-delay:3s; }
+  .scatter > .ios-icon:nth-child(4) { bottom:30px; right:80px; transform:rotate(-5deg); animation-delay:4.5s; }
+  .scatter > .ios-icon:nth-child(5) { top:46%; left:48%; transform:translate(-50%,-50%) rotate(-3deg); animation-delay:2.2s; z-index:5; }
+  @keyframes floatHover {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+  }
+
+  .grid-2x2 { display:grid; grid-template-columns: 1fr 1fr; gap: 28px; width: 320px; }
+  .grid-2x2 .ios-icon {
+    width: 130px; height: 130px;
+    animation: breathe 4s ease-in-out infinite;
+    margin: 0 auto;
+  }
+  .grid-2x2 .ios-icon:nth-child(2) { animation-delay: 0.5s; }
+  .grid-2x2 .ios-icon:nth-child(3) { animation-delay: 1s; }
+  .grid-2x2 .ios-icon:nth-child(4) { animation-delay: 1.5s; }
+  @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+  @media (max-width: 1024px) {
+    .variant { padding:48px 32px; }
+    .hero-wrap { grid-template-columns: 1fr; gap:40px; }
+    .hero-left { justify-content:center; }
+    .hero-right { height: 380px; }
+    .scatter { width: 340px; height: 360px; transform: scale(0.7); transform-origin: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== V1 — ТЁМНАЯ палитра, 5 иконок (с NotebookLM) scatter ====== -->
+<section class="variant pal-dark">
+  <div class="label">V1 · Тёмная палитра + 5 иконок scatter</div>
+  <div class="label-desc">Чуть светлее чёрного (gradient #2c2c30 → #18181c). Real-логотипы из Simple Icons CDN. Gemini и NotebookLM через CSS-mask с градиентом.</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><img src="https://cdn.simpleicons.org/claude/D97757" alt=""></div></div>
+        <div class="ios-icon ios-icon-sm"><div class="logo-inner"><img src="https://cdn.simpleicons.org/openai/ffffff" alt=""></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><div class="mask-icon mask-gemini"></div></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><img src="https://cdn.simpleicons.org/perplexity/20B8B8" alt=""></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><div class="mask-icon mask-notebook"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== V2 — СЕРЕБРИСТАЯ палитра, 5 иконок scatter ====== -->
+<section class="variant pal-silver">
+  <div class="label">V2 · Серебристая палитра</div>
+  <div class="label-desc">Светлые плитки (gradient #e8e8ec → #a8a8b0). На светлом фоне ChatGPT/Perplexity автоматически тёмные через invert().</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><img src="https://cdn.simpleicons.org/claude/D97757" alt=""></div></div>
+        <div class="ios-icon ios-icon-sm"><div class="logo-inner"><img src="https://cdn.simpleicons.org/openai/ffffff" class="invert-on-light" alt=""></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><div class="mask-icon mask-gemini"></div></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><img src="https://cdn.simpleicons.org/perplexity/20B8B8" alt=""></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><div class="mask-icon mask-notebook"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== V3 — ГРАФИТОВАЯ палитра, 5 иконок scatter ====== -->
+<section class="variant pal-graphite">
+  <div class="label">V3 · Графитовый металлик</div>
+  <div class="label-desc">Промежуточный вариант: серебристо-серые плитки, но не светлые. Логотипы яркие.</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><img src="https://cdn.simpleicons.org/claude/D97757" alt=""></div></div>
+        <div class="ios-icon ios-icon-sm"><div class="logo-inner"><img src="https://cdn.simpleicons.org/openai/ffffff" alt=""></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><div class="mask-icon mask-gemini"></div></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><img src="https://cdn.simpleicons.org/perplexity/20B8B8" alt=""></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><div class="mask-icon mask-notebook"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== V4 — Графит сетка 2×2, без NotebookLM ====== -->
+<section class="variant pal-graphite">
+  <div class="label">V4 · Графит, сетка 2×2 (без NotebookLM)</div>
+  <div class="label-desc">Структурный grid 2×2, четыре главных нейросети</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="grid-2x2">
+        <div class="ios-icon"><div class="logo-inner"><img src="https://cdn.simpleicons.org/claude/D97757" alt=""></div></div>
+        <div class="ios-icon"><div class="logo-inner"><img src="https://cdn.simpleicons.org/openai/ffffff" alt=""></div></div>
+        <div class="ios-icon"><div class="logo-inner"><div class="mask-icon mask-gemini"></div></div></div>
+        <div class="ios-icon"><div class="logo-inner"><img src="https://cdn.simpleicons.org/perplexity/20B8B8" alt=""></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
