@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NextGen Club — Всё о нейросетях в одном месте</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>
@@ -424,8 +428,10 @@
 
     /* Адаптив для широких экранов — расширяем контейнер, плашки растут пропорционально */
     @media (min-width: 1280px) {
-      .hero-right-block { height: 580px !important; }
-      .hero-coins-scatter { max-width: 620px !important; height: 560px !important; }
+      .hero-right-block { height: 540px !important; }
+      .hero-coins-scatter { max-width: 560px !important; height: 520px !important; }
+      /* NotebookLM крупнее на ноутбуке */
+      .hero-coins-scatter > .silver-tile.tile-center { width: 128px !important; height: 128px !important; }
     }
     @media (min-width: 1600px) {
       .hero-right-block { height: 620px !important; }
