@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero · iOS App Icons</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0E0E11; color:#E4E4E7; }
+  :root { --gold:#C9A87C; }
+
+  .label {
+    position:absolute; top:24px; left:24px;
+    font-size:11px; letter-spacing:0.2em; color:var(--gold);
+    text-transform:uppercase; padding:6px 14px;
+    background:rgba(201,168,124,0.08); border:1px solid rgba(201,168,124,0.3);
+    border-radius:100px; z-index:80;
+  }
+  .label-desc {
+    position:absolute; top:60px; left:24px;
+    font-size:12px; color:#71717A; max-width:340px;
+    line-height:1.5; z-index:80;
+  }
+
+  .variant {
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding:48px 80px;
+    position:relative;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    overflow:hidden;
+  }
+  .glow {
+    position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 1000px 600px at 70% 50%, rgba(201,168,124,0.05), transparent);
+  }
+
+  .hero-wrap {
+    position:relative; z-index:10; width:100%;
+    display:grid; grid-template-columns: minmax(420px, 1fr) 1fr;
+    gap:48px; align-items:center;
+  }
+  .hero-left { display:flex; align-items:flex-start; gap:20px; }
+  .hero-logo { width:108px; height:108px; flex-shrink:0; margin-top:8px; }
+  .hero-content { display:flex; flex-direction:column; gap:18px; align-items:flex-start; }
+  .eyebrow { font-size:11px; letter-spacing:0.26em; color:#3F3F46; text-transform:uppercase; }
+  .title-stack { display:flex; flex-direction:column; line-height:0.88; }
+  .title-stack h1 {
+    font-size:clamp(46px,7.8vw,96px);
+    letter-spacing:-0.02em; margin:0;
+  }
+  .title-stack h1:first-child { color:var(--gold); font-weight:800; }
+  .title-stack h1:last-child { color:#E4E4E7; font-weight:300; }
+  .desc { font-size:17px; font-weight:300; color:#A1A1AA; max-width:440px; line-height:1.55; }
+  .cta {
+    background: transparent;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    padding:13px 32px; border-radius:100px;
+    font-size:14px; font-weight:600; letter-spacing:0.04em;
+    text-decoration:none; transition:all 0.3s; display:inline-block;
+  }
+
+  .hero-right {
+    position:relative; height:560px;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ============================================================
+     iOS APP ICON — squircle, объём, drop-shadow
+     ============================================================ */
+  .ios-icon {
+    background: linear-gradient(180deg, #1c1c1e 0%, #000 100%);
+    border-radius: 23.5%; /* iOS squircle approx */
+    position: relative;
+    box-shadow:
+      0 14px 32px rgba(0,0,0,0.55),
+      0 4px 10px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+  }
+  .ios-icon::before {
+    /* лёгкое свечение по верху */
+    content:''; position:absolute; top:0; left:0; right:0; height:50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
+    pointer-events:none;
+  }
+  .ios-icon:hover { transform: scale(1.06) rotate(2deg); }
+  .ios-icon .logo-inner {
+    width: 64%; height: 64%;
+    display: flex; align-items: center; justify-content: center;
+    /* Объём: верхний свет + нижняя тень = выпуклость */
+    filter:
+      drop-shadow(0 -1px 0 rgba(255,255,255,0.18))
+      drop-shadow(0 2px 3px rgba(0,0,0,0.7))
+      drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+  }
+
+  /* Размеры */
+  .ios-icon-lg { width: 138px; height: 138px; }
+  .ios-icon-md { width: 118px; height: 118px; }
+  .ios-icon-sm { width: 100px; height: 100px; }
+
+  /* ============================================================
+     SCATTER layout (как на боевом)
+     ============================================================ */
+  .scatter { position:relative; width:560px; height:520px; }
+  .scatter > .ios-icon {
+    position:absolute;
+    animation: floatHover 6s ease-in-out infinite;
+  }
+  .scatter > .ios-icon:nth-child(1) { top:20px; left:80px; transform:rotate(-10deg); animation-delay:0s; }
+  .scatter > .ios-icon:nth-child(2) { top:80px; right:30px; transform:rotate(14deg); animation-delay:1.5s; }
+  .scatter > .ios-icon:nth-child(3) { bottom:90px; left:20px; transform:rotate(7deg); animation-delay:3s; }
+  .scatter > .ios-icon:nth-child(4) { bottom:30px; right:80px; transform:rotate(-5deg); animation-delay:4.5s; }
+  .scatter > .ios-icon:nth-child(5) { top:46%; left:48%; transform:translate(-50%,-50%) rotate(-3deg); animation-delay:2.2s; }
+  @keyframes floatHover {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+  }
+
+  /* ============== ВАРИАНТ I-C — Сетка 2×2 ============== */
+  .var-c .grid-2x2 {
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    width: 320px;
+  }
+  .var-c .ios-icon {
+    width: 130px; height: 130px;
+    animation: breathe 4s ease-in-out infinite;
+    margin: 0 auto;
+  }
+  .var-c .ios-icon:nth-child(2) { animation-delay: 0.5s; }
+  .var-c .ios-icon:nth-child(3) { animation-delay: 1s; }
+  .var-c .ios-icon:nth-child(4) { animation-delay: 1.5s; }
+  @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+  /* ============== ВАРИАНТ I-D — 3 + 2 (5 иконок включая NotebookLM) ============== */
+  .var-d .grid-five {
+    display:flex; flex-direction:column; gap:24px;
+    align-items:center;
+  }
+  .var-d .row-3 { display:flex; gap:24px; }
+  .var-d .row-2 { display:flex; gap:24px; }
+  .var-d .ios-icon {
+    width: 116px; height: 116px;
+    animation: breathe 4s ease-in-out infinite;
+  }
+  .var-d .row-3 > .ios-icon:nth-child(2) { animation-delay: 0.4s; }
+  .var-d .row-3 > .ios-icon:nth-child(3) { animation-delay: 0.8s; }
+  .var-d .row-2 > .ios-icon:nth-child(2) { animation-delay: 1.2s; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 1024px) {
+    .variant { padding:48px 32px; }
+    .hero-wrap { grid-template-columns: 1fr; gap:40px; }
+    .hero-left { justify-content:center; }
+    .hero-right { height: 380px; }
+    .scatter { width: 340px; height: 360px; transform: scale(0.7); transform-origin: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     ЛОГОТИПЫ (правильные SVG)
+     ========================================================= -->
+<svg width="0" height="0" style="position:absolute;" aria-hidden="true">
+  <defs>
+    <!-- Claude — оранжевая 12-лучевая звезда -->
+    <symbol id="ic-claude" viewBox="0 0 100 100">
+      <g fill="#D97757">
+        <!-- 12-лучевая звезда (как иконка Claude в iOS) -->
+        <path d="M50 5 L52.5 38 L50 50 L47.5 38 Z"/>
+        <path d="M95 50 L62 52.5 L50 50 L62 47.5 Z"/>
+        <path d="M50 95 L47.5 62 L50 50 L52.5 62 Z"/>
+        <path d="M5 50 L38 47.5 L50 50 L38 52.5 Z"/>
+        <path d="M81.8 18.2 L60 38 L50 50 L62 40 Z"/>
+        <path d="M81.8 81.8 L62 60 L50 50 L60 62 Z"/>
+        <path d="M18.2 81.8 L38 62 L50 50 L40 60 Z"/>
+        <path d="M18.2 18.2 L38 40 L50 50 L40 38 Z"/>
+        <path d="M73.5 9.5 L57 36 L50 50 L60 33 Z"/>
+        <path d="M90.5 73.5 L64 57 L50 50 L67 60 Z"/>
+        <path d="M26.5 90.5 L43 64 L50 50 L40 67 Z"/>
+        <path d="M9.5 26.5 L36 43 L50 50 L33 40 Z"/>
+      </g>
+    </symbol>
+
+    <!-- ChatGPT — белая 6-лепестковая розетка (Anthropic-style flower) -->
+    <symbol id="ic-gpt" viewBox="0 0 100 100">
+      <g fill="none" stroke="#fff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M70 26 C 84 32, 84 50, 70 56 L 60 60 L 50 66 C 36 72, 22 60, 28 46 L 32 36"/>
+        <path d="M30 74 C 16 68, 16 50, 30 44 L 40 40 L 50 34 C 64 28, 78 40, 72 54 L 68 64"/>
+        <path d="M50 50 L50 50 L 50 50"/>
+      </g>
+      <g fill="#fff">
+        <circle cx="50" cy="50" r="8" opacity="0"/>
+      </g>
+      <!-- Упрощенный простой 'knot' лого -->
+      <g fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round">
+        <path d="M50 22 Q 78 30, 78 50 Q 78 70, 50 78 Q 22 70, 22 50 Q 22 30, 50 22"/>
+        <path d="M50 22 L50 78"/>
+        <path d="M22 50 L78 50"/>
+        <path d="M30 30 L70 70"/>
+        <path d="M70 30 L30 70"/>
+      </g>
+    </symbol>
+
+    <!-- Gemini — 4-лучевая звезда с rainbow-градиентом -->
+    <linearGradient id="grad-gemini" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4796E3"/>
+      <stop offset="35%" stop-color="#7BC58A"/>
+      <stop offset="55%" stop-color="#F2C94C"/>
+      <stop offset="75%" stop-color="#E97A4A"/>
+      <stop offset="100%" stop-color="#9968E5"/>
+    </linearGradient>
+    <symbol id="ic-gemini" viewBox="0 0 100 100">
+      <path d="M50 6 C 52 30, 56 44, 70 48 C 76 49, 84 50, 94 50 C 84 50, 76 51, 70 52 C 56 56, 52 70, 50 94 C 48 70, 44 56, 30 52 C 24 51, 16 50, 6 50 C 16 50, 24 49, 30 48 C 44 44, 48 30, 50 6 Z"
+        fill="url(#grad-gemini)"/>
+    </symbol>
+
+    <!-- Perplexity — три парные дуги/уголка (как на iOS-иконке) -->
+    <symbol id="ic-perplex" viewBox="0 0 100 100">
+      <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Верхний правый уголок -->
+        <path d="M58 18 L80 18 L80 40"/>
+        <path d="M48 28 L70 28 L70 50"/>
+        <!-- Нижний левый уголок -->
+        <path d="M42 82 L20 82 L20 60"/>
+        <path d="M52 72 L30 72 L30 50"/>
+        <!-- Центральная связка -->
+        <path d="M30 50 L70 50"/>
+      </g>
+    </symbol>
+
+    <!-- NotebookLM — серебристо-радужные волны -->
+    <linearGradient id="grad-notebook" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#9BB8E0"/>
+      <stop offset="33%" stop-color="#D4D4D8"/>
+      <stop offset="66%" stop-color="#E8E8EC"/>
+      <stop offset="100%" stop-color="#A3A3A8"/>
+    </linearGradient>
+    <symbol id="ic-notebook" viewBox="0 0 100 100">
+      <g fill="none" stroke="url(#grad-notebook)" stroke-width="6" stroke-linecap="round">
+        <path d="M14 70 Q 50 14, 86 70"/>
+        <path d="M22 76 Q 50 30, 78 76"/>
+        <path d="M30 82 Q 50 46, 70 82"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============== I-A ============== -->
+<section class="variant var-a">
+  <div class="label">I-A · 4 иконки scatter (как сейчас, но iOS-стиль)</div>
+  <div class="label-desc">Чёрные squircle-плитки с цветными выпуклыми логотипами</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="ios-icon ios-icon-lg"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-claude"/></svg></div></div>
+        <div class="ios-icon ios-icon-sm"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-gpt"/></svg></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-gemini"/></svg></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-perplex"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== I-B (с NotebookLM, 5 иконок scatter) ============== -->
+<section class="variant var-b">
+  <div class="label">I-B · 5 иконок scatter (включая NotebookLM)</div>
+  <div class="label-desc">+ NotebookLM в центре композиции</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-claude"/></svg></div></div>
+        <div class="ios-icon ios-icon-sm"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-gpt"/></svg></div></div>
+        <div class="ios-icon ios-icon-sm"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-gemini"/></svg></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-perplex"/></svg></div></div>
+        <div class="ios-icon ios-icon-md"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-notebook"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== I-C (сетка 2×2) ============== -->
+<section class="variant var-c">
+  <div class="label">I-C · Сетка 2×2 (4 иконки)</div>
+  <div class="label-desc">Идеально упорядоченная сетка, дышащая анимация</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="grid-2x2">
+        <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-claude"/></svg></div></div>
+        <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-gpt"/></svg></div></div>
+        <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-gemini"/></svg></div></div>
+        <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-perplex"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== I-D (3+2 с NotebookLM) ============== -->
+<section class="variant var-d">
+  <div class="label">I-D · 3+2 с NotebookLM</div>
+  <div class="label-desc">Структурированная сетка 3 сверху + 2 снизу, NotebookLM включён</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="grid-five">
+        <div class="row-3">
+          <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-claude"/></svg></div></div>
+          <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-gpt"/></svg></div></div>
+          <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-gemini"/></svg></div></div>
+        </div>
+        <div class="row-2">
+          <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-perplex"/></svg></div></div>
+          <div class="ios-icon"><div class="logo-inner"><svg width="100%" height="100%"><use href="#ic-notebook"/></svg></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
