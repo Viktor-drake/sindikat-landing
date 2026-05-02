@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero · iOS Final (clean logos + animation)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0E0E11; color:#E4E4E7; }
+  :root { --gold:#C9A87C; }
+
+  .label {
+    position:absolute; top:24px; left:24px;
+    font-size:11px; letter-spacing:0.2em; color:var(--gold);
+    text-transform:uppercase; padding:6px 14px;
+    background:rgba(201,168,124,0.08); border:1px solid rgba(201,168,124,0.3);
+    border-radius:100px; z-index:80;
+  }
+  .label-desc {
+    position:absolute; top:60px; left:24px;
+    font-size:12px; color:#71717A; max-width:340px;
+    line-height:1.5; z-index:80;
+  }
+
+  .variant {
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding:48px 80px;
+    position:relative;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    overflow:hidden;
+  }
+  .glow { position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse 1000px 600px at 70% 50%, rgba(201,168,124,0.05), transparent); }
+
+  .hero-wrap {
+    position:relative; z-index:10; width:100%;
+    display:grid; grid-template-columns: minmax(420px, 1fr) 1fr;
+    gap:48px; align-items:center;
+  }
+  .hero-left { display:flex; align-items:flex-start; gap:20px; }
+  .hero-logo { width:108px; height:108px; flex-shrink:0; margin-top:8px; }
+  .hero-content { display:flex; flex-direction:column; gap:18px; align-items:flex-start; }
+  .eyebrow { font-size:11px; letter-spacing:0.26em; color:#3F3F46; text-transform:uppercase; }
+  .title-stack { display:flex; flex-direction:column; line-height:0.88; }
+  .title-stack h1 { font-size:clamp(46px,7.8vw,96px); letter-spacing:-0.02em; margin:0; }
+  .title-stack h1:first-child { color:var(--gold); font-weight:800; }
+  .title-stack h1:last-child { color:#E4E4E7; font-weight:300; }
+  .desc { font-size:17px; font-weight:300; color:#A1A1AA; max-width:440px; line-height:1.55; }
+  .cta {
+    background: transparent; color: var(--gold); border: 1.5px solid var(--gold);
+    padding:13px 32px; border-radius:100px;
+    font-size:14px; font-weight:600; letter-spacing:0.04em;
+    text-decoration:none;
+  }
+  .hero-right { position:relative; height:560px; display:flex; align-items:center; justify-content:center; }
+
+  /* === Tile === */
+  .tile {
+    position:absolute;
+    border-radius: 23.5%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    animation: tileFloat 6s ease-in-out infinite;
+  }
+  .tile::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:55%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
+    pointer-events:none; z-index:2;
+  }
+  .tile::after {
+    content:''; position:absolute; inset:0;
+    border-radius: 23.5%;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.18),
+      inset 0 -1px 0 rgba(0,0,0,0.5);
+    pointer-events:none; z-index:3;
+  }
+  .tile:hover { transform: scale(1.06) rotate(2deg) !important; }
+  .tile-logo {
+    width: 60%; height: 60%;
+    object-fit: contain;
+    position: relative; z-index: 1;
+    /* ОБЪЁМ — выпуклость через 5-слойный drop-shadow */
+    filter:
+      drop-shadow(0 -2px 0 rgba(255,255,255,0.35))
+      drop-shadow(0 -1px 0 rgba(255,255,255,0.2))
+      drop-shadow(0 2px 3px rgba(0,0,0,0.7))
+      drop-shadow(0 5px 8px rgba(0,0,0,0.55))
+      drop-shadow(0 10px 14px rgba(0,0,0,0.4));
+  }
+  /* SVG ChatGPT (встроенный path) */
+  .tile-logo-svg {
+    width: 60%; height: 60%; position: relative; z-index: 1;
+    filter:
+      drop-shadow(0 -2px 0 rgba(255,255,255,0.35))
+      drop-shadow(0 2px 3px rgba(0,0,0,0.7))
+      drop-shadow(0 5px 8px rgba(0,0,0,0.55))
+      drop-shadow(0 10px 14px rgba(0,0,0,0.4));
+  }
+
+  /* Анимация floating */
+  @keyframes tileFloat {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -12px; }
+  }
+
+  /* === ПАЛИТРЫ === */
+  .pal-graphite .tile {
+    background: linear-gradient(180deg, #5a5a64 0%, #2a2a32 100%);
+    box-shadow:
+      0 16px 38px rgba(0,0,0,0.6),
+      0 5px 12px rgba(0,0,0,0.45),
+      0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .pal-silver .tile {
+    background: linear-gradient(180deg, #ebebef 0%, #a8a8b0 100%);
+    box-shadow:
+      0 16px 38px rgba(0,0,0,0.45),
+      0 5px 12px rgba(0,0,0,0.3),
+      0 0 0 1px rgba(0,0,0,0.08);
+  }
+  .pal-silver .tile::before {
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, transparent 100%);
+  }
+  .pal-dark .tile {
+    background: linear-gradient(180deg, #2c2c30 0%, #18181c 100%);
+    box-shadow:
+      0 16px 38px rgba(0,0,0,0.6),
+      0 5px 12px rgba(0,0,0,0.45),
+      0 0 0 1px rgba(255,255,255,0.04);
+  }
+
+  /* На светлом фоне Perplexity (белый лого) делаем чёрным через invert */
+  .pal-silver .invert-light { filter:
+    drop-shadow(0 -1px 0 rgba(255,255,255,0.4))
+    drop-shadow(0 1px 2px rgba(0,0,0,0.4))
+    drop-shadow(0 4px 6px rgba(0,0,0,0.35))
+    invert(1) brightness(0);
+  }
+
+  /* Скаттер позиции */
+  .scatter { position:relative; width:560px; height:520px; }
+  .scatter > .tile:nth-of-type(1) { top:20px; left:80px; transform:rotate(-10deg); animation-delay:0s; width:138px; height:138px; }
+  .scatter > .tile:nth-of-type(2) { top:80px; right:30px; transform:rotate(14deg); animation-delay:1.5s; width:108px; height:108px; }
+  .scatter > .tile:nth-of-type(3) { bottom:90px; left:20px; transform:rotate(7deg); animation-delay:3s; width:122px; height:122px; }
+  .scatter > .tile:nth-of-type(4) { bottom:30px; right:80px; transform:rotate(-5deg); animation-delay:4.5s; width:128px; height:128px; }
+  .scatter > .tile:nth-of-type(5) { top:46%; left:48%; transform:translate(-50%,-50%) rotate(-3deg); animation-delay:2.2s; width:118px; height:118px; z-index:5; }
+
+  /* На скаттере анимация должна сохранять transform поворота */
+  .scatter > .tile { animation-name: tileFloatRotate; }
+  @keyframes tileFloatRotate {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -12px; }
+  }
+
+  @media (max-width: 1024px) {
+    .variant { padding:48px 32px; }
+    .hero-wrap { grid-template-columns: 1fr; gap:40px; }
+    .hero-left { justify-content:center; }
+    .hero-right { height: 380px; }
+    .scatter { width: 340px; height: 360px; transform: scale(0.7); transform-origin: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== F1 — ГРАФИТ + 5 иконок (с NotebookLM) ====== -->
+<section class="variant pal-graphite">
+  <div class="label">F1 · Графит + 5 иконок</div>
+  <div class="label-desc">Серебристо-графитовые плашки. Логотипы с прозрачными фонами (вырезаны из оригиналов). Анимация floating.</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="tile"><img src="icon-claude-clean.png" class="tile-logo" alt="Claude"></div>
+        <div class="tile">
+          <svg class="tile-logo-svg" viewBox="0 0 24 24" fill="#fff">
+            <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/>
+          </svg>
+        </div>
+        <div class="tile"><img src="icon-gemini-clean.png" class="tile-logo" alt="Gemini"></div>
+        <div class="tile"><img src="icon-perplexity-clean.png" class="tile-logo" alt="Perplexity"></div>
+        <div class="tile"><img src="icon-notebooklm.svg" class="tile-logo" alt="NotebookLM"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== F2 — ТЁМНАЯ + 5 иконок ====== -->
+<section class="variant pal-dark">
+  <div class="label">F2 · Тёмная палитра</div>
+  <div class="label-desc">Чёрные плашки с яркими логотипами поверх.</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="tile"><img src="icon-claude-clean.png" class="tile-logo" alt="Claude"></div>
+        <div class="tile">
+          <svg class="tile-logo-svg" viewBox="0 0 24 24" fill="#fff">
+            <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/>
+          </svg>
+        </div>
+        <div class="tile"><img src="icon-gemini-clean.png" class="tile-logo" alt="Gemini"></div>
+        <div class="tile"><img src="icon-perplexity-clean.png" class="tile-logo" alt="Perplexity"></div>
+        <div class="tile"><img src="icon-notebooklm.svg" class="tile-logo" alt="NotebookLM"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== F3 — СЕРЕБРИСТАЯ + 5 иконок ====== -->
+<section class="variant pal-silver">
+  <div class="label">F3 · Серебристая</div>
+  <div class="label-desc">Светлые плашки. Perplexity (белый лого) автоматически инвертируется в чёрный для контраста.</div>
+  <div class="glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <img src="logo.png" class="hero-logo">
+      <div class="hero-content">
+        <p class="eyebrow">Закрытый клуб</p>
+        <div class="title-stack"><h1>NEXTGEN</h1><h1>CLUB</h1></div>
+        <p class="desc">Научи нейросети зарабатывать тебе деньги.</p>
+        <a href="#" class="cta">Вступить в клуб</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scatter">
+        <div class="tile"><img src="icon-claude-clean.png" class="tile-logo" alt="Claude"></div>
+        <div class="tile">
+          <svg class="tile-logo-svg invert-light" viewBox="0 0 24 24" fill="#fff">
+            <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494z"/>
+          </svg>
+        </div>
+        <div class="tile"><img src="icon-gemini-clean.png" class="tile-logo" alt="Gemini"></div>
+        <div class="tile"><img src="icon-perplexity-clean.png" class="tile-logo invert-light" alt="Perplexity"></div>
+        <div class="tile"><img src="icon-notebooklm.svg" class="tile-logo" alt="NotebookLM"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
