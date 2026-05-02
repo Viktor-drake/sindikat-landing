@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hero · iOS Final (clean logos + animation)</title>
+<title>Hero · iOS Final v2 (inline Perplex SVG + bigger tiles)</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -80,7 +80,7 @@
   }
   .tile:hover { transform: scale(1.06) rotate(2deg) !important; }
   .tile-logo {
-    width: 60%; height: 60%;
+    width: 70%; height: 70%;
     object-fit: contain;
     position: relative; z-index: 1;
     /* ОБЪЁМ — выпуклость через 5-слойный drop-shadow */
@@ -91,9 +91,14 @@
       drop-shadow(0 5px 8px rgba(0,0,0,0.55))
       drop-shadow(0 10px 14px rgba(0,0,0,0.4));
   }
+  /* Тонкие лого визуально мельче — увеличиваем */
+  .tile img[src*="notebooklm"] { width: 92% !important; height: 92% !important; }
+  .tile .perplex-svg { width: 90% !important; height: 90% !important; }
+  .tile img[src*="claude"] { width: 78% !important; height: 78% !important; }
+  .tile img[src*="gemini"] { width: 75% !important; height: 75% !important; }
   /* SVG ChatGPT (встроенный path) */
   .tile-logo-svg {
-    width: 60%; height: 60%; position: relative; z-index: 1;
+    width: 70%; height: 70%; position: relative; z-index: 1;
     filter:
       drop-shadow(0 -2px 0 rgba(255,255,255,0.35))
       drop-shadow(0 2px 3px rgba(0,0,0,0.7))
@@ -146,8 +151,8 @@
   .scatter > .tile:nth-of-type(1) { top:20px; left:80px; transform:rotate(-10deg); animation-delay:0s; width:138px; height:138px; }
   .scatter > .tile:nth-of-type(2) { top:80px; right:30px; transform:rotate(14deg); animation-delay:1.5s; width:108px; height:108px; }
   .scatter > .tile:nth-of-type(3) { bottom:90px; left:20px; transform:rotate(7deg); animation-delay:3s; width:122px; height:122px; }
-  .scatter > .tile:nth-of-type(4) { bottom:30px; right:80px; transform:rotate(-5deg); animation-delay:4.5s; width:128px; height:128px; }
-  .scatter > .tile:nth-of-type(5) { top:46%; left:48%; transform:translate(-50%,-50%) rotate(-3deg); animation-delay:2.2s; width:118px; height:118px; z-index:5; }
+  .scatter > .tile:nth-of-type(4) { bottom:30px; right:80px; transform:rotate(-5deg); animation-delay:4.5s; width:138px; height:138px; }
+  .scatter > .tile:nth-of-type(5) { top:46%; left:48%; transform:translate(-50%,-50%) rotate(-3deg); animation-delay:2.2s; width:138px; height:138px; z-index:5; }
 
   /* На скаттере анимация должна сохранять transform поворота */
   .scatter > .tile { animation-name: tileFloatRotate; }
@@ -191,7 +196,15 @@
           </svg>
         </div>
         <div class="tile"><img src="icon-gemini-clean.png" class="tile-logo" alt="Gemini"></div>
-        <div class="tile"><img src="icon-perplexity-clean.png" class="tile-logo" alt="Perplexity"></div>
+        <div class="tile">
+          <svg class="tile-logo-svg perplex-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 3 L21 3 L21 10"/>
+            <path d="M10 21 L3 21 L3 14"/>
+            <path d="M21 3 L3 21"/>
+            <path d="M8 8 L16 16"/>
+            <path d="M16 8 L8 16"/>
+          </svg>
+        </div>
         <div class="tile"><img src="icon-notebooklm.svg" class="tile-logo" alt="NotebookLM"></div>
       </div>
     </div>
@@ -222,7 +235,15 @@
           </svg>
         </div>
         <div class="tile"><img src="icon-gemini-clean.png" class="tile-logo" alt="Gemini"></div>
-        <div class="tile"><img src="icon-perplexity-clean.png" class="tile-logo" alt="Perplexity"></div>
+        <div class="tile">
+          <svg class="tile-logo-svg perplex-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 3 L21 3 L21 10"/>
+            <path d="M10 21 L3 21 L3 14"/>
+            <path d="M21 3 L3 21"/>
+            <path d="M8 8 L16 16"/>
+            <path d="M16 8 L8 16"/>
+          </svg>
+        </div>
         <div class="tile"><img src="icon-notebooklm.svg" class="tile-logo" alt="NotebookLM"></div>
       </div>
     </div>
