@@ -24,6 +24,18 @@
 <meta name="twitter:description" content="Гайды, кейсы и разборы про Claude, ChatGPT, Gemini, AI-агенты и вайбкодинг для предпринимателей и специалистов.">
 <meta name="twitter:image" content="https://nextgenclub.ru/logo.png">
 
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Блог NextGen Club","url":"https://nextgenclub.ru/blog","description":"Гайды, кейсы и разборы про Claude, ChatGPT, Gemini, AI-агенты и вайбкодинг для предпринимателей и специалистов."}</script>
@@ -39,6 +51,10 @@
     <div class="blog-nav-links">
       <a href="/blog">Блог</a>
       <a href="/" class="blog-nav-cta">Вступить</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -77,7 +93,7 @@
     <div class="post-card-meta">
       <time datetime="2026-06-01">1 июня 2026</time>
       <span class="dot"></span>
-      <span>6 мин</span>
+      <span>7 мин</span>
     </div>
   </div>
 </a>
@@ -96,5 +112,19 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
 </body>
 </html>
