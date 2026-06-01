@@ -480,6 +480,68 @@ body::before {
   box-shadow: 0 16px 40px color-mix(in srgb, var(--gold) 35%, transparent);
 }
 
+/* === Lead / TL;DR хук-блок === */
+.lead-block {
+  display: flex; gap: 20px;
+  margin: 0 0 44px;
+  padding: 28px 32px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--gold-soft) 0%, transparent 100%);
+  border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+.lead-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: var(--gold);
+}
+.lead-block-icon {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--gold);
+  color: #FFFFFF;
+  display: flex; align-items: center; justify-content: center;
+}
+[data-theme="dark"] .lead-block-icon { color: #0E0E11; }
+.lead-block-body { flex: 1; }
+.lead-block-body p {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--heading);
+}
+.lead-block-body p:first-child strong {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.lead-block-body p:last-child { margin-bottom: 0; }
+.lead-block-body ul {
+  margin: 0 !important;
+  padding-left: 0 !important;
+  list-style: none;
+}
+.lead-block-body li {
+  position: relative;
+  padding: 8px 0 8px 28px;
+  font-size: 15.5px;
+  color: var(--text);
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 12%, transparent);
+}
+.lead-block-body li:last-child { border-bottom: none; }
+.lead-block-body li::before {
+  content: '→';
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
 /* === Callout blocks (tip/warning/info) === */
 .callout {
   display: flex; gap: 16px;
