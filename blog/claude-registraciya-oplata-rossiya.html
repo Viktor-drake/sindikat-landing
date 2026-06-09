@@ -106,7 +106,7 @@
 <p><strong>Вариант 3 — Помогут с оплатой</strong></p>
 <p>Если не хочешь разбираться сам: @katerina_laskovets, @eternalbliss1996 — оформят.</p>
 <h2 id="шаг-5-какой-план-выбрать">Шаг 5. Какой план выбрать</h2>
-<p>| План | Цена | Для кого | |---|---|---| | <strong>Бесплатный</strong> | 0 | Попробовать. Есть лимиты, нет Claude Code и Cowork | | <strong>Pro</strong> | $20/мес | Включает Claude Code (с лимитами по использованию), свежие модели, приоритет при нагрузке | | <strong>Max</strong> | $100/мес | Серьёзная профессиональная работа и API |</p>
+<div class="table-wrap"><table><thead><tr><th>План</th><th>Цена</th><th>Для кого</th></tr></thead><tbody><tr><td><strong>Бесплатный</strong></td><td>0</td><td>Попробовать. Есть лимиты, нет Claude Code и Cowork</td></tr><tr><td><strong>Pro</strong></td><td>$20/мес</td><td>Включает Claude Code (с лимитами по использованию), свежие модели, приоритет при нагрузке</td></tr><tr><td><strong>Max</strong></td><td>$100/мес</td><td>Серьёзная профессиональная работа и API</td></tr></tbody></table></div>
 <div class="faq-block">
 <h2 class="faq-title">Частые вопросы</h2>
 <details class="faq-item"><summary>Работает ли Claude в России?</summary><div class="faq-answer">Да, работает. Нужен VPN и виртуальный номер для регистрации. Тысячи пользователей из РФ пользуются ежедневно.</div></details>
@@ -161,6 +161,25 @@
     document.documentElement.setAttribute('data-theme', next);
     document.documentElement.style.colorScheme = next;
     try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
   });
 })();
 </script>
