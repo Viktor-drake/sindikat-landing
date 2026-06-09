@@ -39,6 +39,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Как сделать Telegram-бота без программирования в 2026: от идеи до рабочего бота","description":"Как собрать Telegram-бота без навыков кода через нейросеть Claude Code: бот под свою логику без найма технаря и без потолка конструктора. Пошагово, с публикацией на сервер.","image":"https://nextgenclub.ru/blog/covers/c7-tg-bot/cover.png","datePublished":"2026-06-02","dateModified":"2026-06-02","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/kak-sdelat-telegram-bota-bez-programmirovaniya"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Можно ли сделать Telegram-бота без навыков программирования?","acceptedAnswer":{"@type":"Answer","text":"Да. Через конструктор (SaleBot, BotHelp, ManyChat) - быстро для простых сценариев. Через нейросеть Claude Code - бота под свою логику, тоже без написания кода руками."}},{"@type":"Question","name":"BotFather - это конструктор?","acceptedAnswer":{"@type":"Answer","text":"Нет. BotFather - официальный бот внутри Telegram для регистрации своего бота и получения токена. Сам бот собирается отдельно: в конструкторе или через Claude Code."}},{"@type":"Question","name":"Чем бот через Claude Code лучше конструктора?","acceptedAnswer":{"@type":"Answer","text":"Он не ограничен шаблоном и чужим тарифом. Пишется под твою логику: свои платежи, интеграции с таблицами и CRM, нестандартная обработка. И тебе не нужен платный технарь для кастомной логики."}},{"@type":"Question","name":"Где работает написанный бот?","acceptedAnswer":{"@type":"Answer","text":"На сервере, чтобы отвечать круглосуточно. Есть бесплатный тариф у Render и дешёвые VPS от 200-300 рублей в месяц (Timeweb, Beget) для стабильной работы."}},{"@type":"Question","name":"Можно ли зарабатывать на сборке ботов?","acceptedAnswer":{"@type":"Answer","text":"Да. Бот под задачу бизнеса (заявки, запись, платежи, консультант) - это услуга, за которую платят. Через Claude Code собирается быстро и без найма разработчика."}}]}</script>
 </head>
 <body>
 
@@ -85,11 +86,13 @@
 </div>
 <p>«Как сделать Telegram-бота без программирования» - почти все статьи по этому запросу ведут в конструкторы: SaleBot, BotHelp, ManyChat и подобные. Собрал из готовых блоков, получил бота. Для простого сценария это работает. Но как только нужна своя логика, ты упираешься в ограничения тарифа или зовёшь технаря за деньги.</p>
 <p>Есть второй путь - собрать бота под свою задачу через нейросеть, тоже без кода с твоей стороны, но без потолка конструктора и без найма разработчика.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>Telegram-бота без программирования собирают двумя путями. Конструктор (SaleBot, BotHelp, ManyChat) быстр для простого, но своя логика упирается в тариф и часто требует платного технаря. Нейросеть Claude Code пишет бота под любую твою задачу: свои платежи, интеграции с CRM и таблицами, бот целиком твой и не привязан к чужому тарифу. Не забудь про сервер, чтобы бот работал круглосуточно.</p></div></div>
 <h2 id="конструктор-или-claude-code-в-чём-разница">Конструктор или Claude Code: в чём разница</h2>
 <p>Конструкторы (SaleBot, BotHelp, ManyChat и подобные) - это платформы, где бот собирается из готовых блоков: меню, автоответы, кнопки, цепочки сообщений. Для простых сценариев быстро и удобно, и в конструкторе вполне можно собрать рабочего бизнес-бота.</p>
 <p>Загвоздка начинается, когда нужна своя логика: приём платежей по твоей схеме, интеграция с твоей CRM или таблицей, нестандартная обработка заявок. В конструкторе это тоже реально, но превращается в сложную задачу - много нюансов, ограничения тарифа, и чаще всего нужен технарь, который всё настроит. А технарь это от 30 000 рублей за работу плюс плата за обслуживание.</p>
 <p>Второй путь - собрать бота через нейросеть Claude Code. Ты описываешь словами, что нужно, а она пишет код бота под твою логику. Без конструктора, без найма технаря и без программирования с твоей стороны. Бот получается полностью твой, под любую задачу, и ты не привязан к чужому тарифу.</p>
 <p>Это и есть вайбкодинг: ты ставишь задачу и проверяешь результат, а не пишешь синтаксис.</p>
+<div class="table-wrap"><table><thead><tr><th>Параметр</th><th>Конструктор</th><th>Claude Code</th></tr></thead><tbody><tr><td>Сборка</td><td>Из готовых блоков</td><td>Под твою логику словами</td></tr><tr><td>Своя логика (платежи, CRM)</td><td>Упирается в тариф, нужен технарь</td><td>Любая, без потолка</td></tr><tr><td>Технарь</td><td>От 30 000 руб плюс обслуживание</td><td>Не нужен</td></tr><tr><td>Чей бот</td><td>На чужом тарифе платформы</td><td>Полностью твой</td></tr></tbody></table></div>
 <p>Важно не путать: BotFather - это не конструктор. Это официальный бот внутри Telegram, через который ты регистрируешь своего бота и получаешь токен (ключ доступа). Им пользуются в обоих путях - и в конструкторе, и при сборке через Claude Code.</p>
 <h2 id="что-нужно-для-старта">Что нужно для старта</h2>
 <p>Минимум, без эзотерики:</p>
@@ -112,11 +115,9 @@
 <h2 id="где-будет-жить-бот-про-сервер">Где будет жить бот: про сервер</h2>
 <p>Момент, о котором забывают. Бот, написанный кодом, должен где-то работать круглосуточно. В конструкторе бот живёт на серверах платформы - это входит в тариф. А своего бота нужно разместить на сервере, чтобы он отвечал 24/7, даже когда твой компьютер выключен.</p>
 <p>Это не страшно и не дорого:</p>
-<ul>
-<li>Бесплатный тариф у хостинга Render (750 часов в месяц) - с ограничениями, но для старта и небольших ботов подойдёт. У Railway бесплатного тарифа больше нет, там от $5 в месяц.</li>
-<li>Дешёвый VPS от 200-300 рублей в месяц (Timeweb, Beget и другие) - для стабильной работы без оговорок.</li>
-</ul>
+<div class="table-wrap"><table><thead><tr><th>Где разместить</th><th>Цена</th><th>Для чего</th></tr></thead><tbody><tr><td>Render, бесплатный тариф</td><td>0 (750 часов в месяц)</td><td>Старт и небольшие боты, с ограничениями</td></tr><tr><td>Railway</td><td>От $5 в месяц</td><td>Бесплатного тарифа больше нет</td></tr><tr><td>VPS (Timeweb, Beget)</td><td>200-300 руб в месяц</td><td>Стабильная работа без оговорок</td></tr></tbody></table></div>
 <p>И тут снова помогает Claude Code: говоришь «подготовь бота к публикации на сервер» - он подскажет шаги и соберёт всё к запуску. Деплой это часть той же работы, а не отдельная головная боль.</p>
+<div class="callout callout-tip"><div class="callout-icon">💡</div><div class="callout-body"><p class="callout-label">Совет</p><p>Начни с бесплатного Render, чтобы проверить бота в деле и не платить за то, что ещё не работает. Когда бот реально нужен 24/7 и нагрузка растёт, переезжай на дешёвый VPS за 200-300 рублей: это снимает ограничения бесплатного тарифа и даёт стабильность.</p></div></div>
 <h2 id="какие-боты-приносят-деньги">Какие боты приносят деньги</h2>
 <p>Бот - это рабочий инструмент, а не игрушка. Что реально нужно бизнесу:</p>
 <ul>
@@ -145,10 +146,33 @@
 </div>
 
   </div>
-  <div class="article-author-box" style="max-width:720px;margin:48px auto 0;padding:20px 24px;border:1px solid var(--border,rgba(128,128,128,0.18));border-radius:16px;background:var(--card,rgba(128,128,128,0.06));">
-    <p style="margin:0 0 8px;font-weight:700;color:var(--gold,#C9A87C);">Автор: Виктор Дачников</p>
-    <p style="margin:0;color:var(--muted,#71717A);font-size:15px;line-height:1.55;">Основатель NextGen Media и клуба NextGen. Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. Выступает в EdTech и AI-нишах, ведёт телеграм-канал «Виктор Дачников | NEXTGEN».</p>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
   </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
 </article>
 <section class="related-section">
   <h2 class="related-title">Читать также</h2>
