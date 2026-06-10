@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>50+ AI-скиллов для Claude: библиотека навыков для бизнеса и контента</title>
+<meta name="description" content="Библиотека из 50+ AI-навыков для Claude: контент, продажи, автоматизация, дизайн. Несколько рабочих скиллов забирай бесплатно прямо из статьи.">
+<link rel="canonical" href="https://nextgenclub.ru/blog/ai-skills-claude-biblioteka">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="50+ AI-скиллов для Claude: библиотека навыков для бизнеса и контента">
+<meta property="og:description" content="Библиотека из 50+ AI-навыков для Claude: контент, продажи, автоматизация, дизайн. Несколько рабочих скиллов забирай бесплатно прямо из статьи.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/ai-skills-claude-biblioteka">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c22-ai-skills/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="50+ AI-скиллов для Claude: библиотека навыков для бизнеса и контента">
+<meta name="twitter:description" content="Библиотека из 50+ AI-навыков для Claude: контент, продажи, автоматизация, дизайн. Несколько рабочих скиллов забирай бесплатно прямо из статьи.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c22-ai-skills/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"50+ AI-скиллов для Claude: библиотека навыков для бизнеса и контента","description":"Библиотека из 50+ AI-навыков для Claude: контент, продажи, автоматизация, дизайн. Несколько рабочих скиллов забирай бесплатно прямо из статьи.","image":"https://nextgenclub.ru/blog/covers/c22-ai-skills/cover.png","datePublished":"2026-06-06","dateModified":"2026-06-06","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/ai-skills-claude-biblioteka"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Нужно ли уметь программировать?","acceptedAnswer":{"@type":"Answer","text":"Нет. Скилл это текстовая инструкция. Ставится копированием, работает на обычном языке."}},{"@type":"Question","name":"Это работает только в Claude Code?","acceptedAnswer":{"@type":"Answer","text":"Скиллы - да, это формат Claude Code. Принцип (сохранить навык один раз) применим и шире, но готовые `SKILL.md` рассчитаны на Claude Code."}},{"@type":"Question","name":"Чем платная библиотека отличается от бесплатных скиллов?","acceptedAnswer":{"@type":"Answer","text":"Бесплатные навыки самодостаточны и решают конкретную задачу. В клубе - полная библиотека под бизнес-процессы, установка под твои задачи, практика внедрения и обновления."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo.png" alt="">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Вступить</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">50+ AI-скиллов для Claude: библиотека навыков для бизнеса и контента</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-06-06">6 июня 2026</time>
+        <span class="dot"></span>
+        <span>8 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c22-ai-skills/cover.webp" alt="50+ AI-скиллов для Claude: библиотека навыков для бизнеса и контента" loading="eager"></div>
+  <div class="article-body">
+    <div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>Поймёшь, что такое скилл и как поставить его за минуту, без кода.</li><li>Заберёшь 4 рабочих скилла прямо из статьи: Humanizer, Hook Generator, Post Scorer, Voice Builder.</li><li>Увидишь карту из 50+ навыков по 5 направлениям: контент, бизнес, Claude-сотрудник, визуал, внедрение.</li><li>Узнаешь, что можно забрать бесплатно сейчас, а что лежит в библиотеке клуба.</li></ul></div>
+</div>
+<p>Скилл это сохранённый навык нейросети. Один раз показываешь Claude как надо, говоришь «запомни», и дальше он делает это с первого раза, без долгих итераций. За 400+ часов в <a href="/blog/vaybkoding-claude-code-gayd">Claude Code</a> я собрал библиотеку таких навыков под реальные задачи: контент, продажи, автоматизация, дизайн, аналитика.</p>
+<p>В этой статье три вещи:</p>
+<ol>
+<li><strong>Карта библиотеки</strong> из 50+ навыков по направлениям, чтобы ты видел весь масштаб.</li>
+<li><strong>Стартовый набор рабочих скиллов</strong> - забираешь и ставишь прямо отсюда, бесплатно.</li>
+<li><strong>Где взять остальное</strong> - публичные ссылки и полная библиотека в клубе NextGen.</li>
+</ol>
+<p>Несколько навыков отдаю рабочими прямо сейчас. Полную библиотеку с установкой, практикой внедрения и обновлениями открываю участникам клуба.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>Скилл это папка с файлом <code>SKILL.md</code>, текстовая инструкция, которую Claude Code подхватывает сам. Программировать не нужно: копируешь блок и просишь Claude создать файл. В статье 4 рабочих скилла, которые ставятся прямо отсюда, плюс карта 50+ навыков по 5 направлениям с честными метками, что бесплатно, что публичное, а что в клубе.</p></div></div>
+<h2 id="что-такое-скилл-и-как-его-установить">Что такое скилл и как его установить</h2>
+<p>Скилл в Claude Code это папка с файлом <code>SKILL.md</code> внутри <code>~/.claude/skills/</code>. В файле описано, что и как делает навык. Claude подхватывает его автоматически.</p>
+<p>Самый простой способ поставить скилл из этой статьи - скопировать блок кода ниже и сказать Claude Code:</p>
+<blockquote><p>«Создай скилл: сделай файл <code>~/.claude/skills/&lt;имя&gt;/SKILL.md</code> с этим содержимым», и вставь блок.</p></blockquote>
+<p>Claude сам создаст папку и файл. Готово, навык работает.</p>
+<h2 id="стартовый-набор-забирай-бесплатно">Стартовый набор: забирай бесплатно</h2>
+<h3 id="1-humanizer-чистит-текст-от-следов-нейросети">1. Humanizer - чистит текст от следов нейросети</h3>
+<p>Ловит более 30 паттернов AI-письма (наработка редакторов Википедии из проекта WikiProject AI Cleanup) и калибрует текст под твой голос. Публичный, ставится одной командой:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer</code></pre></div>
+<p>Дальше в Claude Code пишешь <code>/humanizer</code> и вставляешь текст.</p>
+<h3 id="2-hook-generator-цепляющие-хуки-и-заголовки">2. Hook Generator - цепляющие хуки и заголовки</h3>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">markdown</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-markdown">---
+name: hook-generator
+description: Генерирует цепляющие хуки и первые строки для постов, рилсов, заголовков и писем. Использовать, когда нужно придумать заголовок, открывающую строку или превью, на которых не пролистывают.
+---
+
+Ты редактор-копирайтер, специализируешься на хуках для соцсетей.
+
+Когда пользователь даёт тему, продукт или черновик:
+1. Уточни (если неясно): площадку (Instagram / Telegram / YouTube), аудиторию, цель (охват / продажа / подписка).
+2. Выдай 10 хуков разными приёмами: число-список, провокация, боль, обещание результата, любопытство (открытая петля), контраст «было / стало», вопрос, «ошибка, которую все делают», инсайт, мини-история.
+3. Каждый хук: одна строка, до 90 символов, без длинных тире, без канцелярита и штампов нейросети («безусловно», «в современном мире», «не просто X, а Y»).
+4. Помечай знаком + три самых сильных и одной строкой объясни почему.
+
+Говори как живой человек: конкретика вместо общих слов, никаких эмодзи без запроса.</code></pre></div>
+<h3 id="3-post-scorer-оценка-поста-до-публикации">3. Post Scorer - оценка поста до публикации</h3>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">markdown</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-markdown">---
+name: post-scorer
+description: Оценивает черновик поста, рилса или письма до публикации по чек-листу и даёт конкретные правки. Использовать перед публикацией, когда надо понять, зайдёт ли текст и что усилить.
+---
+
+Ты строгий, но доброжелательный редактор. Оцени присланный текст по шкале 1-10 по пунктам:
+1. Хук - первая строка останавливает скролл?
+2. Ясность - понятно с первого прочтения?
+3. Польза - что человек уносит с собой?
+4. Структура - легко сканировать?
+5. Голос - живой человек или нейросеть? Ищи AI-маркеры.
+6. Призыв - есть понятное следующее действие?
+
+Формат ответа:
+- Таблица: пункт - балл - что не так.
+- Общий балл и вердикт: публиковать или доработать.
+- 3-5 конкретных правок с примерами «было → стало».
+- Если хук слабый, перепиши его в 3 вариантах.
+
+Без воды, по делу.</code></pre></div>
+<h3 id="4-voice-builder-твой-tone-of-voice">4. Voice Builder - твой tone of voice</h3>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">markdown</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-markdown">---
+name: voice-builder
+description: Собирает профиль голоса автора по образцам текстов и дальше пишет и редактирует в этом голосе. Использовать, когда надо, чтобы тексты звучали как конкретный человек, а не как нейросеть.
+---
+
+Цель: зафиксировать голос автора и применять его.
+
+Шаг 1. Попроси 3-5 образцов текстов автора (или возьми присланные).
+Шаг 2. Выдели профиль голоса:
+- лексика, любимые слова и обороты;
+- длина предложений и ритм;
+- тон (прямой, тёплый, ироничный и т.д.);
+- что автор НЕ делает (табу: канцелярит, длинные тире, штампы);
+- как открывает и как закрывает текст.
+Шаг 3. Сохрани профиль в файл `voice-profile.md` в текущем проекте.
+Шаг 4. Дальше любой текст пиши и правь строго по этому профилю, перед выдачей сверяйся с табу-листом.</code></pre></div>
+<div class="callout callout-tip"><div class="callout-icon">💡</div><div class="callout-body"><p class="callout-label">Совет</p><p>Поставь сразу все четыре и собери из них мини-конвейер: Voice Builder фиксирует твой голос, Hook Generator даёт варианты заголовка, ты пишешь пост, Post Scorer оценивает и правит, Humanizer убирает следы нейросети. Пять минут на сборку, дальше каждый текст проходит этот контур.</p></div></div>
+<h2 id="карта-библиотеки-50-навыков-по-направлениям">Карта библиотеки: 50+ навыков по направлениям</h2>
+<p>Метки: <strong>[бесплатно]</strong> - в этой статье, <strong>[публичный]</strong> - открытая ссылка, <strong>[в клубе]</strong> - в библиотеке NextGen с установкой и внедрением.</p>
+<h3 id="контент-и-соцсети">Контент и соцсети</h3>
+<ol>
+<li><strong>Humanizer</strong> - чистит текст от AI-маркеров. <strong>[публичный]</strong> github.com/blader/humanizer</li>
+<li><strong>Hook Generator</strong> - хуки и первые строки. <strong>[бесплатно]</strong></li>
+<li><strong>Post Scorer</strong> - оценка поста до публикации. <strong>[бесплатно]</strong></li>
+<li><strong>Voice Builder</strong> - твой tone of voice. <strong>[бесплатно]</strong></li>
+<li><strong>Reels Content</strong> - тексты под рилсы и Shorts. <strong>[в клубе]</strong></li>
+<li><strong>Reels Pipeline</strong> - монтаж, субтитры, обложки рилсов. <strong>[в клубе]</strong></li>
+<li><strong>Reels Viewer</strong> - разбор чужих рилсов по ссылке. <strong>[в клубе]</strong></li>
+<li><strong>Content Radar</strong> - тренды и темы под твою нишу. <strong>[в клубе]</strong></li>
+<li><strong>NEXTGEN Content</strong> - посты под твой стиль. <strong>[в клубе]</strong></li>
+<li><strong>NEXTGEN Articles</strong> - статьи для базы знаний. <strong>[в клубе]</strong></li>
+<li><strong>Longread</strong> - длинные продающие лендинг-статьи. <strong>[в клубе]</strong></li>
+</ol>
+<h3 id="бизнес-и-автоматизация">Бизнес и автоматизация</h3>
+<ol>
+<li><strong>Meeting Summary</strong> - выжимка созвона: тезисы, договорённости, задачи. <strong>[в клубе]</strong></li>
+<li><strong>CRM Assistant</strong> - ведёт сделки в воронке. <strong>[в клубе]</strong></li>
+<li><strong>Offer Builder</strong> - офферы и КП из брифа или переписки. <strong>[в клубе]</strong></li>
+<li><strong>Contract Generator</strong> - договоры для ИП по нормам РФ. <strong>[в клубе]</strong></li>
+<li><strong>NDA Onboarding</strong> - NDA и выдача доступов подрядчикам. <strong>[в клубе]</strong></li>
+<li><strong>Client Research</strong> - подготовка к встрече: разбор клиента и аргументы. <strong>[в клубе]</strong></li>
+<li><strong>Process Mapper</strong> - раскладка процесса на шаги под автоматизацию. <strong>[в клубе]</strong></li>
+<li><strong>Follow Up</strong> - аккуратные дожимы и напоминания. <strong>[в клубе]</strong></li>
+<li><strong>Anomaly Monitor</strong> - мониторинг чатов на лидов. <strong>[в клубе]</strong></li>
+<li><strong>Marcus</strong> - личный операционный ассистент в Telegram. <strong>[в клубе]</strong></li>
+</ol>
+<h3 id="claude-как-сотрудник">Claude как сотрудник</h3>
+<ol>
+<li><strong>Prompt Engineer</strong> - превращает сырую мысль в профессиональный промпт. <strong>[в клубе]</strong></li>
+<li><strong>Memory Builder</strong> - выстраивает память проекта через CLAUDE.md. <strong>[в клубе]</strong></li>
+<li><strong>Research Agent</strong> - копает тему по источникам и приносит выжимку. <strong>[в клубе]</strong></li>
+<li><strong>Task Decomposer</strong> - бьёт большую задачу на подзадачи и ведёт до результата. <strong>[в клубе]</strong></li>
+<li><strong>QA Reviewer</strong> - проверяет работу на ошибки до отправки. <strong>[в клубе]</strong></li>
+<li><strong>Skill Creator</strong> - помогает упаковать твой workflow в новый скилл. <strong>[публичный]</strong> github.com/anthropics/skills</li>
+<li><strong>Brain</strong> - поиск по архиву прошлых сессий. <strong>[в клубе]</strong></li>
+<li><strong>LLM Council</strong> - совет из 5 ИИ-советников по сложному решению. <strong>[в клубе]</strong></li>
+<li><strong>Skill Selector</strong> - подбирает стек скиллов под задачу. <strong>[в клубе]</strong></li>
+<li><strong>Autoresearch</strong> - автономный цикл улучшения по метрике. <strong>[в клубе]</strong></li>
+</ol>
+<h3 id="визуал-и-упаковка">Визуал и упаковка</h3>
+<ol>
+<li><strong>Image 2 Director</strong> - режиссура генерации картинок под стиль и формат. <strong>[в клубе]</strong></li>
+<li><strong>Carousel Design</strong> - карусели для Instagram из текста. <strong>[в клубе]</strong></li>
+<li><strong>Cover Maker</strong> - обложки и превью под рилсы и посты. <strong>[в клубе]</strong></li>
+<li><strong>Brand System</strong> - единый фирменный стиль: цвета, шрифты, сетка. <strong>[в клубе]</strong></li>
+<li><strong>Ad Creative</strong> - рекламные креативы пачками под тесты. <strong>[в клубе]</strong></li>
+<li><strong>Visual QA</strong> - вычитка макетов: опечатки, кропы, читаемость. <strong>[в клубе]</strong></li>
+<li><strong>DOCX</strong> - документы Word из Claude. <strong>[публичный]</strong> github.com/anthropics/skills</li>
+<li><strong>PPTX</strong> - презентации и питч-деки. <strong>[публичный]</strong> github.com/anthropics/skills</li>
+<li><strong>PDF</strong> - чтение, сборка и заполнение PDF. <strong>[публичный]</strong> github.com/anthropics/skills</li>
+<li><strong>XLSX</strong> - таблицы Excel. <strong>[публичный]</strong> github.com/anthropics/skills</li>
+<li><strong>Google Workspace</strong> - Google Docs и Sheets из Claude. <strong>[в клубе]</strong></li>
+</ol>
+<h3 id="база-знаний-и-внедрение">База знаний и внедрение</h3>
+<ol>
+<li><strong>AI Radar</strong> - ежедневный мониторинг рынка: новые инструменты и связки. <strong>[в клубе]</strong></li>
+<li><strong>Knowledge Base</strong> - структурированная база знаний по AI под рукой. <strong>[в клубе]</strong></li>
+<li><strong>Workshop Notes</strong> - конспекты практик, готовые к применению. <strong>[в клубе]</strong></li>
+<li><strong>Community Match</strong> - подбор нужных людей под задачу. <strong>[в клубе]</strong></li>
+<li><strong>Implementation</strong> - пошаговое внедрение навыка в твой процесс. <strong>[в клубе]</strong></li>
+<li><strong>Case Library</strong> - библиотека кейсов: что у кого сработало. <strong>[в клубе]</strong></li>
+<li><strong>Autonomous Deploy</strong> - деплой проектов на сервер прямо из Claude. <strong>[в клубе]</strong></li>
+<li><strong>Security Guard</strong> - защита от случайной утечки токенов и паролей. <strong>[в клубе]</strong></li>
+<li><strong>Telegram Assistant</strong> - управление Telegram из Claude. <strong>[в клубе]</strong></li>
+<li><strong>YouTube Analyzer</strong> - разбор видео по реальному транскрипту. <strong>[в клубе]</strong></li>
+</ol>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Нужно ли уметь программировать?</summary><div class="faq-answer">Нет. Скилл это текстовая инструкция. Ставится копированием, работает на обычном языке.</div></details>
+<details class="faq-item"><summary>Это работает только в Claude Code?</summary><div class="faq-answer">Скиллы - да, это формат Claude Code. Принцип (сохранить навык один раз) применим и шире, но готовые <code>SKILL.md</code> рассчитаны на Claude Code.</div></details>
+<details class="faq-item"><summary>Чем платная библиотека отличается от бесплатных скиллов?</summary><div class="faq-answer">Бесплатные навыки самодостаточны и решают конкретную задачу. В клубе - полная библиотека под бизнес-процессы, установка под твои задачи, практика внедрения и обновления.</div></details>
+</div>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Хочешь всю библиотеку?</h2>
+  <p class="cta-desc">Стартовый набор уже у тебя. За полной библиотекой из 50+ навыков с установкой под твои задачи и поддержкой - напиши «NEXTGEN», открою доступ и помогу внедрить.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/vaybkoding-claude-code-gayd" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/p0-pillar/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Вайбкодинг с Claude Code: полный гайд для бизнеса в 2026</h3>
+    <p>Что такое вайбкодинг и Claude Code, что реально можно сделать без навыков кода, как запустить в России и сколько это стоит. Разбор на реальных примерах.</p>
+  </div>
+</a>
+<a href="/blog/prompt-inzhiniring-s-nulya" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/c14-prompt/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Промпт-инжиниринг с нуля: с чего начать и как ставить задачи нейросети</h3>
+    <p>Промпт-инжиниринг простыми словами: с чего начать, структура хорошего промпта, рабочие приёмы и частые ошибки. Без академии - под реальные бизнес-задачи.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
