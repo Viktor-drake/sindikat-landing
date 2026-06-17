@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как Claude разбирает видео по ссылке: моя сборка для контент-ресёрча</title>
+<meta name="description" content="Как я анализирую чужие рилсы и YouTube-ролики по ссылке через собственные скиллы Claude Code: транскрипт, хук, структура, паттерны по пачке видео.">
+<link rel="canonical" href="https://nextgenclub.ru/blog/kak-claude-razbirat-video-po-ssylke">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Как Claude разбирает видео по ссылке: моя сборка для контент-ресёрча">
+<meta property="og:description" content="Как я анализирую чужие рилсы и YouTube-ролики по ссылке через собственные скиллы Claude Code: транскрипт, хук, структура, паттерны по пачке видео.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/kak-claude-razbirat-video-po-ssylke">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c28-video-analyz/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Как Claude разбирает видео по ссылке: моя сборка для контент-ресёрча">
+<meta name="twitter:description" content="Как я анализирую чужие рилсы и YouTube-ролики по ссылке через собственные скиллы Claude Code: транскрипт, хук, структура, паттерны по пачке видео.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c28-video-analyz/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Как Claude разбирает видео по ссылке: моя сборка для контент-ресёрча","description":"Как я анализирую чужие рилсы и YouTube-ролики по ссылке через собственные скиллы Claude Code: транскрипт, хук, структура, паттерны по пачке видео.","image":"https://nextgenclub.ru/blog/covers/c28-video-analyz/cover.png","datePublished":"2026-06-17","dateModified":"2026-06-17","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/kak-claude-razbirat-video-po-ssylke"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Работает ли это с закрытыми или приватными аккаунтами?","acceptedAnswer":{"@type":"Answer","text":"Нет. yt-dlp качает только то, что доступно публично без авторизации. Приватные аккаунты Instagram, закрытые TikTok-аккаунты и гео-блокированный контент не скачаются."}},{"@type":"Question","name":"Насколько точная транскрипция?","acceptedAnswer":{"@type":"Answer","text":"Для русскоязычного контента faster-whisper даёт хорошее качество, но иногда путается с именами, жаргоном и быстрой речью. Проверяй транскрипт, не принимай слепо за истину."}},{"@type":"Question","name":"Можно ли разбирать видео конкурентов систематически?","acceptedAnswer":{"@type":"Answer","text":"Да, это основной сценарий. Составь список каналов и аккаунтов, регулярно скидывай свежие ролики на разбор. Клод запомнит твой формат запроса если работать в одной сессии."}},{"@type":"Question","name":"Нужно ли платить за каждый разбор?","acceptedAnswer":{"@type":"Answer","text":"Расходуются токены Claude. Один разбор ролика стоит дёшево, batch из 10-15 чуть дороже. При подписке Max это в пределах лимитов, при pay-as-you-go считается по стандартным ценам Anthropic."}},{"@type":"Question","name":"reels-viewer работает только с Instagram?","acceptedAnswer":{"@type":"Answer","text":"Нет, он работает со всем, что умеет качать yt-dlp: Instagram, TikTok, часть других платформ. YouTube лучше через `youtube-analyzer` — там субтитры подтягиваются напрямую без полного скачивания."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo.png" alt="">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Вступить</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Как Claude разбирает видео по ссылке: моя сборка для контент-ресёрча</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-06-17">17 июня 2026</time>
+        <span class="dot"></span>
+        <span>6 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c28-video-analyz/cover.webp" alt="Как Claude разбирает видео по ссылке: моя сборка для контент-ресёрча" loading="eager"></div>
+  <div class="article-body">
+    <p>🔴 <strong>Продвинутый</strong> — для тех, кто уже работает с Claude Code и знаком с понятием скиллов</p>
+<blockquote><p>⚡ <strong>Не обязательно читать всю статью</strong> Скопируй ссылку на эту статью и отдай Клоду: «Прочитай статью и настрой мне reels-viewer + youtube-analyzer». Он прочитает её сам и проведёт по установке, отвечая на твои вопросы по ходу. Если хочешь разобраться сам — читай дальше.</p></blockquote>
+<div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>Поймёшь, зачем разбирать чужой контент через Claude, а не «просмотром».</li><li>Узнаешь, что нужно для запуска: Claude Code, скиллы, ffmpeg, yt-dlp.</li><li>Увидишь, что приходит в ответе: транскрипт, хук, структура, оценка.</li><li>Научишься скидывать пачку ссылок и получать сводные паттерны по всей подборке.</li><li>Получишь конкретные шаги для первого запуска.</li></ul></div>
+</div>
+<p>Смотреть чужие ролики полезно. Но «смотреть и чувствовать» это не анализ, это впечатление. После 10 видео ты уже не помнишь, в каком именно ролике был тот удачный хук, почему один набрал 200 тысяч просмотров, а похожий с той же темой завис на 3 тысячах. Данные уходят, паттерны не складываются.</p>
+<p>Я решил эту задачу иначе: даю Claude ссылку и получаю структурированный разбор. Расскажу как это работает и что для этого нужно.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>В Claude Code есть два скилла для разбора видео: <code>reels-viewer</code> для рилсов и TikTok, <code>youtube-analyzer</code> для YouTube. Они дают транскрипт, анализ хука и структуры, объяснение почему ролик зашёл. Можно скинуть пачку ссылок и получить сводные паттерны. Это рабочий ресёрч-инструмент, а не кнопка-магия: нужен Claude Code + ffmpeg + yt-dlp, часть приватных или гео-закрытых видео не качается.</p></div></div>
+<h2 id="зачем-анализировать-по-ссылке-а-не-просто-смотреть">Зачем анализировать по ссылке, а не просто смотреть</h2>
+<p>Когда смотришь ролик глазами, замечаешь общее: красиво снято, бодрая музыка, харизматичный автор. Но содержательный анализ требует другого: зафиксировать дословный текст первых 5 секунд, разметить структуру по тайм-кодам, сравнить это с тем, как сделаны 15 других роликов в нише.</p>
+<p>Руками это занимает полдня. Клод делает это за минуту, причём по каждому ролику в одном формате, который потом можно сравнивать.</p>
+<p>Конкретный пример: я разбираю конкурентов в EdTech-нише перед записью своих рилсов. Скидываю 10-15 ссылок на ролики, которые хорошо зашли, получаю по каждому транскрипт и разбор структуры, а потом сводный отчёт: какие хуки повторяются, какова средняя длина, есть ли общий паттерн в финальных призывах. Это уже материал для работы, а не ощущение после просмотра.</p>
+<h2 id="что-нужно-для-запуска">Что нужно для запуска</h2>
+<p>Это не плагин и не сайт с полем для ссылки. Это скиллы, которые работают внутри Claude Code на твоей машине.</p>
+<p><strong>Необходимое:</strong></p>
+<ul>
+<li>Claude Code (установленный и настроенный)</li>
+<li>Скилл <code>reels-viewer</code> для рилсов Instagram и TikTok</li>
+<li>Скилл <code>youtube-analyzer</code> для YouTube</li>
+<li><strong>ffmpeg</strong> — извлекает кадры и аудио из видео</li>
+<li><strong>yt-dlp</strong> — скачивает видео по ссылке</li>
+<li>Node.js (обычно уже стоит если Claude Code настроен)</li>
+</ul>
+<p><strong>Честно про ограничения:</strong> часть видео не скачивается. Приватные аккаунты, закрытые группы, ролики с гео-блоком для РФ, некоторые видео TikTok. Это ограничение самого yt-dlp, не скилла. Публичный контент, который доступен в браузере без авторизации, качается нормально.</p>
+<h2 id="как-разобрать-одно-видео">Как разобрать одно видео</h2>
+<p>Берёшь ссылку и отдаёшь Клоду с одним из двух скиллов:</p>
+<p>Для рилса или TikTok:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">/reels-viewer https://www.instagram.com/reel/...</code></pre></div>
+<p>Для YouTube:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">/youtube-analyzer https://www.youtube.com/watch?v=...</code></pre></div>
+<p><strong>Что происходит под капотом у <code>reels-viewer</code>:</strong> yt-dlp скачивает видео, ffmpeg вытаскивает кадры и аудио, faster-whisper транскрибирует речь, кадры читаются визуально. В итоге Клод видит ролик изнутри: дословный текст + что происходит на экране.</p>
+<p><strong>Что происходит у <code>youtube-analyzer</code>:</strong> yt-dlp тянет субтитры или транскрипт прямо из YouTube. Если они есть, отдаёт почти мгновенно. Если нет, транскрибирует аудио.</p>
+<p><strong>Что получаешь в ответе:</strong></p>
+<ul>
+<li><strong>Транскрипт</strong> — дословный текст ролика с разбивкой по времени</li>
+<li><strong>Хук</strong> — первые 3-5 секунд, дословно и с оценкой: почему должно цеплять</li>
+<li><strong>Структура</strong> — как устроен ролик по блокам (открытие, тело, CTA или его отсутствие)</li>
+<li><strong>Визуальная подача</strong> — что происходит в кадре, монтаж, темп</li>
+<li><strong>Почему зашло или почему нет</strong> — оценка с обоснованием</li>
+</ul>
+<p>Это не гадание на кофейной гуще, а разбор по факту: что реально сказано и показано, как это соотносится с тем, что работает в нише.</p>
+<div class="callout callout-tip"><div class="callout-icon">💡</div><div class="callout-body"><p class="callout-label">Совет</p><p>Если делаешь регулярный ресёрч в одной нише, создай себе шаблон запроса: «разбери ролик, обращая внимание на X, Y, Z». Клод будет применять один фокус ко всем видео в серии, и потом это удобно сравнивать.</p></div></div>
+<h2 id="batch-анализ-пачка-ссылок-за-один-раз">Batch-анализ: пачка ссылок за один раз</h2>
+<p>Разбор одного ролика полезен. Разбор 10-15 за один запрос даёт кое-что ценнее: <strong>паттерны</strong>.</p>
+<p>Можно скинуть пачку ссылок одним запросом:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Разбери эти ролики по одному и потом дай сводный отчёт:
+https://www.youtube.com/watch?v=...
+https://www.youtube.com/watch?v=...
+https://www.instagram.com/reel/...
+[ещё ссылки]</code></pre></div>
+<p>Клод разберёт каждый по отдельности, а потом синтезирует по всей подборке:</p>
+<ul>
+<li>какие типы хуков встречаются чаще всего</li>
+<li>средняя длина и структура роликов, которые набирают просмотры</li>
+<li>какие темы и углы повторяются</li>
+<li>что делают авторы в конце: призыв к действию, вопрос, клиффхэнгер</li>
+</ul>
+<p>Это конкретно помогает перед планированием серии контента: видишь что работает у других, понимаешь куда заходить, а куда уже переполнено.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p>Batch-режим работает последовательно, не параллельно. Если скидываешь 20 ссылок, будь готов что это займёт несколько минут, особенно с рилсами (там скачивание + транскрипция). Для первого раза возьми 5-7 роликов.</p></div></div>
+<h2 id="как-настроить-пошаговые-шаги">Как настроить: пошаговые шаги</h2>
+<p>Это технический инструмент, его нужно настроить один раз. Дальше работает через простые команды.</p>
+<p><strong>Шаг 1.</strong> Убедись, что Claude Code установлен и запускается. Если нет — сначала туда. Статья <a href="/blog/vaybkoding-claude-code-gayd">Claude Code без программирования</a> и <a href="/blog/besplatnyy-claude-code-free-claude-code">бесплатный доступ к Claude Code</a> помогут.</p>
+<p><strong>Шаг 2.</strong> Установи ffmpeg и yt-dlp. На Windows это делается через winget или chocolatey, на Mac через homebrew:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">bash</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-bash"># Mac
+brew install ffmpeg yt-dlp
+
+# Windows (через winget)
+winget install ffmpeg
+winget install yt-dlp</code></pre></div>
+<p><strong>Шаг 3.</strong> Скилл <code>reels-viewer</code> и <code>youtube-analyzer</code> должны быть подключены к твоей сборке Claude Code. Если не знаешь что это такое и как подключить скиллы, открой Claude Code и напиши: «Прочитай эту статью и настрой мне reels-viewer + youtube-analyzer» — он сам пройдёт по шагам.</p>
+<p><strong>Шаг 4.</strong> Проверь работу на публичном YouTube-ролике (самый простой случай, обычно работает сразу).</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Работает ли это с закрытыми или приватными аккаунтами?</summary><div class="faq-answer">Нет. yt-dlp качает только то, что доступно публично без авторизации. Приватные аккаунты Instagram, закрытые TikTok-аккаунты и гео-блокированный контент не скачаются.</div></details>
+<details class="faq-item"><summary>Насколько точная транскрипция?</summary><div class="faq-answer">Для русскоязычного контента faster-whisper даёт хорошее качество, но иногда путается с именами, жаргоном и быстрой речью. Проверяй транскрипт, не принимай слепо за истину.</div></details>
+<details class="faq-item"><summary>Можно ли разбирать видео конкурентов систематически?</summary><div class="faq-answer">Да, это основной сценарий. Составь список каналов и аккаунтов, регулярно скидывай свежие ролики на разбор. Клод запомнит твой формат запроса если работать в одной сессии.</div></details>
+<details class="faq-item"><summary>Нужно ли платить за каждый разбор?</summary><div class="faq-answer">Расходуются токены Claude. Один разбор ролика стоит дёшево, batch из 10-15 чуть дороже. При подписке Max это в пределах лимитов, при pay-as-you-go считается по стандартным ценам Anthropic.</div></details>
+<details class="faq-item"><summary>reels-viewer работает только с Instagram?</summary><div class="faq-answer">Нет, он работает со всем, что умеет качать yt-dlp: Instagram, TikTok, часть других платформ. YouTube лучше через <code>youtube-analyzer</code> — там субтитры подтягиваются напрямую без полного скачивания.</div></details>
+</div>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Разбирать чужой контент, делать свой лучше</h2>
+  <p class="cta-desc">В NextGen Club мы каждую неделю работаем с реальными инструментами: разбираем что работает в нишах участников, настраиваем сборки, делимся паттернами. Приходи, если хочешь делать контент с данными, а не наощупь.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/vaybkoding-claude-code-gayd" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/p0-pillar/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Вайбкодинг с Claude Code: полный гайд для бизнеса в 2026</h3>
+    <p>Что такое вайбкодинг и Claude Code, что реально можно сделать без навыков кода, как запустить в России и сколько это стоит. Разбор на реальных примерах.</p>
+  </div>
+</a>
+<a href="/blog/besplatnyy-claude-code-free-claude-code" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/c23-free-claude-code/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Бесплатный Claude Code: как запустить без подписки через free-claude-code</h3>
+    <p>Claude Code стоит от $20/мес. Показываю рабочий способ запустить его бесплатно через open-source коннектор на моделях NVIDIA, Gemini и DeepSeek.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
