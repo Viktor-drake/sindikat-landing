@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Моя сборка, чтобы Claude делал сайты уровня продукта, а не AI-шаблоны</title>
+<meta name="description" content="Три рычага, которые я использую в Claude Code для дизайна на уровне продукта: движение, авто-правка, референсы. Плюс сигнатурные детали, которые дают вау.">
+<link rel="canonical" href="https://nextgenclub.ru/blog/dizayn-sayta-claude-code-urovnya-produkta">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Моя сборка, чтобы Claude делал сайты уровня продукта, а не AI-шаблоны">
+<meta property="og:description" content="Три рычага, которые я использую в Claude Code для дизайна на уровне продукта: движение, авто-правка, референсы. Плюс сигнатурные детали, которые дают вау.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/dizayn-sayta-claude-code-urovnya-produkta">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c29-dizayn/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Моя сборка, чтобы Claude делал сайты уровня продукта, а не AI-шаблоны">
+<meta name="twitter:description" content="Три рычага, которые я использую в Claude Code для дизайна на уровне продукта: движение, авто-правка, референсы. Плюс сигнатурные детали, которые дают вау.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c29-dizayn/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Моя сборка, чтобы Claude делал сайты уровня продукта, а не AI-шаблоны","description":"Три рычага, которые я использую в Claude Code для дизайна на уровне продукта: движение, авто-правка, референсы. Плюс сигнатурные детали, которые дают вау.","image":"https://nextgenclub.ru/blog/covers/c29-dizayn/cover.png","datePublished":"2026-06-19","dateModified":"2026-06-19","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/dizayn-sayta-claude-code-urovnya-produkta"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Нужен ли Claude Code для этого или хватит обычного Claude?","acceptedAnswer":{"@type":"Answer","text":"Этот подход работает в Claude Code - там ты работаешь с реальными файлами проекта, Claude вносит изменения напрямую. В обычном чате Claude может написать код, но применять его к проекту будешь руками."}},{"@type":"Question","name":"Нужно ли знать CSS и фронтенд?","acceptedAnswer":{"@type":"Answer","text":"Базовое понимание помогает - чтобы ставить точные задачи. Но необязательно: описания «добавь анимацию появления», «сделай стеклянный эффект» Claude понимает без технических деталей."}},{"@type":"Question","name":"Где брать референсы для промптов?","acceptedAnswer":{"@type":"Answer","text":"Awwwards, Mobbin, Dribbble, ProductHunt - для вдохновения. Конкретные продукты которые нравятся: Vercel, Linear, Loom, Notion, Raycast. Описывай конкретный блок который нравится, не весь сайт целиком."}},{"@type":"Question","name":"Это работает для любых проектов или только лендингов?","acceptedAnswer":{"@type":"Answer","text":"Для лендингов и маркетинговых сайтов работает лучше всего. Для веб-приложений принципы те же, но там важнее UX-логика, а не визуальная подача."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo.png" alt="">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Вступить</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Моя сборка, чтобы Claude делал сайты уровня продукта, а не AI-шаблоны</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-06-19">19 июня 2026</time>
+        <span class="dot"></span>
+        <span>6 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c29-dizayn/cover.webp" alt="Моя сборка, чтобы Claude делал сайты уровня продукта, а не AI-шаблоны" loading="eager"></div>
+  <div class="article-body">
+    <div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p>Проблема сайтов на Claude не в Claude. Проблема в том, как ты ставишь задачу. Три рычага меняют результат радикально: движение с правильным easing, авто-правка типографики и сетки одной командой, и конкретные референсы вместо «сделай красиво». Плюс несколько деталей, которые дают вау.</p></div>
+</div>
+<p>Все видели одинаковые сайты, сделанные через AI: светлый фон, синие кнопки, карточки в три колонки, шрифт Inter. Узнаешь его за секунду. Это не потому что Claude плохо умеет в дизайн — он умеет. Это потому что ему не дали контекст.</p>
+<p>Покажу три рычага, которые я использую в своей сборке для премиальных лендингов. Это то, что дало результат на реальных проектах.</p>
+<h2 id="почему-сайты-на-claude-выглядят-как-шаблон">Почему сайты на Claude выглядят как шаблон</h2>
+<p>Claude по умолчанию оптимизирует под «работает и выглядит нормально». Если не задать планку выше, он делает то, что видел чаще всего в обучающих данных. А чаще всего там - стандартные Bootstrap/Tailwind-шаблоны с предсказуемой иерархией.</p>
+<p>Решение не в том, чтобы написать «сделай дизайн уровня Apple». Это работает плохо - слишком абстрактно. Решение - в конкретных инструкциях и правильном контексте.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>Три рычага меняют результат: (1) движение с правильным easing - интерфейс начинает «дышать», (2) авто-правка дизайна одной командой - убирает разнобой в отступах, типографике, сетке, (3) конкретные референсы - Claude понимает вкус, а не угадывает.</p></div></div>
+<h2 id="рычаг-1-движение-и-анимации-с-правильным-easing">Рычаг 1: движение и анимации с правильным easing</h2>
+<p>Статичный сайт на Claude выглядит как документ. Добавь движение - и он начинает ощущаться как продукт.</p>
+<p>Главное - не просто «добавь анимации». А задать конкретный easing и тайминг. Дефолтные <code>ease-in-out</code> на 0.3s - это стандарт. Вот что работает лучше:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Добавь на секцию появление при скролле. Используй:
+- transform: translateY(24px) → translateY(0)
+- opacity: 0 → 1
+- easing: cubic-bezier(0.16, 1, 0.3, 1)
+- duration: 0.6s
+- stagger между дочерними элементами 80ms</code></pre></div>
+<p>Этот easing (spring-like, быстрый старт, плавное завершение) - стандарт у Vercel, Linear, Loom. Он ощущается дорого, потому что движение похоже на физическое.</p>
+<div class="callout callout-tip"><div class="callout-icon">💡</div><div class="callout-body"><p class="callout-label">Совет</p><p>Попроси Claude применить один easing ко всему проекту глобально: «Найди все transition и animation в проекте, замени duration на 0.5-0.7s, easing на cubic-bezier(0.16, 1, 0.3, 1)». Один проход - и интерфейс сразу начинает ощущаться иначе.</p></div></div>
+<p>Микроанимации на hover тоже работают: scale на кнопках (1.02), лёгкий подъём карточек (translateY -4px), плавное изменение цвета с задержкой. Это детали, которые чувствуются, даже если пользователь не может их назвать.</p>
+<h2 id="рычаг-2-авто-правка-дизайна-одной-командой">Рычаг 2: авто-правка дизайна одной командой</h2>
+<p>Когда пишешь сайт поэтапно - секция за секцией - разнобой накапливается. Отступы чуть разные, шрифты немного плавают, карточки не выровнены по сетке.</p>
+<p>Вместо ручной правки - даю Claude одну задачу на весь проект:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Пройдись по всему проекту и приведи к единому стандарту:
+- отступы: только кратные 4px (16, 24, 32, 48, 64, 96px)
+- типографика: заголовки H1/H2/H3 с чёткой иерархией, line-height 1.2/1.4/1.6
+- сетка: все колонки на одной базовой сетке
+- выравнивание: все блоки на главной оси выровнены единообразно
+Покажи что изменил.</code></pre></div>
+<p>Это занимает один раз 2-3 минуты - и сайт становится визуально согласованным. Разнобой исчезает.</p>
+<h2 id="рычаг-3-конкретные-референсы-вместо-абстракций">Рычаг 3: конкретные референсы вместо абстракций</h2>
+<p>«Сделай красиво» - самая неэффективная инструкция. «Сделай как Vercel.com» - лучше, но всё ещё абстрактно.</p>
+<p>Рабочий подход: дать конкретный элемент с конкретного сайта.</p>
+<p>Например:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Посмотри как устроен hero-блок на linear.app - 
+темный фон, крупный заголовок с градиентным акцентом на ключевом слове,
+подзаголовок в 60% непрозрачности, две кнопки (primary solid + ghost),
+слева снизу - соцдоказательство маленьким шрифтом.
+Сделай мой hero в этой логике, адаптировав под мой контент.</code></pre></div>
+<p>Claude понимает конкретные описания - лучше, чем абстрактные уровни качества. Когда ты описываешь что именно ты видел, он воспроизводит паттерн, а не придумывает.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p>Ещё лучше работает скриншот конкретного блока, переданный в контекст. Claude Code в режиме вайбкодинга принимает изображения - показывай что нравится, а не описывай словами.</p></div></div>
+<h2 id="сигнатурные-детали-которые-дают-вау">Сигнатурные детали, которые дают «вау»</h2>
+<p>Есть несколько конкретных решений, которые я использую на премиальных лендингах - и они стабильно дают реакцию «это выглядит дорого»:</p>
+<p><strong>Шрифт Onest вместо Inter.</strong> Inter - стандарт, его везде. Onest - современная русскоязычная гарнитура, которая хорошо смотрится и в кириллице, и в латинице. Просто замени шрифт в глобальных стилях.</p>
+<p><strong>Liquid glass на элементах.</strong> Стеклянный эффект с blur-фоном (backdrop-filter: blur + полупрозрачный фон) на карточках, навбаре, модалках. Это ощущение глубины, которого нет у плоского дизайна. Просит: «Добавь glass-morphism на карточки: backdrop-filter blur(20px), фон rgba(255,255,255,0.08), border rgba(255,255,255,0.12)».</p>
+<p><strong>Градиентные акценты на заголовках.</strong> Одно-два ключевых слова в заголовке с градиентом вместо плоского цвета. Классика: линейный градиент с фиолетового на голубой или с оранжевого на розовый на тёмном фоне.</p>
+<p><strong>Тёмная тема как основа, а не опция.</strong> Большинство AI-сайтов делают светлую тему по умолчанию. Тёмный фон сразу поднимает воспринимаемое качество - он прощает мелкие ошибки в тенях и создаёт ощущение современного продукта.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Нужен ли Claude Code для этого или хватит обычного Claude?</summary><div class="faq-answer">Этот подход работает в Claude Code - там ты работаешь с реальными файлами проекта, Claude вносит изменения напрямую. В обычном чате Claude может написать код, но применять его к проекту будешь руками.</div></details>
+<details class="faq-item"><summary>Нужно ли знать CSS и фронтенд?</summary><div class="faq-answer">Базовое понимание помогает - чтобы ставить точные задачи. Но необязательно: описания «добавь анимацию появления», «сделай стеклянный эффект» Claude понимает без технических деталей.</div></details>
+<details class="faq-item"><summary>Где брать референсы для промптов?</summary><div class="faq-answer">Awwwards, Mobbin, Dribbble, ProductHunt - для вдохновения. Конкретные продукты которые нравятся: Vercel, Linear, Loom, Notion, Raycast. Описывай конкретный блок который нравится, не весь сайт целиком.</div></details>
+<details class="faq-item"><summary>Это работает для любых проектов или только лендингов?</summary><div class="faq-answer">Для лендингов и маркетинговых сайтов работает лучше всего. Для веб-приложений принципы те же, но там важнее UX-логика, а не визуальная подача.</div></details>
+</div>
+<p>Это рабочий рецепт из реальных проектов, не теория. Начни с одного рычага - например авто-правки дизайна на уже существующем проекте. Один промпт - и видно разницу.</p>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Строишь сайт или лендинг через Claude Code?</h2>
+  <p class="cta-desc">Разбираю реальные проекты и показываю что работает - в Telegram-канале. Без воды, только практика.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/vaybkoding-claude-code-gayd" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/p0-pillar/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Вайбкодинг с Claude Code: полный гайд для бизнеса в 2026</h3>
+    <p>Что такое вайбкодинг и Claude Code, что реально можно сделать без навыков кода, как запустить в России и сколько это стоит. Разбор на реальных примерах.</p>
+  </div>
+</a>
+<a href="/blog/moushen-dizayn-claude-code-remotion" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/c25-remotion/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Моушен-дизайн в Claude Code через Remotion: анимация без After Effects</h3>
+    <p>Как делать кинетический текст, анимированные карточки и схемы для роликов кодом — через Remotion и Claude Code. Бесплатно, под полным контролем.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

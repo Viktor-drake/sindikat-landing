@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 промптов — моя контент-команда в одном Claude</title>
+<meta name="description" content="Как заменить контент-команду восемью ролями в Claude: аудит, стратегия, тексты, монтаж, аналитика. Система, которую запускаешь в одном чате.">
+<link rel="canonical" href="https://nextgenclub.ru/blog/8-promptov-claude">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="8 промптов — моя контент-команда в одном Claude">
+<meta property="og:description" content="Как заменить контент-команду восемью ролями в Claude: аудит, стратегия, тексты, монтаж, аналитика. Система, которую запускаешь в одном чате.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/8-promptov-claude">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c30-8-promptov/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="8 промптов — моя контент-команда в одном Claude">
+<meta name="twitter:description" content="Как заменить контент-команду восемью ролями в Claude: аудит, стратегия, тексты, монтаж, аналитика. Система, которую запускаешь в одном чате.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c30-8-promptov/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"8 промптов — моя контент-команда в одном Claude","description":"Как заменить контент-команду восемью ролями в Claude: аудит, стратегия, тексты, монтаж, аналитика. Система, которую запускаешь в одном чате.","image":"https://nextgenclub.ru/blog/covers/c30-8-promptov/cover.png","datePublished":"2026-06-19","dateModified":"2026-06-19","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/8-promptov-claude"}}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo.png" alt="">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Вступить</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">8 промптов — моя контент-команда в одном Claude</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-06-19">19 июня 2026</time>
+        <span class="dot"></span>
+        <span>7 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c30-8-promptov/cover.webp" alt="8 промптов — моя контент-команда в одном Claude" loading="eager"></div>
+  <div class="article-body">
+    <div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p>Вместо контент-менеджера, копирайтера, дизайнера и сценариста — восемь ролей в одном Claude. Каждая роль — отдельный промпт, результат одной передаётся следующей. Это не теория: я так и делаю свой контент.</p></div>
+</div>
+<p>Я не нанимаю контент-команду. У меня один Claude и восемь промптов — по одному на каждую роль. Аудитор, стратег, копирайтер, сценарист, редактор, дизайнер, сборщик, аналитик.</p>
+<p>Каждый промпт — это специализированный агент. Ты запускаешь их по цепочке: результат одного идёт на вход следующему. На выходе — готовый контент для Instagram: рилс, карусель, текст — всё с единым голосом и логикой воронки.</p>
+<p>Объясню как это работает изнутри.</p>
+<h2 id="зачем-восемь-ролей-а-не-один-большой-промпт">Зачем восемь ролей, а не один большой промпт</h2>
+<p>Один общий промпт «сделай мне контент на неделю» даёт посредственный результат. Проблема в том, что разные задачи требуют разного режима мышления.</p>
+<p>Аналитика — это про данные и паттерны. Стратегия — про воронку и цели. Копирайтинг — про эмоцию и хук. Редактура — про голос и живость. Когда один промпт пытается делать всё это одновременно, он делает всё средне.</p>
+<p>Восемь ролей — восемь режимов. Каждая делает одно, но хорошо.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>Система работает по принципу конвейера: Аудитор → Стратег → Копирайтер/Сценарист → Редактор → Сборщик → публикация → Аналитик → обратно в Стратег. Цикл закрывается — каждый месяц данные Аналитика кормят следующий план Стратега.</p></div></div>
+<h2 id="роль-1-аудитор">Роль 1: Аудитор</h2>
+<p>Запускается раз в месяц. Анализирует твои последние 10-15 постов: что зашло, что нет, какие темы резонируют, какие форматы работают лучше — рилсы, карусели, одиночные.</p>
+<p>Аудитор смотрит на это холодно, как аналитик — без привязанности к контенту, который ты делал. Его задача: дать честный срез «вот что работает, вот что нет, вот паттерны».</p>
+<p>Результат Аудитора — входные данные для Стратега.</p>
+<h2 id="роль-2-стратег">Роль 2: Стратег</h2>
+<p>Берёт данные Аудитора и строит контент-план на неделю. Не просто «темы» — а логику воронки: какой пост привлекает новую аудиторию, какой прогревает, какой двигает к действию.</p>
+<p>Стратег думает вертикально: один контент-кластер, несколько форматов, единая линия сообщения. Это не рандомные посты, а система.</p>
+<h2 id="роли-3-4-копирайтер-и-сценарист">Роли 3-4: Копирайтер и Сценарист</h2>
+<p>Берут задание от Стратега — конкретную тему с конкретной целью — и пишут.</p>
+<p>Копирайтер пишет тексты для каруселей: заголовок, слайды, финальный призыв. У него конкретная формула: хук → проблема → решение → доказательство → действие.</p>
+<p>Сценарист пишет рилс: таймлайн 30-60 секунд, хук первых двух секунд (от него зависит всё), что показывать визуально, текстовые оверлеи, финальный call to action.</p>
+<p>Это разные промпты, потому что рилс и карусель — принципиально разные форматы. Карусель читают. Рилс смотрят.</p>
+<div class="callout callout-tip"><div class="callout-icon">💡</div><div class="callout-body"><p class="callout-label">Совет</p><p>Лучший хук рилса — это конкретная провокация или неожиданное утверждение. Не «покажу тебе как», а «ты тратишь X на Y — я перестал и вот что случилось». Попроси Сценариста сгенерировать 5 вариантов хука, выбери лучший.</p></div></div>
+<h2 id="роль-5-редактор">Роль 5: Редактор</h2>
+<p>Это критически важный шаг, который большинство пропускает.</p>
+<p>Редактор берёт текст после Копирайтера или Сценариста и убирает из него всё, что звучит как AI. Шаблонные обороты, пассивный залог, «в мире, где...», «безусловно», «несомненно», вводные конструкции — всё это вон.</p>
+<p>Но не просто «отредактируй под живой язык». Редактор работает по конкретному голосу — твоему. Ты передаёшь ему примеры своих живых постов, он понимает ритм, длину предложений, характерные обороты. И фильтрует через них.</p>
+<p>Разница до и после — огромная. Один и тот же смысл, но читается совсем иначе.</p>
+<h2 id="роль-6-креативный-директор">Роль 6: Креативный директор</h2>
+<p>Отвечает за визуальную систему — не отдельный дизайн поста, а единый визуальный язык аккаунта. Шрифты, цвета, сетку обложек, композицию слайдов.</p>
+<p>Запускается один раз при создании системы, потом обновляется редко — когда хочешь обновить эстетику.</p>
+<p>Результат — визуальные правила, которые используют все остальные роли. Особенно Сборщик.</p>
+<h2 id="роль-7-сборщик">Роль 7: Сборщик</h2>
+<p>Берёт тексты Копирайтера и правила Креативного директора — и собирает карусель в виде HTML/CSS слайдов формата 1080×1350 px.</p>
+<p>Это работает в Claude Code: пишешь файлы, открываешь в браузере, скриншотишь каждый слайд. Никаких Canva, никаких Figma — прямо из чата в готовые картинки.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p>HTML/CSS карусели точнее передают типографику и отступы, чем редакторы вроде Canva. Плюс ты сохраняешь шаблон в коде — следующую карусель генерировать в разы быстрее.</p></div></div>
+<h2 id="роль-8-аналитик">Роль 8: Аналитик</h2>
+<p>Замыкает цикл. Берёт данные по постам через две недели после публикации — охваты, сохранения, переходы, новые подписчики — и делает разбор: что сработало и почему.</p>
+<p>Аналитик не просто констатирует «этот пост набрал больше». Он ищет паттерн: какой формат хука давал лучший retention, какая тема давала больше сохранений, в какой день лучше заходило.</p>
+<p>Его отчёт идёт обратно к Аудитору и Стратегу в следующем месяце. Система обучается на своих данных.</p>
+<div class="custom-block">Скопируй этот системный промпт и отдай своему Claude — он объяснит как начать:
+
+---
+
+Привет. Мне нужно настроить систему производства контента для Instagram/Reels на основе 8 ролей в Claude.
+
+Роли: Аудитор, Стратег, Копирайтер, Сценарист, Редактор, Креативный директор, Сборщик каруселей, Аналитик.
+
+Помоги мне начать с первого шага - с Аудитора. Задай мне вопросы, чтобы понять: какая у меня ниша, кто аудитория, какие у меня последние 10 постов (я вставлю ссылки или опишу), что сработало лучше всего. На основе этого ты выступишь в роли Аудитора и дашь мне структурированный разбор: что работает, что нет, какие форматы и темы резонируют. Этот разбор потом станет входом для Стратега.
+
+Начинай.
+
+---
+
+Дальше объясни Claude как подключить каждую следующую роль.</div>
+<h2 id="как-запускать-систему">Как запускать систему</h2>
+<p><strong>Первый запуск (разово):</strong> Аудитор → Стратег → Креативный директор. Это основа.</p>
+<p><strong>Еженедельный цикл:</strong> Стратег даёт тему → Копирайтер/Сценарист пишут → Редактор фильтрует → Сборщик делает карусель → публикация.</p>
+<p><strong>Раз в месяц:</strong> Аналитик разбирает данные → передаёт Аудитору → Стратег корректирует план.</p>
+<p>Каждая роль — отдельный чат в Claude. Не смешивай их в один. Когда Редактор работает над текстом, ему не нужен контекст Аналитика — это только шумит и путает.</p>
+<p>Начать с нуля занимает 2-3 часа. Потом каждый еженедельный цикл — меньше часа.</p>
+<p>Больше про Claude и AI-инструменты в работе — в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Делаешь контент для Instagram через Claude?</h2>
+  <p class="cta-desc">Показываю как строю свою систему — в Telegram-канале. Реальная практика, не теория.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/moushen-dizayn-claude-code-remotion" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/c25-remotion/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Моушен-дизайн в Claude Code через Remotion: анимация без After Effects</h3>
+    <p>Как делать кинетический текст, анимированные карточки и схемы для роликов кодом — через Remotion и Claude Code. Бесплатно, под полным контролем.</p>
+  </div>
+</a>
+<a href="/blog/5-mcp-serverov-dlya-claude-code" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/c26-mcp/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>5 MCP-серверов для Claude Code: что дают и как поставить</h3>
+    <p>Perplexity, Playwright, Firecrawl, Glif, Chrome MCP - пять серверов, которые расширяют Claude Code браузером, поиском и генерацией изображений.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
