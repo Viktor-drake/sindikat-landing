@@ -37,7 +37,10 @@
   .hero{background:radial-gradient(85% 70% at 88% -10%, rgba(217,99,63,.12), transparent 58%), radial-gradient(60% 60% at 0% 105%, rgba(91,141,239,.10), transparent 60%), var(--paper); color:var(--ink); padding:66px 0 54px; border-bottom:1px solid var(--line)}
   .hero h1{font-family:'Unbounded',sans-serif; font-weight:800; letter-spacing:-.02em; font-size:clamp(28px,4.4vw,42px); line-height:1.05; margin-bottom:20px; color:var(--ink)}
   .hero h1 em{font-style:normal; color:var(--coral)}
-  .hero .sub{font-size:17.5px; color:var(--tx2); margin-bottom:28px}
+  .hero .sub{font-size:17.5px; color:var(--tx2); margin-bottom:22px}
+  .hero-note{display:flex; align-items:flex-start; gap:9px; background:#F4E7E0; border:1px solid #EAD9CF; border-radius:12px; padding:12px 15px; margin-bottom:18px; max-width:530px; font-size:14.5px; line-height:1.45; color:#5a3a2c}
+  .hero-note::before{content:"🎁"; line-height:1.2}
+  .hero-note b{color:var(--coral); font-weight:700}
   .hero-row{display:grid; grid-template-columns:1fr 264px; gap:40px; align-items:center}
   .hero-photo{margin:0}
   .hero-photo img{width:100%; height:auto; display:block; border-radius:18px; border:1px solid var(--line); box-shadow:0 26px 54px -26px rgba(20,30,55,.6)}
@@ -113,7 +116,8 @@
         <span class="eyebrow mono">канал · виктор дачников | nextgen</span>
         <h1>Нейросети уже собирают сайты, контент и продажи. <em>Без программистов и агентств</em></h1>
         <p class="sub">Я предприниматель. За 45 дней с Claude сделал больше, чем за 2 года. В канале показываю, как это повторить: реальные связки, кейсы и цифры.</p>
-        <a class="btn" href="https://t.me/viktor_drake_channel/359">Читать канал в Telegram</a>
+        <p class="hero-note">В закрепе простой способ зарегистрировать, установить и оплатить <b>Claude</b> из России. Бесплатно</p>
+        <a class="btn" href="https://t.me/viktor_drake_channel/359">Читать в Telegram</a>
       </div>
       <figure class="hero-photo"><img src="praktikum-assets/founder.webp" alt="Виктор Дачников" loading="eager"></figure>
     </div>
