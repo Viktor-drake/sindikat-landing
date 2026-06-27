@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Картинки и рилсы на нейросетях: kie.ai из России и монтаж в ffmpeg</title>
+<meta name="description" content="Два инструмента для AI-контента: генерация картинок и видео через kie.ai с оплатой из России (СБП, МИР) и монтаж рилсов через ffmpeg и whisper. Пошагово.">
+
+<link rel="canonical" href="https://nextgenclub.ru/blog/kartinki-i-reels-na-neyrosetyah-kie-ai">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Картинки и рилсы на нейросетях: kie.ai из России и монтаж в ffmpeg">
+<meta property="og:description" content="Два инструмента для AI-контента: генерация картинок и видео через kie.ai с оплатой из России (СБП, МИР) и монтаж рилсов через ffmpeg и whisper. Пошагово.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/kartinki-i-reels-na-neyrosetyah-kie-ai">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c34-kie-reels/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Картинки и рилсы на нейросетях: kie.ai из России и монтаж в ffmpeg">
+<meta name="twitter:description" content="Два инструмента для AI-контента: генерация картинок и видео через kie.ai с оплатой из России (СБП, МИР) и монтаж рилсов через ffmpeg и whisper. Пошагово.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c34-kie-reels/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Картинки и рилсы на нейросетях: kie.ai из России и монтаж в ffmpeg","description":"Два инструмента для AI-контента: генерация картинок и видео через kie.ai с оплатой из России (СБП, МИР) и монтаж рилсов через ffmpeg и whisper. Пошагово.","image":"https://nextgenclub.ru/blog/covers/c34-kie-reels/cover.png","datePublished":"2026-06-27","dateModified":"2026-06-27","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/kartinki-i-reels-na-neyrosetyah-kie-ai"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Нужна зарубежная карта для kie.ai?","acceptedAnswer":{"@type":"Answer","text":"Нет. Оплата идёт из России: СБП, SberPay, ЮMoney, МИР, российские карты."}},{"@type":"Question","name":"Сколько стоит картинка?","acceptedAnswer":{"@type":"Answer","text":"Копейки. Стартового пакета на 1000 кредитов хватает надолго, кредиты не сгорают."}},{"@type":"Question","name":"Нужно уметь монтировать видео?","acceptedAnswer":{"@type":"Answer","text":"Нет. Ставишь ffmpeg и whisper один раз, а команды под твоё видео пишет Claude. Твоя задача дать материал и сказать что сделать."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo.png" alt="">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Вступить</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Картинки и рилсы на нейросетях: kie.ai из России и монтаж в ffmpeg</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-06-27">27 июня 2026</time>
+        <span class="dot"></span>
+        <span>8 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c34-kie-reels/cover.webp" alt="Картинки и рилсы на нейросетях: kie.ai из России и монтаж в ffmpeg" loading="eager"></div>
+  <div class="article-body">
+    <div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав статью</strong></p><ul><li>как подключить kie.ai и платить за нейросети из России без зарубежных карт</li><li>как получить API-ключ для генерации картинок и видео</li><li>как смонтировать рилс через ffmpeg и whisper: порядок шагов и правила</li><li>путь с AI-аватаром, если не хочешь в кадр</li></ul></div>
+</div>
+<p>Чтобы делать контент на нейросетях, нужны две вещи: генератор картинок и видео, и инструмент монтажа. Разбираю оба так, чтобы работало из России и без танцев с бубном.</p>
+<h2 id="часть-1-kie-ai-картинки-и-видео-с-оплатой-из-россии">Часть 1. kie.ai - картинки и видео с оплатой из России</h2>
+<p>kie.ai это агрегатор нейросетей в одном окне: GPT Image 2 для картинок, Seedance и Kling для видео, OmniHuman для говорящих аватаров и другие. Главный плюс для нас: <strong>оплата напрямую из России</strong> через СБП, SberPay, ЮMoney, МИР и российские карты. API-ключ оттуда подключается к Claude, и нейросеть генерит картинки сама.</p>
+<h3 id="шаг-1-регистрация">Шаг 1. Регистрация</h3>
+<p>Зайди на kie.ai и зарегистрируйся через Google или почту.</p>
+<h3 id="шаг-2-пополни-баланс">Шаг 2. Пополни баланс</h3>
+<ul>
+<li>В левом меню открой раздел «Платежи».</li>
+<li>Выбери пакет. Для старта хватит 5 долларов это 1000 кредитов, одна картинка стоит копейки. Кредиты не сгорают.</li>
+<li>В способе оплаты выбери Russia: поддерживаются СБП, SberPay, ЮMoney, МИР и российские карты.</li>
+<li>Нажми «Купить кредиты».</li>
+</ul>
+<h3 id="шаг-3-создай-api-ключ">Шаг 3. Создай API-ключ</h3>
+<ul>
+<li>В левом меню открой «API-ключи».</li>
+<li>Нажми «Создать новый ключ», дай ему имя.</li>
+<li>Скопируй ключ. Он показывается один раз, сразу сохрани.</li>
+</ul>
+<h3 id="шаг-4-подключи-ключ-к-claude">Шаг 4. Подключи ключ к Claude</h3>
+<p>Впиши ключ в настройки своего скилла генерации картинок (там, где стоит метка для ключа). После этого достаточно сказать Claude «сгенери картинку ...», и он сделает её через kie.ai.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p>Ключ это доступ к твоему балансу. Никому не показывай, не выкладывай в открытый код. Засветил - удали ключ в кабинете и создай новый. Лимит аккаунта: 20 запросов на генерацию за 10 секунд, для контента с запасом.</p></div></div>
+<h2 id="часть-2-монтаж-рилсов-через-ffmpeg-и-whisper">Часть 2. Монтаж рилсов через ffmpeg и whisper</h2>
+<p>Для видео нужен монтажный движок. Ставим один раз:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">pip install faster-whisper yt-dlp</code></pre></div>
+<p>Плюс ffmpeg в систему:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Windows: winget install Gyan.FFmpeg
+Mac:     brew install ffmpeg</code></pre></div>
+<p>Проверка: команда <code>ffmpeg -version</code> должна ответить. Дальше Claude сам пишет команды под твоё видео.</p>
+<h3 id="две-дороги-к-ролику">Две дороги к ролику</h3>
+<ol>
+<li><strong>Свой материал</strong> - снял видео, Claude монтирует: субтитры, обрезка, ускорение, обложка.</li>
+<li><strong>AI-аватар без съёмки</strong> - картинка плюс озвучка превращаются в говорящего аватара через OmniHuman или HeyGen на том же kie.ai.</li>
+</ol>
+<h3 id="порядок-монтажа-не-менять">Порядок монтажа (не менять)</h3>
+<p>Транскрибация, потом обложка, потом субтитры, потом обрезка и ускорение. Именно в этом порядке.</p>
+<p>Почему так: если сначала ускорить и потом распознавать речь, whisper начинает галлюцинировать на быстрой речи и врать в числах. Сначала распознаём нормальную речь, режем потом.</p>
+<p><strong>Субтитры.</strong> Жирный шрифт, белый с чёрной обводкой, снизу по центру с отступом примерно 88 процентов высоты, чтобы не залезть под интерфейс. Распознавание сегментное, не пословное: пословное дёргается и врёт в цифрах.</p>
+<p><strong>Обрезка и ускорение.</strong> Ускорение безопасно до 1.5x, дальше речь плывёт. Аудио обязательно 48kHz, иначе на стыках склейки появляется треск.</p>
+<p><strong>Обложка.</strong> Формат 9 на 16, текст в центральной зоне по высоте, не у краёв: в сетке Instagram превью обрезается до квадрата. Не закрывай текстом лицо, эмоция это главный актив кадра.</p>
+<div class="callout callout-tip"><div class="callout-icon">💡</div><div class="callout-body"><p class="callout-label">Совет</p><p>Текст под рилсом делай коротким: хук одной фразой, при необходимости одно предложение контекста, и один призыв. Без длинных размышлений и риторических вопросов в конце. Так смотрится живо, а не как реклама.</p></div></div>
+<h2 id="с-чего-начать">С чего начать</h2>
+<p>Поставь ffmpeg и whisper, заведи ключ kie.ai по шагам выше. Дальше один материал превращается в пост с картинкой и в рилс под Instagram и YouTube. Весь конвейер тянет один человек, без команды и без кода.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Забирай связки первым</h2>
+  <p class="cta-desc">Подпишись на канал, там я показываю, как собираю на ИИ контент, сайты и автоматизацию, с реальными кейсами и цифрами.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Нужна зарубежная карта для kie.ai?</summary><div class="faq-answer">Нет. Оплата идёт из России: СБП, SberPay, ЮMoney, МИР, российские карты.</div></details>
+<details class="faq-item"><summary>Сколько стоит картинка?</summary><div class="faq-answer">Копейки. Стартового пакета на 1000 кредитов хватает надолго, кредиты не сгорают.</div></details>
+<details class="faq-item"><summary>Нужно уметь монтировать видео?</summary><div class="faq-answer">Нет. Ставишь ffmpeg и whisper один раз, а команды под твоё видео пишет Claude. Твоя задача дать материал и сказать что сделать.</div></details>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/neyroseti-dlya-socsetey" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/c16-socseti/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Нейросети для соцсетей: как поставить контент на конвейер, а не генерить по одной картинке</h3>
+    <p>Нейросети для соцсетей не как топ-10 генераторов, а как контент-система: от идеи до публикации - тексты, картинки, видео, упаковка и автопостинг.</p>
+  </div>
+</a>
+<a href="/blog/vaybkoding-claude-code-gayd" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/p0-pillar/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Вайбкодинг с Claude Code: полный гайд для бизнеса в 2026</h3>
+    <p>Что такое вайбкодинг и Claude Code, что реально можно сделать без навыков кода, как запустить в России и сколько это стоит. Разбор на реальных примерах.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
