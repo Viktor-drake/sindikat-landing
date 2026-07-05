@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пошаговый план: лёгкий старт в Claude Code</title>
+<meta name="description" content="Три шага от нуля до рабочего Claude Code: доступ и оплата из России, как устроен инструмент изнутри, и какие скиллы поставить в первую очередь.">
+
+<link rel="canonical" href="https://nextgenclub.ru/blog/legkiy-start-v-claude-code">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Пошаговый план: лёгкий старт в Claude Code">
+<meta property="og:description" content="Три шага от нуля до рабочего Claude Code: доступ и оплата из России, как устроен инструмент изнутри, и какие скиллы поставить в первую очередь.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/legkiy-start-v-claude-code">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c40-legkiy-start/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Пошаговый план: лёгкий старт в Claude Code">
+<meta name="twitter:description" content="Три шага от нуля до рабочего Claude Code: доступ и оплата из России, как устроен инструмент изнутри, и какие скиллы поставить в первую очередь.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c40-legkiy-start/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Пошаговый план: лёгкий старт в Claude Code","description":"Три шага от нуля до рабочего Claude Code: доступ и оплата из России, как устроен инструмент изнутри, и какие скиллы поставить в первую очередь.","image":"https://nextgenclub.ru/blog/covers/c40-legkiy-start/cover.png","datePublished":"2026-07-05","dateModified":"2026-07-05","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/legkiy-start-v-claude-code"}}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo.png" alt="">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Вступить</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Пошаговый план: лёгкий старт в Claude Code</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-07-05">5 июля 2026</time>
+        <span class="dot"></span>
+        <span>9 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c40-legkiy-start/cover.webp" alt="Пошаговый план: лёгкий старт в Claude Code" loading="eager"></div>
+  <div class="article-body">
+    <div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>Рабочий доступ к Claude Code: VPN, регистрация, оплата из России</li><li>Понимание, чем Claude Code отличается от обычного чата и как он устроен изнутри</li><li>Базовый набор скиллов, с которых стоит начать, по трём уровням сложности</li></ul></div>
+</div>
+<h2 id="для-кого-этот-план">Для кого этот план</h2>
+<p>Если ты предприниматель, маркетолог, методолог, эксперт или руководитель и хочешь разобраться в Claude Code без диплома айтишника, этот план для тебя. Три шага: доступ и оплата, база по устройству инструмента, первые скиллы. После этого будет понятно, куда двигаться дальше под свою конкретную задачу.</p>
+<h2 id="шаг-0-доступ-регистрация-оплата">Шаг 0. Доступ, регистрация, оплата</h2>
+<p>Работает, тысячи людей платят и пользуются. Нужно просто знать порядок действий.</p>
+<p><strong>Доступ к сервису.</strong> Claude.ai заблокирован в РФ, нужен инструмент обхода блокировок. Какой конкретно, лучше уточнить лично, готового универсального совета тут нет: сервисы часто меняются. Важный момент: страна VPN и страна платёжного инструмента должны совпадать. Если VPN показывает Казахстан, а карта или счёт оформлены на другую страну, сервис может заблокировать оплату или сам аккаунт. Без этого шага дальше не двигаться.</p>
+<p><strong>Регистрация через Google.</strong> Самый простой путь: регистрируй Claude через Google-аккаунт, которому не меньше года. У Google-аккаунта страна значения не имеет, и если регистрация проходит через него, номер телефона может вообще не понадобиться. Попробуй сначала этот вариант.</p>
+<p><strong>Виртуальный номер, если Google не подошёл.</strong> Российский номер (+7) Claude не принимает, нужен виртуальный номер другой страны.</p>
+<p>Где взять: <a href="https://365sms.io/claude" target="_blank" rel="noopener">365sms.io/claude</a>, стоит 15-300 рублей.</p>
+<p>Какие страны проходят лучше всего:</p>
+<ul>
+<li>Казахстан, Грузия, Армения, Германия - самые стабильные</li>
+<li>Украина, Кыргызстан - тоже работают</li>
+<li>Индия, Индонезия, Бразилия - если стран СНГ нет в наличии</li>
+</ul>
+<p>Берёшь номер, получаешь смс с кодом, вводишь, готово.</p>
+<p><strong>Регистрация.</strong> Заходишь на claude.ai, нажимаешь Sign up, вводишь почту (Gmail подходит), подтверждаешь кодом из письма, при необходимости вводишь виртуальный номер. Аккаунт создан.</p>
+<p><strong>Оплата.</strong> Три рабочих варианта:</p>
+<ul>
+<li><em>МТС Платёжный сервис</em> (<a href="https://payment.mts.ru/tools/claude-ai" target="_blank" rel="noopener">payment.mts.ru</a>): платишь через СБП российской картой, на почту приходят инструкции по активации, обработка около 15 минут.</li>
+<li><em>Виртуальная карта «Плати по миру»</em> (<a href="https://platipomiru.com" target="_blank" rel="noopener">platipomiru.com</a>): выпускаешь карту в евро или долларах, пополняешь рублями через СБП любого банка, конвертация мгновенная. Стоит 2990 ₽, подходит тариф для подписок (не для путешествий за 5к), первый год обслуживания бесплатно, регистрация 2 минуты через Telegram или сайт. Плюс: карта работает не только для Claude, а для любых зарубежных сервисов, оформил один раз и пользуешься дальше.</li>
+<li><em>Помогут с оплатой:</em> если не хочется разбираться самому, можно написать <a href="https://t.me/katerina_laskovets" target="_blank" rel="noopener">@katerina_laskovets</a> или <a href="https://t.me/eternalbliss1996" target="_blank" rel="noopener">@eternalbliss1996</a>, они оформят.</li>
+</ul>
+<p><strong>Какой план выбрать.</strong> Бесплатный - базовый доступ с лимитами, без Claude Code и Cowork. Pro (20$/мес) - без ограничений, свежие модели, приоритет при нагрузке. Max (100$/мес) - для серьёзной профессиональной работы и доступа к API.</p>
+<p>Проверяй актуальные цены и условия в своём аккаунте: тарифы и работоспособность сервисов оплаты со временем меняются.</p>
+<p>Более подробный разбор именно оплаты из России, с деталями по каждому способу, есть в отдельной статье: <a href="/blog/claude-registraciya-oplata-rossiya">как оплатить Claude из России</a>.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p><strong>Итог шага 0:</strong> у тебя есть рабочий доступ к Claude, зарегистрированный аккаунт и оплаченный тариф (Pro или выше, чтобы был доступен Claude Code).</p></div></div>
+<figure class="article-img"><img src="/blog/covers/c40-legkiy-start/step0.webp" alt="Доступ, регистрация, оплата: VPN, аккаунт, карта" loading="lazy"><figcaption>Доступ, регистрация, оплата: VPN, аккаунт, карта</figcaption></figure>
+<h2 id="шаг-1-как-устроен-claude-изнутри">Шаг 1. Как устроен Claude изнутри</h2>
+<p>Сначала главное отличие. Обычный чат Claude отвечает на вопросы: ты спросил, он ответил, дальше сам решаешь, что с этим делать. Claude Code устроен иначе - это агентная система. Он сам принимает решения, сам, по своей инициативе, доводит задачу до конца и стремится к нужному итоговому результату, а не просто выдаёт текст в ответ на вопрос. Именно поэтому с ним работают не как с поисковиком, а как с исполнителем, которому нужно поставить задачу и дать контекст.</p>
+<p><strong>Три среды Claude.</strong> Их три, и путать их не стоит:</p>
+<ul>
+<li><strong>Claude.ai (чат)</strong> - обычный веб-интерфейс для разовых вопросов, синхронизируется между устройствами.</li>
+<li><strong>Claude Code</strong> - самая функциональная среда, работает с папками и файлами напрямую, держит в памяти контекст до 1 миллиона токенов, агентная система из пункта выше. Именно про неё этот план.</li>
+<li><strong>Claude Cowork</strong> - упрощённая версия Claude Code, подходит новичкам: та же логика работы с файлами и задачами, но интерфейс проще и порог входа ниже.</li>
+</ul>
+<p>Ключевая логика Claude Code: проекты организуются через папки, каждая папка - это отдельный контекст, отдельная сессия под свою задачу. Не смешивай всё в одну кучу.</p>
+<p><strong>Модели.</strong> Три уровня: Haiku (быстрая и дешёвая, для простого), Sonnet (баланс, закрывает примерно 80% рабочих задач), Opus (мощная, меньше ошибается, для сложных и важных вещей). Уровень рассуждений (effort) обычно достаточно оставить на среднем значении, вручную трогать нужно редко.</p>
+<p><strong>База знаний и файл памяти.</strong> Прежде чем работать, Claude Code полезно дать базу знаний о твоём проекте. Создай на рабочем столе папку «Claude Code» и положи туда всю информацию, какая есть: заметки, документы, черновики, описание бизнеса или задачи. Дальше попроси Claude прочитать всё это и на основе прочитанного самому создать файл памяти CLAUDE.md, вручную заводить этот файл не нужно.</p>
+<p>Дальше Claude Code постоянно обращается к этому файлу и работает с твоими файлами именно на его основе. Эта база знаний, по сути, фундамент, на котором дальше строится вся инфраструктура твоей работы в Claude: чем полнее и понятнее база сейчас, тем точнее и стабильнее результат в будущем.</p>
+<div class="callout callout-warning"><div class="callout-icon">⚠️</div><div class="callout-body"><p class="callout-label">Внимание</p><p><strong>Частые ошибки новичков:</strong> - кириллица в путях к папкам - лучше называть папки латиницей - пароли и ключи, вставленные прямо в переписку с Claude, - так делать нельзя никогда - отсутствие скриншотов при попытке объяснить, что не так на сайте или в интерфейсе, показать проще и надёжнее, чем описать словами - устаревшее приложение, которое не обновили и потом удивляются, почему что-то не работает</p></div></div>
+<p><strong>Как разговаривать с Claude Code.</strong> Несколько рабочих фраз на первое время:</p>
+<ol>
+<li>«Изучи эту папку и объясни, что здесь находится»</li>
+<li>«Составь план, как решить задачу, но пока ничего не меняй»</li>
+<li>«Предложи 3 варианта простыми словами»</li>
+<li>«Проверь, нет ли рисков, если мы это изменим»</li>
+<li>«Сделай минимальную версию, которую можно проверить»</li>
+<li>«Объясни, что ты изменил, человеческим языком»</li>
+<li>«Если что-то неясно, сначала задай мне уточняющие вопросы»</li>
+</ol>
+<p>Хороший старт - это не «сразу собрать сложного агента», а провести Claude Code по шагам: контекст, план, маленькое изменение, проверка, следующий шаг.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p><strong>Итог шага 1:</strong> ты понимаешь, как устроен Claude изнутри, создал на рабочем столе папку «Claude Code», положил туда информацию о своём проекте, попросил Claude изучить всё и на основе этого создать файл памяти CLAUDE.md.</p></div></div>
+<figure class="article-img"><img src="/blog/covers/c40-legkiy-start/step1.webp" alt="Три среды Claude: chat, Claude Code, Cowork" loading="lazy"><figcaption>Три среды Claude: chat, Claude Code, Cowork</figcaption></figure>
+<h2 id="шаг-2-базовые-скиллы">Шаг 2. Базовые скиллы</h2>
+<p>Важно понимать: Claude из коробки, без единого скилла, коннектора или MCP-сервера, это примерно 5% от того, что инструмент умеет на самом деле. Разница между «голым» Claude и Claude, в который поставлены нужные инструменты, огромная.</p>
+<p>Скилл - это просто файл с инструкцией. Дальше Claude использует его сам, без пересказа контекста заново. По сути, скилл - это запомненная последовательность успешных действий: один раз довели задачу до результата, зафиксировали, дальше инструмент повторяет её сам.</p>
+<p><strong>Уровень 1. Ставим сразу, без вопросов</strong></p>
+<ul>
+<li><strong>security-guard</strong> - страхует от случайного слива паролей, токенов, ключей в переписку. Работает фоново, спрашивает подтверждение перед рискованными операциями.</li>
+<li><strong>skill-selector</strong> - сам определяет, какой скилл нужен под задачу, и запускает его. Снимает вопрос «а что вообще ставить».</li>
+<li><strong>RTK (Rust Token Killer)</strong> - сокращает вывод команд на 60-90%, экономит токены и деньги на длинных сессиях. Открытый исходный код: <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener">github.com/rtk-ai/rtk</a>.</li>
+</ul>
+<p><strong>Уровень 2. Рабочие скиллы под конкретные задачи</strong></p>
+<ul>
+<li><strong>prompt-engineer</strong> - превращает голосовую заметку или сырую идею в структурированный промпт. Полезен, если печатать длинные ТЗ не хочется.</li>
+<li><strong>content-pro</strong> - пишет посты, тексты, лендинги под твой стиль и нишу.</li>
+<li><strong>contract-generator</strong> - собирает и правит договоры под конкретную ситуацию, актуальные нормы, без похода к юристу за типовым документом.</li>
+</ul>
+<p><strong>Уровень 3. Когда уже освоился</strong></p>
+<ul>
+<li><strong>llm-council</strong> - прогоняет решение через совет из 5 ИИ-советников, полезен, когда есть реальный размен вариантов («X или Y») и не получается решить самому.</li>
+<li><strong>GSD (Get Shit Done)</strong> - фреймворк для серьёзной разработки и проектов: планирование по фазам, проверка перед запуском, контроль результата. Открытый исходный код: <a href="https://github.com/gsd-build/get-shit-done" target="_blank" rel="noopener">github.com/gsd-build/get-shit-done</a>.</li>
+<li><strong>autonomous-deploy</strong> - деплой на Vercel без единой команды в консоли, для тех, кто уже работает с сайтами.</li>
+<li><strong>claude-mem</strong> - память между сессиями, закрывает главную боль: Claude забывает контекст между разговорами. Открытый исходный код: <a href="https://github.com/thedotmack/claude-mem" target="_blank" rel="noopener">github.com/thedotmack/claude-mem</a>.</li>
+</ul>
+<p>Формула, которая работает почти всегда: контекст → план → маленькое изменение → проверка → следующий шаг. Не пытайся поставить и освоить всё за один вечер, три уровня выше - это порядок, а не список на сегодня.</p>
+<p>Скиллы под конкретно твою нишу и задачу можно и нужно искать самому: они лежат в открытом доступе на GitHub и в других источниках, ставятся так же просто, как из этого списка. Единственное правило: перед установкой смотри, что внутри, откуда скилл и кто его написал, не ставь вслепую первое попавшееся. Готовый архив с 25+ собранными скиллами разбираем отдельно: <a href="/blog/skilly-claude-code-skachat-arhiv">скиллы Claude Code, скачать архив</a>.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p><strong>Итог шага 2:</strong> у тебя установлены базовые скиллы из уровня 1, ты понимаешь, что такое скилл и как его найти, проверить и поставить самостоятельно.</p></div></div>
+<figure class="article-img"><img src="/blog/covers/c40-legkiy-start/step2.webp" alt="Три уровня скиллов Claude Code" loading="lazy"><figcaption>Три уровня скиллов Claude Code</figcaption></figure>
+<h2 id="способ-быстрее-отдай-эту-статью-своему-claude">Способ быстрее: отдай эту статью своему Claude</h2>
+<p>Тебе не обязательно проходить все три шага руками. Claude Code умеет читать инструкции и выполнять их. Скопируй ссылку на эту статью, открой Claude Code и напиши примерно так:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Вот статья: https://nextgenclub.ru/blog/legkiy-start-v-claude-code
+Прочитай её и проведи меня по каждому шагу. Ничего не меняй без моего подтверждения.</code></pre></div>
+<p>Claude Code сходит по ссылке, разберёт инструкцию и подскажет, что делать на месте, если что-то будет непонятно. Тебе останется только подтверждать шаги.</p>
+<h2 id="куда-дальше">Куда дальше</h2>
+<p>Дальше маршрут отличается в зависимости от роли: владельцу бизнеса важны процессы и точки рычага, маркетологу - контент и воронки, методологу - образовательные продукты, эксперту - упаковка знаний, продюсеру - регламенты и контроль задач.</p>
+<p>Если знаешь принципы работы агентных систем, твоя скорость и эффективность вырастет в 5-10 раз. Больше про полный контекст вокруг Claude Code, вайбкодинга и того, что реально можно строить без кода, смотри в <a href="/blog/vaybkoding-claude-code-gayd">большом гайде по Claude Code</a>.</p>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Собери персональный маршрут в Claude Code</h2>
+  <p class="cta-desc">Разбираем, с чего начать именно тебе: процессы, контент, продукты или знания, без лишнего шума.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/vaybkoding-claude-code-gayd" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/p0-pillar/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Вайбкодинг с Claude Code: полный гайд для бизнеса в 2026</h3>
+    <p>Что такое вайбкодинг и Claude Code, что реально можно сделать без навыков кода, как запустить в России и сколько это стоит. Разбор на реальных примерах.</p>
+  </div>
+</a>
+<a href="/blog/claude-registraciya-oplata-rossiya" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/c3-russia/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Как зарегистрироваться и оплатить Claude из России — пошаговый гайд 2026</h3>
+    <p>Пошаговая инструкция: как обойти блокировку, получить виртуальный номер, зарегистрироваться и оплатить Claude Pro/Max из России через МТС, Плати по миру или помощников.</p>
+  </div>
+</a>
+<a href="/blog/skilly-claude-code-skachat-arhiv" class="related-card">
+  <div class="related-card-cover" style="background-image:url('/blog/covers/c32-skills-pack/cover.webp')"></div>
+  <div class="related-card-body">
+    <h3>Готовый стек скиллов для Claude Code: скачать одним архивом</h3>
+    <p>Забери мой рабочий набор скиллов для Claude Code одним архивом: контент, сайты, видео, договоры, аналитика. Плюс память и фреймворк разработки. Установка за 2 минуты.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
