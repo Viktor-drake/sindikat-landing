@@ -155,6 +155,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://nextgenclub.ru/blog/konnektory-claude-dlya-rossii</loc>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nextgenclub.ru/blog/kontent-konveyer-claude</loc>
     <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -163,6 +169,12 @@
   <url>
     <loc>https://nextgenclub.ru/blog/kontentdashboard</loc>
     <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nextgenclub.ru/blog/legkiy-start-v-claude-code</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
