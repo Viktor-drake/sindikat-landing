@@ -41,6 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Контент-дашборд в Claude Code: 6 страниц + промпты под каждую","description":"Как собрать в Claude Code один дашборд вместо десяти таблиц: хранилище хуков, аналитика, трекер конкурентов, планировщик, календарь и тренды. Промпт под каждую страницу.","image":"https://nextgenclub.ru/blog/covers/c31-dashboard/cover.png","datePublished":"2026-06-19","dateModified":"2026-06-19","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/kontentdashboard"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Зачем дашборд, если можно вести всё в Google Таблицах?","acceptedAnswer":{"@type":"Answer","text":"Проблема разрозненных таблиц не в самих таблицах, а в переключении между ними. Когда хуки и аналитика лежат в разных местах, ты не видишь связь между форматом хука и досмотрами. Плюс в коде можно добавить любую логику: автоподпись под ролик, спарклайн за 30 дней, автотеги на входящие новости. В таблице это боль, в Next.js один промпт."}},{"@type":"Question","name":"Что нужно, чтобы это собрать?","acceptedAnswer":{"@type":"Answer","text":"Claude Code, базовый фронтенд-стек (Node.js и умение запустить `npm run dev`) и 2-3 часа. Стек дашборда: Next.js 14, Tailwind, shadcn/ui, тёмная тема."}},{"@type":"Question","name":"Собирать все шесть страниц сразу?","acceptedAnswer":{"@type":"Answer","text":"Нет, это верный способ бросить на середине. Схема, которая работает: день 1 это каркас и Хранилище хуков (самая часто используемая страница, начинай копить хуки сразу), день 2 Аналитика и Трекер конкурентов (внеси данные за 30 дней вручную и сразу увидишь паттерны), дальше остальные страницы по мере времени."}},{"@type":"Question","name":"Где хранятся данные и можно ли подключить реальные?","acceptedAnswer":{"@type":"Answer","text":"На старте localStorage и ручной ввод. Дальше подключаются настоящие источники: Instagram API для аналитики, Apify для автосбора роликов конкурентов, Claude API для автотегов новостей. Дашборд растёт вместе с аккаунтом."}},{"@type":"Question","name":"Можно ли публиковать прямо из дашборда?","acceptedAnswer":{"@type":"Answer","text":"Автопубликацию в Instagram через официальный API можно прикрутить позже. На старте дашборд готовит контент и собирает подпись из хука, угла и CTA, а публикуешь ты вручную. Это всё равно кратно быстрее, чем собирать подпись заново каждый раз."}}]}</script>
 </head>
 <body>
 
@@ -51,8 +52,8 @@
       <span>NextGen Club</span>
     </a>
     <div class="blog-nav-links">
-      <a href="/">Клуб</a>
-      <a href="/" class="blog-nav-cta">Вступить</a>
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -217,6 +218,14 @@ ProductHunt AI, vc.ru AI-раздел.</code></pre></div>
 Дальше передавай промпты из статьи - по одному на каждую страницу.</div>
 <p>Дашборд в коде - это не разовый инструмент. Ты добавляешь страницы по мере роста, подключаешь реальные данные (Instagram API, Apify для конкурентов), и инструмент растёт вместе с аккаунтом.</p>
 <p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Зачем дашборд, если можно вести всё в Google Таблицах?</summary><div class="faq-answer">Проблема разрозненных таблиц не в самих таблицах, а в переключении между ними. Когда хуки и аналитика лежат в разных местах, ты не видишь связь между форматом хука и досмотрами. Плюс в коде можно добавить любую логику: автоподпись под ролик, спарклайн за 30 дней, автотеги на входящие новости. В таблице это боль, в Next.js один промпт.</div></details>
+<details class="faq-item"><summary>Что нужно, чтобы это собрать?</summary><div class="faq-answer">Claude Code, базовый фронтенд-стек (Node.js и умение запустить <code>npm run dev</code>) и 2-3 часа. Стек дашборда: Next.js 14, Tailwind, shadcn/ui, тёмная тема.</div></details>
+<details class="faq-item"><summary>Собирать все шесть страниц сразу?</summary><div class="faq-answer">Нет, это верный способ бросить на середине. Схема, которая работает: день 1 это каркас и Хранилище хуков (самая часто используемая страница, начинай копить хуки сразу), день 2 Аналитика и Трекер конкурентов (внеси данные за 30 дней вручную и сразу увидишь паттерны), дальше остальные страницы по мере времени.</div></details>
+<details class="faq-item"><summary>Где хранятся данные и можно ли подключить реальные?</summary><div class="faq-answer">На старте localStorage и ручной ввод. Дальше подключаются настоящие источники: Instagram API для аналитики, Apify для автосбора роликов конкурентов, Claude API для автотегов новостей. Дашборд растёт вместе с аккаунтом.</div></details>
+<details class="faq-item"><summary>Можно ли публиковать прямо из дашборда?</summary><div class="faq-answer">Автопубликацию в Instagram через официальный API можно прикрутить позже. На старте дашборд готовит контент и собирает подпись из хука, угла и CTA, а публикуешь ты вручную. Это всё равно кратно быстрее, чем собирать подпись заново каждый раз.</div></details>
+</div>
 <div class="cta-block">
   <p class="cta-eyebrow">NextGen Club</p>
   <h2 class="cta-title">Строишь инструменты под свой контент в Claude Code?</h2>

@@ -4,12 +4,28 @@
   <meta charset="UTF-8">
   <meta name="yandex-verification" content="30943b0eae8860d9" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NextGen Club — Всё о нейросетях в одном месте</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <link rel="apple-touch-icon" href="logo.png">
+  <title>NextGen Club — закрытый клуб практиков AI и нейросетей для бизнеса</title>
+  <meta name="description" content="Закрытый клуб предпринимателей, которые внедряют нейросети в бизнес: Claude, вайбкодинг, AI-агенты и автоматизация. Разборы, инструменты и практика, а не теория.">
+  <link rel="canonical" href="https://nextgenclub.ru/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NextGen Club — закрытый клуб практиков AI и нейросетей для бизнеса">
+  <meta property="og:description" content="Клуб предпринимателей, которые внедряют нейросети в бизнес: Claude, вайбкодинг, AI-агенты и автоматизация.">
+  <meta property="og:url" content="https://nextgenclub.ru/">
+  <meta property="og:image" content="https://nextgenclub.ru/logo.png">
+  <meta property="og:site_name" content="NextGen Club">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NextGen Club — закрытый клуб практиков AI и нейросетей для бизнеса">
+  <meta name="twitter:description" content="Клуб предпринимателей, которые внедряют нейросети в бизнес: Claude, вайбкодинг, AI-агенты и автоматизация.">
+  <meta name="twitter:image" content="https://nextgenclub.ru/logo.png">
+
+  <link rel="icon" type="image/webp" href="logo-64.webp">
+  <link rel="apple-touch-icon" href="logo-180.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" type="image/png" href="logo.png">
-  <link rel="apple-touch-icon" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script>
@@ -334,10 +350,14 @@
       width:108px; height:108px; flex-shrink:0;
       filter: drop-shadow(0 8px 18px rgba(201,168,124,0.18));
     }
+    /* Главный заголовок страницы. Раньше NEXTGEN и CLUB были двумя отдельными
+       заголовками первого уровня; для поисковика это одна фраза, поэтому
+       контейнер стал заголовком, а строки внутри — span. Вид не изменился. */
     .hero-title-stack {
       display:flex; flex-direction:column; line-height:0.88;
+      margin:0; font-weight:inherit;
     }
-    .hero-title-stack h1 {
+    .hero-title-stack span {
       font-size:clamp(46px,8vw,108px);
       letter-spacing:-0.02em; margin:0;
     }
@@ -555,7 +575,7 @@
       .hero-title-row { flex-direction:row; gap:14px; align-items:flex-start; }
       .hero-logo-center { width:56px; height:56px; margin-top:6px; }
       .hero-title-stack { align-items: flex-start; }
-      .hero-title-stack h1 { font-size:clamp(40px,11vw,64px) !important; text-align:left; }
+      .hero-title-stack span { font-size:clamp(40px,11vw,64px) !important; text-align:left; }
       .hero-eyebrow { text-align:left; }
       .hero-desc { text-align: left !important; }
       /* Отменить смещение вправо на мобиле — всё клеится к левому краю */
@@ -828,6 +848,37 @@
     }
 
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://nextgenclub.ru/#organization",
+        "name": "NextGen Club",
+        "url": "https://nextgenclub.ru/",
+        "logo": { "@type": "ImageObject", "url": "https://nextgenclub.ru/logo.png" },
+        "description": "Закрытый клуб предпринимателей и специалистов, которые внедряют нейросети и AI-автоматизацию в бизнес.",
+        "founder": {
+          "@type": "Person",
+          "name": "Виктор Дачников",
+          "jobTitle": "Основатель NextGen Media и NextGen Club",
+          "url": "https://nextgenclub.ru/",
+          "knowsAbout": ["вайбкодинг", "Claude Code", "нейросети для бизнеса", "AI-автоматизация", "AI-агенты", "промпт-инжиниринг"]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://nextgenclub.ru/#website",
+        "url": "https://nextgenclub.ru/",
+        "name": "NextGen Club",
+        "inLanguage": "ru-RU",
+        "publisher": { "@id": "https://nextgenclub.ru/#organization" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="bg-graphite text-platinum antialiased">
 
@@ -888,10 +939,10 @@
         <p class="hero-eyebrow hero-indent">Закрытый клуб</p>
         <div class="hero-title-row">
           <img src="logo.png" alt="" class="hero-logo-center">
-          <div class="hero-title-stack">
-            <h1 id="s01-hero" class="hero-title-gold">NEXTGEN</h1>
-            <h1 class="hero-title-light">CLUB</h1>
-          </div>
+          <h1 id="s01-hero" class="hero-title-stack">
+            <span class="hero-title-gold">NEXTGEN</span>
+            <span class="hero-title-light">CLUB</span>
+          </h1>
         </div>
         <!-- Mobile-only: 5 silver-tiles в ряд между title и desc -->
         <div class="hero-coins-mobile">

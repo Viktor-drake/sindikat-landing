@@ -41,6 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Кинематографичный сайт в Claude Code: AI-видео-герой через Higgsfield","description":"Как собрать лендинг с облётом камеры, дымом и драматичным светом - без дизайнера и Webflow. Стек: Claude Code + Higgsfield + Next.js. Промпт под видео и стартовый промпт для кода.","image":"https://nextgenclub.ru/blog/covers/c35-kinolanding/cover.png","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/kinolanding"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Сколько стоит собрать такой лендинг?","acceptedAnswer":{"@type":"Answer","text":"Подписка Higgsfield около 20 долларов в месяц плюс твоё время. Само видео генерируется 5 минут, лендинг в Claude Code собирается за 2-4 часа. Дизайнер и Webflow не нужны."}},{"@type":"Question","name":"Какое движение камеры выбрать для фона сайта?","acceptedAnswer":{"@type":"Answer","text":"Arc Shot (облёт вокруг объекта) и Crane Shot (подъём сверху) дают плавное движение, которое хорошо зацикливается. Dolly Zoom создаёт напряжение, но для фона подходит хуже. Главное правило: начало и конец клипа должны визуально совпадать, иначе на стыке будет рывок."}},{"@type":"Question","name":"Почему видео дёргается на повторе?","acceptedAnswer":{"@type":"Answer","text":"Скорее всего в конце клипа резкий разворот камеры, и зацикливание разрушается. Генерируй 3-4 варианта и бери тот, где движение самое плавное."}},{"@type":"Question","name":"Какой размер видео нужен для веба?","acceptedAnswer":{"@type":"Answer","text":"1080p и до 15 МБ. Плюс обязательно добавь poster с первым кадром и preload, иначе пользователь увидит пустой чёрный экран, пока видео грузится."}},{"@type":"Question","name":"Нужно ли уметь программировать?","acceptedAnswer":{"@type":"Answer","text":"Нет. Весь код пишет Claude Code по промптам из статьи. Даже сложные вещи вроде parallax или проматывания видео по скроллу не нужно объяснять на уровне механики: достаточно сказать «parallax со скоростью 0.5», и он поймёт."}}]}</script>
 </head>
 <body>
 
@@ -51,8 +52,8 @@
       <span>NextGen Club</span>
     </a>
     <div class="blog-nav-links">
-      <a href="/">Клуб</a>
-      <a href="/" class="blog-nav-cta">Вступить</a>
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -188,6 +189,14 @@ Color grade: teal and orange. Photorealistic, 8K quality.</code></pre></div>
 
 После генерации добавляй scroll-controlled playback по промпту из статьи.</div>
 <p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Сколько стоит собрать такой лендинг?</summary><div class="faq-answer">Подписка Higgsfield около 20 долларов в месяц плюс твоё время. Само видео генерируется 5 минут, лендинг в Claude Code собирается за 2-4 часа. Дизайнер и Webflow не нужны.</div></details>
+<details class="faq-item"><summary>Какое движение камеры выбрать для фона сайта?</summary><div class="faq-answer">Arc Shot (облёт вокруг объекта) и Crane Shot (подъём сверху) дают плавное движение, которое хорошо зацикливается. Dolly Zoom создаёт напряжение, но для фона подходит хуже. Главное правило: начало и конец клипа должны визуально совпадать, иначе на стыке будет рывок.</div></details>
+<details class="faq-item"><summary>Почему видео дёргается на повторе?</summary><div class="faq-answer">Скорее всего в конце клипа резкий разворот камеры, и зацикливание разрушается. Генерируй 3-4 варианта и бери тот, где движение самое плавное.</div></details>
+<details class="faq-item"><summary>Какой размер видео нужен для веба?</summary><div class="faq-answer">1080p и до 15 МБ. Плюс обязательно добавь poster с первым кадром и preload, иначе пользователь увидит пустой чёрный экран, пока видео грузится.</div></details>
+<details class="faq-item"><summary>Нужно ли уметь программировать?</summary><div class="faq-answer">Нет. Весь код пишет Claude Code по промптам из статьи. Даже сложные вещи вроде parallax или проматывания видео по скроллу не нужно объяснять на уровне механики: достаточно сказать «parallax со скоростью 0.5», и он поймёт.</div></details>
+</div>
 <div class="cta-block">
   <p class="cta-eyebrow">NextGen Club</p>
   <h2 class="cta-title">Собираешь сайты через Claude Code?</h2>

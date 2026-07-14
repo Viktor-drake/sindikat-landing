@@ -41,6 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Контент-конвейер на Claude: Remotion + HeyGen без монтажа и камеры","description":"Как настроить пайплайн, где Claude пишет сценарии, HeyGen генерирует аватар, Remotion собирает анимацию - и контент выходит каждый день без ручного монтажа.","image":"https://nextgenclub.ru/blog/covers/c36-konveyer/cover.png","datePublished":"2026-06-25","dateModified":"2026-06-25","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/kontent-konveyer-claude"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Обязательно запускать все три инструмента сразу?","acceptedAnswer":{"@type":"Answer","text":"Нет. Начни с Claude и HeyGen, это уже даёт готовые ролики без камеры и монтажа. Remotion добавляй позже, когда понадобится сложная анимация: динамические субтитры, motion-фон, переходы."}},{"@type":"Question","name":"Нужно ли уметь кодить, чтобы работать с Remotion?","acceptedAnswer":{"@type":"Answer","text":"Нет. Remotion рендерит видео из React-компонентов, но весь код пишет Claude Code по промпту. Ты описываешь словами, что должно быть в кадре, и получаешь готовую сборку."}},{"@type":"Question","name":"Нужно ли снимать себя на камеру для аватара?","acceptedAnswer":{"@type":"Answer","text":"Один раз понадобится пятиминутное видео твоего лица, чтобы HeyGen создал аватар. Дальше он появляется в каждом ролике без съёмки. Если не хочешь свой, есть встроенные персонажи. Русские голоса в HeyGen есть, качество приличное."}},{"@type":"Question","name":"Почему звук из HeyGen тихий?","acceptedAnswer":{"@type":"Answer","text":"HeyGen отдаёт тихую аудиодорожку. Если ведёшь видео дальше в Remotion или монтаж, нормализуй звук до -14 LUFS одной командой: `ffmpeg -i input.mp4 -af loudnorm=I=-14 output.mp4`."}},{"@type":"Question","name":"Сколько времени занимает один ролик?","acceptedAnswer":{"@type":"Answer","text":"30-40 минут активной работы вместо нескольких часов. Утром отдал ролик конкурента Claude и получил сценарий, днём вставил его в HeyGen и запустил генерацию на 5 минут, вечером Remotion собрал финальное видео с субтитрами."}}]}</script>
 </head>
 <body>
 
@@ -51,8 +52,8 @@
       <span>NextGen Club</span>
     </a>
     <div class="blog-nav-links">
-      <a href="/">Клуб</a>
-      <a href="/" class="blog-nav-cta">Вступить</a>
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -171,6 +172,14 @@
 
 Дальше вставляй готовый сценарий в HeyGen для генерации аватара.</div>
 <p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Обязательно запускать все три инструмента сразу?</summary><div class="faq-answer">Нет. Начни с Claude и HeyGen, это уже даёт готовые ролики без камеры и монтажа. Remotion добавляй позже, когда понадобится сложная анимация: динамические субтитры, motion-фон, переходы.</div></details>
+<details class="faq-item"><summary>Нужно ли уметь кодить, чтобы работать с Remotion?</summary><div class="faq-answer">Нет. Remotion рендерит видео из React-компонентов, но весь код пишет Claude Code по промпту. Ты описываешь словами, что должно быть в кадре, и получаешь готовую сборку.</div></details>
+<details class="faq-item"><summary>Нужно ли снимать себя на камеру для аватара?</summary><div class="faq-answer">Один раз понадобится пятиминутное видео твоего лица, чтобы HeyGen создал аватар. Дальше он появляется в каждом ролике без съёмки. Если не хочешь свой, есть встроенные персонажи. Русские голоса в HeyGen есть, качество приличное.</div></details>
+<details class="faq-item"><summary>Почему звук из HeyGen тихий?</summary><div class="faq-answer">HeyGen отдаёт тихую аудиодорожку. Если ведёшь видео дальше в Remotion или монтаж, нормализуй звук до -14 LUFS одной командой: <code>ffmpeg -i input.mp4 -af loudnorm=I=-14 output.mp4</code>.</div></details>
+<details class="faq-item"><summary>Сколько времени занимает один ролик?</summary><div class="faq-answer">30-40 минут активной работы вместо нескольких часов. Утром отдал ролик конкурента Claude и получил сценарий, днём вставил его в HeyGen и запустил генерацию на 5 минут, вечером Remotion собрал финальное видео с субтитрами.</div></details>
+</div>
 <div class="cta-block">
   <p class="cta-eyebrow">NextGen Club</p>
   <h2 class="cta-title">Строишь контент-конвейер на Claude?</h2>

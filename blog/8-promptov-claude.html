@@ -41,6 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"8 промптов — моя контент-команда в одном Claude","description":"Как заменить контент-команду восемью ролями в Claude: аудит, стратегия, тексты, монтаж, аналитика. Система, которую запускаешь в одном чате.","image":"https://nextgenclub.ru/blog/covers/c30-8-promptov/cover.png","datePublished":"2026-06-19","dateModified":"2026-06-19","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/8-promptov-claude"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Почему восемь отдельных промптов, а не один большой?","acceptedAnswer":{"@type":"Answer","text":"Разные задачи требуют разного режима мышления: аналитика про данные, стратегия про воронку, копирайтинг про эмоцию и хук, редактура про голос. Когда один промпт пытается делать всё сразу, он делает всё средне. Восемь ролей это восемь режимов, каждая делает одно, но хорошо."}},{"@type":"Question","name":"Нужно ли держать все роли в одном чате?","acceptedAnswer":{"@type":"Answer","text":"Нет, наоборот. Каждая роль это отдельный чат. Когда Редактор работает над текстом, контекст Аналитика ему только мешает и шумит. Не смешивай их."}},{"@type":"Question","name":"Сколько времени занимает запуск системы?","acceptedAnswer":{"@type":"Answer","text":"Настройка с нуля 2-3 часа: Аудитор, Стратег и Креативный директор запускаются разово. Дальше каждый еженедельный цикл занимает меньше часа."}},{"@type":"Question","name":"Какая роль важнее всего и что чаще всего пропускают?","acceptedAnswer":{"@type":"Answer","text":"Редактор. Он убирает из текста всё, что звучит как AI: шаблонные обороты, пассивный залог, вводные конструкции. Причём работает не абстрактно, а по твоему голосу: даёшь ему примеры своих живых постов, он ловит ритм и длину предложений. Разница до и после огромная."}},{"@type":"Question","name":"Нужен ли Claude Code или хватит обычного чата?","acceptedAnswer":{"@type":"Answer","text":"Семь ролей работают в обычном чате. Claude Code нужен только Сборщику: он собирает карусели как HTML и CSS слайды 1080x1350 и скриншотит их прямо из браузера, без Canva и Figma. Плюс шаблон остаётся в коде, и следующая карусель делается в разы быстрее."}}]}</script>
 </head>
 <body>
 
@@ -51,8 +52,8 @@
       <span>NextGen Club</span>
     </a>
     <div class="blog-nav-links">
-      <a href="/">Клуб</a>
-      <a href="/" class="blog-nav-cta">Вступить</a>
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -145,6 +146,14 @@
 <p>Каждая роль — отдельный чат в Claude. Не смешивай их в один. Когда Редактор работает над текстом, ему не нужен контекст Аналитика — это только шумит и путает.</p>
 <p>Начать с нуля занимает 2-3 часа. Потом каждый еженедельный цикл — меньше часа.</p>
 <p>Больше про Claude и AI-инструменты в работе — в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Почему восемь отдельных промптов, а не один большой?</summary><div class="faq-answer">Разные задачи требуют разного режима мышления: аналитика про данные, стратегия про воронку, копирайтинг про эмоцию и хук, редактура про голос. Когда один промпт пытается делать всё сразу, он делает всё средне. Восемь ролей это восемь режимов, каждая делает одно, но хорошо.</div></details>
+<details class="faq-item"><summary>Нужно ли держать все роли в одном чате?</summary><div class="faq-answer">Нет, наоборот. Каждая роль это отдельный чат. Когда Редактор работает над текстом, контекст Аналитика ему только мешает и шумит. Не смешивай их.</div></details>
+<details class="faq-item"><summary>Сколько времени занимает запуск системы?</summary><div class="faq-answer">Настройка с нуля 2-3 часа: Аудитор, Стратег и Креативный директор запускаются разово. Дальше каждый еженедельный цикл занимает меньше часа.</div></details>
+<details class="faq-item"><summary>Какая роль важнее всего и что чаще всего пропускают?</summary><div class="faq-answer">Редактор. Он убирает из текста всё, что звучит как AI: шаблонные обороты, пассивный залог, вводные конструкции. Причём работает не абстрактно, а по твоему голосу: даёшь ему примеры своих живых постов, он ловит ритм и длину предложений. Разница до и после огромная.</div></details>
+<details class="faq-item"><summary>Нужен ли Claude Code или хватит обычного чата?</summary><div class="faq-answer">Семь ролей работают в обычном чате. Claude Code нужен только Сборщику: он собирает карусели как HTML и CSS слайды 1080x1350 и скриншотит их прямо из браузера, без Canva и Figma. Плюс шаблон остаётся в коде, и следующая карусель делается в разы быстрее.</div></details>
+</div>
 <div class="cta-block">
   <p class="cta-eyebrow">NextGen Club</p>
   <h2 class="cta-title">Делаешь контент для Instagram через Claude?</h2>

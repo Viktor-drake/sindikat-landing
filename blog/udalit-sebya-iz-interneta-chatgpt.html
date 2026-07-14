@@ -41,6 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Убрать себя из интернета за три промпта: ChatGPT против брокеров данных","description":"Сотни сайтов торгуют твоими личными данными прямо сейчас. Три промпта через ChatGPT - найти все утечки, написать заявки на удаление и отправить их автоматически через Agent Mode.","image":"https://nextgenclub.ru/blog/covers/c37-sled/cover.png","datePublished":"2026-06-29","dateModified":"2026-06-29","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/udalit-sebya-iz-interneta-chatgpt"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Это законно и это точно не взлом?","acceptedAnswer":{"@type":"Answer","text":"Речь не про взлом. Брокеры данных это легальный бизнес: они собирают публичную информацию и продают её. А ты пользуешься своим правом субъекта персональных данных и требуешь их удалить. Основания разные в зависимости от страны сайта: GDPR для европейских, CCPA для американских, ФЗ-152 для российских."}},{"@type":"Question","name":"Нужна ли платная подписка ChatGPT?","acceptedAnswer":{"@type":"Answer","text":"Для поиска утечек нужен Plus или Pro, потому что необходим веб-поиск. Agent Mode, который сам заполняет формы на сайтах, доступен только на Pro. Но без него схема тоже работает: второй промпт всё равно выдаёт готовые письма, останется отправить их вручную."}},{"@type":"Question","name":"Сколько сайтов реально удалят мои данные?","acceptedAnswer":{"@type":"Answer","text":"Реалистично 60-80 процентов за месяц. Крупные западные брокеры (Spokeo, BeenVerified, Whitepages) удаляют за 2-4 недели. Мелкие сайты реагируют по-разному, некоторые просто игнорируют. С остальными остаётся повторный запрос или жалоба в Роскомнадзор либо в надзорный орган страны сайта."}},{"@type":"Question","name":"Работает ли это с российскими источниками?","acceptedAnswer":{"@type":"Answer","text":"Да, но их надо запросить отдельно: допиши в промпт «включая российские источники». Речь про GetContact, Truecaller, агрегаторы судебных решений, архивы объявлений. На ФЗ-152 они реагируют лучше, чем на GDPR."}},{"@type":"Question","name":"Один раз почистился и всё?","acceptedAnswer":{"@type":"Answer","text":"Нет. Базы пополняются, и удалённые данные иногда возвращаются: брокеры восстанавливают их из новых источников. Поставь еженедельное напоминание на проверку и раз в квартал прогоняй полный цикл всех трёх промптов."}}]}</script>
 </head>
 <body>
 
@@ -51,8 +52,8 @@
       <span>NextGen Club</span>
     </a>
     <div class="blog-nav-links">
-      <a href="/">Клуб</a>
-      <a href="/" class="blog-nav-cta">Вступить</a>
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
       <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -150,6 +151,14 @@ Username(s): [твои никнеймы в соцсетях]
 <p>Реалистичный результат через месяц: 60-80% сайтов удалят твои данные. Остальные - повторный запрос или жалоба в Роскомнадзор/надзорный орган страны сайта.</p>
 <p>Это не идеальная защита, но это лучшее что можно сделать за час без найма юриста.</p>
 <p>Больше про ChatGPT, Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Это законно и это точно не взлом?</summary><div class="faq-answer">Речь не про взлом. Брокеры данных это легальный бизнес: они собирают публичную информацию и продают её. А ты пользуешься своим правом субъекта персональных данных и требуешь их удалить. Основания разные в зависимости от страны сайта: GDPR для европейских, CCPA для американских, ФЗ-152 для российских.</div></details>
+<details class="faq-item"><summary>Нужна ли платная подписка ChatGPT?</summary><div class="faq-answer">Для поиска утечек нужен Plus или Pro, потому что необходим веб-поиск. Agent Mode, который сам заполняет формы на сайтах, доступен только на Pro. Но без него схема тоже работает: второй промпт всё равно выдаёт готовые письма, останется отправить их вручную.</div></details>
+<details class="faq-item"><summary>Сколько сайтов реально удалят мои данные?</summary><div class="faq-answer">Реалистично 60-80 процентов за месяц. Крупные западные брокеры (Spokeo, BeenVerified, Whitepages) удаляют за 2-4 недели. Мелкие сайты реагируют по-разному, некоторые просто игнорируют. С остальными остаётся повторный запрос или жалоба в Роскомнадзор либо в надзорный орган страны сайта.</div></details>
+<details class="faq-item"><summary>Работает ли это с российскими источниками?</summary><div class="faq-answer">Да, но их надо запросить отдельно: допиши в промпт «включая российские источники». Речь про GetContact, Truecaller, агрегаторы судебных решений, архивы объявлений. На ФЗ-152 они реагируют лучше, чем на GDPR.</div></details>
+<details class="faq-item"><summary>Один раз почистился и всё?</summary><div class="faq-answer">Нет. Базы пополняются, и удалённые данные иногда возвращаются: брокеры восстанавливают их из новых источников. Поставь еженедельное напоминание на проверку и раз в квартал прогоняй полный цикл всех трёх промптов.</div></details>
+</div>
 <div class="cta-block">
   <p class="cta-eyebrow">NextGen Club</p>
   <h2 class="cta-title">Хочешь больше таких разборов AI-инструментов?</h2>
