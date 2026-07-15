@@ -90,7 +90,7 @@
 <div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>Скилл <code>site-compliance</code> проводит короткий опрос про твой сайт и сам генерирует готовые документы: страницу политики конфиденциальности, текст согласия под чекбоксом форм и cookie-баннер. Плюс проверяет техническую безопасность перед деплоем.</p></div></div>
 <h2 id="почему-это-не-мелочь">Почему это не мелочь</h2>
 <p>152-ФЗ «О персональных данных» касается любого сайта, который собирает имя, телефон, email или другие данные через форму. Не важно, интернет-магазин это или лендинг с одной кнопкой «Оставить заявку». Закон один и тот же.</p>
-<p>На практикуме «Claude и вайбкодинг» это всплыло на живом занятии: участники собрали рабочие сайты за пару часов, но у половины формы отправляли данные без чекбокса согласия и без страницы политики. Технически сайт работал. Юридически это дыра, за которую можно получить штраф.</p>
+<p>На практике это часто всплывает уже после запуска: сайт собран за пару часов, форма работает, а чекбокса согласия и страницы политики нет. Технически сайт работает. Юридически это дыра, за которую можно получить штраф.</p>
 <h2 id="что-делает-скилл">Что делает скилл</h2>
 <p><strong><a href="https://nextgenclub.ru/site-compliance-pack.zip">Скачать site-compliance-pack.zip</a></strong></p>
 <p>Внутри один скилл и README с установкой. Работает так: ты отвечаешь на несколько вопросов про свой сайт (кто владелец, какие данные собираешь, куда падают заявки, где физически хранятся), и Claude сам собирает готовые файлы.</p>
@@ -122,7 +122,7 @@ Mac:     ~/.claude/skills/</code></pre></div>
 <div class="callout callout-tip"><div class="callout-icon">💡</div><div class="callout-body"><p class="callout-label">Совет</p><p>Способ быстрее: отдай эту статью своему Claude. Скопируй ссылку на эту страницу, открой Claude Code и напиши: «Вот статья: [ссылка]. Прочитай её, установи скилл site-compliance по инструкции и прогони мой сайт через него». Claude сходит по ссылке, разберёт шаги и сделает всё сам, тебе останется только ответить на вопросы опроса.</p></div></div>
 <h2 id="что-скилл-не-сделает-за-тебя">Что скилл не сделает за тебя</h2>
 <div class="callout callout-warning"><div class="callout-icon">⚠️</div><div class="callout-body"><p class="callout-label">Внимание</p><p>Регистрация как оператор персональных данных в Роскомнадзоре не автоматизируется. Если сайт собирает персональные данные, а это почти всегда так при наличии формы заявки, по 152-ФЗ нужно подать уведомление на <strong>pd.rkn.gov.ru</strong>. Делается один раз, лично, через подтверждённую учётную запись Госуслуг. Скилл только напоминает об этом, подать уведомление придётся руками.</p></div></div>
-<p>Если на сайте есть прямая оплата, а не только заявки, потребуется ещё публичная оферта, за ней уже к скиллу <code>contract-generator</code> из <a href="/blog/skilly-claude-code-skachat-arhiv">основного набора</a>.</p>
+<p>Если на сайте есть прямая оплата, а не только заявки, потребуется ещё публичная оферта, это уже отдельная задача.</p>
 <p>Больше про Claude и AI-инструменты в работе, в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
 <div class="cta-block">
   <p class="cta-eyebrow">NextGen Club</p>
@@ -168,14 +168,7 @@ Mac:     ~/.claude/skills/</code></pre></div>
 </article>
 <section class="related-section">
   <h2 class="related-title">Читать также</h2>
-  <div class="related-grid"><a href="/blog/skilly-claude-code-skachat-arhiv" class="related-card">
-  <div class="related-card-cover"><img src="/blog/covers/c32-skills-pack/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
-  <div class="related-card-body">
-    <h3>Готовый стек скиллов для Claude Code: скачать одним архивом</h3>
-    <p>Забери мой рабочий набор скиллов для Claude Code одним архивом: контент, сайты, видео, договоры, аналитика. Плюс память и фреймворк разработки. Установка за 2 минуты.</p>
-  </div>
-</a>
-<a href="/blog/kak-sozdat-sayt-s-pomoshchyu-neyroseti" class="related-card">
+  <div class="related-grid"><a href="/blog/kak-sozdat-sayt-s-pomoshchyu-neyroseti" class="related-card">
   <div class="related-card-cover"><img src="/blog/covers/c9-sayt/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
   <div class="related-card-body">
     <h3>Как создать сайт с помощью нейросети: от идеи до публикации за вечер</h3>
