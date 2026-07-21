@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Куда уходит пятичасовой лимит и как перестать его жечь</title>
+<meta name="description" content="Почему лимит сгорает за 30 минут работы: как растёт контекст, что такое кэш промптов и три действия, которые обнуляют его целиком. Плюс реальная разница в цене между моделями.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://nextgenclub.ru/blog/kuda-uhodit-pyatichasovoy-limit">
+<link rel="icon" type="image/webp" href="/logo-64.webp">
+<link rel="apple-touch-icon" href="/logo-180.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Куда уходит пятичасовой лимит и как перестать его жечь">
+<meta property="og:description" content="Почему лимит сгорает за 30 минут работы: как растёт контекст, что такое кэш промптов и три действия, которые обнуляют его целиком. Плюс реальная разница в цене между моделями.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/kuda-uhodit-pyatichasovoy-limit">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c53-limit/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Куда уходит пятичасовой лимит и как перестать его жечь">
+<meta name="twitter:description" content="Почему лимит сгорает за 30 минут работы: как растёт контекст, что такое кэш промптов и три действия, которые обнуляют его целиком. Плюс реальная разница в цене между моделями.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c53-limit/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Куда уходит пятичасовой лимит и как перестать его жечь","description":"Почему лимит сгорает за 30 минут работы: как растёт контекст, что такое кэш промптов и три действия, которые обнуляют его целиком. Плюс реальная разница в цене между моделями.","image":"https://nextgenclub.ru/blog/covers/c53-limit/cover.png","datePublished":"2026-07-22","dateModified":"2026-07-22","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/kuda-uhodit-pyatichasovoy-limit"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Почему лимит сгорел, хотя я работал всего полчаса?","acceptedAnswer":{"@type":"Answer","text":"Расход зависит не от времени, а от размера контекста и числа обращений. Полчаса в сессии с большим накопленным контекстом стоят дороже, чем несколько часов в свежих коротких сессиях."}},{"@type":"Question","name":"Правда ли, что закрыть и открыть сессию заново - экономит?","acceptedAnswer":{"@type":"Answer","text":"Да, если задача сменилась. Новая сессия начинается с чистого контекста, и первые сообщения в ней стоят минимум. Продолжать вчерашнюю сессию ради «он же уже в контексте» имеет смысл, только если контекст реально нужен."}},{"@type":"Question","name":"Можно ли посмотреть, сколько именно осталось?","acceptedAnswer":{"@type":"Answer","text":"Общий расход виден в Settings → Usage. Разложить по конкретным причинам («вот это съел MCP, а это перечитанный файл») штатными средствами нельзя - Anthropic такую детализацию не показывает."}},{"@type":"Question","name":"Помогает ли отключить thinking?","acceptedAnswer":{"@type":"Answer","text":"Иногда - но осторожно. С отключённым размышлением модель может писать более длинные ответы, компенсируя это в видимом тексте, так что экономия не всегда та, на которую рассчитываешь. Обычно правильнее снизить эффорт, а не выключать размышление целиком."}},{"@type":"Question","name":"Влияет ли длина моего сообщения?","acceptedAnswer":{"@type":"Answer","text":"Влияет, но обычно это капля. Твои сообщения на фоне прочитанных файлов и описаний инструментов почти незаметны - экономить на формулировках вопроса смысла нет."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo-64.webp" alt="" width="32" height="32">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Куда уходит пятичасовой лимит и как перестать его жечь</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-07-22">22 июля 2026</time>
+        <span class="dot"></span>
+        <span>8 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c53-limit/cover.webp" alt="Куда уходит пятичасовой лимит и как перестать его жечь" width="1200" height="675" loading="eager" fetchpriority="high"></div>
+  <div class="article-body">
+    <p>🟡 <strong>Средний уровень</strong> - нужно понимание, что такое сессия и контекст</p>
+<div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>Поймёшь, почему расход не зависит от времени, а зависит от размера контекста</li><li>Узнаешь про кэш промптов: почему повторные запросы дешевле в 10 раз</li><li>Разберёшь три действия, которые обнуляют кэш целиком, и перестанешь их делать</li><li>Увидишь реальную разницу в цене между моделями (не в ощущениях, а в цифрах)</li><li>Получишь набор привычек, которые растягивают лимит без потери качества</li></ul></div>
+</div>
+<p>Знакомая ситуация из нашего чата: «поставил небольшую задачу и пятичасовой лимит улетел за 30 минут». Причина почти всегда одна, и она не в том, что задача была сложная.</p>
+<div class="callout callout-warning"><div class="callout-icon">⚠️</div><div class="callout-body"><p class="callout-label">Внимание</p><p><strong>Честная рамка.</strong> Anthropic не публикует формулу, по которой лимиты подписки считаются в токенах. Ниже - механика расхода токенов, которая задокументирована и одинакова везде. Она объясняет, почему у одного лимит живёт весь день, а у другого горит за полчаса, но не позволяет посчитать остаток до единицы.</p></div></div>
+<h2 id="главное-каждое-сообщение-отправляет-всю-переписку-заново">Главное: каждое сообщение отправляет всю переписку заново</h2>
+<p>Модель не помнит предыдущие сообщения. Она вообще ничего не помнит между запросами. Иллюзия памяти создаётся тем, что <strong>при каждом обращении отправляется вся история сессии целиком</strong> - с самого первого сообщения.</p>
+<p>Из этого следует то, что объясняет большинство случаев «сгорело за полчаса»:</p>
+<p>Первое сообщение в сессии стоит, условно, одну единицу. Двадцатое сообщение стоит уже двадцать, потому что тянет за собой все девятнадцать предыдущих плюс всё, что Claude успел прочитать по дороге. Расход растёт не линейно со временем работы, а <strong>накопительно с размером контекста</strong>.</p>
+<p>Поэтому «небольшая задача» в конце длинной сессии обходится в разы дороже той же задачи в свежей сессии. Дело не в задаче.</p>
+<h2 id="кэш-промптов-почему-не-всё-так-плохо">Кэш промптов: почему не всё так плохо</h2>
+<p>Если бы каждый запрос оплачивался целиком, работать было бы невозможно. Спасает кэширование: повторно отправляемая часть переписки не обрабатывается заново, а берётся из кэша.</p>
+<p>Разница в цене принципиальная:</p>
+<div class="table-wrap"><table><thead><tr><th>Что происходит с токеном</th><th>Цена относительно обычной</th></tr></thead><tbody><tr><td>Читается из кэша</td><td><strong>0.1x</strong> - в десять раз дешевле</td></tr><tr><td>Записывается в кэш (первый раз)</td><td>1.25x - небольшая наценка</td></tr><tr><td>Обрабатывается без кэша</td><td>1x - полная цена</td></tr></tbody></table></div>
+<p>То есть в нормально идущей сессии ты платишь полную цену только за новые сообщения, а вся накопленная история идёт по одной десятой. Именно поэтому длинные сессии вообще возможны.</p>
+<p><strong>А теперь плохая новость:</strong> кэш очень легко сломать. И когда он ломается, вся история пересчитывается по полной цене - вот тогда лимит и улетает за полчаса.</p>
+<h2 id="три-действия-которые-обнуляют-кэш">Три действия, которые обнуляют кэш</h2>
+<p>Чтобы понять, почему именно эти три - нужно знать, как собирается запрос. Порядок жёсткий:</p>
+<p><strong>1) описания инструментов → 2) системный промпт (CLAUDE.md) → 3) вся переписка</strong></p>
+<p>Кэш работает по принципу совпадения начала: он действует до первого изменившегося байта. Всё, что идёт после точки изменения, пересчитывается заново. Отсюда три вывода.</p>
+<h3 id="подключил-или-отключил-mcp-посреди-сессии">Подключил или отключил MCP посреди сессии</h3>
+<p>Описания инструментов стоят в самом начале запроса - в позиции ноль. Добавил MCP-сервер, отключил, поменял местами - <strong>изменилось начало, а значит аннулируется вообще весь кэш</strong>: и инструменты, и CLAUDE.md, и вся переписка.</p>
+<p>Это самое дорогое, что можно сделать в середине длинной сессии. Вся накопленная история, которая шла по 0.1x, разом пересчитывается по полной.</p>
+<p><strong>Что делать:</strong> определиться с набором MCP до начала работы, а не подключать по ходу. Нужен новый инструмент - лучше закончить текущую сессию и начать свежую с нужным набором.</p>
+<h3 id="переключил-модель-на-ходу">Переключил модель на ходу</h3>
+<p>Кэш привязан к конкретной модели. Переключение с Sonnet на Opus в середине сессии означает, что для новой модели никакого кэша нет - вся история обрабатывается с нуля по полной цене.</p>
+<p><strong>Что делать:</strong> выбирать модель под задачу в начале. Если нужна другая - осознавать, что это стоит как полный пересчёт истории.</p>
+<h3 id="поправил-claude-md-во-время-сессии">Поправил CLAUDE.md во время сессии</h3>
+<p>Системный промпт идёт вторым. Правка CLAUDE.md не трогает кэш инструментов, но обнуляет кэш всей переписки - а это обычно основной объём.</p>
+<p><strong>Что делать:</strong> править файл памяти между сессиями, а не посреди работы.</p>
+<h2 id="что-ещё-незаметно-съедает-контекст">Что ещё незаметно съедает контекст</h2>
+<p><strong>Прочитанные файлы остаются навсегда.</strong> Каждый раз, когда Claude читает файл, его содержимое попадает в контекст и <strong>остаётся там до конца сессии</strong>. Прочитал десять больших файлов - они едут в каждом последующем запросе. Если по ходу работы файл читается повторно, в контексте лежат обе копии.</p>
+<p><strong>Лишние MCP-серверы платные всегда.</strong> Описания всех подключённых инструментов отправляются в каждом запросе, даже если ты ими не пользуешься. Десять подключённых MCP - это фиксированная надбавка к каждому обращению за всю сессию. Отключи те, которыми реально не пользуешься.</p>
+<p><strong>Длинная сессия без сжатия.</strong> Когда контекст разрастается, историю нужно сжимать. Claude Code умеет это делать сам, но команда <code>/compact</code> позволяет не ждать. Ещё дешевле - закрыть сессию и открыть новую, если задача сменилась: свежая сессия начинается с нуля.</p>
+<h2 id="разница-между-моделями-цифры-а-не-ощущения">Разница между моделями: цифры, а не ощущения</h2>
+<p>Расход считается по-разному в зависимости от модели. Официальные цены за миллион токенов:</p>
+<div class="table-wrap"><table><thead><tr><th>Модель</th><th>Входящие</th><th>Исходящие</th></tr></thead><tbody><tr><td>Haiku 4.5</td><td>$1</td><td>$5</td></tr><tr><td>Sonnet 5</td><td>$3</td><td>$15</td></tr><tr><td>Opus 4.8</td><td>$5</td><td>$25</td></tr><tr><td>Fable 5</td><td>$10</td><td>$50</td></tr></tbody></table></div>
+<p>Практический вывод: <strong>Haiku в пять раз дешевле Opus, а Fable в два раза дороже Opus</strong>. Разница между «взял Haiku на простую задачу» и «взял Fable на ту же задачу» - десятикратная.</p>
+<p>Отсюда типовая ошибка, которая и жжёт лимиты: тяжёлая модель на мелких задачах. Переименовать переменные, поправить текст, разобрать простой файл - для этого не нужна самая мощная модель. А вот когда Fable гоняют на всём подряд, лимит закономерно улетает за час.</p>
+<h2 id="эффорт-регулятор-о-котором-забывают">Эффорт: регулятор, о котором забывают</h2>
+<p>Отдельный параметр - глубина проработки (effort). По умолчанию стоит высокая. На высоких значениях модель дольше думает, делает больше вызовов инструментов и пишет более развёрнутые ответы. На низких - работает короче и собраннее.</p>
+<p>Для рутинных задач имеет смысл снижать: разница в качестве на простых вещах незаметна, а расход отличается ощутимо.</p>
+<h2 id="набор-привычек-который-реально-работает">Набор привычек, который реально работает</h2>
+<ol>
+<li><strong>Новая задача - новая сессия.</strong> Самое дешёвое действие из всех. Не тащи контекст вчерашней работы в сегодняшнюю задачу.</li>
+<li><strong>Набор MCP определяй до начала</strong>, а не подключай по ходу.</li>
+<li><strong>Модель под задачу.</strong> Haiku и Sonnet закрывают большую часть рутины. Тяжёлые модели - для того, что реально сложно.</li>
+<li><strong>CLAUDE.md правь между сессиями.</strong></li>
+<li><strong>Не заставляй перечитывать одно и то же</strong> - если файл уже читался в этой сессии, он всё ещё в контексте.</li>
+<li><strong><code>/compact</code> в длинной сессии</strong> до того, как всё начнёт тормозить.</li>
+<li><strong>Отключи MCP, которыми не пользуешься.</strong></li>
+</ol>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Почему лимит сгорел, хотя я работал всего полчаса?</summary><div class="faq-answer">Расход зависит не от времени, а от размера контекста и числа обращений. Полчаса в сессии с большим накопленным контекстом стоят дороже, чем несколько часов в свежих коротких сессиях.</div></details>
+<details class="faq-item"><summary>Правда ли, что закрыть и открыть сессию заново - экономит?</summary><div class="faq-answer">Да, если задача сменилась. Новая сессия начинается с чистого контекста, и первые сообщения в ней стоят минимум. Продолжать вчерашнюю сессию ради «он же уже в контексте» имеет смысл, только если контекст реально нужен.</div></details>
+<details class="faq-item"><summary>Можно ли посмотреть, сколько именно осталось?</summary><div class="faq-answer">Общий расход виден в Settings → Usage. Разложить по конкретным причинам («вот это съел MCP, а это перечитанный файл») штатными средствами нельзя - Anthropic такую детализацию не показывает.</div></details>
+<details class="faq-item"><summary>Помогает ли отключить thinking?</summary><div class="faq-answer">Иногда - но осторожно. С отключённым размышлением модель может писать более длинные ответы, компенсируя это в видимом тексте, так что экономия не всегда та, на которую рассчитываешь. Обычно правильнее снизить эффорт, а не выключать размышление целиком.</div></details>
+<details class="faq-item"><summary>Влияет ли длина моего сообщения?</summary><div class="faq-answer">Влияет, но обычно это капля. Твои сообщения на фоне прочитанных файлов и описаний инструментов почти незаметны - экономить на формулировках вопроса смысла нет.</div></details>
+</div>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Работать быстро и не упираться в лимиты</h2>
+  <p class="cta-desc">В NextGen Club разбираем такие механики до уровня практики - что реально влияет на расход, а что городская легенда. Приходи, если хочешь работать в полную силу, а не считать оставшиеся проценты.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/claude-desktop-bazovyy-funkcional" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c33-efir1/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>Claude Desktop с нуля: три среды, модели, лимиты, скилы и безопасность</h3>
+    <p>Полный разбор базового функционала Claude для новичка: три среды работы, выбор модели, лимиты и токены, скилы, коннекторы, второй мозг и безопасность.</p>
+  </div>
+</a>
+<a href="/blog/9router-claude-code-besplatnye-modeli" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c44-9router/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>9Router: как подключить Claude Code к бесплатным моделям и не упираться в лимиты</h3>
+    <p>Лимит Claude Code закончился в неподходящий момент? Показываю рабочий open-source роутер 9Router: подключает Claude Code к бесплатным моделям и переключает их автоматически.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
