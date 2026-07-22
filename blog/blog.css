@@ -985,3 +985,46 @@ body::before {
 .article-img figcaption{font-size:13.5px;color:#6a7180;margin-top:10px}
 
 /* redeploy trigger 1782311741 */
+
+/* Чек-лист: "- [ ] пункт" в markdown */
+.article-body ul.checklist,
+.post-body ul.checklist,
+ul.checklist {
+  list-style: none;
+  padding-left: 0;
+  margin: 1.1em 0;
+}
+ul.checklist .checklist-item {
+  position: relative;
+  padding: 0.5em 0 0.5em 2.1em;
+  margin: 0;
+  border-bottom: 1px solid var(--border, rgba(0,0,0,0.06));
+}
+ul.checklist .checklist-item:last-child { border-bottom: none; }
+ul.checklist .checklist-item::before {
+  content: "";
+  position: absolute;
+  left: 0.15em;
+  top: 0.72em;
+  width: 1.05em;
+  height: 1.05em;
+  border: 1.5px solid var(--gold, #B88E54);
+  border-radius: 4px;
+  background: transparent;
+  box-sizing: border-box;
+}
+ul.checklist .checklist-item.is-done::before {
+  background: var(--gold, #B88E54);
+}
+ul.checklist .checklist-item.is-done::after {
+  content: "";
+  position: absolute;
+  left: 0.42em;
+  top: 0.9em;
+  width: 0.32em;
+  height: 0.6em;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+ul.checklist .checklist-item.is-done { color: var(--muted, #6B6B73); }
