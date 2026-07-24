@@ -10,6 +10,7 @@
 
 ## Статьи блога
 - [Claude в России: как получить доступ и начать пользоваться в 2026](https://nextgenclub.ru/blog/claude-v-rossii): Claude работает из России: рабочий доступ, регистрация без номера через Google, оплата рублями. Пошагово и с проверенными сервисами, от практика.
+- [Как установить Claude Code на Windows, Mac и из России: пошагово 2026](https://nextgenclub.ru/blog/kak-ustanovit-claude-code): Claude Code ставится одной командой, а не скачивается как программа. Пошаговая установка на Windows, Mac и Linux, доступ из России и первый запуск.
 - [Безопасность сайта на Claude: 152-ФЗ, персональные данные и юридический футер](https://nextgenclub.ru/blog/bezopasnost-sayta-152-fz-claude): Скилл для Claude Code, который сам собирает политику конфиденциальности, чекбокс согласия и cookie-баннер под 152-ФЗ, плюс чек-лист технической безопасности перед деплоем.
 - [Как подключить Claude Code к 1400+ сервисам: база Public APIs и готовый промпт](https://nextgenclub.ru/blog/claude-code-public-apis-1400-servisov): Как через каталог Public APIs найти сервис под рабочую задачу и отдать Claude Code готовый промпт на безопасную интеграцию.
 - [9Router: как подключить Claude Code к бесплатным моделям и не упираться в лимиты](https://nextgenclub.ru/blog/9router-claude-code-besplatnye-modeli): Лимит Claude Code закончился в неподходящий момент? Показываю рабочий open-source роутер 9Router: подключает Claude Code к бесплатным моделям и переключает их автоматически.
