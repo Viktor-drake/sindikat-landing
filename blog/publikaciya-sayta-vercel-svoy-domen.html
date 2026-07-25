@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111022672','ym');
+ym(111022672,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111022672" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Публикация сайта на Vercel и подключение своего домена через Claude</title>
+<meta name="description" content="Пошагово: как связать Claude с Vercel, опубликовать сайт за 5-10 минут, привязать свой домен через reg.ru или Beget, и когда пора переезжать на российский хостинг из-за 152-ФЗ.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://nextgenclub.ru/blog/publikaciya-sayta-vercel-svoy-domen">
+<link rel="icon" type="image/webp" href="/logo-64.webp">
+<link rel="apple-touch-icon" href="/logo-180.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Публикация сайта на Vercel и подключение своего домена через Claude">
+<meta property="og:description" content="Пошагово: как связать Claude с Vercel, опубликовать сайт за 5-10 минут, привязать свой домен через reg.ru или Beget, и когда пора переезжать на российский хостинг из-за 152-ФЗ.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/publikaciya-sayta-vercel-svoy-domen">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c57-vercel-domen/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Публикация сайта на Vercel и подключение своего домена через Claude">
+<meta name="twitter:description" content="Пошагово: как связать Claude с Vercel, опубликовать сайт за 5-10 минут, привязать свой домен через reg.ru или Beget, и когда пора переезжать на российский хостинг из-за 152-ФЗ.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c57-vercel-domen/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Публикация сайта на Vercel и подключение своего домена через Claude","description":"Пошагово: как связать Claude с Vercel, опубликовать сайт за 5-10 минут, привязать свой домен через reg.ru или Beget, и когда пора переезжать на российский хостинг из-за 152-ФЗ.","image":"https://nextgenclub.ru/blog/covers/c57-vercel-domen/cover.png","datePublished":"2026-07-26","dateModified":"2026-07-26","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/publikaciya-sayta-vercel-svoy-domen"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Обязательно ли платить за Vercel?","acceptedAnswer":{"@type":"Answer","text":"Нет, для показа сайта и обкатки бесплатного тарифа хватает. Платить придётся только за домен (200-700 ₽/год) и, при переезде вдолгую, за российский хостинг."}},{"@type":"Question","name":"Почему сайт открывается у меня, но не у заказчика?","acceptedAnswer":{"@type":"Answer","text":"Частая причина - тот самый DNS-нюанс с апексом: домен привязан к «новому» IP Vercel, который из России маршрутизируется нестабильно. Перепривязка на легаси-IP обычно решает. Вторая причина - DNS ещё не обновился (первые часы после привязки это нормально)."}},{"@type":"Question","name":"Можно ли сразу делать на российском хостинге, минуя Vercel?","acceptedAnswer":{"@type":"Answer","text":"Можно, но на старте Vercel удобнее: Claude с ним хорошо интегрирован, публикация в одну команду. Переезд имеет смысл, когда сайт готов и начинает реально собирать данные."}},{"@type":"Question","name":"Что если я не разбираюсь в DNS и хостинге?","acceptedAnswer":{"@type":"Answer","text":"Всё это делается в диалоге - Claude объясняет каждый шаг и говорит, что куда вставить. Разбираться в DNS самому не обязательно, но полезно понимать общую логику: домен у регистратора, сайт на Vercel, между ними - пара DNS-записей."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo-64.webp" alt="" width="32" height="32">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Публикация сайта на Vercel и подключение своего домена через Claude</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-07-26">26 июля 2026</time>
+        <span class="dot"></span>
+        <span>7 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c57-vercel-domen/cover.webp" alt="Публикация сайта на Vercel и подключение своего домена через Claude" width="1200" height="675" loading="eager" fetchpriority="high"></div>
+  <div class="article-body">
+    <p>🟡 <strong>Средний уровень</strong> - нужен готовый сайт от Claude, программирование не требуется</p>
+<div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>Свяжешь Claude с Vercel и опубликуешь сайт за 5-10 минут, а не за час мучений</li><li>Поймёшь, почему у новичка публикация «зависает», а у опытного идёт за пять минут</li><li>Подключишь свой домен вместо технического адреса</li><li>Узнаешь особенность DNS для России, из-за которой сайт может «не грузиться»</li><li>Поймёшь, когда пора переезжать с Vercel на российский хостинг</li></ul></div>
+</div>
+<p>Собрать сайт с помощью Claude - половина дела, про это есть <a href="/blog/kak-sozdat-sayt-s-pomoshchyu-neyroseti">отдельная статья</a>. Вторая половина - опубликовать его так, чтобы можно было дать ссылку заказчику, а потом посадить на свой домен. Здесь новички чаще всего застревают: Claude «долго думает», жалуется на большие фото, ссылку так и не выдаёт. Разберём, почему так и как правильно.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>Публикация сайта делается через сервис Vercel: он даёт и хостинг, и временный адрес вида <code>твой-сайт.vercel.app</code>. Claude хорошо с ним интегрирован - если аккаунт Vercel подключён заранее, публикация занимает 5-10 минут по команде «опубликуй сайт». Свой домен привязывается отдельно через регистратора (reg.ru, Beget). Для интернет-магазина с персональными данными вдолгую - лучше переехать на российский хостинг.</p></div></div>
+<h2 id="почему-у-новичка-зависает-а-у-опытного-за-пять-минут">Почему у новичка «зависает», а у опытного - за пять минут</h2>
+<p>Типичная жалоба: попросил ссылку, Claude час думал, ругался на крупные фотографии, перезагружался и так ничего и не выдал.</p>
+<p>Причина не в Claude. Когда ты не знаешь, что такое Vercel и как он подключается, Claude пытается разобраться по ходу разговора - итерациями, наощупь. Отсюда и «час думал». Как только аккаунт Vercel заведён и связан с Claude заранее, публикация превращается в одну команду и проходит за считанные минуты.</p>
+<p>Про большие фото отдельно: Claude умеет сжимать их сам, это не препятствие. Если он на них «жалуется» - обычно достаточно прямо попросить сжать изображения перед публикацией.</p>
+<h2 id="шаг-1-завести-аккаунт-vercel-и-связать-с-claude">Шаг 1. Завести аккаунт Vercel и связать с Claude</h2>
+<ol>
+<li>Зарегистрируйся на <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> - бесплатно, вход можно через GitHub-аккаунт.</li>
+<li>Получи в настройках Vercel токен доступа (Settings → Tokens → Create).</li>
+<li>Подключи Vercel к Claude - через коннектор или передав токен. После этого Claude может публиковать сам, без ручных операций в браузере.</li>
+</ol>
+<p>Дальше публикация - это буквально фраза: «опубликуй этот сайт на Vercel». Claude заливает код и возвращает рабочую ссылку <code>твой-сайт.vercel.app</code>, которую сразу можно открыть с телефона и показать заказчику.</p>
+<h2 id="шаг-2-что-даёт-временный-адрес">Шаг 2. Что даёт временный адрес</h2>
+<p>Ссылка <code>.vercel.app</code> - полноценный работающий сайт. Для показа заказчику её достаточно.</p>
+<p>Но как постоянный адрес она не годится по двум причинам: выглядит несолидно (<code>moy-magazin-x7k2.vercel.app</code> вместо <code>moybrand.ru</code>), и часть элементов на техническом домене может отображаться не идеально. Поэтому следующий шаг - свой домен.</p>
+<h2 id="шаг-3-купить-и-подключить-свой-домен">Шаг 3. Купить и подключить свой домен</h2>
+<p><strong>Где купить.</strong> Зарегистрируй домен у российского регистратора - reg.ru, Beget. Стоит от 200 до 700 рублей в год.</p>
+<p><strong>Как привязать.</strong> В настройках проекта на Vercel есть раздел <strong>Domains</strong> - жмёшь плюс, добавляешь свой домен (<code>moybrand.ru</code>). Vercel показывает, какие DNS-записи нужно прописать у регистратора. Claude объясняет каждый шаг: что скопировать и куда вставить в панели reg.ru или Beget. По сути ты переносишь пару значений из Vercel в настройки домена, и через некоторое время сайт открывается по твоему адресу.</p>
+<div class="callout callout-warning"><div class="callout-icon">⚠️</div><div class="callout-body"><p class="callout-label">Внимание</p><p><strong>Особенность для России, из-за которой сайт может «не грузиться».</strong> У Vercel есть два IP-адреса для привязки домена на апексе (голый <code>moybrand.ru</code> без <code>www</code>). Новый IP из России маршрутизируется плохо - сайт у части посетителей просто не открывается. Легаси-адрес Vercel (<code>76.76.21.21</code>) из России работает стабильно. Если после привязки сайт «то грузится, то нет» - почти наверняка дело в этом: попроси Claude прописать A-запись именно на легаси-IP Vercel. Ещё нюанс: некоторые регистраторы (Beget) не дают ставить CNAME/ALIAS на голом домене - тогда апекс подключается именно A-записью.</p></div></div>
+<h2 id="шаг-4-когда-переезжать-на-свой-хостинг">Шаг 4. Когда переезжать на свой хостинг</h2>
+<p>Vercel идеален, чтобы быстро собрать, показать и обкатать сайт. Но для интернет-магазина или любого сайта, который <strong>собирает персональные данные</strong> (имя, телефон, email через форму), вдолгую есть юридический нюанс.</p>
+<p>Vercel - зарубежный сервис, его серверы за границей. Когда посетитель оставляет данные на сайте, размещённом на Vercel, это может считаться <strong>трансграничной передачей персональных данных</strong>, которая в России регулируется. Чтобы не иметь с этим сложностей, персональные данные граждан РФ должны храниться на российских серверах (152-ФЗ, ст. 18).</p>
+<p>Практический путь:</p>
+<ol>
+<li><strong>Собери и обкатай сайт на Vercel</strong> - быстро, бесплатно, удобно.</li>
+<li><strong>Когда сайт готов и реально пойдёт в работу с формами</strong> - перенеси на российский хостинг (Beget, reg.ru и подобные, порядка 600-1000 ₽/мес). Claude умеет и это: даёшь доступ к серверу, он переносит сайт и дальше вносит правки прямо там.</li>
+</ol>
+<p>Отдельно про юридическую часть - политику конфиденциальности, согласие на обработку, регистрацию оператором в Роскомнадзоре - есть <a href="https://nextgenclub.ru/blog/bezopasnost-sayta-152-fz-claude">отдельная статья про 152-ФЗ</a>. Это не формальность: за сбор данных без уведомления в РКН штрафы измеряются миллионами.</p>
+<h2 id="не-забудь-про-бэкап">Не забудь про бэкап</h2>
+<p>Весь сайт хранится в папке проекта на твоём компьютере (<code>index.html</code> и остальные файлы). Периодически копируй всю папку Claude Code на Яндекс.Диск или Google Диск. Если Claude вдруг заблокируют - даёшь доступ к этой папке Codex или новому аккаунту, и работа продолжается с того места, где остановились. Сессии тоже хранятся локально, так что наработки не теряются.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Обязательно ли платить за Vercel?</summary><div class="faq-answer">Нет, для показа сайта и обкатки бесплатного тарифа хватает. Платить придётся только за домен (200-700 ₽/год) и, при переезде вдолгую, за российский хостинг.</div></details>
+<details class="faq-item"><summary>Почему сайт открывается у меня, но не у заказчика?</summary><div class="faq-answer">Частая причина - тот самый DNS-нюанс с апексом: домен привязан к «новому» IP Vercel, который из России маршрутизируется нестабильно. Перепривязка на легаси-IP обычно решает. Вторая причина - DNS ещё не обновился (первые часы после привязки это нормально).</div></details>
+<details class="faq-item"><summary>Можно ли сразу делать на российском хостинге, минуя Vercel?</summary><div class="faq-answer">Можно, но на старте Vercel удобнее: Claude с ним хорошо интегрирован, публикация в одну команду. Переезд имеет смысл, когда сайт готов и начинает реально собирать данные.</div></details>
+<details class="faq-item"><summary>Что если я не разбираюсь в DNS и хостинге?</summary><div class="faq-answer">Всё это делается в диалоге - Claude объясняет каждый шаг и говорит, что куда вставить. Разбираться в DNS самому не обязательно, но полезно понимать общую логику: домен у регистратора, сайт на Vercel, между ними - пара DNS-записей.</div></details>
+</div>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Доводить сайт до реального адреса, а не бросать на полпути</h2>
+  <p class="cta-desc">В NextGen Club разбираем весь путь - от сборки сайта до его публикации на своём домене с учётом российских требований. Приходи, если хочешь не просто собрать красивую картинку, а выпустить рабочий сайт в интернет.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/kak-sozdat-sayt-s-pomoshchyu-neyroseti" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c9-sayt/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>Как создать сайт с помощью нейросети: от идеи до публикации за вечер</h3>
+    <p>Как создать сайт с помощью нейросети по-настоящему, а не в шаблоне конструктора. Реальный путь от идеи до опубликованного сайта через ИИ-агента, с деплоем, ценами и сроками.</p>
+  </div>
+</a>
+<a href="/blog/konnektory-claude-dlya-rossii" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c40-konnektory-rf/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>Какие коннекторы Claude реально работают для России</h3>
+    <p>В официальном каталоге Claude 400+ коннекторов, но часть из них бесполезна для российского пользователя из-за санкций или нулевой локальной адопции. Разбираю, что реально стоит подключать: Notion, GitHub, Figma, Google Drive и другие.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
