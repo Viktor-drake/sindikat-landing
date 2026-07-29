@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111022672','ym');
+ym(111022672,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111022672" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подключение «Мой склад» к сайту через API</title>
+<meta name="description" content="Как связать интернет-магазин на Claude с «Мой склад» через официальный JSON API: остатки и цены подтягиваются на сайт автоматически, без ручного обновления карточек.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://nextgenclub.ru/blog/moy-sklad-k-saytu-cherez-api">
+<link rel="icon" type="image/webp" href="/logo-64.webp">
+<link rel="apple-touch-icon" href="/logo-180.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Подключение «Мой склад» к сайту через API">
+<meta property="og:description" content="Как связать интернет-магазин на Claude с «Мой склад» через официальный JSON API: остатки и цены подтягиваются на сайт автоматически, без ручного обновления карточек.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/moy-sklad-k-saytu-cherez-api">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c58-moysklad-api/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Подключение «Мой склад» к сайту через API">
+<meta name="twitter:description" content="Как связать интернет-магазин на Claude с «Мой склад» через официальный JSON API: остатки и цены подтягиваются на сайт автоматически, без ручного обновления карточек.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c58-moysklad-api/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Подключение «Мой склад» к сайту через API","description":"Как связать интернет-магазин на Claude с «Мой склад» через официальный JSON API: остатки и цены подтягиваются на сайт автоматически, без ручного обновления карточек.","image":"https://nextgenclub.ru/blog/covers/c58-moysklad-api/cover.png","datePublished":"2026-07-27","dateModified":"2026-07-27","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/moy-sklad-k-saytu-cherez-api"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Нужно ли программировать, чтобы это настроить?","acceptedAnswer":{"@type":"Answer","text":"Нет. Токен получаешь мышкой в интерфейсе «Мой склад», связку пишет Claude. Разбираться в устройстве API самому не нужно."}},{"@type":"Question","name":"Это работает только с сайтом на Claude или с любым?","acceptedAnswer":{"@type":"Answer","text":"Механизм универсальный - «Мой склад» отдаёт данные любому сайту, который умеет обращаться к его API. Но если сайт собран на Claude, вся настройка делается в том же диалоге, без отдельного разработчика."}},{"@type":"Question","name":"Что будет, если товара нет на складе?","acceptedAnswer":{"@type":"Answer","text":"Сайт покажет актуальный остаток - ноль или «нет в наличии», в зависимости от того, как настроена карточка. Именно в этом смысл: витрина всегда отражает реальный склад."}},{"@type":"Question","name":"Безопасно ли давать Claude токен?","acceptedAnswer":{"@type":"Answer","text":"Токен хранится в защищённой переменной окружения, а не в открытом коде сайта, который видят посетители. Общие правила те же, что с любым паролем: не публиковать, не пересылать в мессенджерах."}},{"@type":"Question","name":"А обратно - с сайта в склад - данные идут?","acceptedAnswer":{"@type":"Answer","text":"Да, API двусторонний: при оформлении заказа на сайте можно создавать заказ в «Мой склад», чтобы он сразу списывал товар. Это следующий уровень автоматизации после подгрузки остатков."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo-64.webp" alt="" width="32" height="32">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Подключение «Мой склад» к сайту через API</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-07-27">27 июля 2026</time>
+        <span class="dot"></span>
+        <span>6 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c58-moysklad-api/cover.webp" alt="Подключение «Мой склад» к сайту через API" width="1200" height="675" loading="eager" fetchpriority="high"></div>
+  <div class="article-body">
+    <p>🟡 <strong>Средний уровень</strong> - нужен аккаунт «Мой склад» с доступом администратора, программирование не требуется</p>
+<div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>Поймёшь, зачем связывать сайт со складом напрямую, а не вести остатки руками</li><li>Получишь токен доступа к «Мой склад» и подключишь его к сайту через Claude</li><li>Настроишь автоматическую подгрузку остатков и цен: списал приход - на витрине обновилось</li><li>Узнаешь, что можно тянуть кроме остатков и где подводные камни</li></ul></div>
+</div>
+<p>Собрал интернет-магазин на Claude, залил каталог - и дальше начинается рутина: списал товар в «Мой склад», зашёл на сайт, поправил карточку руками. На двух товарах терпимо, на двухстах - невозможно. Решение - связать сайт со складом напрямую, чтобы остатки подтягивались сами.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>У «Мой склад» есть официальный JSON API: даёшь Claude токен доступа, он подключает сайт к твоему складу. После этого актуальные остатки и цены подтягиваются автоматически - списал из прихода, на витрине обновилось. Никакого ручного редактирования карточек.</p></div></div>
+<h2 id="зачем-это-вообще-нужно">Зачем это вообще нужно</h2>
+<p>Пока каталог и остатки живут в двух местах - в «Мой склад» и на сайте отдельно - они неизбежно расходятся. Клиент видит товар в наличии, оформляет заказ, а его на самом деле нет. Или наоборот: товар есть, но на сайте висит «нет в наличии», и продажа не случилась.</p>
+<p>«Мой склад» - это твой единственный источник правды по остаткам. Логично, чтобы сайт брал цифры оттуда, а не хранил свою копию, которую надо синхронизировать вручную.</p>
+<h2 id="как-это-работает">Как это работает</h2>
+<p>«Мой склад» отдаёт данные через официальный JSON API (версия 1.2). Это стандартный механизм: сайт по защищённому запросу спрашивает у склада «сколько сейчас такого-то товара», склад отвечает актуальной цифрой. Авторизация - по токену доступа, привязанному к твоему аккаунту.</p>
+<p>Claude умеет работать с таким API так же, как с любым другим: ты даёшь ему токен, он пишет связку между сайтом и складом. Тебе не нужно разбираться в устройстве API - достаточно получить токен и передать его Claude.</p>
+<h2 id="шаг-1-получить-токен-доступа">Шаг 1. Получить токен доступа</h2>
+<ol>
+<li>Зайди в свой аккаунт «Мой склад» под администратором.</li>
+<li>В настройках найди раздел для разработчиков / доступ к API (в интерфейсе он в разделе настроек профиля и обмена данными).</li>
+<li>Сгенерируй <strong>токен доступа</strong> к JSON API. Это длинная строка - по сути пароль, который заменяет логин/пароль при обращениях к API.</li>
+</ol>
+<p>Токен - это учётные данные. Храни его как пароль: не публикуй в коде сайта, не отправляй в чаты. При настройке Claude кладёт его в защищённое место (переменную окружения), а не в открытый код.</p>
+<h2 id="шаг-2-передать-токен-claude-и-подключить">Шаг 2. Передать токен Claude и подключить</h2>
+<p>Дальше это делается в диалоге. Открываешь проект сайта в Claude Code и говоришь примерно так:</p>
+<blockquote><p>«Вот токен доступа к моему складу в "Мой склад" [токен]. Подключи мой интернет-магазин к нему через JSON API, чтобы остатки товаров подтягивались с моего склада автоматически.»</p></blockquote>
+<p>Claude разбирается в структуре API «Мой склад», сопоставляет товары на сайте с товарами на складе (обычно по артикулу) и настраивает подгрузку остатков. Здесь важно, чтобы артикулы на сайте и в складе совпадали - это ключ, по которому связываются карточки.</p>
+<h2 id="шаг-3-проверить-что-остатки-живые">Шаг 3. Проверить, что остатки живые</h2>
+<p>После подключения проверь на реальном примере: спиши товар из прихода в «Мой склад» и посмотри, обновилась ли цифра на сайте. Если да - связка работает, дальше остатки живут сами.</p>
+<h2 id="что-ещё-можно-тянуть-кроме-остатков">Что ещё можно тянуть кроме остатков</h2>
+<p>Через тот же API доступны не только остатки:</p>
+<ul>
+<li><strong>Цены</strong> - если ведёшь цены в «Мой склад», сайт может брать их оттуда, чтобы не править в двух местах</li>
+<li><strong>Карточки товаров</strong> - название, описание, характеристики, если основной каталог у тебя в складе</li>
+<li><strong>Изображения</strong> - можно подтягивать фото товаров, привязанные к позициям</li>
+</ul>
+<p>На старте разумно подключить только остатки (это самое болезненное), а цены и карточки добавить, когда базовая связка обкатана.</p>
+<div class="callout callout-warning"><div class="callout-icon">⚠️</div><div class="callout-body"><p class="callout-label">Внимание</p><p><strong>Про частоту обновления.</strong> Обычно сайт запрашивает остатки не в реальном времени на каждый клик покупателя, а по расписанию - раз в несколько минут или при загрузке страницы. Мгновенная синхронизация «секунда в секунду» технически возможна, но для большинства магазинов избыточна и создаёт лишнюю нагрузку. Claude поможет выбрать разумный интервал под твой поток заказов.</p></div></div>
+<h2 id="подводные-камни">Подводные камни</h2>
+<ul>
+<li><strong>Артикулы должны совпадать.</strong> Если на сайте товар с одним артикулом, а в складе с другим (или артикула нет вообще) - связать их не по чему. Наведи порядок с артикулами до подключения.</li>
+<li><strong>Токен даёт доступ ко всему складу.</strong> Токен - это ключ ко всем данным аккаунта. Если делаешь сайт для клиента, обсуди, кто хранит токен и на чьём аккаунте склад.</li>
+<li><strong>Тариф «Мой склад».</strong> Доступ к API есть на большинстве тарифов, но на самом базовом может быть ограничен - проверь свой перед настройкой.</li>
+</ul>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Нужно ли программировать, чтобы это настроить?</summary><div class="faq-answer">Нет. Токен получаешь мышкой в интерфейсе «Мой склад», связку пишет Claude. Разбираться в устройстве API самому не нужно.</div></details>
+<details class="faq-item"><summary>Это работает только с сайтом на Claude или с любым?</summary><div class="faq-answer">Механизм универсальный - «Мой склад» отдаёт данные любому сайту, который умеет обращаться к его API. Но если сайт собран на Claude, вся настройка делается в том же диалоге, без отдельного разработчика.</div></details>
+<details class="faq-item"><summary>Что будет, если товара нет на складе?</summary><div class="faq-answer">Сайт покажет актуальный остаток - ноль или «нет в наличии», в зависимости от того, как настроена карточка. Именно в этом смысл: витрина всегда отражает реальный склад.</div></details>
+<details class="faq-item"><summary>Безопасно ли давать Claude токен?</summary><div class="faq-answer">Токен хранится в защищённой переменной окружения, а не в открытом коде сайта, который видят посетители. Общие правила те же, что с любым паролем: не публиковать, не пересылать в мессенджерах.</div></details>
+<details class="faq-item"><summary>А обратно - с сайта в склад - данные идут?</summary><div class="faq-answer">Да, API двусторонний: при оформлении заказа на сайте можно создавать заказ в «Мой склад», чтобы он сразу списывал товар. Это следующий уровень автоматизации после подгрузки остатков.</div></details>
+</div>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">NextGen Club</p>
+  <h2 class="cta-title">Автоматизировать рутину, а не делать её руками</h2>
+  <p class="cta-desc">В NextGen Club разбираем такие связки под реальные магазины участников - от подключения склада до полной автоматизации заказов. Приходи, если продаёшь товары и устал синхронизировать остатки вручную.</p>
+  <a href="https://t.me/darina_nextgen_club_bot" target="_blank" rel="noopener" class="cta-button">Вступить в клуб</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/viktor_drake_channel" target="_blank" rel="noopener" class="channel-cta">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика — каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/publikaciya-sayta-vercel-svoy-domen" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c57-vercel-domen/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>Публикация сайта на Vercel и подключение своего домена через Claude</h3>
+    <p>Пошагово: как связать Claude с Vercel, опубликовать сайт за 5-10 минут, привязать свой домен через reg.ru или Beget, и когда пора переезжать на российский хостинг из-за 152-ФЗ.</p>
+  </div>
+</a>
+<a href="/blog/google-tablicy-docs-cherez-claude" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c41-google-sheets/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>Google Таблицы и Docs через Claude: как настроить автоматическую работу с документами</h3>
+    <p>Почему Claude не может просто взять и отредактировать твою Google Таблицу, и как двухчастная схема (личный аккаунт для создания + сервисный аккаунт для правки) решает это раз и навсегда.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
