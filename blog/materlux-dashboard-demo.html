@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Materlux: Дашборд</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+:root{--page:#fff;--surface:#eef1f8;--slate:#293235;--muted:#55626b;--border:#dfe4ee;--mint:#61d0b0;--mint-deep:#44a68a;--danger:#df6464;--warning:#edb04b;--gold:#c9973f;--shadow:0 12px 36px rgba(41,50,53,.08);--r:10px;--rs:5px} [data-theme=dark]{--page:#20292c;--surface:#293235;--slate:#f4f7f7;--muted:#acbbc0;--border:#3b494e;--mint:#70dbbe;--mint-deep:#70dbbe;--danger:#f07b7b;--warning:#f4c26b;--gold:#e0b563;--shadow:0 12px 36px rgba(0,0,0,.2)}*{box-sizing:border-box}body{margin:0;background:var(--surface);font:14px/1.4 Inter,Arial,sans-serif;color:var(--slate)}button{font:inherit}.shell{display:grid;grid-template-columns:244px minmax(0,1fr);min-height:100vh;max-width:1660px;margin:auto;background:var(--page);box-shadow:var(--shadow)}
+.sidebar{display:flex;flex-direction:column;padding:25px 15px 18px;background:var(--slate);color:#f5f8f7}.logo{display:flex;align-items:center;gap:10px;padding:0 9px 28px;color:inherit;text-decoration:none}.mark{width:30px;height:30px;border:7px solid var(--mint);border-radius:50% 50% 50% 6px;transform:rotate(-36deg)}.logo b{display:block;font-size:18px;letter-spacing:-.7px}.logo small{color:#adbdba;font-size:10px}.nav-label{padding:0 11px 8px;color:#a9b7b5;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.nav{display:grid;gap:3px}.nav button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 11px;border:0;border-radius:var(--rs);background:transparent;color:#c7d1cf;text-align:left;font-size:12px;cursor:pointer;transition:.18s}.nav button:hover{background:rgba(255,255,255,.09);color:#fff}.nav button.active{background:var(--mint);color:#183a32;font-weight:700}.ico{display:grid;place-items:center;width:17px;height:17px;border:1.5px solid currentColor;border-radius:5px;font-size:10px;line-height:1}.nav .spacer{margin-left:auto}.badge{display:grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:50%;background:var(--warning);color:#293235;font-size:9px;font-weight:700}.side-foot{margin-top:auto;padding:16px 8px 0;border-top:1px solid rgba(255,255,255,.14)}.theme{display:flex;align-items:center;justify-content:space-between;width:100%;padding:9px 10px;border:1px solid rgba(255,255,255,.16);border-radius:var(--rs);background:transparent;color:#ced8d6;font-size:11px;cursor:pointer}.dot{width:14px;height:14px;border:3px solid var(--mint);border-radius:50%}.profile{display:flex;gap:9px;align-items:center;margin-top:13px}.avatar{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e7f7f1;color:#29745f;font-size:10px;font-weight:700}.profile b,.profile small{display:block}.profile b{font-size:11px}.profile small{color:#a9b7b5;font-size:10px}
+.content{min-width:0;padding:27px 32px 38px;background:var(--page)}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:28px}.crumb{color:var(--muted);font-size:11px}.crumb b{color:var(--slate)}.controls{display:flex;align-items:center;gap:14px}.updated{color:var(--muted);font-size:11px}.updated:before{content:"";display:inline-block;width:6px;height:6px;margin:0 6px 1px 0;border-radius:50%;background:var(--mint)}.period{display:flex;padding:3px;border:1px solid var(--border);border-radius:7px;background:var(--surface)}.period button{padding:6px 10px;border:0;border-radius:4px;background:transparent;color:var(--muted);font-size:11px;cursor:pointer}.period button.active{background:var(--page);color:var(--slate);box-shadow:0 1px 3px rgba(41,50,53,.12);font-weight:700}h1{margin:0;font-size:28px;letter-spacing:-1.1px}h1 small,.sub{color:var(--muted);font-size:12px;font-weight:400;letter-spacing:0}.sub{margin:5px 0 0}.label{margin:27px 0 10px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.card{border:1px solid var(--border);border-radius:var(--r);background:var(--page);box-shadow:0 2px 8px rgba(41,50,53,.025)}.pad{padding:20px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:17px}.head h2{margin:0;font-size:15px;letter-spacing:-.35px}.caption{margin-top:3px;color:var(--muted);font-size:11px}.chip{padding:5px 8px;border-radius:var(--rs);background:var(--surface);color:var(--muted);font-size:10px;font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.kpi{min-height:128px;padding:16px}.kpi-top{display:flex;justify-content:space-between;gap:6px;color:var(--muted);font-size:11px;line-height:1.3}.kpi-ico{display:grid;place-items:center;width:25px;height:25px;border-radius:7px;background:var(--surface);color:var(--mint-deep);font-size:14px}.num{margin-top:18px;font-size:28px;font-weight:700;letter-spacing:-1.2px}.num small{font-size:13px}.signal{display:inline-flex;gap:5px;align-items:center;margin-top:5px;font-size:10px;font-weight:700}.signal:before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}.danger{color:var(--danger)}.warning{color:var(--warning)}.good{color:var(--mint-deep)}.gold{color:var(--gold)}
+.main-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(320px,.85fr);gap:14px}.funnel{display:grid;gap:10px}.frow{display:grid;grid-template-columns:108px 1fr 48px 44px;align-items:center;gap:10px}.frow label{color:var(--muted);font-size:11px}.track{height:27px;overflow:hidden;border-radius:5px;background:var(--surface)}.bar{display:flex;align-items:center;width:100%;height:100%;padding-left:9px;border-radius:5px;background:var(--mint);color:#21463c;font-size:11px;font-weight:700}.bar-2{width:76%;background:#80dcc4}.bar-3{width:51%;background:#9ce5d2}.bar-4{width:31%;background:#bceee0}.right{text-align:right}.conv{color:var(--muted);font-size:10px}.under{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.soft{padding:13px;border-radius:7px;background:var(--surface)}.soft label{display:block;color:var(--muted);font-size:10px}.soft strong{display:block;margin-top:4px;font-size:21px;letter-spacing:-.7px}.soft small{font-size:10px;font-weight:700}.answer{display:flex;align-items:center;justify-content:space-between;gap:8px}.spark{width:125px;height:43px}.spark line{stroke:var(--border)}.spark polyline{fill:none;stroke:var(--mint-deep);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.missed{display:flex;justify-content:space-between;align-items:center;margin-top:15px;padding-top:15px;border-top:1px solid var(--border)}.missed b{font-size:23px}.reasons{margin:16px 0 0;padding:0;list-style:none}.reasons li{display:grid;grid-template-columns:1fr 110px 24px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:11px}.reasons li:last-child{border:0}.rtrack{height:6px;border-radius:9px;background:var(--surface);overflow:hidden}.rtrack i{display:block;height:100%;border-radius:9px;background:var(--mint)}.rcount{color:var(--muted);text-align:right;font-size:10px}
+.table-card{overflow:hidden}.table-card .head{padding:20px 20px 13px;margin:0}table{width:100%;border-collapse:collapse}th{padding:10px 15px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);color:var(--muted);text-align:left;font-size:9px;letter-spacing:.08em;text-transform:uppercase}td{padding:12px 15px;border-bottom:1px solid var(--border);font-size:11px;white-space:nowrap}tbody tr:last-child td{border-bottom:0}tbody tr{transition:.15s}tbody tr:hover{background:var(--surface)}.manager{display:flex;align-items:center;gap:8px;font-weight:600}.ma{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:var(--surface);color:var(--mint-deep);font-size:9px;font-weight:700}.score{display:inline-grid;place-items:center;min-width:34px;padding:3px 5px;border-radius:5px;font-size:10px;font-weight:700}.g{background:rgba(97,208,176,.18);color:var(--mint-deep)}.m{background:rgba(237,176,75,.16);color:#b37718}.l{background:rgba(223,100,100,.13);color:var(--danger)}
+.bottom{display:grid;grid-template-columns:1.05fr 1.35fr;gap:14px}.alerts,.focus-list{display:grid;gap:8px}.alert{display:grid;grid-template-columns:29px 1fr auto;gap:9px;align-items:center;padding:10px;border:1px solid var(--border);border-left:3px solid var(--warning);border-radius:7px;background:var(--page);transition:.16s}.alert:hover{transform:translateY(-1px);box-shadow:var(--shadow)}.alert.critical{border-left-color:var(--danger)}.alert-ico,.focus-number{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--surface);color:var(--warning);font-weight:700}.critical .alert-ico{color:var(--danger)}.atitle,.focus-title{display:block;font-size:11px;font-weight:700}.adesc,.focus-desc{display:block;margin-top:2px;color:var(--muted);font-size:10px}.atime{color:var(--muted);font-size:9px;white-space:nowrap}.focus{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:12px;border-radius:7px;background:var(--surface);transition:.15s}.focus:hover{background:rgba(97,208,176,.18)}.focus-number{background:var(--page);color:var(--mint-deep);font-size:10px}
+/* --- owner-specific --- */
+.hero-num{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.hero-card{padding:20px}.hero-card label{display:block;color:var(--muted);font-size:11px}.hero-card .big{margin-top:10px;font-size:32px;font-weight:700;letter-spacing:-1.4px}.hero-card .big small{font-size:14px;color:var(--muted);font-weight:500}.hero-card .delta{margin-top:6px;font-size:11px;font-weight:700}
+.trendbox{padding:20px}.trend{width:100%;height:150px}.trend line{stroke:var(--border)}.trend polyline{fill:none;stroke:var(--mint-deep);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.trend polygon{fill:rgba(97,208,176,.12);stroke:none}.trend circle{fill:var(--mint-deep)}
+.caps{display:grid;gap:14px}.cap-row label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px}.cap-row label b{color:var(--slate);font-weight:700}.captrack{height:9px;border-radius:9px;background:var(--surface);overflow:hidden}.captrack i{display:block;height:100%;border-radius:9px}
+.depts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.dept{padding:16px;border-radius:9px;background:var(--surface);border-left:3px solid var(--mint)}.dept.warn{border-left-color:var(--warning)}.dept.risk{border-left-color:var(--danger)}.dept b{display:block;font-size:12px}.dept .dstat{margin-top:6px;font-size:20px;font-weight:700}.dept .dnote{margin-top:5px;color:var(--muted);font-size:10px;line-height:1.4}
+.watch{display:grid;gap:9px}.watch-item{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:11px;border-radius:8px;background:var(--surface)}.watch-ico{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--page);font-size:12px}.watch-title{font-size:11.5px;font-weight:700}.watch-desc{margin-top:2px;color:var(--muted);font-size:10.5px;line-height:1.4}
+.stub{padding:60px 20px;text-align:center;color:var(--muted)}.stub b{display:block;color:var(--slate);font-size:15px;margin-bottom:6px}
+@media(max-width:1200px){.kpis{grid-template-columns:repeat(3,1fr)}.main-grid,.bottom{grid-template-columns:1fr}.hero-num{grid-template-columns:repeat(2,1fr)}.depts{grid-template-columns:1fr}}
+@media(max-width:760px){.shell{grid-template-columns:1fr}.sidebar{display:none}.content{padding:20px 14px}.top,.controls{align-items:flex-start;flex-direction:column}.kpis{grid-template-columns:repeat(2,1fr)}.frow{grid-template-columns:85px 1fr 40px}.conv{display:none}.table-card{overflow-x:auto}table{min-width:720px}}
+</style></head><body><div class="shell">
+
+<aside class="sidebar">
+  <a class="logo" href="#dashboard"><span class="mark"></span><span><b>Materlux</b><small>Панель управления</small></span></a>
+  <div class="nav-label">Рабочее пространство</div>
+  <nav class="nav">
+    <button class="active" data-view="owner"><i class="ico">◆</i>Собственник</button>
+    <button data-view="rop"><i class="ico">▦</i>РОП</button>
+    <button data-view="stub" data-label="Сделки"><i class="ico">◇</i>Сделки</button>
+    <button data-view="stub" data-label="Задачи"><i class="ico">✓</i>Задачи <span class="spacer"></span><span class="badge">17</span></button>
+    <button data-view="stub" data-label="Диалоги"><i class="ico">◌</i>Диалоги</button>
+    <button data-view="stub" data-label="Команда"><i class="ico">♙</i>Команда</button>
+  </nav>
+  <div class="nav-label" style="margin-top:25px">Управление</div>
+  <nav class="nav">
+    <button data-view="stub" data-label="Отчёты"><i class="ico">⌁</i>Отчёты</button>
+    <button data-view="stub" data-label="Настройки"><i class="ico">⚙</i>Настройки</button>
+  </nav>
+  <div class="side-foot">
+    <button class="theme" id="themeToggle"><span>Тёмная тема</span><i class="dot"></i></button>
+    <div class="profile" id="profileBlock"><i class="avatar">Т</i><span><b>Татьяна</b><small>Собственник</small></span></div>
+  </div>
+</aside>
+
+<main class="content">
+
+<header class="top">
+  <span class="crumb">Materlux &nbsp;›&nbsp; <b id="pageName">Собственник</b></span>
+  <span class="controls">
+    <i class="updated">Обновлено сегодня, 09:14</i>
+    <span class="period"><button>Сегодня</button><button class="active">Неделя</button><button>Месяц</button></span>
+  </span>
+</header>
+
+<!-- ═══════════ ВЛАДЕЛЕЦ ═══════════ -->
+<section id="view-owner">
+  <h1>Компания под контролем <small>· 12–18 августа</small></h1>
+  <p class="sub">Главное для решения, без операционных деталей: деньги, план, риски и где горит бюджет.</p>
+
+  <div class="label">Главные цифры недели</div>
+  <div class="hero-num">
+    <article class="card hero-card"><label>Выручка за неделю</label><div class="big">2,84 <small>млн ₽</small></div><div class="delta good">+12% к прошлой неделе</div></article>
+    <article class="card hero-card"><label>Маржинальность</label><div class="big">34 <small>%</small></div><div class="delta warning">-1,5 п.п. за месяц</div></article>
+    <article class="card hero-card"><label>План месяца</label><div class="big">68 <small>%</small></div><div class="delta good">на графике, 9 дней в запасе</div></article>
+    <article class="card hero-card"><label>Средний чек</label><div class="big">48 700 <small>₽</small></div><div class="delta good">стабильно</div></article>
+  </div>
+
+  <div class="label">Динамика и бюджетные лимиты</div>
+  <div class="main-grid">
+    <section class="card trendbox">
+      <div class="head"><span><h2>Выручка по неделям</h2><i class="caption">Последние 8 недель, ₽ млн</i></span><i class="chip good">рост 6 недель подряд</i></div>
+      <svg class="trend" viewBox="0 0 560 150" preserveAspectRatio="none">
+        <line x1="0" y1="130" x2="560" y2="130"/>
+        <polygon points="0,130 0,95 80,88 160,100 240,78 320,70 400,55 480,40 560,20 560,130"/>
+        <polyline points="0,95 80,88 160,100 240,78 320,70 400,55 480,40 560,20"/>
+        <circle cx="560" cy="20" r="5"/>
+      </svg>
+      <div class="under">
+        <div class="soft"><label>Выручка с начала месяца</label><strong>9,6 млн ₽</strong><small class="good">план 14,1 млн</small></div>
+        <div class="soft"><label>Прибыль с начала месяца</label><strong>3,3 млн ₽</strong><small class="warning">маржа под давлением</small></div>
+      </div>
+    </section>
+
+    <section class="card pad">
+      <div class="head"><span><h2>Бюджетные лимиты</h2><i class="caption">Расход к утверждённому капу за месяц</i></span></div>
+      <div class="caps">
+        <div class="cap-row"><label>Реклама и маркетинг <b>340 000 / 500 000 ₽</b></label><div class="captrack"><i style="width:68%;background:var(--mint)"></i></div></div>
+        <div class="cap-row"><label>ФОТ отдела продаж <b>1,1 / 1,4 млн ₽</b></label><div class="captrack"><i style="width:79%;background:var(--mint)"></i></div></div>
+        <div class="cap-row"><label>Закупка материалов <b>2,7 / 2,8 млн ₽</b></label><div class="captrack"><i style="width:96%;background:var(--warning)"></i></div></div>
+        <div class="cap-row"><label>Техобслуживание и ИТ <b>38 000 / 150 000 ₽</b></label><div class="captrack"><i style="width:25%;background:var(--mint)"></i></div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="label">Отделы одним взглядом</div>
+  <div class="depts">
+    <article class="dept"><b>Продажи</b><div class="dstat good">В плане</div><div class="dnote">380 из 560 сделок к цели месяца, конверсия растёт вторую неделю</div></article>
+    <article class="dept warn"><b>Производство</b><div class="dstat warning">Загрузка 82%</div><div class="dnote">Два цеха близко к пределу мощности при текущем темпе заказов</div></article>
+    <article class="dept risk"><b>Закупки материалов</b><div class="dstat danger">Кап на 96%</div><div class="dnote">Рост цен на пружинный блок и наполнитель с начала квартала</div></article>
+  </div>
+
+  <div class="label">На что обратить внимание</div>
+  <div class="bottom">
+    <section class="card pad">
+      <div class="head"><span><h2>Стратегические риски</h2><i class="caption">Отобрано автоматически из данных всех отделов</i></span></div>
+      <div class="watch">
+        <article class="watch-item"><span class="watch-ico">₽</span><span><span class="watch-title">Себестоимость сырья выросла на 6% с начала квартала</span><span class="watch-desc">Маржа по трём популярным моделям уже ниже целевой на 2-3 п.п.</span></span></article>
+        <article class="watch-item"><span class="watch-ico">◷</span><span><span class="watch-title">Срок производства стал частой причиной отказа</span><span class="watch-desc">22% отказов за неделю: клиенты уходят из-за сроков, а не из-за цены</span></span></article>
+        <article class="watch-item"><span class="watch-ico">▤</span><span><span class="watch-title">Остатки трёх моделей ниже недели продаж</span><span class="watch-desc">Риск дефицита при текущем темпе заказов, нужно решение по закупке</span></span></article>
+      </div>
+    </section>
+    <section class="card pad">
+      <div class="head"><span><h2>Прогресс к цели года</h2><i class="caption">Выручка нарастающим итогом, план vs факт</i></span></div>
+      <svg class="trend" viewBox="0 0 560 150" preserveAspectRatio="none">
+        <line x1="0" y1="130" x2="560" y2="130"/>
+        <polyline points="0,128 70,118 140,105 210,96 280,84 350,74 420,60 490,48 560,36" style="stroke:var(--border);stroke-dasharray:5 5"/>
+        <polyline points="0,128 70,115 140,108 210,90 280,79 350,68 420,58 490,44 560,32"/>
+        <circle cx="560" cy="32" r="5"/>
+      </svg>
+      <div class="under">
+        <div class="soft"><label>Факт год к текущей дате</label><strong>84,2 млн ₽</strong><small class="good">+3,4% к плану</small></div>
+        <div class="soft"><label>Цель на год</label><strong>168 млн ₽</strong><small>без изменений</small></div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ═══════════ РОП ═══════════ -->
+<section id="view-rop" style="display:none">
+  <h1>Продажи под контролем <small>· 12–18 августа</small></h1>
+  <p class="sub">Главные показатели отдела, динамика воронки и зоны, где нужно вмешательство.</p>
+
+  <div class="label">Сводка в реальном времени</div>
+  <section class="kpis">
+    <article class="card kpi"><div class="kpi-top">Просрочки по задачам <b class="kpi-ico">!</b></div><div class="num">17</div><div class="signal danger">6 критичных</div></article>
+    <article class="card kpi"><div class="kpi-top">Среднее закрытие задачи <b class="kpi-ico">◷</b></div><div class="num">1,8 <small>дня</small></div><div class="signal good">на 0,3 дня быстрее</div></article>
+    <article class="card kpi"><div class="kpi-top">Без срока / ответственного <b class="kpi-ico">?</b></div><div class="num">9</div><div class="signal warning">требуют разбора</div></article>
+    <article class="card kpi"><div class="kpi-top">Без следующего действия <b class="kpi-ico">→</b></div><div class="num">23</div><div class="signal warning">8 старше 24 часов</div></article>
+    <article class="card kpi"><div class="kpi-top">Сделки без движения <b class="kpi-ico">~</b></div><div class="num">14</div><div class="signal danger">5 старше 3 дней</div></article>
+    <article class="card kpi"><div class="kpi-top">Эскалации за период <b class="kpi-ico">↑</b></div><div class="num">7</div><div class="signal warning">3 ждут решения</div></article>
+  </section>
+
+  <div class="label">Продажи и коммуникации</div>
+  <div class="main-grid">
+    <section class="card pad">
+      <div class="head"><span><h2>Воронка продаж</h2><i class="caption">Все новые обращения за выбранный период</i></span><i class="chip">1 248 обращений</i></div>
+      <div class="funnel">
+        <div class="frow"><label>Лиды</label><span class="track"><span class="bar">1 248</span></span><b class="right">1 248</b><i class="conv">100%</i></div>
+        <div class="frow"><label>Квалификация</label><span class="track"><span class="bar bar-2">946</span></span><b class="right">946</b><i class="conv">75,8%</i></div>
+        <div class="frow"><label>Предложение</label><span class="track"><span class="bar bar-3">636</span></span><b class="right">636</b><i class="conv">67,2%</i></div>
+        <div class="frow"><label>Сделка</label><span class="track"><span class="bar bar-4">388</span></span><b class="right">388</b><i class="conv">61,0%</i></div>
+      </div>
+      <div class="under">
+        <div class="soft"><label>Общая конверсия в сделку</label><strong>31,1%</strong><small class="good">+2,4 п.п. к прошлой неделе</small></div>
+        <div class="soft"><label>Средний чек предложения</label><strong>48 700 ₽</strong><small class="good">стабильно</small></div>
+      </div>
+    </section>
+    <section class="card pad">
+      <div class="head"><span><h2>Аналитика диалогов</h2><i class="caption">Качество коммуникации за 7 дней</i></span></div>
+      <div class="soft answer"><span><label>Среднее время первого ответа</label><strong>7 мин 42 сек</strong><small class="good">на 18% быстрее</small></span><svg class="spark" viewBox="0 0 125 43"><line x1="0" y1="36" x2="125" y2="36"/><polyline points="2,12 20,18 39,14 57,26 75,20 93,31 124,28"/></svg></div>
+      <div class="missed"><span>Пропущенные обращения</span><b class="danger">12</b></div>
+      <ol class="reasons">
+        <li><span>Стоимость выше ожиданий</span><span class="rtrack"><i style="width:100%"></i></span><i class="rcount">31%</i></li>
+        <li><span>Долгий срок производства</span><span class="rtrack"><i style="width:72%"></i></span><i class="rcount">22%</i></li>
+        <li><span>Не подошёл размер</span><span class="rtrack"><i style="width:54%"></i></span><i class="rcount">17%</i></li>
+        <li><span>Выбрали другой бренд</span><span class="rtrack"><i style="width:42%"></i></span><i class="rcount">13%</i></li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="label">Результаты по менеджерам</div>
+  <section class="card table-card">
+    <div class="head"><span><h2>Команда продаж</h2><i class="caption">Результат, скорость реакции и качество общения по каждому менеджеру</i></span><i class="chip">6 менеджеров</i></div>
+    <table>
+      <thead><tr><th>Менеджер</th><th>Обращений</th><th>Конверсия</th><th>Просрочки</th><th>Среднее время ответа</th><th>Качество диалогов</th></tr></thead>
+      <tbody>
+        <tr><td><span class="manager"><i class="ma">АК</i>Анна Крылова</span></td><td>286</td><td>36,4%</td><td class="danger">1</td><td>4 мин 18 сек</td><td><i class="score g">92</i></td></tr>
+        <tr><td><span class="manager"><i class="ma">ДМ</i>Денис Миронов</span></td><td>251</td><td>33,1%</td><td class="warning">3</td><td>6 мин 52 сек</td><td><i class="score g">88</i></td></tr>
+        <tr><td><span class="manager"><i class="ma">ЕК</i>Елена Кузнецова</span></td><td>228</td><td>29,8%</td><td class="warning">4</td><td>8 мин 11 сек</td><td><i class="score m">76</i></td></tr>
+        <tr><td><span class="manager"><i class="ma">ИС</i>Илья Соколов</span></td><td>204</td><td>27,0%</td><td class="danger">5</td><td>11 мин 36 сек</td><td><i class="score m">71</i></td></tr>
+        <tr><td><span class="manager"><i class="ma">ОВ</i>Ольга Власова</span></td><td>179</td><td>22,9%</td><td class="danger">4</td><td>14 мин 03 сек</td><td><i class="score l">63</i></td></tr>
+        <tr><td><span class="manager"><i class="ma">ПК</i>Павел Ким</span></td><td>100</td><td>24,0%</td><td class="warning">2</td><td>9 мин 27 сек</td><td><i class="score m">74</i></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="label">Требуют внимания</div>
+  <div class="bottom">
+    <section class="card pad">
+      <div class="head"><span><h2>Эскалации</h2><i class="caption">Задачи, требующие решения руководителя</i></span><i class="chip danger">3 критичных</i></div>
+      <div class="alerts">
+        <article class="alert critical"><b class="alert-ico">!</b><span><b class="atitle">Просрочена задача по сделке #1247</b><i class="adesc">Илья Соколов · клиент ждёт КП на нестандартный размер</i></span><i class="atime">2 дня</i></article>
+        <article class="alert critical"><b class="alert-ico">!</b><span><b class="atitle">Сделка без движения</b><i class="adesc">#1183 · Ольга Власова · сумма предложения 92 400 ₽</i></span><i class="atime">4 дня</i></article>
+        <article class="alert"><b class="alert-ico">↑</b><span><b class="atitle">Жалоба на срок производства</b><i class="adesc">#1261 · клиент просит обратный звонок руководителя</i></span><i class="atime">38 мин</i></article>
+        <article class="alert"><b class="alert-ico">?</b><span><b class="atitle">Не назначен ответственный</b><i class="adesc">Новое обращение из Telegram · запрос на подбор для пары</i></span><i class="atime">1 ч 14 мин</i></article>
+      </div>
+    </section>
+    <section class="card pad">
+      <div class="head"><span><h2>На что обратить внимание сегодня</h2><i class="caption">Автоматическая сводка по отклонениям</i></span></div>
+      <div class="focus-list">
+        <article class="focus"><b class="focus-number">01</b><span><b class="focus-title">Падает конверсия на этапе предложения</b><i class="focus-desc">У Ольги Власовой и Ильи Соколова она ниже среднего отдела на 8–10 п.п.</i></span></article>
+        <article class="focus"><b class="focus-number">02</b><span><b class="focus-title">Первый ответ дольше 10 минут</b><i class="focus-desc">19 диалогов за вчера. Основной объём пришёлся на вечерние обращения.</i></span></article>
+        <article class="focus"><b class="focus-number">03</b><span><b class="focus-title">Растёт доля отказов по срокам</b><i class="focus-desc">22% отказов за неделю связаны со сроком производства, что на 5 п.п. выше прошлого периода.</i></span></article>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ═══════════ ЗАГЛУШКА ДЛЯ ОСТАЛЬНЫХ РАЗДЕЛОВ ═══════════ -->
+<section id="view-stub" style="display:none">
+  <div class="card stub"><b id="stubLabel">Раздел</b>Полноценный экран собирается в рамках соответствующего блока разработки. Здесь показаны только два готовых демо-экрана: «Собственник» и «РОП».</div>
+</section>
+
+</main>
+</div>
+<script>
+const root=document.documentElement;
+const profiles={owner:{name:'Татьяна',role:'Собственник',initials:'Т'},rop:{name:'Павел',role:'Руководитель продаж',initials:'П'}};
+function setProfile(view){
+  const p=profiles[view]||profiles.rop;
+  document.getElementById('profileBlock').innerHTML='<i class="avatar">'+p.initials+'</i><span><b>'+p.name+'</b><small>'+p.role+'</small></span>';
+}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  const view=b.dataset.view;
+  document.getElementById('view-owner').style.display=view==='owner'?'':'none';
+  document.getElementById('view-rop').style.display=view==='rop'?'':'none';
+  document.getElementById('view-stub').style.display=view==='stub'?'':'none';
+  if(view==='stub'){
+    document.getElementById('pageName').textContent=b.dataset.label;
+    document.getElementById('stubLabel').textContent=b.dataset.label;
+  } else {
+    document.getElementById('pageName').textContent=view==='owner'?'Собственник':'РОП';
+  }
+  setProfile(view);
+});
+document.querySelectorAll('.period button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.period button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+document.getElementById('themeToggle').onclick=e=>{let dark=root.getAttribute('data-theme')==='dark';dark?root.removeAttribute('data-theme'):root.setAttribute('data-theme','dark');e.currentTarget.firstElementChild.textContent=dark?'Тёмная тема':'Светлая тема'};
+</script>
+</body></html>
