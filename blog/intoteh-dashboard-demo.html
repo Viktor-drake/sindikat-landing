@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Интотех: Дашборд</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F3F4F8; --card:#FFFFFF; --border:#E7E9EF; --border-strong:#DCDFE7;
+  --text:#171A21; --text-muted:#666D79; --text-faint:#9AA0AC;
+  --accent:#D9662B; --accent-ink:#B04E1E; --accent-tint:#FCE8DA;
+  --data:#2E8B94; --data-tint:#DCEEF0;
+  --ok:#1E9E63; --warn:#B8790E; --crit:#D6433B;
+  --rail:#171A21; --rail-2:#20242C; --rail-text:#AEB4BF; --rail-text-dim:#6B7280;
+  --shadow:0 1px 2px rgba(20,24,32,.04), 0 18px 34px -22px rgba(20,24,32,.16);
+  --ease:cubic-bezier(0.32,0.72,0,1);
+}
+*{box-sizing:border-box;}
+html,body{margin:0; padding:0;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:"Plus Jakarta Sans", -apple-system, Segoe UI, Arial, sans-serif;
+  font-size:14px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums;}
+h1,h2,h3{font-family:"Archivo", Arial, sans-serif; font-weight:700; text-wrap:balance; margin:0; color:var(--text);}
+button{font-family:inherit;}
+
+.card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px 24px; box-shadow:var(--shadow);}
+
+/* shell */
+.app{display:grid; grid-template-columns:230px 1fr; min-height:100vh;}
+@media (max-width:900px){.app{grid-template-columns:1fr;}}
+
+.rail{background:var(--rail); padding:22px 16px; display:flex; flex-direction:column; gap:20px; position:sticky; top:0; align-self:start; height:100vh;}
+.brand{display:flex; align-items:center; gap:11px; padding:4px 6px 8px;}
+.brand-mark{width:32px;height:32px;border-radius:9px; flex:none; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:15px;}
+.brand b{font-family:"Archivo"; font-size:15px; color:#fff; letter-spacing:.1px;}
+.brand span{display:block; font-size:10.5px; color:var(--rail-text-dim); margin-top:1px;}
+
+.nav{display:flex; flex-direction:column; gap:2px;}
+.nav-btn{
+  display:flex; align-items:center; gap:11px; padding:10px 12px; border-radius:9px;
+  background:transparent; border:none; color:var(--rail-text);
+  font-size:13.5px; font-weight:500; cursor:pointer; text-align:left; width:100%;
+  transition:background .35s var(--ease), color .3s var(--ease), transform .2s var(--ease);
+}
+.nav-btn .ic{width:17px; text-align:center; font-size:14px; opacity:.8;}
+.nav-btn:hover{background:var(--rail-2); color:#fff;}
+.nav-btn:active{transform:scale(0.97);}
+.nav-btn.active{background:var(--accent); color:#fff; font-weight:600;}
+.nav-foot{margin-top:auto; padding:12px 10px 4px; font-size:10.5px; color:var(--rail-text-dim); border-top:1px solid var(--rail-2); line-height:1.6;}
+
+.main{padding:28px 32px 70px; max-width:1240px;}
+.view{display:none; animation:rise .5s var(--ease);}
+.view.active{display:block;}
+@keyframes rise{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+.topbar{display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:26px; flex-wrap:wrap;}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:6px; font-size:10.5px; font-weight:700;
+  color:var(--accent-ink); background:var(--accent-tint);
+  padding:4px 10px; border-radius:5px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:11px;
+}
+.topbar h1{font-size:24px;}
+.topbar .sub{color:var(--text-muted); font-size:13px; margin-top:5px;}
+
+.role-toggle{display:flex; background:var(--card); border:1px solid var(--border); border-radius:11px; padding:3px; gap:2px; box-shadow:var(--shadow);}
+.role-btn{
+  border:none; background:transparent; color:var(--text-muted); font-size:12.5px;
+  font-weight:600; padding:8px 15px; border-radius:8px; cursor:pointer;
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.role-btn.active{background:var(--accent); color:#fff;}
+.role-btn:active{transform:scale(0.97);}
+
+/* bento */
+.bento{display:grid; grid-template-columns:repeat(12,1fr); gap:16px; margin-bottom:16px; align-items:stretch;}
+.bento > *{min-width:0;}
+.s3{grid-column:span 3;} .s4{grid-column:span 4;} .s5{grid-column:span 5;} .s7{grid-column:span 7;} .s9{grid-column:span 9;} .s12{grid-column:span 12;}
+@media (max-width:900px){.bento{grid-template-columns:1fr;} .bento > *{grid-column:1/-1 !important;}}
+
+.lbl{font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.09em; font-weight:700;}
+.val{font-family:"IBM Plex Mono"; font-size:27px; font-weight:600; margin-top:9px; color:var(--text);}
+.stat{font-size:12.5px; margin-top:9px; font-weight:600; display:block;}
+.stat.up{color:var(--ok);} .stat.down{color:var(--crit);} .stat.flat{color:var(--warn);} .stat.neutral{color:var(--text-muted); font-weight:500;}
+
+.hero-top{display:flex; align-items:flex-start; justify-content:space-between; gap:16px;}
+.spark-wrap{margin-top:14px;}
+.spark-tag{font-size:11px; color:var(--ok); font-weight:700; background:var(--card); border:1px solid var(--border); padding:4px 10px; border-radius:20px; box-shadow:var(--shadow);}
+
+.panel-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+.panel-head h3{font-size:14.5px; letter-spacing:.005em;}
+.panel-head .hint{font-size:11.5px; color:var(--text-faint);}
+
+/* pipeline */
+.pipeline{display:flex; gap:12px; align-items:stretch;}
+.pstage{flex:1; padding:16px 14px 14px; border-radius:12px; background:var(--bg); border:1px solid var(--border); transition:border-color .3s var(--ease), transform .3s var(--ease);}
+.pstage:hover{transform:translateY(-2px); border-color:var(--border-strong);}
+.pstage.risk{background:#FDF1F0; border-color:#F3D3D0;}
+.pstage .n{font-family:"IBM Plex Mono"; font-size:22px; font-weight:600; color:var(--text);}
+.pstage .name{font-size:11.5px; color:var(--text-muted); margin-top:3px; font-weight:600;}
+.pstage .stat{margin-top:11px; font-size:11.5px;}
+
+/* funnel */
+.funnel-row{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+.funnel-label{width:150px; font-size:12.5px; color:var(--text-muted); font-weight:500; flex:none;}
+.funnel-val{width:40px; text-align:right; font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; flex:none; color:var(--text);}
+.funnel-track{flex:1; background:var(--bg); border-radius:8px; height:9px; overflow:hidden;}
+.funnel-bar{height:100%; border-radius:8px; background:var(--data);}
+
+/* alerts */
+.alert{display:flex; gap:11px; padding:13px 0; border-bottom:1px solid var(--border);}
+.alert:last-child{border-bottom:none;}
+.alert .dot{width:7px;height:7px;border-radius:50%; margin-top:6px; flex:none;}
+.dot.crit{background:var(--crit);} .dot.warn{background:var(--warn);} .dot.ok{background:var(--ok);}
+.alert .t{font-size:13px; font-weight:600; color:var(--text);}
+.alert .d{font-size:12px; color:var(--text-faint); margin-top:3px;}
+
+/* tables */
+table{width:100%; border-collapse:collapse; font-size:12.5px;}
+th{text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--text-faint); font-weight:700; padding:0 10px 12px; border-bottom:1px solid var(--border);}
+td{padding:13px 10px; border-bottom:1px solid var(--border); color:var(--text-muted);}
+td.strong{color:var(--text); font-weight:600;}
+tr:last-child td{border-bottom:none;}
+.td-note{font-size:11px; color:var(--text-faint); margin-top:4px; font-weight:400;}
+.tbl-wrap{overflow-x:auto;}
+
+/* advisor */
+.advisor-shell{display:grid; grid-template-columns:1fr 260px; gap:16px;}
+@media (max-width:900px){.advisor-shell{grid-template-columns:1fr;}}
+.chat-window{display:flex; flex-direction:column; gap:14px; min-height:360px;}
+.msg{max-width:82%; padding:12px 16px; border-radius:12px; font-size:13.5px; line-height:1.55;}
+.msg.user{align-self:flex-end; background:var(--accent); color:#fff; font-weight:600; border-bottom-right-radius:3px;}
+.msg.bot{align-self:flex-start; background:var(--bg); border:1px solid var(--border); border-bottom-left-radius:3px; color:var(--text);}
+.msg.bot b{color:var(--accent-ink);}
+.chat-empty{color:var(--text-faint); font-size:13px; padding:30px 4px;}
+.suggest-list{display:flex; flex-direction:column; gap:8px;}
+.suggest{
+  text-align:left; padding:11px 13px; border-radius:10px; background:var(--bg);
+  border:1px solid var(--border); color:var(--text-muted); font-size:12.5px; font-weight:500; cursor:pointer;
+  transition:transform .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.suggest:hover{border-color:var(--border-strong); color:var(--text);}
+.suggest:active{transform:scale(0.97);}
+.suggest.used{opacity:.4; pointer-events:none;}
+
+.foot-note{margin-top:22px; padding:15px 18px; border-radius:12px; background:var(--card); border:1px solid var(--border); font-size:12px; color:var(--text-muted); display:flex; gap:10px; align-items:flex-start; box-shadow:var(--shadow);}
+.foot-note b{color:var(--text);}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="brand">
+      <div class="brand-mark">⛽</div>
+      <div><b>Интотех</b><span>Центр управления</span></div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active" onclick="showView('overview',this)"><span class="ic">◧</span> Обзор</button>
+      <button class="nav-btn" onclick="showView('sales',this)"><span class="ic">◔</span> Продажи</button>
+      <button class="nav-btn" onclick="showView('production',this)"><span class="ic">▤</span> Производство</button>
+      <button class="nav-btn" onclick="showView('supply',this)"><span class="ic">⇄</span> Снабжение</button>
+      <button class="nav-btn" onclick="showView('advisor',this)"><span class="ic">✦</span> ИИ-советник</button>
+    </nav>
+    <div class="nav-foot">Демонстрационный макет.<br>Все данные иллюстративные.<br>NextGen Media, август 2026</div>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <section class="view active" id="view-overview">
+      <div class="topbar">
+        <div>
+          <div class="eyebrow">Демо-данные</div>
+          <h1 id="ov-title">Обзор компании</h1>
+          <div class="sub">Пятница, 22 августа · обновлено 6 минут назад</div>
+        </div>
+        <div class="role-toggle">
+          <button class="role-btn active" onclick="setRole('owner', this)">Собственник</button>
+          <button class="role-btn" onclick="setRole('manager', this)">Руководитель</button>
+        </div>
+      </div>
+
+      <div class="bento" id="kpi-owner">
+        <div class="card s5">
+          <div class="hero-top">
+            <div><div class="lbl">Выручка, месяц</div><div class="val" style="font-size:32px;">54,2 млн ₽</div></div>
+            <span class="spark-tag">рост 6 недель подряд</span>
+          </div>
+          <div class="spark-wrap">
+            <svg viewBox="0 0 300 56" width="100%" height="56" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1E9E63" stop-opacity="0.18"/>
+                  <stop offset="100%" stop-color="#1E9E63" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <polyline points="0,42 50,36 100,40 150,26 200,30 250,14 300,6" fill="none" stroke="#1E9E63" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon points="0,42 50,36 100,40 150,26 200,30 250,14 300,6 300,56 0,56" fill="url(#sg)"/>
+              <circle cx="300" cy="6" r="4" fill="#1E9E63"/>
+            </svg>
+          </div>
+          <div class="stat up">↑ 12% к прошлому месяцу</div>
+        </div>
+        <div class="card s3">
+          <div class="lbl">Маржа</div><div class="val">27,4%</div>
+          <div class="stat down">↓ 1,8 п.п., дорожает металл</div>
+        </div>
+        <div class="card s4">
+          <div class="lbl">Выполнение плана</div><div class="val">71%</div>
+          <div class="stat up">по графику на 22 августа</div>
+        </div>
+      </div>
+      <div class="bento" id="kpi-manager" style="display:none;">
+        <div class="card s3"><div class="lbl">Звонков сегодня</div><div class="val">42</div><div class="stat up">+5 к вчера</div></div>
+        <div class="card s3"><div class="lbl">Средний отклик</div><div class="val" style="font-size:22px;">7 мин 40 с</div><div class="stat up">быстрее нормы в 10 мин</div></div>
+        <div class="card s3"><div class="lbl">Зависших сделок</div><div class="val">6</div><div class="stat down">без звонка 3+ дня</div></div>
+        <div class="card s3"><div class="lbl">КП на согласовании</div><div class="val">9</div><div class="stat up">средний темп недели</div></div>
+      </div>
+
+      <div class="bento">
+        <div class="card s3">
+          <div class="lbl">Заказов в работе</div><div class="val">18</div>
+          <div class="stat down">3 под риском срыва срока</div>
+        </div>
+        <div class="card s9">
+          <div class="panel-head"><h3>Производственный конвейер</h3><span class="hint">18 заказов в работе</span></div>
+          <div class="pipeline">
+            <div class="pstage"><div class="n mono">5</div><div class="name">Приём и ТЗ</div><div class="stat up">в графике</div></div>
+            <div class="pstage"><div class="n mono">4</div><div class="name">Снабжение</div><div class="stat flat">2 в ожидании</div></div>
+            <div class="pstage risk"><div class="n mono">6</div><div class="name">Производство</div><div class="stat down">2 под риском</div></div>
+            <div class="pstage"><div class="n mono">2</div><div class="name">Монтаж</div><div class="stat up">в графике</div></div>
+            <div class="pstage"><div class="n mono">1</div><div class="name">Сдача</div><div class="stat up">готово к приёмке</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento">
+        <div class="card s7">
+          <div class="panel-head"><h3>Воронка продаж</h3><span class="hint">за 30 дней</span></div>
+          <div class="funnel-row"><div class="funnel-label">ТЗ получено</div><div class="funnel-track"><div class="funnel-bar" style="width:100%"></div></div><div class="funnel-val mono">62</div></div>
+          <div class="funnel-row"><div class="funnel-label">КП отправлено</div><div class="funnel-track"><div class="funnel-bar" style="width:74%"></div></div><div class="funnel-val mono">46</div></div>
+          <div class="funnel-row"><div class="funnel-label">Переговоры</div><div class="funnel-track"><div class="funnel-bar" style="width:44%"></div></div><div class="funnel-val mono">27</div></div>
+          <div class="funnel-row"><div class="funnel-label">Сделка</div><div class="funnel-track"><div class="funnel-bar" style="width:19%"></div></div><div class="funnel-val mono">12</div></div>
+        </div>
+
+        <div class="card s5">
+          <div class="panel-head"><h3>Требует внимания</h3><span class="hint">флаги советника</span></div>
+          <div class="alert"><span class="dot crit"></span><div><div class="t">Заказ №2026-041 под риском срыва</div><div class="d">Монтаж смещается на 5 дней, задержка ТРК от поставщика</div></div></div>
+          <div class="alert"><span class="dot warn"></span><div><div class="t">Себестоимость металла +4%</div><div class="d">Пересчитать наценку по КП после 15 августа</div></div></div>
+          <div class="alert"><span class="dot ok"></span><div><div class="t">Заказ №2026-036 готов к сдаче</div><div class="d">Все этапы пройдены в срок</div></div></div>
+        </div>
+      </div>
+
+      <div class="foot-note"><span>ⓘ</span><div>Все цифры на этой странице <b>иллюстративные</b>, собраны для демонстрации структуры дашборда. Реальные метрики подключаются после аудита систем, в рамках блока 1.8 плана внедрения.</div></div>
+    </section>
+
+    <!-- SALES -->
+    <section class="view" id="view-sales">
+      <div class="topbar"><div><div class="eyebrow">Демо-данные</div><h1>Продажи</h1><div class="sub">Воронка и работа менеджеров, 30 дней</div></div></div>
+
+      <div class="bento">
+        <div class="card s12">
+          <div class="panel-head"><h3>Менеджеры</h3><span class="hint">6 человек в отделе</span></div>
+          <div class="tbl-wrap"><table>
+            <tr><th>Менеджер</th><th>КП отправлено</th><th>Сделок</th><th>Конверсия</th><th>Статус</th></tr>
+            <tr><td class="strong">Ирина К.</td><td class="mono">11</td><td class="mono">5</td><td class="mono">45%</td><td><span class="stat up">в норме</span></td></tr>
+            <tr><td class="strong">Игорь П.</td><td class="mono">9</td><td class="mono">2</td><td class="mono">22%</td><td><span class="stat down">риск</span><div class="td-note">4 сделки без звонка 3+ дня</div></td></tr>
+            <tr><td class="strong">Марат С.</td><td class="mono">8</td><td class="mono">3</td><td class="mono">37%</td><td><span class="stat up">в норме</span></td></tr>
+            <tr><td class="strong">Дана О.</td><td class="mono">7</td><td class="mono">1</td><td class="mono">14%</td><td><span class="stat down">риск</span><div class="td-note">конверсия ниже средней вдвое</div></td></tr>
+            <tr><td class="strong">Вадим Т.</td><td class="mono">6</td><td class="mono">1</td><td class="mono">17%</td><td><span class="stat up">в норме</span></td></tr>
+            <tr><td class="strong">Настя Р.</td><td class="mono">5</td><td class="mono">0</td><td class="mono">0%</td><td><span class="stat flat">адаптация</span><div class="td-note">первая неделя</div></td></tr>
+          </table></div>
+        </div>
+        <div class="card s12">
+          <div class="panel-head"><h3>Причины отказа</h3><span class="hint">по закрытым сделкам</span></div>
+          <div class="funnel-row"><div class="funnel-label">Срок поставки</div><div class="funnel-track"><div class="funnel-bar" style="width:38%"></div></div><div class="funnel-val mono">38%</div></div>
+          <div class="funnel-row"><div class="funnel-label">Цена</div><div class="funnel-track"><div class="funnel-bar" style="width:29%"></div></div><div class="funnel-val mono">29%</div></div>
+          <div class="funnel-row"><div class="funnel-label">Не подошла комплектация</div><div class="funnel-track"><div class="funnel-bar" style="width:17%"></div></div><div class="funnel-val mono">17%</div></div>
+          <div class="funnel-row"><div class="funnel-label">Другое</div><div class="funnel-track"><div class="funnel-bar" style="width:16%"></div></div><div class="funnel-val mono">16%</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTION -->
+    <section class="view" id="view-production">
+      <div class="topbar"><div><div class="eyebrow">Демо-данные</div><h1>Производство</h1><div class="sub">18 заказов в работе, по этапам</div></div></div>
+      <div class="card">
+        <div class="tbl-wrap"><table>
+          <tr><th>Заказ</th><th>Изделие</th><th>Этап</th><th>Срок сдачи</th><th>Статус</th></tr>
+          <tr><td class="strong mono">№2026-041</td><td>АЗС модульная, 2 поста</td><td>Производство</td><td class="mono">28 авг</td><td><span class="stat down">риск срыва</span><div class="td-note">+5 дней к сроку</div></td></tr>
+          <tr><td class="strong mono">№2026-039</td><td>Нефтебаза, 4 резервуара</td><td>Производство</td><td class="mono">2 сен</td><td><span class="stat flat">ожидание</span><div class="td-note">ждём ТРК от поставщика</div></td></tr>
+          <tr><td class="strong mono">№2026-037</td><td>АЗС модульная, 1 пост</td><td>Монтаж</td><td class="mono">25 авг</td><td><span class="stat up">в графике</span></td></tr>
+          <tr><td class="strong mono">№2026-036</td><td>Топливный терминал</td><td>Сдача</td><td class="mono">23 авг</td><td><span class="stat up">готово</span></td></tr>
+          <tr><td class="strong mono">№2026-034</td><td>Нефтебаза, 2 резервуара</td><td>Снабжение</td><td class="mono">10 сен</td><td><span class="stat flat">ожидание</span><div class="td-note">2 позиции у снабжения</div></td></tr>
+          <tr><td class="strong mono">№2026-031</td><td>АЗС ведомственная</td><td>Приём и ТЗ</td><td class="mono">18 сен</td><td><span class="stat up">в графике</span></td></tr>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- SUPPLY -->
+    <section class="view" id="view-supply">
+      <div class="topbar"><div><div class="eyebrow">Демо-данные</div><h1>Снабжение</h1><div class="sub">Цены и альтернативные источники</div></div></div>
+      <div class="card">
+        <div class="panel-head"><h3>Мониторинг цен</h3><span class="hint">погрешность до подтверждения ±3%</span></div>
+        <div class="tbl-wrap"><table>
+          <tr><th>Позиция</th><th>Текущая цена</th><th>Изменение</th><th>Поставщик</th><th>Статус</th></tr>
+          <tr><td class="strong">Металл листовой</td><td class="mono">184 500 ₽/т</td><td class="mono" style="color:var(--crit); font-weight:600;">+4,1%</td><td>ЮжМеталлПром</td><td><span class="stat flat">пересчитать</span><div class="td-note">наценку по КП после 15 августа</div></td></tr>
+          <tr><td class="strong">ТРК высокоскоростная</td><td class="mono">1 260 000 ₽</td><td class="mono" style="color:var(--warn); font-weight:600;">+5 дней</td><td>Ливенка</td><td><span class="stat down">риск</span><div class="td-note">второй срыв срока за квартал</div></td></tr>
+          <tr><td class="strong">Уровнемер</td><td class="mono">96 000 ₽</td><td class="mono" style="color:var(--text-faint);">без изменений</td><td>собственное производство</td><td><span class="stat up">в наличии</span></td></tr>
+          <tr><td class="strong">Насос топливный</td><td class="mono">142 000 ₽</td><td class="mono" style="color:var(--ok); font-weight:600;">-1,2%</td><td>ПромНасос</td><td><span class="stat up">в наличии</span></td></tr>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ADVISOR -->
+    <section class="view" id="view-advisor">
+      <div class="topbar"><div><div class="eyebrow">Демо-диалог</div><h1>ИИ-советник</h1><div class="sub">Отвечает по данным продаж, производства и снабжения</div></div></div>
+      <div class="advisor-shell">
+        <div class="card">
+          <div id="chat" class="chat-window">
+            <div class="chat-empty">Выберите вопрос справа, чтобы увидеть пример ответа</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="panel-head" style="margin-bottom:12px;"><h3 style="font-size:13px;">Примеры вопросов</h3></div>
+          <div class="suggest-list" id="suggest-list"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+function showView(name, btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function setRole(role, btn){
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const isOwner = role==='owner';
+  document.getElementById('kpi-owner').style.display = isOwner ? 'grid' : 'none';
+  document.getElementById('kpi-manager').style.display = isOwner ? 'none' : 'grid';
+  document.getElementById('ov-title').textContent = isOwner ? 'Обзор компании' : 'Обзор для руководителя отдела';
+}
+
+const QA = [
+  {q:'Почему просел план по марже в августе?', a:'Металл подорожал на <b>4,1%</b> с начала месяца, а в 6 КП, отправленных после 15 августа, себестоимость ещё не пересчитана. Рекомендую обновить наценку по этим КП до подписания.'},
+  {q:'Какой заказ сейчас самый рискованный?', a:'Заказ <b>№2026-041</b>: монтаж смещается на 5 дней из-за задержки ТРК от поставщика Ливенка. Это второй подобный случай за квартал, стоит обсудить резервного поставщика.'},
+  {q:'У кого из менеджеров стоит проверить работу?', a:'У <b>Игоря П.</b> 4 сделки без звонка 3 и более дня, риск потери контакта с клиентом. У <b>Даны О.</b> конверсия 14% при среднем 30%, возможно стоит разобрать её звонки.'},
+];
+const list = document.getElementById('suggest-list');
+QA.forEach((item)=>{
+  const b = document.createElement('button');
+  b.className = 'suggest';
+  b.textContent = item.q;
+  b.onclick = ()=>{
+    if(b.classList.contains('used')) return;
+    b.classList.add('used');
+    const chat = document.getElementById('chat');
+    if(chat.querySelector('.chat-empty')) chat.innerHTML = '';
+    const u = document.createElement('div'); u.className='msg user'; u.textContent = item.q;
+    const a = document.createElement('div'); a.className='msg bot'; a.innerHTML = item.a;
+    chat.appendChild(u); chat.appendChild(a);
+    chat.scrollTop = chat.scrollHeight;
+  };
+  list.appendChild(b);
+});
+</script>
+</body></html>
