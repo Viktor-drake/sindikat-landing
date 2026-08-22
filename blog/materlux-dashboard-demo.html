@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Materlux: Дашборд</title><!-- v2 --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Materlux: Дашборд</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
 :root{--page:#fff;--surface:#eef1f8;--slate:#293235;--muted:#55626b;--border:#dfe4ee;--mint:#61d0b0;--mint-deep:#44a68a;--danger:#df6464;--warning:#edb04b;--gold:#c9973f;--shadow:0 12px 36px rgba(41,50,53,.08);--r:10px;--rs:5px} [data-theme=dark]{--page:#20292c;--surface:#293235;--slate:#f4f7f7;--muted:#acbbc0;--border:#3b494e;--mint:#70dbbe;--mint-deep:#70dbbe;--danger:#f07b7b;--warning:#f4c26b;--gold:#e0b563;--shadow:0 12px 36px rgba(0,0,0,.2)}*{box-sizing:border-box}body{margin:0;background:var(--surface);font:14px/1.4 Inter,Arial,sans-serif;color:var(--slate)}button{font:inherit}.shell{display:grid;grid-template-columns:244px minmax(0,1fr);min-height:100vh;max-width:1660px;margin:auto;background:var(--page);box-shadow:var(--shadow)}
 .sidebar{display:flex;flex-direction:column;padding:25px 15px 18px;background:var(--slate);color:#f5f8f7}.logo{display:flex;align-items:center;gap:10px;padding:0 9px 28px;color:inherit;text-decoration:none}.mark{width:30px;height:30px;border:7px solid var(--mint);border-radius:50% 50% 50% 6px;transform:rotate(-36deg)}.logo b{display:block;font-size:18px;letter-spacing:-.7px}.logo small{color:#adbdba;font-size:10px}.nav-label{padding:0 11px 8px;color:#a9b7b5;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.nav{display:grid;gap:3px}.nav button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 11px;border:0;border-radius:var(--rs);background:transparent;color:#c7d1cf;text-align:left;font-size:12px;cursor:pointer;transition:.18s}.nav button:hover{background:rgba(255,255,255,.09);color:#fff}.nav button.active{background:var(--mint);color:#183a32;font-weight:700}.ico{display:grid;place-items:center;width:17px;height:17px;border:1.5px solid currentColor;border-radius:5px;font-size:10px;line-height:1}.nav .spacer{margin-left:auto}.badge{display:grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:50%;background:var(--warning);color:#293235;font-size:9px;font-weight:700}.side-foot{margin-top:auto;padding:16px 8px 0;border-top:1px solid rgba(255,255,255,.14)}.theme{display:flex;align-items:center;justify-content:space-between;width:100%;padding:9px 10px;border:1px solid rgba(255,255,255,.16);border-radius:var(--rs);background:transparent;color:#ced8d6;font-size:11px;cursor:pointer}.dot{width:14px;height:14px;border:3px solid var(--mint);border-radius:50%}.profile{display:flex;gap:9px;align-items:center;margin-top:13px}.avatar{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e7f7f1;color:#29745f;font-size:10px;font-weight:700}.profile b,.profile small{display:block}.profile b{font-size:11px}.profile small{color:#a9b7b5;font-size:10px}
 .content{min-width:0;padding:27px 32px 38px;background:var(--page)}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:28px}.crumb{color:var(--muted);font-size:11px}.crumb b{color:var(--slate)}.controls{display:flex;align-items:center;gap:14px}.updated{color:var(--muted);font-size:11px}.updated:before{content:"";display:inline-block;width:6px;height:6px;margin:0 6px 1px 0;border-radius:50%;background:var(--mint)}.period{display:flex;padding:3px;border:1px solid var(--border);border-radius:7px;background:var(--surface)}.period button{padding:6px 10px;border:0;border-radius:4px;background:transparent;color:var(--muted);font-size:11px;cursor:pointer}.period button.active{background:var(--page);color:var(--slate);box-shadow:0 1px 3px rgba(41,50,53,.12);font-weight:700}h1{margin:0;font-size:28px;letter-spacing:-1.1px}h1 small,.sub{color:var(--muted);font-size:12px;font-weight:400;letter-spacing:0}.sub{margin:5px 0 0}.label{margin:27px 0 10px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.card{border:1px solid var(--border);border-radius:var(--r);background:var(--page);box-shadow:0 2px 8px rgba(41,50,53,.025)}.pad{padding:20px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:17px}.head h2{margin:0;font-size:15px;letter-spacing:-.35px}.caption{margin-top:3px;color:var(--muted);font-size:11px}.chip{padding:5px 8px;border-radius:var(--rs);background:var(--surface);color:var(--muted);font-size:10px;font-weight:600}
@@ -14,8 +14,42 @@
 .depts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.dept{padding:16px;border-radius:9px;background:var(--surface);border-left:3px solid var(--mint)}.dept.warn{border-left-color:var(--warning)}.dept.risk{border-left-color:var(--danger)}.dept b{display:block;font-size:12px}.dept .dstat{margin-top:6px;font-size:20px;font-weight:700}.dept .dnote{margin-top:5px;color:var(--muted);font-size:10px;line-height:1.4}
 .watch{display:grid;gap:9px}.watch-item{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:11px;border-radius:8px;background:var(--surface)}.watch-ico{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--page);font-size:12px}.watch-title{font-size:11.5px;font-weight:700}.watch-desc{margin-top:2px;color:var(--muted);font-size:10.5px;line-height:1.4}
 .stub{padding:60px 20px;text-align:center;color:var(--muted)}.stub b{display:block;color:var(--slate);font-size:15px;margin-bottom:6px}
-@media(max-width:1200px){.kpis{grid-template-columns:repeat(3,1fr)}.main-grid,.bottom{grid-template-columns:1fr}.hero-num{grid-template-columns:repeat(2,1fr)}.depts{grid-template-columns:1fr}}
-@media(max-width:760px){.shell{grid-template-columns:1fr}.sidebar{display:none}.content{padding:20px 14px}.top,.controls{align-items:flex-start;flex-direction:column}.kpis{grid-template-columns:repeat(2,1fr)}.frow{grid-template-columns:85px 1fr 40px}.conv{display:none}.table-card{overflow-x:auto}table{min-width:720px}}
+/* --- AI-советник: пункт меню --- */
+.nav button.ai-nav{position:relative}.ai-pulse{width:7px;height:7px;border-radius:50%;background:var(--mint);margin-left:auto;box-shadow:0 0 0 0 rgba(97,208,176,.6);animation:aipulse 2s infinite}
+.nav button.active.ai-nav .ai-pulse{background:#183a32;box-shadow:none;animation:none}
+@keyframes aipulse{0%{box-shadow:0 0 0 0 rgba(97,208,176,.55)}70%{box-shadow:0 0 0 7px rgba(97,208,176,0)}100%{box-shadow:0 0 0 0 rgba(97,208,176,0)}}
+/* --- AI-советник: страница --- */
+.ai-hero{display:flex;align-items:center;gap:14px;padding:20px;border-radius:var(--r);background:linear-gradient(120deg,rgba(97,208,176,.14),rgba(97,208,176,.03));border:1px solid var(--border)}
+.ai-hero-ico{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--mint);color:#0e2b23;font-size:20px;font-weight:700;flex-shrink:0}
+.ai-hero b{display:block;font-size:14px}.ai-hero span{display:block;margin-top:3px;color:var(--muted);font-size:11.5px;line-height:1.5}
+.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.insight{padding:15px;border-radius:9px;background:var(--surface)}.insight-ico{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--page);font-size:12px;margin-bottom:9px}.insight b{display:block;font-size:11.5px;line-height:1.4}.insight span{display:block;margin-top:4px;color:var(--muted);font-size:10.5px;line-height:1.4}
+.chat{display:flex;flex-direction:column;gap:10px;padding:18px;max-height:340px;overflow-y:auto}
+.msg{display:flex;gap:9px;max-width:78%}.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.msg-av{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--surface);color:var(--mint-deep);font-size:11px;font-weight:700;flex-shrink:0}
+.msg.user .msg-av{background:var(--slate);color:#fff}
+.msg-bubble{padding:10px 13px;border-radius:11px;background:var(--surface);font-size:11.5px;line-height:1.55}
+.msg.user .msg-bubble{background:var(--mint);color:#0e2b23}
+.chat-input{display:flex;gap:8px;padding:14px 18px;border-top:1px solid var(--border)}
+.chat-input input{flex:1;padding:10px 13px;border:1px solid var(--border);border-radius:8px;background:var(--page);color:var(--slate);font:inherit;font-size:12px}
+.chat-input input:focus{outline:2px solid var(--mint);outline-offset:1px}
+.chat-input button{padding:0 18px;border:0;border-radius:8px;background:var(--mint);color:#0e2b23;font-weight:700;font-size:12px;cursor:pointer}
+.chat-input button:hover{background:var(--mint-deep)}
+.suggest{display:flex;flex-wrap:wrap;gap:7px;padding:0 18px 14px}.suggest button{padding:6px 11px;border:1px solid var(--border);border-radius:100px;background:var(--page);color:var(--muted);font-size:10.5px;cursor:pointer}.suggest button:hover{border-color:var(--mint);color:var(--slate)}
+/* --- плавающая кнопка + мини-попап (виден на всех вкладках) --- */
+.ai-fab{position:fixed;right:26px;bottom:26px;width:56px;height:56px;border-radius:50%;border:0;background:var(--mint);color:#0e2b23;font-size:22px;font-weight:700;cursor:pointer;box-shadow:0 10px 28px rgba(41,50,53,.28);z-index:80;display:grid;place-items:center;transition:transform .18s}
+.ai-fab:hover{transform:translateY(-2px) scale(1.04)}
+.ai-fab-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--mint);opacity:.55;animation:aiRing 2.4s infinite}
+@keyframes aiRing{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+.ai-pop{position:fixed;right:26px;bottom:94px;width:330px;max-height:420px;background:var(--page);border:1px solid var(--border);border-radius:14px;box-shadow:0 20px 50px rgba(41,50,53,.28);z-index:81;display:none;flex-direction:column;overflow:hidden}
+.ai-pop.open{display:flex}
+.ai-pop-head{display:flex;align-items:center;gap:9px;padding:14px 16px;background:var(--slate);color:#fff}
+.ai-pop-head .msg-av{background:var(--mint);color:#0e2b23}
+.ai-pop-head b{font-size:12px}.ai-pop-head span{display:block;font-size:9.5px;color:#a9b7b5}
+.ai-pop-close{margin-left:auto;background:none;border:0;color:#c7d1cf;font-size:16px;cursor:pointer;line-height:1;padding:2px}
+.ai-pop .chat{padding:14px;max-height:220px}.ai-pop .chat-input{padding:11px 14px}.ai-pop .suggest{padding:0 14px 11px}
+@media(prefers-reduced-motion:reduce){.ai-pulse,.ai-fab-ring{animation:none}}
+@media(max-width:1200px){.kpis{grid-template-columns:repeat(3,1fr)}.main-grid,.bottom{grid-template-columns:1fr}.hero-num{grid-template-columns:repeat(2,1fr)}.depts{grid-template-columns:1fr}.insights{grid-template-columns:1fr}}
+@media(max-width:760px){.shell{grid-template-columns:1fr}.sidebar{display:none}.content{padding:20px 14px}.top,.controls{align-items:flex-start;flex-direction:column}.kpis{grid-template-columns:repeat(2,1fr)}.frow{grid-template-columns:85px 1fr 40px}.conv{display:none}.table-card{overflow-x:auto}table{min-width:720px}.ai-pop{right:14px;left:14px;width:auto;bottom:88px}.ai-fab{right:18px;bottom:18px}}
 </style></head><body><div class="shell">
 
 <aside class="sidebar">
@@ -24,6 +58,7 @@
   <nav class="nav">
     <button class="active" data-view="owner"><i class="ico">◆</i>Собственник</button>
     <button data-view="rop"><i class="ico">▦</i>РОП</button>
+    <button data-view="ai" class="ai-nav"><i class="ico">✦</i>AI-советник<span class="spacer"></span><i class="ai-pulse"></i></button>
     <button data-view="stub" data-label="Сделки"><i class="ico">◇</i>Сделки</button>
     <button data-view="stub" data-label="Задачи"><i class="ico">✓</i>Задачи <span class="spacer"></span><span class="badge">17</span></button>
     <button data-view="stub" data-label="Диалоги"><i class="ico">◌</i>Диалоги</button>
@@ -52,7 +87,7 @@
 
 <!-- ═══════════ ВЛАДЕЛЕЦ ═══════════ -->
 <section id="view-owner">
-  <h1>Компания под контролем <small>· 12–18 августа</small></h1>
+  <h1>Компания под контролем <small>· 12-18 августа</small></h1>
   <p class="sub">Главное для решения, без операционных деталей: деньги, план, риски и где горит бюджет.</p>
 
   <div class="label">Главные цифры недели</div>
@@ -125,7 +160,7 @@
 
 <!-- ═══════════ РОП ═══════════ -->
 <section id="view-rop" style="display:none">
-  <h1>Продажи под контролем <small>· 12–18 августа</small></h1>
+  <h1>Продажи под контролем <small>· 12-18 августа</small></h1>
   <p class="sub">Главные показатели отдела, динамика воронки и зоны, где нужно вмешательство.</p>
 
   <div class="label">Сводка в реальном времени</div>
@@ -196,7 +231,7 @@
     <section class="card pad">
       <div class="head"><span><h2>На что обратить внимание сегодня</h2><i class="caption">Автоматическая сводка по отклонениям</i></span></div>
       <div class="focus-list">
-        <article class="focus"><b class="focus-number">01</b><span><b class="focus-title">Падает конверсия на этапе предложения</b><i class="focus-desc">У Ольги Власовой и Ильи Соколова она ниже среднего отдела на 8–10 п.п.</i></span></article>
+        <article class="focus"><b class="focus-number">01</b><span><b class="focus-title">Падает конверсия на этапе предложения</b><i class="focus-desc">У Ольги Власовой и Ильи Соколова она ниже среднего отдела на 8-10 п.п.</i></span></article>
         <article class="focus"><b class="focus-number">02</b><span><b class="focus-title">Первый ответ дольше 10 минут</b><i class="focus-desc">19 диалогов за вчера. Основной объём пришёлся на вечерние обращения.</i></span></article>
         <article class="focus"><b class="focus-number">03</b><span><b class="focus-title">Растёт доля отказов по срокам</b><i class="focus-desc">22% отказов за неделю связаны со сроком производства, что на 5 п.п. выше прошлого периода.</i></span></article>
       </div>
@@ -204,36 +239,127 @@
   </div>
 </section>
 
+<!-- ═══════════ AI-СОВЕТНИК ═══════════ -->
+<section id="view-ai" style="display:none">
+  <h1>AI-советник <small>учится на данных Materlux</small></h1>
+  <p class="sub">Разбирает все дашборды, следит за конкурентами, объясняет причины и отвечает на вопросы. Решение всегда за вами.</p>
+
+  <div class="label">Сегодня заметил</div>
+  <div class="insights">
+    <article class="insight"><i class="insight-ico">₽</i><b>Маржа по премиум-сегменту растёт третий месяц</b><span>С 31% до 34,5% за счёт модели «Аврора Люкс»</span></article>
+    <article class="insight"><i class="insight-ico">⚑</i><b>Конкурент снизил цену на аналог модели «Классик»</b><span>На 8%, три дня назад. Стоит проверить ваш прайс в этом сегменте</span></article>
+    <article class="insight"><i class="insight-ico">▤</i><b>Остаток по трём моделям ниже недели продаж</b><span>При текущем темпе заказов возможен дефицит через 5-7 дней</span></article>
+  </div>
+
+  <div class="label">Спросить советника</div>
+  <section class="card" style="overflow:hidden">
+    <div class="chat">
+      <div class="msg"><i class="msg-av">AI</i><div class="msg-bubble">Добрый день. Я разобрал данные за неделю: выручка растёт, но маржа в сегменте «Стандарт» просела на 2 п.п. Спросите, что вас интересует, или выберите вопрос ниже.</div></div>
+      <div class="msg user"><div class="msg-bubble">Почему упала маржа в июле?</div><i class="msg-av">Т</i></div>
+      <div class="msg"><i class="msg-av">AI</i><div class="msg-bubble">Основная причина - рост закупочной цены на пружинный блок и наполнитель, плюс три модели сегмента «Стандарт» продавались со скидкой выше обычной. Себестоимость выросла на 6% с начала квартала, розничная цена не менялась.</div></div>
+    </div>
+    <div class="suggest">
+      <button>Какие модели стоит вывести из ассортимента?</button>
+      <button>Что изменилось у конкурентов за неделю?</button>
+      <button>Стоит ли поднимать цены на топ-3 модели?</button>
+    </div>
+    <div class="chat-input"><input type="text" placeholder="Спросите что-нибудь о бизнесе..."><button class="ai-send" data-target="page">Спросить</button></div>
+  </section>
+
+  <div class="label" style="margin-top:24px">Ограничения</div>
+  <div class="card pad" style="font-size:11.5px;color:var(--muted);line-height:1.6">Советник опирается на ваши данные и открытые источники по конкурентам. Он объясняет и предлагает, решение принимает человек. Первые содержательные выводы появляются после накопления истории - обычно через пару месяцев работы дашбордов.</div>
+</section>
+
 <!-- ═══════════ ЗАГЛУШКА ДЛЯ ОСТАЛЬНЫХ РАЗДЕЛОВ ═══════════ -->
 <section id="view-stub" style="display:none">
-  <div class="card stub"><b id="stubLabel">Раздел</b>Полноценный экран собирается в рамках соответствующего блока разработки. Здесь показаны только два готовых демо-экрана: «Собственник» и «РОП».</div>
+  <div class="card stub"><b id="stubLabel">Раздел</b>Полноценный экран собирается в рамках соответствующего блока разработки. Здесь показаны только три готовых демо-экрана: «Собственник», «РОП» и «AI-советник».</div>
 </section>
 
 </main>
 </div>
+
+<!-- ═══════════ ПЛАВАЮЩИЙ AI-ПОМОЩНИК ═══════════ -->
+<button class="ai-fab" id="aiFab" aria-label="Открыть AI-советника"><span class="ai-fab-ring"></span>✦</button>
+<div class="ai-pop" id="aiPop">
+  <div class="ai-pop-head">
+    <i class="msg-av">AI</i>
+    <span><b>AI-советник</b><span>на связи, спросите о цифрах</span></span>
+    <button class="ai-pop-close" id="aiPopClose">✕</button>
+  </div>
+  <div class="chat">
+    <div class="msg"><i class="msg-av">AI</i><div class="msg-bubble">Заметил: конкурент снизил цену на аналог «Классик» на 8%. Показать подробнее на вкладке «AI-советник»?</div></div>
+  </div>
+  <div class="suggest">
+    <button data-open-ai="1">Открыть полную вкладку</button>
+  </div>
+  <div class="chat-input"><input type="text" placeholder="Быстрый вопрос..."><button class="ai-send" data-target="pop">Спросить</button></div>
+</div>
+
 <script>
 const root=document.documentElement;
-const profiles={owner:{name:'Татьяна',role:'Собственник',initials:'Т'},rop:{name:'Павел',role:'Руководитель продаж',initials:'П'}};
+const profiles={owner:{name:'Татьяна',role:'Собственник',initials:'Т'},rop:{name:'Павел',role:'Руководитель продаж',initials:'П'},ai:{name:'Татьяна',role:'Собственник',initials:'Т'}};
 function setProfile(view){
   const p=profiles[view]||profiles.rop;
   document.getElementById('profileBlock').innerHTML='<i class="avatar">'+p.initials+'</i><span><b>'+p.name+'</b><small>'+p.role+'</small></span>';
 }
+const viewLabels={owner:'Собственник',rop:'РОП',ai:'AI-советник'};
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
   b.classList.add('active');
   const view=b.dataset.view;
   document.getElementById('view-owner').style.display=view==='owner'?'':'none';
   document.getElementById('view-rop').style.display=view==='rop'?'':'none';
+  document.getElementById('view-ai').style.display=view==='ai'?'':'none';
   document.getElementById('view-stub').style.display=view==='stub'?'':'none';
   if(view==='stub'){
     document.getElementById('pageName').textContent=b.dataset.label;
     document.getElementById('stubLabel').textContent=b.dataset.label;
   } else {
-    document.getElementById('pageName').textContent=view==='owner'?'Собственник':'РОП';
+    document.getElementById('pageName').textContent=viewLabels[view];
   }
   setProfile(view);
 });
 document.querySelectorAll('.period button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.period button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
 document.getElementById('themeToggle').onclick=e=>{let dark=root.getAttribute('data-theme')==='dark';dark?root.removeAttribute('data-theme'):root.setAttribute('data-theme','dark');e.currentTarget.firstElementChild.textContent=dark?'Тёмная тема':'Светлая тема'};
+
+/* AI FAB + popover */
+const aiFab=document.getElementById('aiFab'), aiPop=document.getElementById('aiPop');
+aiFab.onclick=()=>aiPop.classList.toggle('open');
+document.getElementById('aiPopClose').onclick=()=>aiPop.classList.remove('open');
+document.querySelectorAll('[data-open-ai]').forEach(b=>b.onclick=()=>{
+  aiPop.classList.remove('open');
+  document.querySelector('.nav button[data-view="ai"]').click();
+});
+const canned=[
+  'Смотрю по данным: маржа в этом сегменте держится за счёт двух моделей, остальные ниже среднего на 3-4 п.п.',
+  'За последнюю неделю заметных изменений у конкурентов не было, кроме снижения цены на аналог «Классик».',
+  'Судя по истории спроса, топ-3 модели можно поднять в цене на 3-5% без заметного падения конверсии.'
+];
+document.querySelectorAll('.ai-send').forEach(btn=>btn.onclick=()=>{
+  const input=btn.previousElementSibling;
+  const text=input.value.trim();
+  if(!text) return;
+  const chat=btn.closest('.ai-pop, .card').querySelector('.chat');
+  const userMsg=document.createElement('div');
+  userMsg.className='msg user';
+  userMsg.innerHTML='<div class="msg-bubble"></div><i class="msg-av">Т</i>';
+  userMsg.querySelector('.msg-bubble').textContent=text;
+  chat.appendChild(userMsg);
+  input.value='';
+  setTimeout(()=>{
+    const reply=document.createElement('div');
+    reply.className='msg';
+    reply.innerHTML='<i class="msg-av">AI</i><div class="msg-bubble"></div>';
+    reply.querySelector('.msg-bubble').textContent=canned[Math.floor(Math.random()*canned.length)];
+    chat.appendChild(reply);
+    chat.scrollTop=chat.scrollHeight;
+  },500);
+  chat.scrollTop=chat.scrollHeight;
+});
+document.querySelectorAll('.suggest button:not([data-open-ai])').forEach(b=>b.onclick=()=>{
+  const input=b.closest('section,.ai-pop').querySelector('.chat-input input');
+  input.value=b.textContent;
+  input.closest('.chat-input').querySelector('.ai-send').click();
+});
 </script>
 </body></html>
