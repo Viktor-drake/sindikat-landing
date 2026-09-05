@@ -107,6 +107,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://nextgenclub.ru/blog/chto-takoe-agi-singulyarnost</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nextgenclub.ru/blog/claude-code-bez-programmirovaniya</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -151,6 +157,12 @@
   <url>
     <loc>https://nextgenclub.ru/blog/dizayn-sayta-claude-code-urovnya-produkta</loc>
     <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nextgenclub.ru/blog/gpt-6-astra</loc>
+    <lastmod>2026-09-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

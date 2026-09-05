@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111022672','ym');
+ym(111022672,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111022672" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPT-6 Astra: что это, зачем нужен бизнесу и что реально умеет</title>
+<meta name="description" content="GPT-6 Astra от OpenAI: разбор без хайпа. Что модель умеет на компьютере, как меняет работу и бизнес, реальные кейсы в играх, и правда ли это AGI.">
+
+<link rel="canonical" href="https://nextgenclub.ru/blog/gpt-6-astra">
+<link rel="icon" type="image/webp" href="/logo-64.webp">
+<link rel="apple-touch-icon" href="/logo-180.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT-6 Astra: что это, зачем нужен бизнесу и что реально умеет">
+<meta property="og:description" content="GPT-6 Astra от OpenAI: разбор без хайпа. Что модель умеет на компьютере, как меняет работу и бизнес, реальные кейсы в играх, и правда ли это AGI.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/gpt-6-astra">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c78-gpt-6-astra/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GPT-6 Astra: что это, зачем нужен бизнесу и что реально умеет">
+<meta name="twitter:description" content="GPT-6 Astra от OpenAI: разбор без хайпа. Что модель умеет на компьютере, как меняет работу и бизнес, реальные кейсы в играх, и правда ли это AGI.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c78-gpt-6-astra/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"GPT-6 Astra: что это, зачем нужен бизнесу и что реально умеет","description":"GPT-6 Astra от OpenAI: разбор без хайпа. Что модель умеет на компьютере, как меняет работу и бизнес, реальные кейсы в играх, и правда ли это AGI.","image":"https://nextgenclub.ru/blog/covers/c78-gpt-6-astra/cover.png","datePublished":"2026-09-05","dateModified":"2026-09-05","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/gpt-6-astra"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Что такое GPT-6 Astra?","acceptedAnswer":{"@type":"Answer","text":"Флагманская модель OpenAI, анонсированная в сентябре 2026 года. Главные особенности: контекст в миллион токенов и заметно возросшая способность самостоятельно работать с компьютером и интерфейсами программ."}},{"@type":"Question","name":"GPT-6 Astra это AGI?","acceptedAnswer":{"@type":"Answer","text":"Президент OpenAI сделал осторожное заявление, что «не будет неразумным» считать это эрой AGI, но не заявил о прямом достижении общего искусственного интеллекта. На одном тесте результат резко вырос, но на агрегированных рейтингах модель близка к предыдущей версии."}},{"@type":"Question","name":"Как GPT-6 Astra применяют в бизнесе?","acceptedAnswer":{"@type":"Answer","text":"Для автоматизации рутины через интерфейс: заполнение форм, работа с CRM, разбор документов и таблиц, подготовка готовых отчётов и презентаций по существующим шаблонам компании."}},{"@type":"Question","name":"Какие есть реальные кейсы использования в играх?","acceptedAnswer":{"@type":"Answer","text":"Playco сократила ручные правки на 50% при разработке через инструмент на базе Astra, модель самостоятельно собрала 3D-персонажа от промпта до готовой сцены в Unreal Engine 5, а команда CodeRabbit поручила ей собрать полноценную RPG с нуля."}},{"@type":"Question","name":"Сколько стоит GPT-6 Astra?","acceptedAnswer":{"@type":"Answer","text":"Примерно в 2,5 раза дороже предыдущей флагманской модели OpenAI: $10 за миллион входных токенов и $50 за миллион выходных."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo-64.webp" alt="" width="32" height="32">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">GPT-6 Astra: что это, зачем нужен бизнесу и что реально умеет</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-09-05">5 сентября 2026</time>
+        <span class="dot"></span>
+        <span>10 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c78-gpt-6-astra/cover.webp" alt="GPT-6 Astra: что это, зачем нужен бизнесу и что реально умеет" width="1200" height="675" loading="eager" fetchpriority="high"></div>
+  <div class="article-body">
+    <p>OpenAI выпустила GPT-6 Astra, назвала её самым мощным своим релизом и заявила о начале «эры AGI». Обычно такие заявления стоит пропускать мимо ушей, компании хвалят свой продукт всегда. Но за этим релизом стоят конкретные цифры и уже работающие кейсы, и часть из них действительно меняет то, что раньше называли «просто ещё одна модель».</p>
+<p>Разберём по фактам: что это, что реально умеет на компьютере, как это применяют в работе и в играх, и стоит ли верить разговорам про AGI.</p>
+<div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь из статьи</strong></p><ul><li>Что такое GPT-6 Astra и чем технически отличается от прошлой модели</li><li>Как её применяют в работе: автоматизация компьютера, документы, аналитика</li><li>Реальные кейсы в играх: от прототипирования до сборки готовой игры</li><li>Честный разбор заявлений про AGI без хайпа</li></ul></div>
+</div>
+<h2 id="что-это-такое">Что это такое</h2>
+<p>GPT-6 Astra это флагманская модель OpenAI, анонсированная 3 сентября 2026 года. Это крупнейший обучающий прогон компании: впервые тренировка шла на более чем 100 000 видеокарт на площадке Stargate в Техасе.</p>
+<p>Технически: контекст 1,05 миллиона токенов (это примерно объём толстой книги за один заход), вывод до 128 000 токенов, знания обновлены до конца апреля 2026. На входе принимает текст и картинки, отвечает пока только текстом, аудио и видео на старте нет.</p>
+<p>Стоит она заметно дороже предыдущей модели: примерно в 2,5 раза, $10 за миллион входных токенов и $50 за миллион выходных. Раскатывают модель поэтапно: сначала доверенным партнёрам и участникам программы по кибербезопасности, затем по тарифам ChatGPT Plus, Pro, Business, Enterprise и через API.</p>
+<h2 id="что-реально-нового-компьютер-и-агентность">Что реально нового: компьютер и агентность</h2>
+<p>Главная тема релиза не текст, а способность <strong>самой пользоваться компьютером</strong>: браузером, программами, интерфейсами. OpenAI называет это «новым рубежом» скорости, точности и безопасности такой автоматизации.</p>
+<p>Цифры это подтверждают. На тесте OSWorld 2.0, который меряет работу с реальными приложениями, модель показала рост почти на 11 процентных пунктов. При этом она тратит на задачу примерно на 47% меньше времени, чем предыдущая версия, при более высоком результате. Это разница не в стиле ответа, а в скорости и надёжности выполнения реальной работы.</p>
+<h2 id="как-это-применяют-в-работе-и-бизнесе">Как это применяют в работе и бизнесе</h2>
+<p>Вот где начинается самое практичное для бизнеса, и это шире, чем просто «более умный чат-бот».</p>
+<p><strong>Автоматизация рутины через интерфейс.</strong> Модель заполняет формы, обновляет записи в CRM, разбирает и организует календарь, ищет информацию в интернете и оформляет результат в документ или письмо. Это закрывает то, что раньше называли «долгий хвост» внутренних задач: мелкие процессы, для которых делать полноценную интеграцию невыгодно, а руками их выполнять муторно каждый день.</p>
+<p><strong>Готовые документы и отчёты.</strong> Модель находит нужные файлы, сопоставляет данные из таблиц, PDF, презентаций и картинок, и выдаёт на выходе готовый результат: финансовый анализ, список выводов по проверке, аудит. Не черновик, а документ, который сразу можно отдать на проверку эксперту.</p>
+<p><strong>Работа с существующими шаблонами.</strong> Она умеет собирать документы, таблицы и презентации по уже принятым в компании стандартам, а не с нуля в произвольном формате. Это снижает объём ручной доводки после того, как модель закончила.</p>
+<p><strong>Интеграция в корпоративные системы.</strong> Модель уже доступна через платформы вроде Microsoft Foundry и используется в enterprise-инструментах для сложной офисной работы: разбор договоров, поиск фактов, финансовые расчёты.</p>
+<p><strong>Важная оговорка для бизнеса.</strong> Раз модель сама управляет интерфейсами и получает доступ к внутренним системам, компаниям приходится заранее продумывать правила: какие процессы вообще разрешено автоматизировать, как логировать действия, как хранить пароли и доступы, что делать, если интерфейс программы поменялся и модель сбилась. Это не мелочь, а обязательное условие безопасного внедрения, а не опция на будущее.</p>
+<h2 id="реальные-кейсы-в-играх">Реальные кейсы в играх</h2>
+<p>Игровая индустрия оказалась той сферой, где новые возможности показали себя нагляднее всего, и здесь уже есть не гипотезы, а рабочие примеры.</p>
+<p><strong>Playco: минус половина ручных правок.</strong> Компания строит на базе Astra инструмент Playbot, среду разработки для профессиональных геймдизайнеров, которая подключается прямо к движкам Unity и Godot. Модель редактирует сцены, сама запускает и тестирует игру, проверяет изменения и работает параллельно с разработчиком в тех же инструментах, которыми он и так пользуется. Результат уже измерен: на 50% меньше ручных исправлений по сравнению с прежним процессом.</p>
+<p><strong>От текстового промпта до играбельного персонажа.</strong> В одном задокументированном случае модель самостоятельно открыла Blender, по одному текстовому описанию смоделировала персонажа-волка, оснастила его скелетом для анимации, анимировала бег, а затем перенесла результат в Unreal Engine 5, построила лесное окружение и разместила персонажа как играбельного. Весь путь от идеи до рабочего прототипа без участия человека на промежуточных шагах.</p>
+<p><strong>Целая игра с нуля.</strong> Команда CodeRabbit протестировала модель, поручив ей собрать полноценную экшен-RPG под названием NIGHTSHIFT на движке Godot. Результат: семь игровых классов, дерево пассивных навыков на 988 узлов по мотивам культовой системы из Path of Exile, активные умения, руны, система усиления предметов и кооперативный режим.</p>
+<p>Вывод для тех, кто не в геймдеве: если раньше нейросеть «помогала писать код», то здесь она <strong>сама спроектировала и собрала игровую систему</strong> целиком. Та же механика: агент управляет инструментом, тестирует результат, находит и чинит ошибки сам, переносится на любую другую область, не только на игры: сайты, внутренний софт, автоматизации.</p>
+<h2 id="правда-ли-это-agi">Правда ли это AGI</h2>
+<p>Президент OpenAI Грег Брокман заявил на презентации: «не будет неразумным считать, что мы сейчас в эре AGI». Формулировка нарочно мягкая: это не прямое заявление о достижении общего искусственного интеллекта, а осторожная фраза, которую сам Брокман не подкрепил однозначным «да, это AGI».</p>
+<p>Аргумент в пользу громкого заголовка: на тесте ARC-AGI-3, который специально спроектирован как трудный именно для проверки общих способностей, результат подскочил примерно с 7,8% до около 99%. Цифра эффектная.</p>
+<p>Но есть и обратная сторона, которую реже цитируют в заголовках. На агрегированных рейтингах общего интеллекта модель осталась близко к показателям своей предыдущей версии, а по части бенчмарков кодирования уступает более свежим моделям конкурентов. То есть скачок резкий на одном конкретном тесте, а не универсальный по всем направлениям сразу.</p>
+<p>Что такое AGI на самом деле, чем он отличается от того, что мы видим сейчас, и почему сами эксперты расходятся в оценках, разобрано подробно в отдельной статье про <a href="/blog/chto-takoe-agi-singulyarnost">AGI и технологическую сингулярность</a>.</p>
+<h2 id="про-риски-не-только-польза">Про риски: не только польза</h2>
+<p>Задержка релиза Astra была связана с тем, что модель впервые пересекла установленный OpenAI «критический» порог по кибербезопасности. Публичная версия отказывается выполнять продвинутые задачи в этой области, а расширенный доступ есть только у проверенных исследователей в специальной программе. На тестах модель самостоятельно нашла и связала в цепочку две ранее неизвестные уязвимости, которые затем передали разработчикам для исправления.</p>
+<p>Отдельно часть сообщества разработчиков игр восприняла кейсы с быстрой генерацией клонов существующих игр настороженно: способность собрать рабочую игровую систему за считанные часы поднимает вопросы об оригинальности и о том, что происходит с трудом дизайнеров, когда рутинная часть их работы автоматизируется настолько сильно.</p>
+<h2 id="что-запомнить">Что запомнить</h2>
+<p>GPT-6 Astra не первая модель, обещающая перевернуть всё, и не последняя. Но конкретные измеримые вещи в ней есть: заметный скачок в способности пользоваться компьютером и интерфейсами самостоятельно, измеримое ускорение сложной офисной работы, и уже работающие, а не гипотетические, кейсы в разработке игр.</p>
+<p>Заявления про AGI стоит воспринимать как маркетинговую рамку раунда, а не как техническую веху. Практическая ценность модели не в ярлыке, а в том, что она реально умеет сделать за тебя уже сегодня, и цена за это заметно выше, чем у предыдущих моделей, так что применять её стоит точечно, для сложных задач, а не для рутины.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Что такое GPT-6 Astra?</summary><div class="faq-answer">Флагманская модель OpenAI, анонсированная в сентябре 2026 года. Главные особенности: контекст в миллион токенов и заметно возросшая способность самостоятельно работать с компьютером и интерфейсами программ.</div></details>
+<details class="faq-item"><summary>GPT-6 Astra это AGI?</summary><div class="faq-answer">Президент OpenAI сделал осторожное заявление, что «не будет неразумным» считать это эрой AGI, но не заявил о прямом достижении общего искусственного интеллекта. На одном тесте результат резко вырос, но на агрегированных рейтингах модель близка к предыдущей версии.</div></details>
+<details class="faq-item"><summary>Как GPT-6 Astra применяют в бизнесе?</summary><div class="faq-answer">Для автоматизации рутины через интерфейс: заполнение форм, работа с CRM, разбор документов и таблиц, подготовка готовых отчётов и презентаций по существующим шаблонам компании.</div></details>
+<details class="faq-item"><summary>Какие есть реальные кейсы использования в играх?</summary><div class="faq-answer">Playco сократила ручные правки на 50% при разработке через инструмент на базе Astra, модель самостоятельно собрала 3D-персонажа от промпта до готовой сцены в Unreal Engine 5, а команда CodeRabbit поручила ей собрать полноценную RPG с нуля.</div></details>
+<details class="faq-item"><summary>Сколько стоит GPT-6 Astra?</summary><div class="faq-answer">Примерно в 2,5 раза дороже предыдущей флагманской модели OpenAI: $10 за миллион входных токенов и $50 за миллион выходных.</div></details>
+</div>
+<div class="cta-block">
+  <p class="cta-eyebrow">Лёгкий старт</p>
+  <h2 class="cta-title">Хочешь применять новые возможности ИИ в своей работе, а не просто читать новости о них?</h2>
+  <p class="cta-desc">Забери бесплатный пошаговый план «Лёгкий старт в Claude Code» прямо в Telegram: доступ, первые шаги и маршрут под тебя.</p>
+  <a href="https://t.me/darina_nextgen_club_bot?start=seo" target="_blank" rel="noopener" class="cta-button" onclick="if(window.ym)ym(111022672,'reachGoal','bot_seo')">Получить план в боте</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener" class="channel-cta" onclick="if(window.ym)ym(111022672,'reachGoal','channel_sub')">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/chto-takoe-agi-singulyarnost" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c77-agi-singulyarnost/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>AGI и технологическая сингулярность: что это и к чему может привести</h3>
+    <p>Что такое AGI (общий искусственный интеллект) и технологическая сингулярность простыми словами. Прогнозы, риски и почему эксперты спорят, а не соглашаются.</p>
+  </div>
+</a>
+<a href="/blog/luchshie-neyroseti-2026" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c59-luchshie-neyroseti/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>Лучшие нейросети 2026: какая под какую задачу (без топов ради топов)</h3>
+    <p>Не очередной список из 20 нейросетей, а разбор, какую брать под текст, картинки, видео, код и музыку в 2026. С честными оговорками и бесплатными вариантами.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
