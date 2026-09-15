@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111022672','ym');
+ym(111022672,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111022672" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Скилл talking-head-reel: рилс с моушен-графикой за 15 минут</title>
+<meta name="description" content="Скилл для Claude Code, который собирает вертикальный рилс с говорящей головой и анимацией поверх речи. Манифест вместо HTML, 30+ готовых элементов, субтитры и звук. Архив внутри.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://nextgenclub.ru/blog/skill-talking-head-reel">
+<link rel="icon" type="image/webp" href="/logo-64.webp">
+<link rel="apple-touch-icon" href="/logo-180.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Скилл talking-head-reel: рилс с моушен-графикой за 15 минут">
+<meta property="og:description" content="Скилл для Claude Code, который собирает вертикальный рилс с говорящей головой и анимацией поверх речи. Манифест вместо HTML, 30+ готовых элементов, субтитры и звук. Архив внутри.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/skill-talking-head-reel">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c79-talking-head-reel/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Скилл talking-head-reel: рилс с моушен-графикой за 15 минут">
+<meta name="twitter:description" content="Скилл для Claude Code, который собирает вертикальный рилс с говорящей головой и анимацией поверх речи. Манифест вместо HTML, 30+ готовых элементов, субтитры и звук. Архив внутри.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c79-talking-head-reel/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Скилл talking-head-reel: рилс с моушен-графикой за 15 минут","description":"Скилл для Claude Code, который собирает вертикальный рилс с говорящей головой и анимацией поверх речи. Манифест вместо HTML, 30+ готовых элементов, субтитры и звук. Архив внутри.","image":"https://nextgenclub.ru/blog/covers/c79-talking-head-reel/cover.png","datePublished":"2026-09-15","dateModified":"2026-09-15","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/skill-talking-head-reel"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Обязательно ли использовать HeyGen?","acceptedAnswer":{"@type":"Answer","text":"Нет. Скилл работает с любым клипом говорящей головы, включая обычную съёмку на телефон. HeyGen удобен тем, что текст правится и переозвучивается за пару минут."}},{"@type":"Question","name":"Можно ли поменять фирменный стиль?","acceptedAnswer":{"@type":"Answer","text":"Да. Цвета, стекло и тени лежат одним блоком констант вверху генератора, схемы оформления описаны словарём пресетов. Новый пресет это одна секция констант, а не ветка кода."}},{"@type":"Question","name":"Что будет, если элемента под мою задачу нет?","acceptedAnswer":{"@type":"Answer","text":"Новая фигура добавляется одной строкой в словарь фигур: viewBox, путь и тип анимации. Новый тип карточки это одна функция в генераторе."}},{"@type":"Question","name":"Нужен ли платный аккаунт для звука и картинок?","acceptedAnswer":{"@type":"Answer","text":"Звук синтезируется кодом, он бесплатный. Логотипы тянутся из Simple Icons и svgl. Платными остаются только генерация аватара и картинки для полнокадровых вставок, если они нужны."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo-64.webp" alt="" width="32" height="32">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Скилл talking-head-reel: рилс с моушен-графикой за 15 минут</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-09-15">15 сентября 2026</time>
+        <span class="dot"></span>
+        <span>7 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c79-talking-head-reel/cover.webp" alt="Скилл talking-head-reel: рилс с моушен-графикой за 15 минут" width="1200" height="675" loading="eager" fetchpriority="high"></div>
+  <div class="article-body">
+    <div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>что делает скилл talking-head-reel и на каких задачах он себя окупает</li><li>как устроен пайплайн: от клипа аватара до готового mp4 с субтитрами и звуком</li><li>какие грабли в движке уже найдены и обойдены, чтобы не тратить на них свои часы</li><li>ссылку на архив со скиллом и порядок установки</li></ul></div>
+</div>
+<p>Формат вертикального ролика, где спикер говорит, а поверх идёт анимация, буквально иллюстрирующая его слова, работает лучше и голой говорящей головы, и текста на пол-экрана. Проблема в том, что собирать такое руками дорого: каждая вставка это верстка, тайминги и десяток проб.</p>
+<p>Этот скилл закрывает сборку целиком. На входе клип говорящей головы и текст, на выходе готовый вертикальный mp4 с графикой, субтитрами и звуковыми акцентами.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>Скилл превращает сборку рилса в заполнение одного YAML-файла. Ты описываешь карточки и раскадровку, генератор собирает HTML, движок HyperFrames рендерит видео. Замеренная скорость на боевой задаче: 15 минут от сценария до финального файла.</p></div></div>
+<h2 id="что-это-такое">Что это такое</h2>
+<p><code>talking-head-reel</code> это скилл для Claude Code поверх <a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener">HyperFrames</a>, движка рендера видео из HTML. HyperFrames даёт покадровый детерминированный рендер, скилл даёт всё остальное: структуру композиции, библиотеку анимаций, субтитры, звук и свод правил, выстраданный на серии роликов.</p>
+<p>Формат ролика такой. Спикер живёт в кружке или на половине экрана, а рядом идёт графика, синхронная с речью: число прокручивается на табло ровно тогда, когда его называют, столбики вырастают на фразе про цифры, курсор кликает на слове «нажми».</p>
+<h2 id="как-устроен-пайплайн">Как устроен пайплайн</h2>
+<p>Работа идёт через манифест. HTML руками не пишется никогда.</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">yaml</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-yaml">preset: sand
+duration: 53.0
+audio: assets/audio.m4a
+
+pip:
+  src: assets/pip_source.mp4
+  states:
+    - {at: 0,    state: hero_center}
+    - {at: 3.9,  state: side_big}
+    - {at: 32.2, state: half_top}
+
+captions:
+  from_words: _words.json
+  karaoke: true
+
+cards:
+  - type: mark
+    shape: number_roll
+    start: 0.25
+    duration: 3.2
+    value: 17
+    label: ребят в группе</code></pre></div>
+<p>Полный порядок:</p>
+<ol>
+<li>Клип говорящей головы: HeyGen, любой другой генератор или обычная съёмка.</li>
+<li>Вытащить аудио и квадратный кроп лица под картинку-в-картинке.</li>
+<li>Снять word-level транскрипт через faster-whisper. Это основа и для субтитров, и для таймингов карточек.</li>
+<li>Заполнить манифест: карточки по фразам, раскадровка спикера, словарь исправлений для субтитров.</li>
+<li><code>build.py manifest.yaml</code> собирает <code>index.html</code>.</li>
+<li><code>npx hyperframes check</code> ловит контраст, наложения текста и конфликты трансформаций.</li>
+<li><code>npx hyperframes snapshot</code> даёт контакт-лист за 15 секунд вместо трёхминутного рендера.</li>
+<li>Рендер, ускорение через ffmpeg, звуковые эффекты.</li>
+</ol>
+<p>Ключевая вещь в скорости: генерация клипа и рендер идут в фоне, а манифест пишется параллельно. Последовательное выполнение стоит лишних семи минут на ровном месте.</p>
+<h2 id="библиотека-графики">Библиотека графики</h2>
+<p>В скилле больше тридцати готовых анимированных элементов. Это inline SVG плюс GSAP, поэтому ни лицензий, ни сетевых запросов, ни чужой эстетики, и всё красится цветом текущего пресета.</p>
+<div class="table-wrap"><table><thead><tr><th>элемент</th><th>что делает</th></tr></thead><tbody><tr><td><code>number_roll</code>, <code>counter</code></td><td>число набирается на глазах, разряды прокручиваются</td></tr><tr><td><code>compare</code></td><td>две колонки «было и стало» со стрелкой между ними</td></tr><tr><td><code>bar_chart</code>, <code>timeline</code></td><td>столбики и линия со ступенями</td></tr><tr><td><code>node_map</code>, <code>card_stack</code></td><td>схема связей, стопка карточек разлетается в сетку</td></tr><tr><td><code>chat_bubbles</code>, <code>type_line</code></td><td>переписка и строка, набираемая посимвольно</td></tr><tr><td><code>cursor_path</code>, <code>frame_box</code>, <code>tooltip</code></td><td>курсор с кликами, рамка на области кадра, подсказка</td></tr><tr><td><code>highlight</code>, <code>strike_text</code>, <code>underline</code></td><td>маркер по тексту, зачёркивание с заменой</td></tr><tr><td><code>codeword</code></td><td>плашка с кодовым словом и прыгающая на неё стрелка</td></tr><tr><td><code>claude_terminal</code>, <code>claude_desktop</code>, <code>task_list</code></td><td>мокапы терминала, приложения и списка задач</td></tr></tbody></table></div>
+<p>Плюс простая служебная графика: стрелки, галочки, крестики, лоадеры, прогресс-бары.</p>
+<p>Оформление задаётся одним полем <code>preset</code>: пять светлых схем, каждая разом меняет палитру, стиль субтитров и форму картинки-в-картинке. Тёмная схема в коде есть, но на практике проиграла светлым по восприятию.</p>
+<h2 id="что-уже-найдено-и-обойдено">Что уже найдено и обойдено</h2>
+<p>Главная ценность скилла не в коде, а в граблях, которые в нём зафиксированы.</p>
+<p><strong>Баг движка на составных композициях.</strong> Связка «одно видео плюс несколько сцен через <code>data-composition-src</code>» даёт сдвинутый неклипованный прямоугольник поверх кадра. Воспроизводится стабильно, от настроек GPU не зависит, на диагностику уходит около сорока минут. Обход структурный: вся композиция живёт в одном файле.</p>
+<p><strong>Движение через transform, а не через top/left.</strong> Иначе линтер справедливо ругается, а анимация дёргается.</p>
+<p><strong>Ширину плашки задаёт самый длинный вариант текста.</strong> Если содержимое меняется по таймлайну, плашка считает ширину по тому, что лежало в ней в момент раскладки, и текст вылезает за край по мере печати. Приём: скрытый дубль полного текста держит ширину, видимый идёт поверх.</p>
+<p><strong>Звук ставится по событиям, а не по карточкам.</strong> Первая версия давала один и тот же свист на каждую смену кадра, и это раздражает уже на третьем просмотре. Сейчас у каждого типа события свой звук и своя громкость, плюс троттлинг. Эффекты синтезируются кодом: ни лицензий, ни сети, звук детерминированный.</p>
+<p><strong>Субтитры режутся по смыслу.</strong> Приоритет разрыва: конец предложения, запятая, пауза в речи, лимит слов. Фразы не обрываются на середине. Караоке-подсветка активного слова включена по умолчанию.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p>Скорость речи у синтеза плавает в диапазоне 2,0-2,5 слова в секунду. Поэтому тайминги карточек не строятся до word-level транскрипта: на 45-секундном ролике разброс доходит до восьми секунд.</p></div></div>
+<h2 id="что-нужно-на-входе">Что нужно на входе</h2>
+<ul>
+<li>Node и <code>hyperframes</code> CLI, ставится через npx</li>
+<li>Python: <code>pyyaml</code>, <code>faster-whisper</code>, <code>requests</code></li>
+<li><code>ffmpeg</code> в PATH</li>
+<li>Клип говорящей головы</li>
+</ul>
+<p>Отдельно про аватары, если берёшь HeyGen. Аватары там двух типов, и по списку это не видно, потому что имена похожие. <code>photo_avatar</code> это оживлённая фотография: двигается только лицо, тело и руки стоят, мимика натянутая. <code>digital_twin</code> обучен на видео и даёт нормальную моторику. Для ролика годится только второй, проверяется полем <code>avatar_type</code> в ответе API.</p>
+<h2 id="установка">Установка</h2>
+<p>Архив со скиллом: <strong><a href="https://nextgenclub.ru/talking-head-reel.zip">Скачать talking-head-reel.zip</a></strong></p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">bash</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-bash">unzip talking-head-reel.zip
+cp -r talking-head-reel ~/.claude/skills/
+pip install pyyaml faster-whisper requests</code></pre></div>
+<p>Внутри: <code>SKILL.md</code> со всеми правилами, генератор <code>build.py</code>, библиотека графики <code>marks.py</code>, синтез звука <code>sound.py</code>, вспомогательные скрипты, набор wav-эффектов и пример проекта с манифестом.</p>
+<h2 id="способ-быстрее-отдай-эту-статью-своему-claude">Способ быстрее: отдай эту статью своему Claude</h2>
+<p>Настраивать руками не обязательно. Скопируй ссылку на эту страницу, открой Claude Code и напиши примерно так:</p>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Вот статья: https://nextgenclub.ru/blog/skill-talking-head-reel
+Прочитай её, скачай архив по ссылке внутри и поставь мне этот скилл.
+Дальше собери тестовый ролик по примеру из папки example.</code></pre></div>
+<p>Claude сходит по ссылке, разберёт инструкцию, поставит скилл и проверит, что зависимости на месте. Тебе останется подтвердить шаги.</p>
+<h2 id="сколько-это-занимает-на-практике">Сколько это занимает на практике</h2>
+<p>Замер на боевой задаче: 48-секундный ролик собран за 15 минут от сценария до финального файла, без переделок, проверка прошла с первого раза. Раскладка по времени: генерация клипа 3:40 в фоне, транскрипт 1:30, манифест со сборкой и проверкой 40 секунд, рендер 3:30, ускорение и звук 40 секунд.</p>
+<p>Реалистичная оценка для ролика со сложной графикой и новой раскадровкой: 35-55 минут. Основное время уходит на раскадровку конкретного текста и на рендеры, а не на борьбу с движком.</p>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Обязательно ли использовать HeyGen?</summary><div class="faq-answer">Нет. Скилл работает с любым клипом говорящей головы, включая обычную съёмку на телефон. HeyGen удобен тем, что текст правится и переозвучивается за пару минут.</div></details>
+<details class="faq-item"><summary>Можно ли поменять фирменный стиль?</summary><div class="faq-answer">Да. Цвета, стекло и тени лежат одним блоком констант вверху генератора, схемы оформления описаны словарём пресетов. Новый пресет это одна секция констант, а не ветка кода.</div></details>
+<details class="faq-item"><summary>Что будет, если элемента под мою задачу нет?</summary><div class="faq-answer">Новая фигура добавляется одной строкой в словарь фигур: viewBox, путь и тип анимации. Новый тип карточки это одна функция в генераторе.</div></details>
+<details class="faq-item"><summary>Нужен ли платный аккаунт для звука и картинок?</summary><div class="faq-answer">Звук синтезируется кодом, он бесплатный. Логотипы тянутся из Simple Icons и svgl. Платными остаются только генерация аватара и картинки для полнокадровых вставок, если они нужны.</div></details>
+</div>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">Лёгкий старт</p>
+  <h2 class="cta-title">Хочешь собрать такой конвейер под свои задачи</h2>
+  <p class="cta-desc">Забери бесплатный пошаговый план «Лёгкий старт в Claude Code» прямо в Telegram: доступ, первые шаги и маршрут под тебя.</p>
+  <a href="https://t.me/darina_nextgen_club_bot?start=seo" target="_blank" rel="noopener" class="cta-button" onclick="if(window.ym)ym(111022672,'reachGoal','bot_seo')">Получить план в боте</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener" class="channel-cta" onclick="if(window.ym)ym(111022672,'reachGoal','channel_sub')">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/ai-skills-claude-biblioteka" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c22-ai-skills/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>50+ AI-скиллов для Claude: библиотека навыков для бизнеса и контента</h3>
+    <p>Библиотека из 50+ AI-навыков для Claude: контент, продажи, автоматизация, дизайн. Несколько рабочих скиллов забирай бесплатно прямо из статьи.</p>
+  </div>
+</a>
+<a href="/blog/legkiy-start-v-claude-code" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c40-legkiy-start/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>Пошаговый план: лёгкий старт в Claude Code</h3>
+    <p>Три шага от нуля до рабочего Claude Code: доступ и оплата из России, как устроен инструмент изнутри, и какие скиллы поставить в первую очередь.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
