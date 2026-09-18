@@ -113,7 +113,7 @@ ym(111022672,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 <p><strong>2. Собери окружение.</strong> В терминале, из папки с архивом:</p>
 <div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt</code></pre></div>
-<p><strong>3. Заполни настройки.</strong> Скопируй <code>.env.example</code> в <code>.env</code> и впиши <code>TELEGRAM_API_ID</code> и <code>TELEGRAM_API_HASH</code>: свои с my.telegram.org или те, что выдали в клубе.</p>
+<p><strong>3. Заполни настройки.</strong> Скопируй <code>.env.example</code> в <code>.env</code>. Клубные <code>TELEGRAM_API_ID</code> и <code>TELEGRAM_API_HASH</code> там уже заполнены (стоковая публичная пара Telegram Desktop), менять их не нужно, на my.telegram.org ходить не надо.</p>
 <p><strong>4. Определи отпечаток компьютера.</strong> Обязательный шаг, до входа:</p>
 <div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">.venv/bin/python scripts/detect_fingerprint.py</code></pre></div>
 <p>Скрипт сам подставит модель Mac, версию системы и версию Telegram. Если уже стоит рабочая сессия, он откажется что-либо менять и объяснит почему.</p>
