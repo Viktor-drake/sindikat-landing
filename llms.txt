@@ -9,6 +9,7 @@
 - [Блог](https://nextgenclub.ru/blog): статьи о Claude, вайбкодинге и автоматизации бизнеса
 
 ## Статьи блога
+- [Свой ИИ-ассистент за вечер: шесть шагов и два, которые решают](https://nextgenclub.ru/blog/svoy-ai-assistent-shest-shagov): Как собрать личного ассистента вроде Джарвиса: дом, оболочка, память, скиллы, инструменты, канал связи. С живым примером и честными границами.
 - [Бесплатный SEO-аудит сайта в Claude Code: установка за 3 команды](https://nextgenclub.ru/blog/besplatnyy-seo-audit-claude-code): Как поставить открытый плагин claude-seo и за десять минут получить аудит сайта с оценкой, приоритетами и проверкой видимости в нейросетях.
 - [5 MCP-серверов для Claude Code: обновлённый набор на осень 2026](https://nextgenclub.ru/blog/mcp-servery-claude-code-osen-2026): Perplexity, Playwright, Firecrawl, Higgsfield и Chrome DevTools: что каждый даёт, точные команды установки и где нужен платный ключ.
 - [Unlazy: как заставить ИИ-агента не врать, что задача готова](https://nextgenclub.ru/blog/unlazy-skill-agent-gates): Агент отчитывается «готово», а сделана половина. Разбор бесплатного скилла Unlazy: гейты, чекер, безопасная установка и грабля Windows.
