@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111022672','ym');
+ym(111022672,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111022672" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphify: почему лимиты Claude Code уходят на перечитывание кода</title>
+<meta name="description" content="Агент заново читает проект каждую сессию. Graphify строит граф связей, и агент спрашивает его вместо файлов. Установка, границы и честно о цифре 71,5x.">
+
+<link rel="canonical" href="https://nextgenclub.ru/blog/graphify-graf-vmesto-perechityvaniya">
+<link rel="icon" type="image/webp" href="/logo-64.webp">
+<link rel="apple-touch-icon" href="/logo-180.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graphify: почему лимиты Claude Code уходят на перечитывание кода">
+<meta property="og:description" content="Агент заново читает проект каждую сессию. Graphify строит граф связей, и агент спрашивает его вместо файлов. Установка, границы и честно о цифре 71,5x.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/graphify-graf-vmesto-perechityvaniya">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c86-graphify/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Graphify: почему лимиты Claude Code уходят на перечитывание кода">
+<meta name="twitter:description" content="Агент заново читает проект каждую сессию. Graphify строит граф связей, и агент спрашивает его вместо файлов. Установка, границы и честно о цифре 71,5x.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c86-graphify/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Graphify: почему лимиты Claude Code уходят на перечитывание кода","description":"Агент заново читает проект каждую сессию. Graphify строит граф связей, и агент спрашивает его вместо файлов. Установка, границы и честно о цифре 71,5x.","image":"https://nextgenclub.ru/blog/covers/c86-graphify/cover.png","datePublished":"2026-09-22","dateModified":"2026-09-22","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/graphify-graf-vmesto-perechityvaniya"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Это платно?","acceptedAnswer":{"@type":"Answer","text":"Нет, Apache-2.0, открытый исходник."}},{"@type":"Question","name":"Данные уходят наружу?","acceptedAnswer":{"@type":"Answer","text":"Нет, разбор идёт локально."}},{"@type":"Question","name":"Работает только с Claude Code?","acceptedAnswer":{"@type":"Answer","text":"Нет, заявлена поддержка разных ассистентов, включая Codex и Cursor."}},{"@type":"Question","name":"Заменяет ли это файл памяти проекта?","acceptedAnswer":{"@type":"Answer","text":"Нет, это разные вещи. Файл памяти хранит договорённости и контекст, граф хранит структуру кода. Они дополняют друг друга."}},{"@type":"Question","name":"Насколько реально экономит?","acceptedAnswer":{"@type":"Answer","text":"Зависит от размера проекта и типа запросов. Цифра авторов это их замер, проверяйте на своём коде."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo-64.webp" alt="" width="32" height="32">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Graphify: почему лимиты Claude Code уходят на перечитывание кода</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-09-22">22 сентября 2026</time>
+        <span class="dot"></span>
+        <span>6 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c86-graphify/cover.webp" alt="Graphify: почему лимиты Claude Code уходят на перечитывание кода" width="1200" height="675" loading="eager" fetchpriority="high"></div>
+  <div class="article-body">
+    <div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>почему лимиты кончаются быстрее, чем кажется, и куда они уходят</li><li>что делает Graphify и чем это отличается от векторного поиска</li><li>команду установки, проверенную по PyPI</li><li>честный разбор цифры «в 71,5 раза меньше токенов»</li><li>чего он не умеет</li></ul></div>
+</div>
+<p>Знакомое ощущение: работаешь полчаса, а лимиты уже на исходе. Причём код почти не писался.</p>
+<p>Объяснение простое. Агент не помнит ваш проект между сессиями. Каждый новый разговор он начинает с чтения: открывает файлы, ищет, где что определено, прослеживает связи. На средней кодовой базе это десятки тысяч токенов <strong>до того</strong>, как он приступит к вашей задаче.</p>
+<h2 id="что-делает-graphify">Что делает Graphify</h2>
+<p>Один локальный прогон разбирает проект и строит <strong>граф связей</strong>: что откуда вызывается, где определено, что на что ссылается.</p>
+<p>Дальше агент не читает файлы подряд. Он спрашивает граф: «где определена эта функция», «кто её вызывает», «что сломается, если её поменять». Получает точный ответ вместо того, чтобы прочитать полпроекта ради одного факта.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p>Это не векторный поиск. Вектора ищут похожее по смыслу и могут ошибаться. Граф хранит фактические связи кода, и ответ на «кто вызывает эту функцию» там точный, а не вероятностный.</p></div></div>
+<div class="table-wrap"><table><thead><tr><th>Что</th><th>Значение</th><th>Проверено</th></tr></thead><tbody><tr><td>Репозиторий</td><td>Graphify-Labs/graphify</td><td>GitHub API, 22.09.2026</td></tr><tr><td>Звёзд</td><td>120 335</td><td>там же</td></tr><tr><td>Форков</td><td>11 618</td><td>там же</td></tr><tr><td>Лицензия</td><td>Apache-2.0</td><td>там же</td></tr><tr><td>Создан</td><td>3 апреля 2026</td><td>там же</td></tr><tr><td>Пакет PyPI</td><td>graphifyy, версия 0.9.65</td><td>pypi.org</td></tr></tbody></table></div>
+<h2 id="установка">Установка</h2>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">bash</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-bash">pip install graphifyy &amp;&amp; graphify install</code></pre></div>
+<p>Работает локально: ни серверов, ни облачных векторных баз, код наружу не уходит. Для коммерческой разработки и клиентских проектов это принципиально.</p>
+<p>Разбирает не только код: подхватывает документацию, схемы БД, конфиги и PDF. То есть в граф попадает и то, что обычно лежит рядом с проектом и всегда читается заново.</p>
+<h2 id="честно-про-в-71-5-раза-меньше-токенов">Честно про «в 71,5 раза меньше токенов»</h2>
+<p>Эту цифру называют авторы. Она получена <strong>на их собственном наборе из 52 файлов</strong> при сравнении запроса к графу с чтением сырых файлов.</p>
+<div class="callout callout-main"><div class="callout-body"><p class="callout-label">Главное</p><p>Я эту цифру не перепроверял и за свою не выдаю. Относиться к ней стоит как к верхней границе на удобном для авторов примере, а не как к тому, что вы получите на своём проекте.</p><p>Но даже доля такого эффекта на длинной сессии видна сразу: сессия живёт дольше, и лимит кончается на работе, а не на разогреве.</p></div></div>
+<p>Это общая закономерность, про которую я писал и раньше: выигрыш инструмента почти всегда меряют на примере, где он выигрывает сильнее всего.</p>
+<h2 id="чего-ждать-не-стоит">Чего ждать не стоит</h2>
+<ul>
+<li><strong>Граф надо обновлять.</strong> Код поменялся, граф устарел. Прогон дешёвый, но про</li>
+</ul>
+<p>  него надо помнить.</p>
+<ul>
+<li><strong>Он не делает агента умнее.</strong> Он делает его осведомлённее дешевле. Плохо</li>
+</ul>
+<p>  сформулированная задача останется плохо сформулированной.</p>
+<ul>
+<li><strong>На крошечном проекте выигрыша почти нет.</strong> Если у вас три файла, агент</li>
+</ul>
+<p>  прочитает их и так.</p>
+<ul>
+<li><strong>Первый прогон занимает время</strong>, пропорционально размеру базы.</li>
+</ul>
+<h2 id="способ-быстрее-отдай-эту-статью-своему-claude">Способ быстрее: отдай эту статью своему Claude</h2>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Вот статья: https://nextgenclub.ru/blog/graphify-graf-vmesto-perechityvaniya
+Прочитай её, поставь Graphify по инструкции в отдельную копию моего проекта
+и построй граф. Потом покажи, сколько файлов он разобрал и что попало
+в граф кроме кода.</code></pre></div>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Это платно?</summary><div class="faq-answer">Нет, Apache-2.0, открытый исходник.</div></details>
+<details class="faq-item"><summary>Данные уходят наружу?</summary><div class="faq-answer">Нет, разбор идёт локально.</div></details>
+<details class="faq-item"><summary>Работает только с Claude Code?</summary><div class="faq-answer">Нет, заявлена поддержка разных ассистентов, включая Codex и Cursor.</div></details>
+<details class="faq-item"><summary>Заменяет ли это файл памяти проекта?</summary><div class="faq-answer">Нет, это разные вещи. Файл памяти хранит договорённости и контекст, граф хранит
+структуру кода. Они дополняют друг друга.</div></details>
+<details class="faq-item"><summary>Насколько реально экономит?</summary><div class="faq-answer">Зависит от размера проекта и типа запросов. Цифра авторов это их замер,
+проверяйте на своём коде.</div></details>
+</div>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">Лёгкий старт</p>
+  <h2 class="cta-title">Разбираю инструменты с границами применимости</h2>
+  <p class="cta-desc">Забери бесплатный пошаговый план «Лёгкий старт в Claude Code» прямо в Telegram: доступ, первые шаги и маршрут под тебя.</p>
+  <a href="https://t.me/darina_nextgen_club_bot?start=seo" target="_blank" rel="noopener" class="cta-button" onclick="if(window.ym)ym(111022672,'reachGoal','bot_seo')">Получить план в боте</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener" class="channel-cta" onclick="if(window.ym)ym(111022672,'reachGoal','channel_sub')">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/ecc-nadstroyka-claude-code" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c81-ecc/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>ECC для Claude Code: 68 агентов, 125 скиллов и цена, о которой не пишут</h3>
+    <p>Разбор надстройки ECC над Claude Code: что реально ставится в проект, как поставить безопасно и сколько контекста она съедает в каждой сессии.</p>
+  </div>
+</a>
+<a href="/blog/mcp-servery-claude-code-osen-2026" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c84-mcp-osen/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>5 MCP-серверов для Claude Code: обновлённый набор на осень 2026</h3>
+    <p>Perplexity, Playwright, Firecrawl, Higgsfield и Chrome DevTools: что каждый даёт, точные команды установки и где нужен платный ключ.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
