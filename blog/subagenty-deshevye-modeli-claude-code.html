@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=111022672','ym');
+ym(111022672,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111022672" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Субагенты на дешёвых моделях: как Claude Code перестаёт жечь лимиты на поиск</title>
+<meta name="description" content="Главная модель планирует и проверяет, Sonnet пишет код, Haiku ищет. Одна строка model в файле субагента, три готовых агента и честные границы.">
+
+<link rel="canonical" href="https://nextgenclub.ru/blog/subagenty-deshevye-modeli-claude-code">
+<link rel="icon" type="image/webp" href="/logo-64.webp">
+<link rel="apple-touch-icon" href="/logo-180.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Субагенты на дешёвых моделях: как Claude Code перестаёт жечь лимиты на поиск">
+<meta property="og:description" content="Главная модель планирует и проверяет, Sonnet пишет код, Haiku ищет. Одна строка model в файле субагента, три готовых агента и честные границы.">
+<meta property="og:url" content="https://nextgenclub.ru/blog/subagenty-deshevye-modeli-claude-code">
+<meta property="og:image" content="https://nextgenclub.ru/blog/covers/c90-orkestr/cover.png">
+<meta property="og:site_name" content="NextGen Club">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Субагенты на дешёвых моделях: как Claude Code перестаёт жечь лимиты на поиск">
+<meta name="twitter:description" content="Главная модель планирует и проверяет, Sonnet пишет код, Haiku ищет. Одна строка model в файле субагента, три готовых агента и честные границы.">
+<meta name="twitter:image" content="https://nextgenclub.ru/blog/covers/c90-orkestr/cover.png">
+
+<!-- Theme: anti-FOUC. Применяем сохранённую тему до загрузки CSS -->
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('blog-theme');
+    var theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch(e){ document.documentElement.setAttribute('data-theme','light'); }
+})();
+</script>
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Субагенты на дешёвых моделях: как Claude Code перестаёт жечь лимиты на поиск","description":"Главная модель планирует и проверяет, Sonnet пишет код, Haiku ищет. Одна строка model в файле субагента, три готовых агента и честные границы.","image":"https://nextgenclub.ru/blog/covers/c90-orkestr/cover.png","datePublished":"2026-09-24","dateModified":"2026-09-24","author":{"@type":"Person","name":"Виктор Дачников","url":"https://nextgenclub.ru/","jobTitle":"Основатель NextGen Media и NextGen Club, практик AI-автоматизации","knowsAbout":["вайбкодинг","Claude Code","нейросети для бизнеса","AI-автоматизация","AI-агенты","промпт-инжиниринг"]},"publisher":{"@type":"Organization","name":"NextGen Club","logo":{"@type":"ImageObject","url":"https://nextgenclub.ru/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://nextgenclub.ru/blog/subagenty-deshevye-modeli-claude-code"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Это официальная функция?","acceptedAnswer":{"@type":"Answer","text":"Да, поле `model` у субагентов описано в документации Claude Code."}},{"@type":"Question","name":"Сколько реально экономит?","acceptedAnswer":{"@type":"Answer","text":"Зависит от того, какая доля работы у тебя приходится на поиск и чтение файлов. Чем больше проект и чем чаще агент ищет, тем заметнее разница."}},{"@type":"Question","name":"Не упадёт ли качество?","acceptedAnswer":{"@type":"Answer","text":"На поиске и сборе контекста почти нет. На решениях и проверке может, поэтому они остаются на главной модели."}},{"@type":"Question","name":"Работает на подписке, а не на API?","acceptedAnswer":{"@type":"Answer","text":"Да, субагенты и выбор модели работают в Claude Code независимо от способа оплаты."}},{"@type":"Question","name":"Можно ли поставить агентов сразу во все проекты?","acceptedAnswer":{"@type":"Answer","text":"Да, положи файлы в `~/.claude/agents/`."}}]}</script>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <div class="blog-nav-inner">
+    <a href="/" class="blog-nav-logo">
+      <img src="/logo-64.webp" alt="" width="32" height="32">
+      <span>NextGen Club</span>
+    </a>
+    <div class="blog-nav-links">
+      <a href="/blog">Блог</a>
+      <a href="/" class="blog-nav-cta">Клуб</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-header-inner">
+      <p class="article-eyebrow"><a href="/blog">← Все статьи</a></p>
+      <h1 class="article-title">Субагенты на дешёвых моделях: как Claude Code перестаёт жечь лимиты на поиск</h1>
+      <div class="article-meta">
+        <span class="article-author">Виктор Дачников</span>
+        <span class="dot"></span>
+        <time datetime="2026-09-24">24 сентября 2026</time>
+        <span class="dot"></span>
+        <span>6 минут</span>
+      </div>
+    </div>
+  </header>
+  <div class="article-cover"><img src="/blog/covers/c90-orkestr/cover.webp" alt="Субагенты на дешёвых моделях: как Claude Code перестаёт жечь лимиты на поиск" width="1200" height="675" loading="eager" fetchpriority="high"></div>
+  <div class="article-body">
+    <div class="lead-block">
+  <div class="lead-block-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  </div>
+  <div class="lead-block-body"><p><strong>Что ты получишь, прочитав эту статью</strong></p><ul><li>почему поиск по проекту по умолчанию идёт на самой дорогой модели</li><li>что изменилось в версии 2.1.198 и почему это важно</li><li>схема «оркестра»: кто планирует, кто пишет код, кто ищет</li><li>три готовых субагента, которые можно скопировать к себе</li><li>где эта схема не сэкономит</li></ul></div>
+</div>
+<p>Когда Claude Code ищет по проекту, читает файлы и правит мелочи, всё это по умолчанию крутит та же модель, что и главная сессия. Сидишь на Opus, значит и поиск по папкам идёт на Opus. Это как нанять главного архитектора и отправить его сортировать папки.</p>
+<h2 id="что-изменилось-в-2-1-198">Что изменилось в 2.1.198</h2>
+<p>Раньше встроенный агент поиска Explore всегда работал на Haiku, самой быстрой и дешёвой модели. С версии 2.1.198 он <strong>наследует модель основного разговора</strong>. На Claude API наследуемая модель ограничена Opus: если разговор идёт на модели выше, Explore работает на Opus.</p>
+<p>Решение понятное: поиск на сильной модели точнее. Но если ты считаешь лимиты, каждый «найди, где это лежит» теперь стоит как задача для Opus.</p>
+<h2 id="схема-оркестра">Схема оркестра</h2>
+<div class="table-wrap"><table><thead><tr><th>Роль</th><th>Модель</th><th>Что делает</th></tr></thead><tbody><tr><td>Дирижёр</td><td>главная сессия, Opus</td><td>планирует, раздаёт задачи, проверяет результат</td></tr><tr><td>Разработчик</td><td>Sonnet</td><td>пишет и правит код по готовому плану</td></tr><tr><td>Разведчик</td><td>Haiku</td><td>ищет по проекту, читает файлы, собирает контекст</td></tr></tbody></table></div>
+<p>Главная модель не тратит себя на рутину. Она получает от разведчика короткую выжимку вместо сотни прочитанных файлов и принимает решения.</p>
+<h2 id="как-настроить-одна-строка">Как настроить: одна строка</h2>
+<p>Субагент в Claude Code это markdown-файл с заголовком. Модель задаётся полем <code>model</code>:</p>
+<ul>
+<li><code>haiku</code>, <code>sonnet</code>, <code>opus</code>, <code>fable</code>: псевдоним модели</li>
+<li>полный идентификатор, например <code>claude-sonnet-5</code></li>
+<li><code>inherit</code>: та же модель, что у главного разговора</li>
+</ul>
+<p>Файлы кладутся в <code>.claude/agents/</code> внутри проекта (только для него) или в <code>~/.claude/agents/</code> (для всех твоих проектов). Claude Code подхватывает их сам через несколько секунд.</p>
+<div class="callout callout-info"><div class="callout-icon">ℹ️</div><div class="callout-body"><p class="callout-label">Заметка</p><p>Команда <code>/agents</code> с версии 2.1.198 больше не открывает мастер создания. Она только напоминает, что субагента можно попросить создать у самого Claude или написать файл руками. Проще всего первое: «создай субагента-разведчика, только чтение, модель haiku».</p></div></div>
+<p>Есть и второй способ: переменная окружения <code>CLAUDE_CODE_SUBAGENT_MODEL</code> задаёт модель субагентам по умолчанию, если модель не указана другим способом.</p>
+<h2 id="три-готовых-субагента">Три готовых субагента</h2>
+<h3 id="разведчик-на-haiku">Разведчик на Haiku</h3>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">markdown</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-markdown">---
+name: scout
+description: Ищет по проекту и собирает контекст. Используй, когда нужно найти, где что лежит, или прочитать много файлов перед решением.
+tools: Read, Grep, Glob
+model: haiku
+---
+
+Ты разведчик. Найди то, о чём просят, и верни короткую выжимку: пути к файлам,
+номера строк и две-три фразы, что там происходит. Код не меняй. Если не нашёл,
+так и скажи и перечисли, где искал.</code></pre></div>
+<h3 id="разработчик-на-sonnet">Разработчик на Sonnet</h3>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">markdown</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-markdown">---
+name: builder
+description: Пишет и правит код по готовому плану. Используй, когда план уже утверждён и нужно его реализовать.
+tools: Read, Edit, Write, Grep, Glob, Bash
+model: sonnet
+---
+
+Ты разработчик. Реализуй ровно тот план, который тебе передали, без лишних улучшений.
+После изменений запусти проверки проекта и верни список изменённых файлов и результат
+проверок.</code></pre></div>
+<h3 id="ревьюер-на-главной-модели">Ревьюер на главной модели</h3>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">markdown</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-markdown">---
+name: reviewer
+description: Проверяет изменения перед сдачей. Используй после того, как разработчик закончил.
+tools: Read, Grep, Glob, Bash
+model: inherit
+---
+
+Ты ревьюер. Проверь изменения на ошибки, пропущенные случаи и расхождение с планом.
+Верни список конкретных замечаний с файлом и строкой. Если замечаний нет, так и скажи.</code></pre></div>
+<p>Ревьюер намеренно на <code>inherit</code>: проверка это как раз то место, где сильная модель окупается.</p>
+<h2 id="где-это-не-сэкономит">Где это не сэкономит</h2>
+<ul>
+<li><strong>Мелкая задача целиком.</strong> Если всё дело в одной правке, передача субагенту стоит</li>
+</ul>
+<p>  дороже самой правки.</p>
+<ul>
+<li><strong>Сложный поиск.</strong> Когда искать надо не строку, а смысл («где у нас нарушается логика</li>
+</ul>
+<p>  оплаты»), дешёвая модель может промахнуться. Такой поиск оставь главной модели.</p>
+<ul>
+<li><strong>Без проверки.</strong> Результат дешёвых моделей главная сессия обязана проверять. Если</li>
+</ul>
+<p>  пропустить этот шаг, экономия лимитов превратится в переделки.</p>
+<h2 id="способ-быстрее-отдай-эту-статью-своему-claude">Способ быстрее: отдай эту статью своему Claude</h2>
+<div class="code-block"><div class="code-block-head"><span class="code-lang">code</span><button type="button" class="code-copy" aria-label="Скопировать код">Копировать</button></div><pre><code class="lang-">Вот статья: https://nextgenclub.ru/blog/subagenty-deshevye-modeli-claude-code
+Создай в этом проекте в .claude/agents/ трёх субагентов из статьи: scout на haiku,
+builder на sonnet и reviewer на inherit. Потом покажи список файлов и проверь,
+что Claude Code их видит.</code></pre></div>
+<div class="faq-block">
+<h2 class="faq-title">Частые вопросы</h2>
+<details class="faq-item"><summary>Это официальная функция?</summary><div class="faq-answer">Да, поле <code>model</code> у субагентов описано в документации Claude Code.</div></details>
+<details class="faq-item"><summary>Сколько реально экономит?</summary><div class="faq-answer">Зависит от того, какая доля работы у тебя приходится на поиск и чтение файлов. Чем
+больше проект и чем чаще агент ищет, тем заметнее разница.</div></details>
+<details class="faq-item"><summary>Не упадёт ли качество?</summary><div class="faq-answer">На поиске и сборе контекста почти нет. На решениях и проверке может, поэтому они
+остаются на главной модели.</div></details>
+<details class="faq-item"><summary>Работает на подписке, а не на API?</summary><div class="faq-answer">Да, субагенты и выбор модели работают в Claude Code независимо от способа оплаты.</div></details>
+<details class="faq-item"><summary>Можно ли поставить агентов сразу во все проекты?</summary><div class="faq-answer">Да, положи файлы в <code>~/.claude/agents/</code>.</div></details>
+</div>
+<p>Больше про Claude и AI-инструменты в работе - в моём Telegram-канале <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Виктор Дачников | NEXTGEN</a>.</p>
+<div class="cta-block">
+  <p class="cta-eyebrow">Лёгкий старт</p>
+  <h2 class="cta-title">Настрою оркестр агентов под ваш проект</h2>
+  <p class="cta-desc">Забери бесплатный пошаговый план «Лёгкий старт в Claude Code» прямо в Telegram: доступ, первые шаги и маршрут под тебя.</p>
+  <a href="https://t.me/darina_nextgen_club_bot?start=seo" target="_blank" rel="noopener" class="cta-button" onclick="if(window.ym)ym(111022672,'reachGoal','bot_seo')">Получить план в боте</a>
+</div>
+
+  </div>
+  <div class="author-card-wrap"><div class="author-card">
+  <div class="author-card-avatar"><img src="/founder.jpg" alt="Виктор Дачников" loading="lazy"></div>
+  <div class="author-card-body">
+    <p class="author-card-label">Автор</p>
+    <p class="author-card-name">Виктор Дачников</p>
+    <p class="author-card-role">Основатель NextGen Media и клуба NextGen</p>
+    <p class="author-card-bio">Практик AI-автоматизации: вайбкодинг, Claude Code, продукты и автоматизации для бизнеса. NextGen Media — рекламное агентство (800+ млн выручки клиентам), NextGen Club — закрытый клуб практиков ИИ. Выступает в EdTech и AI-нишах.</p>
+    <div class="author-card-socials">
+      <a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="/">Клуб NextGen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="channel-cta-wrap"><a href="https://t.me/+8vwtYYu7_3c2ZjUy" target="_blank" rel="noopener" class="channel-cta" onclick="if(window.ym)ym(111022672,'reachGoal','channel_sub')">
+  <span class="channel-cta-avatar">
+    <img src="/founder.jpg" alt="Виктор Дачников" loading="lazy">
+    <span class="channel-cta-tg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.95 3.06 2.4 10.6c-1.13.44-1.12 1.06-.2 1.34l5.02 1.57 1.94 5.95c.24.65.12.9.8.9.52 0 .75-.24 1.05-.52l2.42-2.36 5.06 3.74c.93.51 1.6.25 1.84-.86l3.3-15.56c.34-1.37-.5-1.99-1.52-1.67z"/></svg>
+    </span>
+  </span>
+  <span class="channel-cta-text">
+    <span class="channel-cta-eyebrow">Телеграм-канал</span>
+    <span class="channel-cta-title">Виктор Дачников | NEXTGEN</span>
+    <span class="channel-cta-desc">AI, нейросети и бизнес без воды. Разборы, инструменты и практика каждую неделю.</span>
+  </span>
+  <span class="channel-cta-btn">Подписаться</span>
+</a></div>
+</article>
+<section class="related-section">
+  <h2 class="related-title">Читать также</h2>
+  <div class="related-grid"><a href="/blog/graphify-graf-vmesto-perechityvaniya" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c86-graphify/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>Graphify: почему лимиты Claude Code уходят на перечитывание кода</h3>
+    <p>Агент заново читает проект каждую сессию. Graphify строит граф связей, и агент спрашивает его вместо файлов. Установка, границы и честно о цифре 71,5x.</p>
+  </div>
+</a>
+<a href="/blog/ecc-nadstroyka-claude-code" class="related-card">
+  <div class="related-card-cover"><img src="/blog/covers/c81-ecc/thumb.webp" alt="" width="600" height="338" decoding="async" loading="lazy"></div>
+  <div class="related-card-body">
+    <h3>ECC для Claude Code: 68 агентов, 125 скиллов и цена, о которой не пишут</h3>
+    <p>Разбор надстройки ECC над Claude Code: что реально ставится в проект, как поставить безопасно и сколько контекста она съедает в каждой сессии.</p>
+  </div>
+</a></div>
+</section>
+
+<footer class="blog-footer">
+  <div class="blog-footer-inner">
+    <div>
+      <span class="blog-footer-brand">NEXTGEN CLUB</span>
+      <p>Всё о нейросетях — в одном месте</p>
+    </div>
+    <div class="blog-footer-links">
+      <a href="/privacy.html">Политика обработки персональных данных</a>
+      <p>© 2026 NextGen Club. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem('blog-theme', next); } catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.code-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.code-block').querySelector('code');
+      if (!pre) return;
+      var done = function(){ var t = btn.textContent; btn.textContent = 'Скопировано'; setTimeout(function(){ btn.textContent = t; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.innerText).then(done).catch(function(){});
+      } else {
+        var r = document.createRange(); r.selectNode(pre);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch(e){}
+        sel.removeAllRanges();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
